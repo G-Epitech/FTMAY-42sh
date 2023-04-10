@@ -5,11 +5,12 @@ Contribute to this Epitech project involves following strict rules to keep a cle
 * [1 - Project architecture and file naming](#1---project-architecture-and-file-naming)
 * [2 - Commits and Pull Requests](#2---commits-and-pull-requests)
 * [3 - Variables and types naming](#3---variables-and-types-naming)
+* [4 - Header files and preprocessor directives](#4---header-files-and-preprocessor-directives)
 
 ## 1 - Project architecture and file naming
 Files conventions naming and project architecture need to be followed.
 
-### Files and folders naming
+### a - Files and folders naming
 Files and folders names must be short and readable by architecure depth level.
 
 *Exemples*
@@ -20,7 +21,7 @@ Files and folders names must be short and readable by architecure depth level.
 * File located in `./sources/display/builtins/cd.c` can be read easily as:
     > A file used to display the builtin cd
 
-### Project architecture
+### b - Project architecture
 The architecture of have to be organized as the follwing tree.
 
 ```text
@@ -80,7 +81,7 @@ The architecture of have to be organized as the follwing tree.
 ## 2 - Commits and Pull Requests
 The group convention is to use emojis with a past tense in your commits message and in your pull requests too.
 
-### Meaning of emojis
+### a - Meaning of emojis
 `✨` New global feature  
 `🔨` Utils functions  
 `💡` Display functions  
@@ -102,7 +103,7 @@ The group convention is to use emojis with a past tense in your commits message 
 `🚑️` Hotfix  
 `🔥` Remove file / function
 
-### Commit syntax
+### b - Commit syntax
 ```
 [EMOJI] [Past tense verb] [Description]
 ```
@@ -116,7 +117,7 @@ The group convention is to use emojis with a past tense in your commits message 
 ## 3 - Variables and types naming
 An unified types and variable naming will allow us to keep our project clean and clear for all of us. All details of this sections are importants !
 
-### Types
+### a - Types
 You have to declare your types in a C file header such the Epitech standard is imposing us.
 
 A type in C have to be prototyped as follwing:
@@ -150,7 +151,7 @@ typedef enum e_state {
 } state_t;
 ```
 
-### Multiple and single elements
+### b - Multiple and single elements
 Sometimes just add an `s` at the end of a name can do a big difference.
 
 If you variable (not the type of it) contains several elements end it by an `s`. Otherwise leave it singular.
@@ -182,4 +183,109 @@ typedef struct s_components {
     button_t *button_start;
     input_t *input_zone;
 } components_t;
+```
+
+## 4 - Header files and preprocessor directives
+### a - Header files
+When you create an C header file you have first to follow the Epitech standard.
+
+The header guard name needs to be like `<NAME>_H_`.
+
+```c
+#ifndef FILE_H_
+    #define FILE_H_
+
+#endif /* !FILE_H_ */
+```
+
+### b - Preprocessor directives
+In your header you have to indent all preprocessor directives. A preprocessor directive is a line which start with `#` *(`#include`, `#define`...).
+
+Just after header guard definition, you have to add a break line. Preprocessor directives order is free, but just all `#include` directives have to be placed first.
+
+*Exemples*
+
+✅ Correct
+```c
+#ifndef FILE_H_
+    #define FILE_H_
+
+    #include <stdlib.h>
+
+    #define ABS(x) (x > 0 ? -x : x)
+    #define SQUARE(x) (x * x)
+
+#endif /* !FILE_H_ */
+```
+
+❌ Incorrect
+```c
+#ifndef FILE_H_
+    #define FILE_H_
+
+    #include <stdlib.h>
+    #define ABS(x) (x > 0 ? -x : x)
+    #define SQUARE(x) (x * x)
+
+#endif /* !FILE_H_ */
+
+```
+
+❌ Incorrect
+```c
+#ifndef FILE_H_
+    #define FILE_H_
+
+    #define ABS(x) (x > 0 ? -x : x)
+    #define SQUARE(x) (x * x)
+
+    #include <stdlib.h>
+
+#endif /* !FILE_H_ */
+```
+
+### c - `#include` directive
+When you're including headers, the inclusion order is:
+* Inclusion from path (with chevrons : `<stdlib.h>`)
+* Inclusion from own files (with quotes : `"my.h"`)
+* Shortest directive at top
+
+✅ Correct
+```c
+#ifndef MY_HEADER_H_
+    #define MY_HEADER_H_
+
+    #include <stdlib.h>
+    #include <sys/wait.h>
+    #include <sys/types.h>
+    #include "my.h"
+    #include "cjson.h"
+
+    #define ABS(x) (x > 0 ? -x : x)
+    #define SQUARE(x) (x * x)
+
+#endif /* !MY_HEADER_H_ */
+```
+
+✅ Correct
+```c
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include "my.h"
+#include "types/list/defs.h"
+```
+
+❌ Incorrect
+```c
+#ifndef MY_HEADER_H_
+    #define MY_HEADER_H_
+
+    #include <sys/wait.h>
+    #include <stdlib.h>
+    #include "my.h"
+    #include <sys/types.h>
+    #include "cjson.h"
+
+#endif /* !MY_HEADER_H_ */
 ```
