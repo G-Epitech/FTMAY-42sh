@@ -2,6 +2,9 @@
 
 Contribute to this Epitech project involves following strict rules to keep a clean project and easily maintainable code.
 
+* [1 - Project architecture and file naming](#1---project-architecture-and-file-naming)
+* [2 - Commits and Pull Requests](#2---commits-and-pull-requests)
+
 ## 1 - Project architecture and file naming
 Files conventions naming and project architecture need to be followed.
 
