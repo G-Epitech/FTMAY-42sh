@@ -2,6 +2,7 @@
 man tcsh
 
 - [📦 Epitech private repository](https://github.com/EpitechPromo2027/B-PSU-200-NAN-2-1-42sh-flavien.chenu)
+- [📦 Remote repository](https://github.com/G-42sh-1/G-42sh-1)
 - [📄 PDF Project](https://intra.epitech.eu/module/2022/B-PSU-200/NAN-2-1/acti-593359/project/file/B-PSU-210_42sh.pdf)
 
 ### Usage
