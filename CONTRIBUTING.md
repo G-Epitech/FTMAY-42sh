@@ -72,3 +72,39 @@ The architecture of have to be organized as the follwing tree.
 │                                           to be used instead
 └── tests
 ```
+
+## 2 - Commits and Pull Requests
+The group convention is to use emojis with a past tense in your commits message and in your pull requests too.
+
+### Meaning of emojis
+`✨` New global feature  
+`🔨` Utils functions  
+`💡` Display functions  
+`📑` Files functions  
+`📒` Types functions  
+`⚡️`  Optimisation / Performance  
+`🏗️` Code architecture  
+`🍱` Assets  
+`✅` Tests  
+`🚚` Files structure / File rename  
+`📦` Library  
+`🙈` Gitignore  
+`🍌` Coding-style  
+`🏷️` Header definition  
+`📝` Makefile / CMakeLists  
+`👷‍♂️` CI Github Action  
+`🐛` Simple fix  
+`💚` Automation fix  
+`🚑️` Hotfix  
+`🔥` Remove file / function
+
+### Commit syntax
+```
+[EMOJI] [Past tense verb] [Description]
+```
+*Examples :*
+* > 🐛 Fixed parsing of arguments
+* > 👷‍♂️ Added coding-style CI
+* > ✅ Updated units tests of files functions (criterion)
+* > 📦️ Updated my_str_to_word_array function
+
