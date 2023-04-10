@@ -30,21 +30,40 @@ The architecture of have to be organized as the follwing tree.
 ├── Makefile
 ├── README.md
 ├── includes
+│   ├── types                           ✅  This folder is reserved for types
+│   │   │                                   headers. This folder is normally symetric
+│   │   │                                   with sources/types folder (1st level only)
+│   │   │
+│   │   ├── shell                       ✅  Reserved folder for shell type
+│   │   │   ├── defs.h                  ✅  Reserved file to declare types and constants
+│   │   │   │                               relative to shell type
+│   │   │   └── shell.h                 ✅  Reserved file to declare all functions
+│   │   │                                   relative to shell type
+│   │   │                               ❌  Other file here is not really good
+│   │   └── list
+│   │       ├── defs.h
+│   │       └── list.h
+│   ├── display.h                       ✅  Reserved folder for sources/display
+│   │                                       folder
+│   └── ...                             👍  Here you can add other folders and sub folders
+│                                           to orgnanize inclusions, but max sub folders
+│                                           level is 2. Try to keep symetry with sources
+│                                           folder.
 ├── sources
 │   ├── main.c
-|   ├── display                         ✅  Folder dedicated for all needed displays
-|   |   ├── prompt.c                    ✅  File used to implement prompt display
-|   |   |                                   with at least function display_prompt
-|   |   |
-|   |   └── builtins
-|   |       └── cd.c                    ✅  File used to implement cd builtin display
-|   |                                       with at least function display_builtin_cd
-|   |
+│   ├── display                         ✅  Folder dedicated for all needed displays
+│   │   ├── prompt.c                    ✅  File used to implement prompt display
+│   │   │                                   with at least function display_prompt
+│   │   │
+│   │   └── builtins
+│   │       └── cd.c                    ✅  File used to implement cd builtin display
+│   │                                       with at least function display_builtin_cd
+│   │
 │   └── types                           ✅  This folder is reserved for types
 │       │                                   implmementation. All functions and files
-|       |                                   in this folder must not call functions outside
-|       |                                   of types folder.
-|       |
+│       │                                   in this folder must not call functions outside
+│       │                                   of types folder.
+│       │
 │       └── list                        ✅  Folder of a type
 │       │   └── new.c                   ✅  File reserved to create a new instance
 │       │   │                               of given type
@@ -187,7 +206,7 @@ typedef struct s_components {
 
 ## 4 - Header files and preprocessor directives
 ### a - Header files
-When you create an C header file you have first to follow the Epitech standard.
+When you create a C header file you have first to follow the Epitech standard.
 
 The header guard name needs to be like `<NAME>_H_`.
 
@@ -199,9 +218,9 @@ The header guard name needs to be like `<NAME>_H_`.
 ```
 
 ### b - Preprocessor directives
-In your header you have to indent all preprocessor directives. A preprocessor directive is a line which start with `#` *(`#include`, `#define`...).
+In your header you have to indent all preprocessor directives. A preprocessor directive is a line which start with `#` (`#include`, `#define`...).
 
-Just after header guard definition, you have to add a break line. Preprocessor directives order is free, but just all `#include` directives have to be placed first.
+Just after header guard definition, you have to add a break line. Preprocessor directives order is free, but all `#include` directives have to be placed first.
 
 *Exemples*
 
@@ -212,7 +231,7 @@ Just after header guard definition, you have to add a break line. Preprocessor d
 
     #include <stdlib.h>
 
-    #define ABS(x) (x > 0 ? -x : x)
+    #define ABS(x) (x < 0 ? -x : x)
     #define SQUARE(x) (x * x)
 
 #endif /* !FILE_H_ */
@@ -224,7 +243,7 @@ Just after header guard definition, you have to add a break line. Preprocessor d
     #define FILE_H_
 
     #include <stdlib.h>
-    #define ABS(x) (x > 0 ? -x : x)
+    #define ABS(x) (x < 0 ? -x : x)
     #define SQUARE(x) (x * x)
 
 #endif /* !FILE_H_ */
@@ -236,7 +255,7 @@ Just after header guard definition, you have to add a break line. Preprocessor d
 #ifndef FILE_H_
     #define FILE_H_
 
-    #define ABS(x) (x > 0 ? -x : x)
+    #define ABS(x) (x < 0 ? -x : x)
     #define SQUARE(x) (x * x)
 
     #include <stdlib.h>
@@ -261,7 +280,7 @@ When you're including headers, the inclusion order is:
     #include "my.h"
     #include "cjson.h"
 
-    #define ABS(x) (x > 0 ? -x : x)
+    #define ABS(x) (x < 0 ? -x : x)
     #define SQUARE(x) (x * x)
 
 #endif /* !MY_HEADER_H_ */
@@ -289,3 +308,14 @@ When you're including headers, the inclusion order is:
 
 #endif /* !MY_HEADER_H_ */
 ```
+
+### d - `#define` preprocessor directive naming
+You have to name your macros and your defined values with the prefix of current context. This in order to avoid conflicts of naming.
+
+*Exemples*
+
+* If you define the header guard of `includes/types/shell/shell.h` you have to name it : `SHELL_H_`
+* If you define the header guard of `includes/types/shell/defs.h` you have to name it : `SHELL_DEFS_H_`.
+* If you define the header guard of `includes/display.h` you have to name it : `DISPLAY_H_`
+* If you define the header guard of `includes/display/builtins.h` you have to name it : `DISPLAY_BUILTINS_H_`
+* If you define a macro in `includes/types/shell/defs.h` you have to name it : `SHELL_EXIT_CODE`.
