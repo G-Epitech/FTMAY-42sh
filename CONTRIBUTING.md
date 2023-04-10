@@ -6,7 +6,6 @@ Contribute to this Epitech project involves following strict rules to keep a cle
 Files conventions naming and project architecture need to be followed.
 
 ### Files and folders naming
----
 Files and folders names must be short and readable by architecure depth level.
 
 *Exemples*
@@ -18,7 +17,6 @@ Files and folders names must be short and readable by architecure depth level.
     > A file used to display the builtin cd
 
 ### Project architecture
----
 The architecture of have to be organized as the follwing tree.
 
 ```text
