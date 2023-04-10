@@ -161,11 +161,11 @@ list_t *animals = list_new(); //Here there are several animals in current variab
 node_t *animal = NULL;        //But here we have just one of them
 ```
 
-It the same in the names that you give to your types. 
+It the same rule for the names that you give to your types. 
 
 *Exemples*
 
-❌ In the follwing exemple you must not set an `s` at the end of type name. In fact, you're defining a type that describe just one state at time. Even if the `enum` contains several values, the type is used to set just one state at time so you don't have to add `s`.
+In the follwing exemple you must not set an `s` at the end of type name. In fact, you're defining a type that describe just one state at time. Even if the `enum` contains several values, the type is used to set just one state at time so you don't have to add `s`.
 
 ```c
 typedef enum e_state {
@@ -175,7 +175,7 @@ typedef enum e_state {
 } state_t;
 ```
 
-✅ In the follwing exemple you have to set an `s` at the end of type name because you're defining a type that contains several values in same time so you have to add an `s` at the end.
+In the follwing exemple you have to set an `s` at the end of type name because you're defining a type that contains several values in same time so you have to add an `s` at the end.
 
 ```c
 typedef struct s_components {
