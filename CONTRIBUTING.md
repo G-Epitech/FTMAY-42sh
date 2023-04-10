@@ -9,13 +9,13 @@ Files conventions naming and project architecture need to be followed.
 ---
 Files and folders names must be short and readable by architecure depth level.
 
-**Exemple**
+*Exemples*
 
-File located in `./sources/display/prompt.c` can be read easily as:
-> A file used to display prompt
+* File located in `./sources/display/prompt.c` can be read easily as:
+    > A file used to display prompt
 
-File located in `./sources/display/builtins/cd.c` can be read easily as:
-> A file used to display the builtin cd
+* File located in `./sources/display/builtins/cd.c` can be read easily as:
+    > A file used to display the builtin cd
 
 ### Project architecture
 ---
