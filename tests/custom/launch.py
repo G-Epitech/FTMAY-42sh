@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 from classes.tester import Tester
-import suites
+import suites.basics as basics
 
 if __name__ == '__main__':
     tester = Tester()
-    tester.addSuite(suites.basics.suite)
+    tester.addSuite(basics.suite)
 
     if tester.execute():
         exit(0)
