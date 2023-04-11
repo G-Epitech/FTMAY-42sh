@@ -77,7 +77,7 @@ fclean: 		clean
 re: 			fclean all
 
 style:			fclean
-				@echo "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)"
+				@printf "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)"
 				@coding-style . .
 				@cat coding-style-reports.log
 
