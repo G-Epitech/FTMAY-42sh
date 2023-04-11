@@ -41,6 +41,8 @@ $(STYLE_BOLD)$(STYLE_BOLD)[%s]$(STYLE_END)\n"
 
 NAME =			42sh
 
+TESTS_CUSTOM = tests/custom/launch.py
+
 .PHONY = all clean fclean re
 
 all: 			$(NAME)
@@ -79,14 +81,15 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_run:
-			echo "pass"
+tests_run: 	criterion
+			@echo "pass"
 
-criterion:
-			echo "pass"
+criterion:	$(NAME)
+			@echo "pass"
 
-ftest:
-			echo "pass"
+ftest:		$(NAME)
+			@echo "pass"
 
-custom:
-			echo "pass"
+custom:		$(NAME)
+			@./$(TESTS_CUSTOM)
+			@echo "pass"
