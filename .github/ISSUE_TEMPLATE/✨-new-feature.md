@@ -3,7 +3,7 @@ name: "✨ New feature"
 about: Create a new feature for the project
 title: "✨ Feature: [TITLE]"
 labels: enhancement
-assignees: TekMath
+assignees: ''
 
 ---
 
