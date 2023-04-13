@@ -334,3 +334,62 @@ If your macros are variables based, you have to pass these variables as paramete
     //✅ Correct
     #define LIST_NODE_ITEM(node) node->next.data->item
 ```
+
+## 5 - Functions
+
+### a - Returned value
+In your C functions you can return any value. But in some cases the returned value is just an indicator to specify if an error occured.
+
+- So in the most cases return value are `success` or `fail` and to indicate them you have to prototype your functions with returned type `bool`. In fact in order to make the developer read more easier we can use the created function in a pseudo-sentences like:
+
+    ```c
+    bool add_item(int e, list_t *list)
+    {
+        //...
+        (void) e;
+        (void) list;
+
+        if (success) {
+            return true; //No error occured
+        } else {
+            return false; //An error occured
+        }
+    }
+
+    //✅ Good convention
+    //Next statement could be easily read as 'If non item add' or 'If item not added' then...
+    if (!add_item(3, NULL)) {
+        printf("error during item adding\n");
+    }
+
+    //❌ Bad convention
+    //Next statement can not be easily read : 'If item was added then error' => illogical
+    if (add_item(3, NULL)) {
+        printf("error during item adding\n");
+    }
+
+    ```
+- But in some others cases the value of returned code is useful. Then in that case, on `success` you have to return `0` and all `errors` code can be described by other values :
+    ```c
+    #include <string.h>
+
+    int display_check_data(char *data)
+    {
+        if (!data)
+            return 1;           //To indicate that pointer is NULL (Error 1)
+        if (strlen(data) == 0)
+            return 2;           //To indicate data is too short (Error 2)
+        return 0;               //To indicate success
+    }
+
+    //✅ Good convention
+    int check_data_status = display_check_data("Hello");
+
+    if (check_data_status == 1) {
+        printf("NULL pointer given\n");
+    } else if (check_data_status == 2) {
+        printf("Too short data given\n");
+    } else {
+        printf("Valid data\n");
+    }
+    ```
