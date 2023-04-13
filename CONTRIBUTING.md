@@ -13,7 +13,7 @@ Files conventions naming and project architecture need to be followed.
 ### a - Files and folders naming
 Files and folders names must be short and readable by architecure depth level.
 
-*Exemples*
+*Examples*
 
 * File located in `./sources/display/prompt.c` can be read easily as:
     > A file used to display prompt
@@ -175,7 +175,7 @@ Sometimes just add an `s` at the end of a name can do a big difference.
 
 If you variable (not the type of it) contains several elements end it by an `s`. Otherwise leave it singular.
 
-*Exemple*
+*Example*
 ```c
 list_t *animals = list_new(); //Here there are several animals in current variable
 node_t *animal = NULL;        //But here we have just one of them
@@ -183,7 +183,7 @@ node_t *animal = NULL;        //But here we have just one of them
 
 It the same rule for the names that you give to your types. 
 
-*Exemples*
+*Examples*
 
 In the follwing exemple you must not set an `s` at the end of type name. In fact, you're defining a type that describe just one state at time. Even if the `enum` contains several values, the type is used to set just one state at time so you don't have to add `s`.
 
@@ -222,7 +222,7 @@ In your header you have to indent all preprocessor directives. A preprocessor di
 
 Just after header guard definition, you have to add a break line. Preprocessor directives order is free, but all `#include` directives have to be placed first.
 
-*Exemples*
+*Examples*
 
 ✅ Correct
 ```c
@@ -312,10 +312,25 @@ When you're including headers, the inclusion order is:
 ### d - `#define` preprocessor directive naming
 You have to name your macros and your defined values with the prefix of current context. This in order to avoid conflicts of naming.
 
-*Exemples*
+*Examples*
 
 * If you define the header guard of `includes/types/shell/shell.h` you have to name it : `SHELL_H_`
 * If you define the header guard of `includes/types/shell/defs.h` you have to name it : `SHELL_DEFS_H_`.
 * If you define the header guard of `includes/display.h` you have to name it : `DISPLAY_H_`
 * If you define the header guard of `includes/display/builtins.h` you have to name it : `DISPLAY_BUILTINS_H_`
 * If you define a macro in `includes/types/shell/defs.h` you have to name it : `SHELL_EXIT_CODE`.
+
+### e - `#define` macros
+You have to set macro on 2 lines maximum.
+
+If your macros are variables based, you have to pass these variables as parameters of your macro and you must not hard code it with the variables names. In fact in different context your variables could be undefined.
+
+*Example*
+
+```c
+    //❌ Incorrect
+    #define LIST_NODE_ITEM node->next.data->item     //Will fail if node is undefined
+
+    //✅ Correct
+    #define LIST_NODE_ITEM(node) node->next.data->item
+```
