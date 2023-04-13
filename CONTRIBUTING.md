@@ -6,6 +6,7 @@ Contribute to this Epitech project involves following strict rules to keep a cle
 * [2 - Commits and Pull Requests](#2---commits-and-pull-requests)
 * [3 - Variables and types naming](#3---variables-and-types-naming)
 * [4 - Header files and preprocessor directives](#4---header-files-and-preprocessor-directives)
+* [5 - Functions](#5---functions)
 
 ## 1 - Project architecture and file naming
 Files conventions naming and project architecture need to be followed.
