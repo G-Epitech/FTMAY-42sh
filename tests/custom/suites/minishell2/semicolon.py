@@ -35,11 +35,11 @@ suite.addTest(tabWrong)
 tabSpaceWrong = Test("wrong with one space and one tab", "echo \"        ;\" | {shell}")
 suite.addTest(tabSpaceWrong)
 
-SimpleWrongTab = Test("wrong with one command and tab", "echo \"ls ;      \" | {shell}")
-suite.addTest(SimpleWrongTab)
+simpleWrongTab = Test("wrong with one command and tab", "echo \"ls ;      \" | {shell}")
+suite.addTest(simpleWrongTab)
 
-SimpleWrongTabSpace = Test("Complex wrong cmd", "echo \"ls         ;      \" | {shell}")
-suite.addTest(SimpleWrongTabSpace)
+simpleWrongTabSpace = Test("Complex wrong cmd", "echo \"ls         ;      \" | {shell}")
+suite.addTest(simpleWrongTabSpace)
 
-InversedWrong = Test("wrong inversed cmd semicolon", "echo \"; ls\" | {shell}")
-suite.addTest(InversedWrong)
+inversedWrong = Test("wrong inversed cmd semicolon", "echo \"; ls\" | {shell}")
+suite.addTest(inversedWrong)
