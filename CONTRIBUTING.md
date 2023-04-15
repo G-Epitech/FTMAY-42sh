@@ -394,3 +394,11 @@ In your C functions you can return any value. But in some cases the returned val
         printf("Valid data\n");
     }
     ```
+
+### b - Memory handling
+All functions that are using `malloc` needs to have a symetric function to free allocated memory.
+If this rule is not followed, your reviews could be refused.
+
+*Exemple*
+
+> If you create `shell_new()` that allocate 2 strings inside a `shell_t` structure (also allocated), you have to free all of them with symetric function `shell_free()` in which you will first free 2 strings and then the `shell_t` structure.
