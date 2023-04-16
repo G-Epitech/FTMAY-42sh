@@ -9,4 +9,4 @@ man tcsh
 To test this project, launch following command : `./42sh` then, enter your commands as in **[tcsh shell](https://www.tcsh.org/)**.
 
 #
-Made by [AxelF44](https://github.com/AxelF44), [TekMath](https://github.com/TekMath), [Muvyr](https://github.com/Muvyr), [ThomasQUINTIN](https://github.com/ThomasQUINTIN) [Flavien Chenu](https://github.com/flavien-chenu)
+Made by [AxelF44](https://github.com/AxelF44), [TekMath](https://github.com/TekMath), [Muvyr](https://github.com/Muvyr), [ThomasQUINTIN](https://github.com/ThomasQUINTIN) & [Flavien Chenu](https://github.com/flavien-chenu)
