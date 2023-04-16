@@ -529,3 +529,38 @@ size_t strlen(char *str);
 bool shell_in_tty_mode(shell_t *shell);
 ```
 You can also add some tags like `@info`, `@warning` or `@deprecated` to specify additionals informations on current function. These tags follow same rules than `@brief`.
+
+### b - `typedef`
+You have to document your all `typedef`. Below, there are exemples for differents `typedef`.
+
+* Structure:
+    ```c
+    // Represent a shell with all necessary data
+    typedef struct s_shell {
+        char **env;         //Environnement variables
+        bool is_tty;        //Specify if current shell is in tty mode
+    } shell_t;
+    ```
+* Enumeration:
+    ```c
+    // Represent state of a shell
+    typedef enum e_shell_state {
+        SHST_RUNNING,           //Shell running
+        SHST_EXITED,            //Shell exited
+    } shell_state_t;
+    ```
+* Union:
+    ```c
+    // Represent the data contained in a node
+    typedef union u_node_data {
+        void *v_ptr;         //Any pointer
+        int v_int;           //Integer value
+        float v_float;       //Float value   
+    } node_data_t;
+    ```
+* Function:
+    ```c
+    // Prototype of a shell builtin function
+    typedef int (*shell_builtin_t)(int argc, char **argv, char **env);
+    ```
+More generally you can document your typedef above your typedef declaration.
