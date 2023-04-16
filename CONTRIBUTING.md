@@ -395,7 +395,7 @@ In your C functions you can return any value. But in some cases the returned val
 All functions that are using `malloc` needs to have a symetric function to free allocated memory.
 If this rule is not followed, your reviews could be refused.
 
-*Exemple*
+*Example*
 
 > If you create `shell_new()` that allocate 2 strings inside a `shell_t` structure (also allocated), you have to free all of them with symetric function `shell_free()` in which you will first free 2 strings and then the `shell_t` structure.
 
@@ -404,7 +404,7 @@ If a conditionnal block contains only one line, you have to ommit brackets on it
 
 On a block of multiples conditions as `if > else if > else`, if one on condition needs brackets you have to put brackets on all conditions of block.
 
-*Exemples*
+*Examples*
 
 >   ```c
 >   // ✅ Correct
@@ -441,7 +441,7 @@ When your are using loops, there are 2 differents cases:
 
 So in the first case you have to use a `for` loop. Otherwise you have to use `while` loop.
 
-*Exemples*
+*Examples*
 
 * `for` loop:
     ```c
@@ -492,5 +492,40 @@ So in the first case you have to use a `for` loop. Otherwise you have to use `wh
         i += 1;
     }
 
-    
     ```
+
+## 6 - Documentation
+You have to document your code **precisely** to allow to others members of the group to understand easily your code. There is serveral manners to document your code in C langage, but we are going to use the *Doxygen* syntax. All documentation that you will write, needs to be placed in header files.
+
+**Doxygen** is a software that allow to produce a complete documentation by usage of sepcial comment syntax. To write easily Doxygen comments you can download the extension corresponding to your IDE (exemple: [*Visual Studio Code*](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen), ...).
+
+### a - Function
+
+With the Doxygen extension, you can easily document a function for example, by typing : `/***/` (just above your function declaration) and then pressing `Enter`.
+
+All `tags` (`@param`, `@brief`...) needs to be followed by a description.
+
+Rules for main tags :
+* `@brief`: needs to be followed by a description of current function. This description must consist of one or more sentences beginning with a **capital letter and ending with a period**.
+* `@param`: describe the parameter that follow it, and have to **begin with a capital letter and end without period**.
+* `@return`: describe the returned value and have to follow same rules than `@param` and **must not contains type** of returned value. If first word of description is an absolute value like `false` for exemple, you have to ommit the first capital letter.
+
+*Example*
+```c
+/**
+ * @brief Count the length of given string.
+ * @param str String of which get length
+ * @return Length of given string
+ */
+size_t strlen(char *str);
+```
+
+```c
+/**
+ * @brief Check if given shell is in tty mode.
+ * @param shell Shell object of which check tty mode
+ * @return true if shell is in tty mode, false otherwise
+ */
+bool shell_in_tty_mode(shell_t *shell);
+```
+You can also add some tags like `@info`, `@warning` or `@deprecated` to specify additionals informations on current function. These tags follow same rules than `@brief`.
