@@ -328,13 +328,13 @@ If your macros are variables based, you have to pass these variables as paramete
 
 *Example*
 
-```c
-    //❌ Incorrect
-    #define LIST_NODE_ITEM node->next.data->item     //Will fail if node is undefined
-
-    //✅ Correct
-    #define LIST_NODE_ITEM(node) node->next.data->item
-```
+>```c
+> //❌ Incorrect
+> #define LIST_NODE_ITEM node->next.data->item     //Will fail if node is undefined
+>
+> //✅ Correct
+> #define LIST_NODE_ITEM(node) node->next.data->item
+>```
 
 ## 5 - Functions
 
@@ -350,24 +350,21 @@ In your C functions you can return any value. But in some cases the returned val
         (void) e;
         (void) list;
 
-        if (success) {
+        if (success)
             return true; //No error occured
-        } else {
+        else
             return false; //An error occured
-        }
     }
 
     //✅ Good convention
     //Next statement could be easily read as 'If non item add' or 'If item not added' then...
-    if (!add_item(3, NULL)) {
+    if (!add_item(3, NULL))
         printf("error during item adding\n");
-    }
 
     //❌ Bad convention
     //Next statement can not be easily read : 'If item was added then error' => illogical
-    if (add_item(3, NULL)) {
+    if (add_item(3, NULL))
         printf("error during item adding\n");
-    }
 
     ```
 - But in some others cases the value of returned code is useful. Then in that case, on `success` you have to return `0` and all `errors` code can be described by other values :
@@ -386,13 +383,12 @@ In your C functions you can return any value. But in some cases the returned val
     //✅ Good convention
     int check_data_status = display_check_data("Hello");
 
-    if (check_data_status == 1) {
+    if (check_data_status == 1)
         printf("NULL pointer given\n");
-    } else if (check_data_status == 2) {
+    else if (check_data_status == 2)
         printf("Too short data given\n");
-    } else {
+    else
         printf("Valid data\n");
-    }
     ```
 
 ### b - Memory handling
@@ -402,3 +398,99 @@ If this rule is not followed, your reviews could be refused.
 *Exemple*
 
 > If you create `shell_new()` that allocate 2 strings inside a `shell_t` structure (also allocated), you have to free all of them with symetric function `shell_free()` in which you will first free 2 strings and then the `shell_t` structure.
+
+### c - Blocks of one line
+If a conditionnal block contains only one line, you have to ommit brackets on it, but only if the block condition is on one, and only one line.
+
+On a block of multiples conditions as `if > else if > else`, if one on condition needs brackets you have to put brackets on all conditions of block.
+
+*Exemples*
+
+>   ```c
+>   // ✅ Correct
+>   if (true)
+>       printf("Hello");
+>
+>   // ❌ Incorrect (the conditionnal block is not on just one line)
+>   if (true && strlen("Super") == 5
+>       && player.active)
+>       printf("Hello");
+>   ```
+>   ```c
+>   // ❌ Incorrect
+>   if (get_status(player) == SLEEPING)
+>       printf("Sleeping");
+>   else if (true && strlen("Super") == 5
+>       && player.active)
+>       printf("Hello");
+>   
+>   // ✅ Correct
+>   if (get_status(player) == SLEEPING) {
+>       printf("Sleeping");
+>   } else if (strlen("Super") == 5 && player.active) {
+>       printf("Hello");
+>       player.active = false;
+>   }
+>   ```
+
+### d - Loops
+When your are using loops, there are 2 differents cases:
+
+- You **know** how many loops you will do even before looping
+- You **don't know** how many loops you will do before looping
+
+So in the first case you have to use a `for` loop. Otherwise you have to use `while` loop.
+
+*Exemples*
+
+* `for` loop:
+    ```c
+    // ✅ Correct
+    // FOR loop is adapted because before entering in loop, we know how many loopings we are going to do.
+    char *str = "Hello\n"
+    size_t len = strlen(str);
+
+    for (size_t i = 0; i < len; i++)
+    putchar(str[i]);
+
+    // ❌ Incorrect
+    // FOR loop is more adapted because before entering in loop, we know how many loopings we are going to do.
+    char *str = "Hello\n"
+    size_t len = strlen(str);
+    size_t i = 0;
+
+    while(i < len) {
+    putchar(str[i]);
+    i += 1;
+    }
+    ```
+
+* `while` loop:
+    ```c
+    // ❌ Incorrect
+    // FOR loop is not adapted because before entering in loop, we don't know how many loopings we are going to do.
+    char *str = "Hello\n"
+    char expected = 'l';
+    bool found = false;
+    size_t len = strlen(str);
+
+    for (size_t i = 0; i < len && !found; i++) {
+        if (str[i] == expected)
+            found = true;
+    }
+
+    // ✅ Correct
+    // WHILE loop is adapted because before entering in loop, we don't know how many loopings we are going to do.
+    char *str = "Hello\n"
+    char expected = 'l';
+    bool found = false;
+    size_t len = strlen(str);
+
+    while (i < len && !found) {
+        if (str[i] == expected)
+            found = true;
+        i += 1;
+    }
+
+    
+    ```
