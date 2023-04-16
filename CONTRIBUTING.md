@@ -349,7 +349,6 @@ In your C functions you can return any value. But in some cases the returned val
         //...
         (void) e;
         (void) list;
-
         if (success)
             return true; //No error occured
         else
