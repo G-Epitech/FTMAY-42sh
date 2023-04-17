@@ -6,6 +6,7 @@ import suites.minishell1.cd as minishell1Cd
 import suites.minishell1.env as minishell1Env
 import suites.minishell1.unsetenv as minishell1Unsetenv
 import suites.minishell1.setenv as minishell1Setenv
+import suites.minishell1.error as minishell1Error
 
 if __name__ == '__main__':
     tester = Tester()
@@ -14,6 +15,7 @@ if __name__ == '__main__':
     tester.addSuite(minishell1Env.suite)
     tester.addSuite(minishell1Unsetenv.suite)
     tester.addSuite(minishell1Setenv.suite)
+    tester.addSuite(minishell1Error.suite)
 
     if tester.execute():
         exit(0)
