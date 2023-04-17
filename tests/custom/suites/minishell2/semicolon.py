@@ -12,16 +12,16 @@ from classes.test import Test
 pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
-suite = TestSuite("Basics")
+suite = TestSuite("Semicolon")
 
-simple_semi = Test("Simple semicolon", "echo \"ls; pwd\" | {shell}")
-suite.addTest(simple_semi)
+simpleSemi = Test("Simple semicolon", "echo \"ls; pwd\" | {shell}")
+suite.addTest(simpleSemi)
 
-double_semi = Test("Double semicolon", "echo \"ls; echo salut; pwd\" | {shell}")
-suite.addTest(double_semi)
+doubleSemi = Test("Double semicolon", "echo \"ls; echo salut; pwd\" | {shell}")
+suite.addTest(doubleSemi)
 
-triple_semi = Test("Triple semicolon", "echo \"ls; pwd; touch axxel; rm -rf axxel\" | {shell}")
-suite.addTest(triple_semi)
+tripleSemi = Test("Triple semicolon", "echo \"ls; pwd; touch axxel; rm -rf axxel\" | {shell}")
+suite.addTest(tripleSemi)
 
 wrong = Test("wrong", "echo \";\" | {shell}")
 suite.addTest(wrong)

@@ -12,7 +12,7 @@ from classes.test import Test
 pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
-suite = TestSuite("Basics")
+suite = TestSuite("Pipe")
 
 simplePipe = Test("Simple pipe", "echo \"ls | grep l\" | {shell}")
 suite.addTest(simplePipe)
