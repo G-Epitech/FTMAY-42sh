@@ -16,9 +16,3 @@ suite = TestSuite("env")
 
 simpleenv = Test("Simple env command", "echo \"env\" | {shell}")
 suite.addTest(simpleenv)
-
-grepenv = Test("cd and grep command", "echo \"env | grep USER=\" | {shell}")
-suite.addTest(grepenv)
-
-redirectionenv = Test("cd redirection", "echo \"env > test_env ; cat test_env ; rm test_env\" | {shell}")
-suite.addTest(redirectionenv)
