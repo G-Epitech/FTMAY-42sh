@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-_SRC =
+_SRC =			types/node/new.c
 
 _TESTS =		criterion/example/simple.c
 
