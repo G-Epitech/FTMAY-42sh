@@ -8,7 +8,7 @@
 
 _SRC =
 
-_TESTS =
+_TESTS =		criterion/example/simple.c
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -19,6 +19,7 @@ SRC_OBJ = 		$(SRC:.c=.o)
 TESTSDIR = 		tests/
 TESTS =			$(addprefix $(TESTSDIR), $(_TESTS))
 TESTS_OBJ = 	$(TESTS:.c=.o)
+TESTS_CFLAGS =	-lcriterion
 
 INC = 			-I.. -I./includes
 CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument
@@ -40,6 +41,7 @@ COMPILING_O_LOG = "$(STYLE_BLUE)📑 Compiling sources -\
 $(STYLE_BOLD)$(STYLE_BOLD)[%s]$(STYLE_END)\n"
 
 NAME =			42sh
+TESTS_NAME = 	42sh_tests
 
 TESTS_CUSTOM = tests/custom/launch.py
 
@@ -68,9 +70,11 @@ exec:			$(NAME)
 clean:
 				@rm -f $(OBJ)
 				@rm -f $(MAIN_OBJ)
+				@rm -f $(TESTS_OBJ)
 
 fclean: 		clean
 				@rm -f $(NAME)
+				@rm -f $(TESTS_NAME)
 				@printf "$(STYLE_ORANGE)🧽 $(NAME) was successfully cleaned\
 				$(STYLE_END)\n"
 
@@ -81,15 +85,20 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_run: 	criterion
-			@echo "pass"
+criterion:		$(SRC_OBJ) $(TESTS_OBJ)
+				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
+				@$(CC) -o $(TESTS_NAME) $(SRC_OBJ) $(TESTS_OBJ) \
+				$(LDFLAGS) $(CFLAGS) $(INC) $(TESTS_CFLAGS)
+				@printf "$(STYLE_GREEN)✅ Tests was successfully built\
+				$(STYLE_END)\n"
+				@-./$(TESTS_NAME)
+				@make fclean
 
-criterion:	$(NAME)
-			@echo "pass"
+ftest:			$(NAME)
+				@echo "pass"
 
-ftest:		$(NAME)
-			@echo "pass"
+custom:			$(NAME)
+				@./$(TESTS_CUSTOM)
+				@echo "pass"
 
-custom:		$(NAME)
-			@./$(TESTS_CUSTOM)
-			@echo "pass"
+tests_run: 		criterion
