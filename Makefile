@@ -17,8 +17,6 @@ SRC_OBJ = 		$(SRC:.c=.o)
 
 SRC_COVER =		$(SRC:.c=.gcno)
 SRC_PRFL =		$(SRC:.c=.gcda)
-TESTS_COVER =	$(TESTS:.c=.gcno)
-TESTS_PRFL =	$(TESTS:.c=.gcda)
 
 TESTSDIR = 		tests/
 TESTS =			$(addprefix $(TESTSDIR), $(_TESTS))
@@ -81,8 +79,6 @@ clean:
 				@rm -f $(SRC_COVER)
 				@rm -f $(SRC_PRFL)
 				@rm -f $(TESTS_OBJ)
-				@rm -f $(TESTS_COVER)
-				@rm -f $(TESTS_PRFL)
 
 fclean: 		clean
 				@rm -f $(NAME)
@@ -100,7 +96,7 @@ style:			fclean
 criterion:
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage
-				@$(MAKE) tests_objects CFLAGS+=--coverage
+				@$(MAKE) tests_objects
 				@$(CC) -o $(TESTS_NAME) $(SRC_OBJ) $(TESTS_OBJ) \
 				$(LDFLAGS) $(CFLAGS) $(INC) $(TESTS_CFLAGS)
 				@printf "$(STYLE_GREEN)✅ Tests was successfully built\
@@ -115,3 +111,9 @@ custom:			$(NAME)
 				@echo "pass"
 
 tests_run: 		criterion
+
+coverage:
+				gcovr
+
+coverage_branch:
+				gcovr --branch
