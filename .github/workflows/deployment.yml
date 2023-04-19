@@ -6,6 +6,10 @@ on:
     workflow_dispatch:
 
 jobs:
+    coding_style:
+        name: "🍌 Epitech coding-style"
+        uses: ./.github/workflows/coding-style.yml
+
     repository_mirroring:
         name: "🚀 Repository mirroring"
         runs-on: ubuntu-latest
