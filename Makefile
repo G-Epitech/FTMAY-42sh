@@ -99,7 +99,7 @@ criterion:
 				@$(MAKE) tests_objects
 				@$(CC) -o $(TESTS_NAME) $(SRC_OBJ) $(TESTS_OBJ) \
 				$(LDFLAGS) $(CFLAGS) $(INC) $(TESTS_CFLAGS)
-				@printf "$(STYLE_GREEN)✅ Tests was successfully built\
+				@printf "$(STYLE_GREEN)✅ Tests were successfully built\
 				$(STYLE_END)\n"
 				@./$(TESTS_NAME)
 
