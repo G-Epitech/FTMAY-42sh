@@ -5,7 +5,6 @@
 ## Makefile
 ##
 
-
 _SRC =
 
 _TESTS =		criterion/example/simple.c
@@ -16,10 +15,15 @@ MAIN =			$(addprefix $(SRCDIR), main.c)
 MAIN_OBJ =		$(MAIN:.c=.o)
 SRC_OBJ = 		$(SRC:.c=.o)
 
+SRC_COVER =		$(SRC:.c=.gcno)
+SRC_PRFL =		$(SRC:.c=.gcda)
+TESTS_COVER =	$(TESTS:.c=.gcno)
+TESTS_PRFL =	$(TESTS:.c=.gcda)
+
 TESTSDIR = 		tests/
 TESTS =			$(addprefix $(TESTSDIR), $(_TESTS))
 TESTS_OBJ = 	$(TESTS:.c=.o)
-TESTS_CFLAGS =	-lcriterion
+TESTS_CFLAGS =	-lcriterion --coverage
 
 INC = 			-I.. -I./includes
 CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument
@@ -67,10 +71,18 @@ docker:
 exec:			$(NAME)
 				@./$(NAME)
 
+objects:		$(SRC_OBJ)
+
+tests_objects:	$(TESTS_OBJ)
+
 clean:
-				@rm -f $(OBJ)
 				@rm -f $(MAIN_OBJ)
+				@rm -f $(SRC_OBJ)
+				@rm -f $(SRC_COVER)
+				@rm -f $(SRC_PRFL)
 				@rm -f $(TESTS_OBJ)
+				@rm -f $(TESTS_COVER)
+				@rm -f $(TESTS_PRFL)
 
 fclean: 		clean
 				@rm -f $(NAME)
@@ -85,14 +97,15 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-criterion:		$(SRC_OBJ) $(TESTS_OBJ)
+criterion:
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
+				@$(MAKE) objects CFLAGS+=--coverage
+				@$(MAKE) tests_objects CFLAGS+=--coverage
 				@$(CC) -o $(TESTS_NAME) $(SRC_OBJ) $(TESTS_OBJ) \
 				$(LDFLAGS) $(CFLAGS) $(INC) $(TESTS_CFLAGS)
 				@printf "$(STYLE_GREEN)✅ Tests was successfully built\
 				$(STYLE_END)\n"
-				@-./$(TESTS_NAME)
-				@make fclean
+				@./$(TESTS_NAME)
 
 ftest:			$(NAME)
 				@echo "pass"
