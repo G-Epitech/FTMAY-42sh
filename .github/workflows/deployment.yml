@@ -7,15 +7,17 @@ on:
 
 jobs:
     coding_style:
-        name: "🍌 Epitech coding-style"
+        name: "Epitech coding-style"
+        permissions: write-all
         uses: ./.github/workflows/coding-style.yml
 
     project-compilation:
-        name: "⚙️ Project compilation"
+        name: "Project compilation"
         uses: ./.github/workflows/compilation.yml
 
     project-tests:
-        name: "✅ Tests"
+        name: "Tests"
+        permissions: write-all
         uses: ./.github/workflows/tests.yml
         needs: [ project-compilation ]
 
