@@ -1,4 +1,4 @@
-name: "✅ CI: Tests"
+name: "CI: Tests"
 
 on:
     pull_request:

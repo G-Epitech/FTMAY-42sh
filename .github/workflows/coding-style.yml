@@ -1,4 +1,4 @@
-name: "🍌 CI: Coding-Style"
+name: "CI: Coding-Style"
 
 on:
     pull_request:

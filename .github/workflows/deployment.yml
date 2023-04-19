@@ -1,4 +1,4 @@
-name: "🚚 CD: Deployement"
+name: "CD: Deployement"
 
 on:
     push:
