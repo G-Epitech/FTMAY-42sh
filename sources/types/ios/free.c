@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** G-42sh-1 [WSL: Ubuntu]
+** 42sh
 ** File description:
 ** free
 */
