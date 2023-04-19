@@ -89,7 +89,7 @@ fclean: 		clean
 re: 			fclean all
 
 style:			fclean
-				@printf "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)"
+				@printf "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)\n"
 				@coding-style . .
 				@cat coding-style-reports.log
 
