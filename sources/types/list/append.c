@@ -9,6 +9,8 @@
 
 void list_append(list_t *list, node_t *node)
 {
+    if (!node || !list)
+        return;
     if (list->last != NULL) {
         node->next = list->last->next;
         list->last->next = node;
