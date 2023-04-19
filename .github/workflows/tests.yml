@@ -61,6 +61,10 @@ jobs:
             message: |
                 # 📋 Coverage report @${{ github.event.pull_request.assignee.login }}
                 ## Lines coverage
+                ```
                 ${{ steps.lines_coverage.outputs.lines_coverage }}
+                ```
                 ## Branch coverage
+                ```
                 ${{ steps.branch_coverage.outputs.branch_coverage }}
+                ```
