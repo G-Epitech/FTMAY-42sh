@@ -24,7 +24,7 @@ jobs:
                 cat coding-style-reports.log >> $GITHUB_OUTPUT
                 echo 'EOF' >> $GITHUB_OUTPUT
 
-            - name: "💬 Display developers errors"
+            - name: "💬 Log errors"
               if: ${{ steps.coding_style.outputs.coding_style != '' }}
               run: |
                 while read -r line
