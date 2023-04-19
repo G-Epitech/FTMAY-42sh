@@ -8,9 +8,18 @@
 #ifndef NODE_DEFS_H_
     #define NODE_DEFS_H_
 
-//Represent data of node_t
+typedef struct s_node node_t;
+
+// Represent data of node_t
 typedef union u_node_data {
-    void *ptr;  //Any pointer
+    void *ptr;          //Any pointer
 } node_data_t;
+
+// Represent a node of linked list
+typedef struct s_node {
+    node_t *prev;       //Previous node
+    node_data_t data;   //Data of node
+    node_t *next;       //Next node
+} node_t;
 
 #endif /* !NODE_DEFS_H_ */
