@@ -19,3 +19,4 @@ unit_tests*
 cmake-build-debug/
 .idea/
 unitests
+42sh_tests
