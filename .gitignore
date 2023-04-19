@@ -16,6 +16,5 @@ unit_tests*
 *.dSYM
 .DS_Store
 42sh
-cmake-build-debug/
 .idea/
-unitests
+42sh_tests

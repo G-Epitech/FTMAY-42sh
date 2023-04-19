@@ -8,6 +8,7 @@
 #ifndef NODE_DEFS_H_
     #define NODE_DEFS_H_
 
+// Represent a node of linked list
 typedef struct s_node node_t;
 
 // Represent data of node_t
