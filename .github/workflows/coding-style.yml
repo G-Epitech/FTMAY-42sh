@@ -9,6 +9,7 @@ jobs:
     coding_style:
         name: "🍌 Epitech coding-style"
         runs-on: ubuntu-latest
+        permissions: write-all
         container:
           image: ghcr.io/epitech/coding-style-checker:latest
 

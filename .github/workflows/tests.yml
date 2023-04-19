@@ -28,6 +28,7 @@ jobs:
     project_coverage:
         name: "📋 Project coverage"
         runs-on: ubuntu-latest
+        permissions: write-all
         container:
             image: epitechcontent/epitest-docker:latest
         needs: [ project_tests ]
