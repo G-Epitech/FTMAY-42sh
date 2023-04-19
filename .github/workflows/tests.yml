@@ -12,18 +12,18 @@ jobs:
         container:
             image: epitechcontent/epitest-docker:latest
         continue-on-error: false
+        timeout-minutes: 3
 
         strategy:
             matrix:
-                label: ['criterion', 'ftest', 'custom']
-                rule: ['tests_criterion', 'ftest', 'tests_custom']
+                type: ['tests_criterion', 'ftest', 'tests_custom']
 
         steps:
         - name: "📥 Checkout repository"
           uses: actions/checkout@v3
 
-        - name: "⚙️ Run ${{ matrix.label }}"
-          run: make ${{ matrix.rule }}
+        - name: "⚙️ Run ${{ matrix.type }}"
+          run: make ${{ matrix.type }}
 
     project_coverage:
         name: "📋 Project coverage"
@@ -31,6 +31,7 @@ jobs:
         container:
             image: epitechcontent/epitest-docker:latest
         needs: [ project_tests ]
+        timeout-minutes: 3
         
         steps:
         - name: "📥 Checkout repository"
