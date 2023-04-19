@@ -93,10 +93,10 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-criterion:
+tests_criterion:
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
-				@$(MAKE) objects CFLAGS+=--coverage
-				@$(MAKE) tests_objects
+				@$(MAKE) objects CFLAGS+=--coverage -s
+				@$(MAKE) tests_objects -s
 				@$(CC) -o $(TESTS_NAME) $(SRC_OBJ) $(TESTS_OBJ) \
 				$(LDFLAGS) $(CFLAGS) $(INC) $(TESTS_CFLAGS)
 				@printf "$(STYLE_GREEN)✅ Tests were successfully built\
@@ -106,14 +106,14 @@ criterion:
 ftest:			$(NAME)
 				@echo "pass"
 
-custom:			$(NAME)
+tests_custom:	$(NAME)
 				@./$(TESTS_CUSTOM)
 				@echo "pass"
 
-tests_run: 		criterion
+tests_run: 		tests_criterion
 
 coverage:
-				gcovr
+				@gcovr
 
 coverage_branch:
-				gcovr --branch
+				@gcovr --branch

@@ -1,0 +1,74 @@
+name: "CI: Tests"
+
+on:
+    pull_request:
+    workflow_dispatch:
+    workflow_call:
+
+jobs:
+    project_tests:
+        name: "✅ Project tests"
+        runs-on: ubuntu-latest
+        container:
+            image: epitechcontent/epitest-docker:latest
+        continue-on-error: false
+        timeout-minutes: 3
+
+        strategy:
+            matrix:
+                type: ['tests_criterion', 'ftest', 'tests_custom']
+
+        steps:
+        - name: "📥 Checkout repository"
+          uses: actions/checkout@v3
+
+        - name: "⚙️ Run ${{ matrix.type }}"
+          run: make ${{ matrix.type }}
+
+    project_coverage:
+        name: "📋 Project coverage"
+        runs-on: ubuntu-latest
+        permissions: write-all
+        container:
+            image: epitechcontent/epitest-docker:latest
+        needs: [ project_tests ]
+        timeout-minutes: 3
+        
+        steps:
+        - name: "📥 Checkout repository"
+          uses: actions/checkout@v3
+        
+        - name: "⚙️ Run tests with Epitech rule"
+          run: make tests_custom
+        
+        - name: "⚙️ Run lines coverage"
+          id: lines_coverage
+          run: |
+            echo 'lines_coverage<<EOF' >> $GITHUB_OUTPUT
+            make coverage >> $GITHUB_OUTPUT
+            echo 'EOF' >> $GITHUB_OUTPUT
+
+        - name: "⚙️ Run branch coverage"
+          id: branch_coverage
+          run: |
+            echo 'branch_coverage<<EOF' >> $GITHUB_OUTPUT
+            make coverage_branch >> $GITHUB_OUTPUT
+            echo 'EOF' >> $GITHUB_OUTPUT
+
+        - name: "💬 Display coverage"
+          uses: thollander/actions-comment-pull-request@v2
+          with:
+            message: |
+                # 📋 Coverage report @${{ github.event.pull_request.assignee.login }}
+                <details>
+                <summary><h2>Lines coverage</h2></summary>
+                <pre>
+                ${{ steps.lines_coverage.outputs.lines_coverage }}
+                </pre>
+                </details>
+                <details>
+                <summary><h2>Branches coverage</h2></summary>
+                <pre>
+                ${{ steps.branch_coverage.outputs.branch_coverage }}
+                </pre>
+                </details>
