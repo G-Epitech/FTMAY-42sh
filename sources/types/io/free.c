@@ -13,4 +13,3 @@ void io_free(io_t *io)
         return;
     free(io->path);
 }
-
