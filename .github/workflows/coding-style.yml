@@ -1,0 +1,45 @@
+name: "🍌 CI: Coding-Style"
+
+on:
+    pull_request:
+    workflow_dispatch:
+    workflow_call:
+
+jobs:
+    coding_style:
+        name: "🍌 Epitech coding-style"
+        runs-on: ubuntu-latest
+        container:
+          image: ghcr.io/epitech/coding-style-checker:latest
+
+        steps:
+            - name: "📥 Checkout repository"
+              uses: actions/checkout@v3
+
+            - name: "⚙️ Run conding-style"
+              id: coding_style
+              run: |
+                echo 'coding_style<<EOF' >> $GITHUB_OUTPUT
+                check.sh $(pwd) $(pwd) >> $GITHUB_OUTPUT
+                cat coding-style-reports.log >> $GITHUB_OUTPUT
+                echo 'EOF' >> $GITHUB_OUTPUT
+
+            - name: "💬 Log errors"
+              if: ${{ steps.coding_style.outputs.coding_style != '' }}
+              run: |
+                while read -r line
+                do error_type=$(echo $line | cut -d ':' -f 3 | cut -c 2-)
+                code=$(echo $line | cut -d ':' -f 4)
+                filename=$(echo $line | cut -d ':' -f 1)
+                line_number=$(echo $line | cut -d ':' -f 2)
+                echo "::error title=$error_type coding style error,file=$filename,line=$line_number::$code"
+                done < coding-style-reports.log
+                exit 1
+
+            - name: "💬 Display pull-request errors"
+              if: ${{ steps.coding_style.outputs.coding_style != '' }}
+              uses: thollander/actions-comment-pull-request@v2
+              with:
+                  message: |
+                    ## 🍌 Epitech coding-style report
+                    ${{ steps.coding_style.outputs.coding_style }}
