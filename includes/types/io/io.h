@@ -1,12 +1,25 @@
 /*
 ** EPITECH PROJECT, 2023
-** G-42sh-1 [WSL: Ubuntu]
+** 42sh
 ** File description:
 ** io
 */
 
-#ifndef DEFS_IO_H_
-    #define DEFS_IO_H_
+#ifndef IO_H_
+    #define IO_H_
 
+    #include "defs.h"
 
-#endif /* !DEFS_IO_H_ */
+/**
+ * @brief Free inner io content but no structure
+ * @param io Prototype of input / output structure
+ */
+void io_free(io_t *io);
+
+/**
+ * @brief Free input and output io_t fields, but no structure
+ * @param ios Prototype of inputs / outputs structure
+ */
+void ios_free(ios_t *ios);
+
+#endif /* !IO_H_ */
