@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-_SRC =			types/node/new.c
+_SRC =			types/node/new.c \
+				types/node/free.c \
+				types/node/unlink.c \
 
 _TESTS =		criterion/example/simple.c
 

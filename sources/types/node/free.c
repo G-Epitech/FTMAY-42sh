@@ -5,6 +5,7 @@
 ** Node free
 */
 
+#include <stdlib.h>
 #include "types/node/defs.h"
 
 void node_free(node_t *node, node_freeer_t freeer)
