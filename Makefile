@@ -8,8 +8,14 @@
 _SRC =			types/node/new.c \
 				types/node/free.c \
 				types/node/unlink.c \
+				\
+				types/list/new.c \
+				types/list/free.c \
+				types/list/append.c \
+				types/list/remove.c
 
-_TESTS =		criterion/example/simple.c
+_TESTS =		criterion/types/list.c \
+				criterion/types/node.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

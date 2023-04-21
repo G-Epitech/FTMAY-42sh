@@ -8,6 +8,9 @@
 #ifndef NODE_DEFS_H_
     #define NODE_DEFS_H_
 
+    #define NODE_DATA_FROM_PTR(ptr) ((node_data_t) (void *) ptr)
+    #define NODE_DATA_TO_PTR(data, ptrtype) ((ptrtype) data.ptr)
+
 // Represent a node of linked list
 typedef struct s_node node_t;
 
