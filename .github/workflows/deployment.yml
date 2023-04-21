@@ -1,4 +1,4 @@
-name: "🚚 CD: Deployement"
+name: "CD: Deployement"
 
 on:
     push:
@@ -6,10 +6,25 @@ on:
     workflow_dispatch:
 
 jobs:
+    coding_style:
+        name: "Epitech coding-style"
+        permissions: write-all
+        uses: ./.github/workflows/coding-style.yml
+
+    project-compilation:
+        name: "Project compilation"
+        uses: ./.github/workflows/compilation.yml
+
+    project-tests:
+        name: "Tests"
+        permissions: write-all
+        uses: ./.github/workflows/tests.yml
+        needs: [ project-compilation ]
+
     repository_mirroring:
         name: "🚀 Repository mirroring"
         runs-on: ubuntu-latest
-        needs: []
+        needs: [ coding_style, project-tests]
 
         steps:
         - name: "📥 Checkout repository"
