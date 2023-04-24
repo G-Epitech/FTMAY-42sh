@@ -8,11 +8,11 @@
 #include <stdlib.h>
 #include "types/node/defs.h"
 
-void node_free(node_t *node, node_freeer_t freeer)
+void node_free(node_t *node, node_freer_t freer)
 {
     if (!node)
         return;
-    if (freeer)
-        freeer(node->data);
+    if (freer)
+        freer(node->data);
     free(node);
 }

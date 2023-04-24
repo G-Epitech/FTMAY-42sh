@@ -17,11 +17,11 @@
 list_t *list_new(void);
 
 /**
- * @brief Free given list and all its nodes with given freeer if specified.
+ * @brief Free given list and all its nodes with given freer if specified.
  * @param list List to free
- * @param freeer Freeer to call on each node
+ * @param freer freer to call on each node
  */
-void list_free(list_t *list, node_freeer_t freeer);
+void list_free(list_t *list, node_freer_t freer);
 
 /**
  * @brief Append given node in given list.
@@ -41,8 +41,8 @@ void list_remove(list_t *list, node_t *node);
  * @brief Remove given node of given list and free it.
  * @param list List in which remove node
  * @param node Node to remove of list
- * @param freeer Freeer to call to free node data
+ * @param freer freer to call to free node data
  */
-void list_delete(list_t *list, node_t *node, node_freeer_t freeer);
+void list_delete(list_t *list, node_t *node, node_freer_t freer);
 
 #endif /* !LIST_H_ */

@@ -21,14 +21,14 @@ Test(types_node, new_node)
     cr_assert(node != NULL);
 }
 
-Test(types_node, free_node_without_freeer)
+Test(types_node, free_node_without_freer)
 {
     node_t *node = node_new(NODE_DATA_FROM_PTR(NULL));
 
     node_free(node, NULL);
 }
 
-Test(types_node, free_node_with_freeer)
+Test(types_node, free_node_with_freer)
 {
     char *data = strdup("test");
     node_t *node = node_new(NODE_DATA_FROM_PTR(data));

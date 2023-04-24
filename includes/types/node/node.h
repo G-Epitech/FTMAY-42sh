@@ -18,11 +18,11 @@
 node_t *node_new(node_data_t data);
 
 /**
- * @brief Free given node and free data of it with freeer if specified.
+ * @brief Free given node and free data of it with freer if specified.
  * @param node Node to free
- * @param freeer Freeer function for node data
+ * @param freer freer function for node data
  */
-void node_free(node_t *node, node_freeer_t freeer);
+void node_free(node_t *node, node_freer_t freer);
 
 /**
  * @brief Unlink given node from its neighbours.

@@ -106,7 +106,7 @@ Test(types_list, remove_several_items)
     list_free(list, NULL);
 }
 
-Test(types_list, delete_several_items_with_freeer)
+Test(types_list, delete_several_items_with_freer)
 {
     list_t *list = list_new();
     char *tmp = NULL;

@@ -23,8 +23,8 @@ void list_remove(list_t *list, node_t *node)
     list->len--;
 }
 
-void list_delete(list_t *list, node_t *node, node_freeer_t freeer)
+void list_delete(list_t *list, node_t *node, node_freer_t freer)
 {
     list_remove(list, node);
-    node_free(node, freeer);
+    node_free(node, freer);
 }

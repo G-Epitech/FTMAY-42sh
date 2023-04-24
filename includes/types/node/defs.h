@@ -26,7 +26,7 @@ typedef struct s_node {
     node_t *next;       //Next node
 } node_t;
 
-// Node freeer function prototype
-typedef void (*node_freeer_t)(node_data_t data);
+// Node freer function prototype
+typedef void (*node_freer_t)(node_data_t data);
 
 #endif /* !NODE_DEFS_H_ */
