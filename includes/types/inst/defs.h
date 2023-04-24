@@ -11,12 +11,7 @@
     #include <stdbool.h>
     #include "types/io/defs.h"
     #include "types/cmd/defs.h"
-
-// ===============================================
-// These structures must be destroyed once their prototyping is finished
-// And obviousely add the correct include
-typedef struct s_list list_t;
-// ===============================================
+    #include "types/list/defs.h"
 
 // Represent type of instruction
 typedef enum e_isnt_type {

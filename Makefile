@@ -16,16 +16,19 @@ _SRC =			types/node/new.c \
 				\
 				types/cmd/free.c \
 				types/cmd/new.c \
+				\
 				types/io/free.c \
 				types/ios/free.c \
 				\
 				types/var/free.c \
 				types/var/new.c \
 				types/var/set_value.c \
+				\
 				types/inst/new.c \
 				types/inst/free.c \
 				types/inst/block/free.c \
 				types/inst/block/new.c \
+				types/inst/block/append.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

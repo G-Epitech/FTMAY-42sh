@@ -34,4 +34,19 @@ inst_block_t *inst_block_new(void);
  */
 void inst_block_free(inst_block_t *inst_block);
 
+/**
+ * @brief Append a command in a block
+ * @param inst_block Block to append the command
+ * @param cmd Command to append
+ */
+void inst_block_append_cmd(inst_block_t *inst_block, cmd_t *cmd);
+
+/**
+ * @brief Append a block in a block
+ * @param inst_block Block to append the other block
+ * @param cmd Block to append
+ */
+void inst_block_append_block(inst_block_t *inst_block,
+                            inst_block_t *sub_block);
+
 #endif /* !INST_H_ */
