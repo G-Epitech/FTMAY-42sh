@@ -5,12 +5,10 @@
 ** Main file of project
 */
 
-#include "types/var/var.h"
 #include <stdio.h>
+#include "types/var/var.h"
 
 int main(void)
 {
-    var_t *test = var_new("test", "1");
-    printf("name : [%s] | [%s] : value\n", test->name, test->value);
-    var_free(test);
+    return 0;
 }
