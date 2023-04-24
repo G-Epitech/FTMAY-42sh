@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-_SRC =
+_SRC =  types/var/free.c \
+		types/var/new.c \
+
 
 _TESTS =		criterion/example/simple.c
 
