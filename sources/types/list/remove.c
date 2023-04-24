@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** remove
+** List type remove and delete function
 */
 
 #include <stdlib.h>

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** new
+** List type free function
 */
 
 #include <stdlib.h>

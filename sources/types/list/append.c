@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** append
+** List type append function
 */
 
 #include "types/list/defs.h"

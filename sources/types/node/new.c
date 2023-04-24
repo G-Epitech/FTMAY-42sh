@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** New node creation
+** Node type new function
 */
 
 #include <stdlib.h>

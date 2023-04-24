@@ -12,7 +12,10 @@ _SRC =			types/node/new.c \
 				types/list/new.c \
 				types/list/free.c \
 				types/list/append.c \
-				types/list/remove.c
+				types/list/remove.c \
+				\
+				types/io/free.c \
+				types/ios/free.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

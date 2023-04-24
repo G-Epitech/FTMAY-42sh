@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** Node unlink
+** Node type unlink function
 */
 
 #include "types/node/defs.h"
