@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "types/var/var.h"
 
 var_t *var_new(char *name, char *value)
@@ -14,7 +15,7 @@ var_t *var_new(char *name, char *value)
 
     if (!new)
         return NULL;
-    new->name = name;
-    new->value = value;
+    new->name = strdup(name);
+    new->value = strdup(value);
     return new;
 }
