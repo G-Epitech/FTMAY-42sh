@@ -8,6 +8,7 @@
 #ifndef VAR_H_
     #define VAR_H_
 
+    #include <stdbool.h>
     #include "defs.h"
 
 /**
@@ -28,6 +29,6 @@ void var_free(var_t *variable);
  * @param value Value to set in struct varuable
  * @param variable Struct var_t where set the value
  */
-int var_set_value(var_t *variable, char *value);
+bool var_set_value(var_t *variable, char *value);
 
 #endif /* !VAR_H_ */

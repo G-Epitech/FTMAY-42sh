@@ -17,3 +17,26 @@ Test(types_io, new_struct_var)
     cr_assert_str_eq(var->value, "test_value");
     var_free(var);
 }
+
+Test(types_io, set_new_value)
+{
+    var_t *test = var_new("test", "1");
+    bool test_return = false;
+    
+    cr_assert_str_eq(test->value, "1");
+    test_return = var_set_value(test, "2");
+    cr_assert_str_eq(test->value, "2");
+    cr_assert(test_return == false);
+    var_free(test);
+}
+
+Test(types_io, set_bad_new_value)
+{
+    var_t *test = var_new("axel", "matheo");
+    bool test_return = false;
+    
+    cr_assert_str_eq(test->value, "matheo");
+    test_return = var_set_value(test, NULL);
+    cr_assert(test_return == true);
+    var_free(test);
+}

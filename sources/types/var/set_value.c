@@ -9,11 +9,11 @@
 #include <string.h>
 #include "types/var/var.h"
 
-int var_set_value(var_t *variable, char *value)
+bool var_set_value(var_t *variable, char *value)
 {
-    if (!variable)
-        return 84;
+    if (!variable || !value)
+        return true;
     free(variable->value);
     variable->value = strdup(value);
-    return 0;
+    return false;
 }
