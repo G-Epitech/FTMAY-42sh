@@ -26,7 +26,7 @@ Test(types_io, set_new_value)
     cr_assert_str_eq(test->value, "1");
     test_return = var_set_value(test, "2");
     cr_assert_str_eq(test->value, "2");
-    cr_assert(test_return == false);
+    cr_assert(test_return == true);
     var_free(test);
 }
 
@@ -37,6 +37,6 @@ Test(types_io, set_bad_new_value)
     
     cr_assert_str_eq(test->value, "matheo");
     test_return = var_set_value(test, NULL);
-    cr_assert(test_return == true);
+    cr_assert(test_return == false);
     var_free(test);
 }

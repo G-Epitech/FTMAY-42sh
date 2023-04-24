@@ -12,8 +12,8 @@
 bool var_set_value(var_t *variable, char *value)
 {
     if (!variable || !value)
-        return true;
+        return false;
     free(variable->value);
     variable->value = strdup(value);
-    return false;
+    return true;
 }

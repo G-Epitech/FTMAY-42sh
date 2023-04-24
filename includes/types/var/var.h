@@ -28,6 +28,7 @@ void var_free(var_t *variable);
  * @brief Set a value in structure var_t
  * @param value Value to set in struct varuable
  * @param variable Struct var_t where set the value
+ * @return True if no error else False
  */
 bool var_set_value(var_t *variable, char *value);
 
