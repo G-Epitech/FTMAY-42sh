@@ -12,6 +12,8 @@ var_t *var_new(char *name, char *value)
 {
     var_t *new = malloc(sizeof(var_t));
 
+    if (!new)
+        return NULL;
     new->name = name;
     new->value = value;
     return new;

@@ -13,6 +13,7 @@ _SRC =  types/var/free.c \
 _TESTS =		criterion/example/simple.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
+				criterion/types/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
