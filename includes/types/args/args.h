@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** target
+** args
 */
 
 #ifndef ARGS_H_
