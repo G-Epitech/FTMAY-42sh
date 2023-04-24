@@ -10,7 +10,10 @@
 
 void var_free(var_t *variable)
 {
-    free(variable->name);
-    free(variable->value);
-    free(variable);
+    if (variable->name != NULL)
+        free(variable->name);
+    if (variable->value != NULL)
+        free(variable->value);
+    if (variable != NULL)
+        free(variable);
 }
