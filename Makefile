@@ -5,9 +5,12 @@
 ## Makefile
 ##
 
-_SRC =
+_SRC =			types/io/free.c \
+				types/ios/free.c \
 
-_TESTS =		criterion/example/simple.c
+_TESTS =		criterion/example/simple.c \
+				criterion/types/io.c \
+				criterion/types/ios.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -93,7 +96,7 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_criterion:
+tests_criterion:fclean
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage -s
 				@$(MAKE) tests_objects -s
