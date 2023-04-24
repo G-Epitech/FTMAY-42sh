@@ -19,6 +19,8 @@ _SRC =			types/node/new.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
+				criterion/types/io.c \
+				criterion/types/ios.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

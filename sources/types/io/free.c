@@ -13,4 +13,5 @@ void io_free(io_t *io)
     if (!io)
         return;
     free(io->path);
+    io->path = NULL;
 }
