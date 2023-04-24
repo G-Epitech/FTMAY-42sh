@@ -5,12 +5,15 @@
 ## Makefile
 ##
 
-_SRC =			types/io/free.c \
-				types/ios/free.c \
+_SRC =  types/var/free.c \
+		types/var/new.c \
+		types/io/free.c \
+		types/ios/free.c \
 
 _TESTS =		criterion/example/simple.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
+				criterion/types/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
