@@ -7,6 +7,7 @@
 
 _SRC =  types/var/free.c \
 		types/var/new.c \
+		types/var/set_value.c \
 		types/io/free.c \
 		types/ios/free.c \
 
