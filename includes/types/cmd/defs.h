@@ -6,7 +6,7 @@
 */
 
 #ifndef CMD_DEFS_H_
-    #define CMD_DEFS_H_ 
+    #define CMD_DEFS_H_
 
     #include <stdbool.h>
     #include "types/args/defs.h"
