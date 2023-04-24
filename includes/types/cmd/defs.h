@@ -9,17 +9,8 @@
     #define CMD_DEFS_H_ 
 
     #include <stdbool.h>
-
-// =================================
-// These functions must be destroyed once their prototyping is finished
-// And obviousely add the correct include
-typedef struct s_target {
-    int temp;
-} target_t;
-typedef struct s_args {
-    int temp;
-} args_t;
-// =================================
+    #include "types/args/defs.h"
+    #include "types/target/defs.h"
 
 // Represent type of command
 typedef enum e_cmd_type {

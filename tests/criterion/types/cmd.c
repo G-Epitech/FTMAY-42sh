@@ -23,8 +23,10 @@ Test(types_cmd, new_field_cmd)
     cr_assert(command->input == NULL);
     cr_assert(command->name == NULL);
     cr_assert(command->type == CMD_NULL);
-    cr_assert(command->target.temp == 0);
-    cr_assert(command->args.temp == 0);
+    cr_assert(command->target.path == NULL);
+    cr_assert(command->target.builtin == NULL);
+    cr_assert(command->args.argv == NULL);
+    cr_assert(command->args.argc == 0);
     cr_assert(command->forked == false);
     cr_assert(command != NULL);
 }
@@ -42,4 +44,3 @@ Test(types_cmd, free_null_cmd)
 {
     cmd_free(NULL);
 }
-

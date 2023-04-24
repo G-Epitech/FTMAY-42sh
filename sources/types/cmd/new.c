@@ -11,8 +11,8 @@
 cmd_t *cmd_new(void)
 {
     cmd_t *command = malloc(sizeof(cmd_t));
-    args_t cmd_args = { 0 };
-    target_t cmd_target = { 0 };
+    args_t cmd_args = {NULL, 0};
+    target_t cmd_target = {NULL};
 
     if (!command)
         return NULL;
