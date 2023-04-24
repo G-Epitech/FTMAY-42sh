@@ -11,6 +11,7 @@
     #include "args/args.h"
 
 typedef struct s_shell shell_t;
+// Represent a prototype of builtin_t struct with his parameters
 typedef char builtin_t(args_t *args, shell_t *shell);
 
 // Represent a prototype of target struct with a path and a struct builtin_t
