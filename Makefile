@@ -5,13 +5,24 @@
 ## Makefile
 ##
 
-_SRC =  types/var/free.c \
-		types/var/new.c \
-		types/var/set_value.c \
-		types/io/free.c \
-		types/ios/free.c \
+_SRC =			types/node/new.c \
+				types/node/free.c \
+				types/node/unlink.c \
+				\
+				types/list/new.c \
+				types/list/free.c \
+				types/list/append.c \
+				types/list/remove.c \
+				\
+				types/io/free.c \
+				types/ios/free.c \
+				\
+				types/var/free.c \
+				types/var/new.c \
+				types/var/set_value.c \
 
-_TESTS =		criterion/example/simple.c \
+_TESTS =		criterion/types/list.c \
+				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
 				criterion/types/var.c \
@@ -96,7 +107,7 @@ fclean: 		clean
 re: 			fclean all
 
 style:			fclean
-				@printf "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)"
+				@printf "$(STYLE_RED)🔍 Checking coding style...$(STYLE_END)\n"
 				@coding-style . .
 				@cat coding-style-reports.log
 
