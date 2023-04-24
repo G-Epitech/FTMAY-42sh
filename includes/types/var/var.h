@@ -23,4 +23,11 @@ var_t *var_new(char *name, char *value);
  */
 void var_free(var_t *variable);
 
+/**
+ * @brief Set a value in structure var_t
+ * @param value Value to set in struct varuable
+ * @param variable Struct var_t where set the value
+ */
+int var_set_value(var_t *variable, char *value);
+
 #endif /* !VAR_H_ */
