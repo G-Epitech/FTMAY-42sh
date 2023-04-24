@@ -7,9 +7,12 @@
 
 _SRC =  types/var/free.c \
 		types/var/new.c \
+		types/io/free.c \
+		types/ios/free.c \
 
-
-_TESTS =		criterion/example/simple.c
+_TESTS =		criterion/example/simple.c \
+				criterion/types/io.c \
+				criterion/types/ios.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

@@ -7,6 +7,7 @@ Contribute to this Epitech project involves following strict rules to keep a cle
 * [3 - Variables and types naming](#3---variables-and-types-naming)
 * [4 - Header files and preprocessor directives](#4---header-files-and-preprocessor-directives)
 * [5 - Functions](#5---functions)
+* [6 - Documentation](#6---documentation)
 
 ## 1 - Project architecture and file naming
 Files conventions naming and project architecture need to be followed.
@@ -103,7 +104,7 @@ The group convention is to use emojis with a past tense in your commits message 
 
 ### a - Meaning of emojis
 `✨` New global feature  
-`🔨` Utils functions  
+`🔨` Utils functions
 `💡` Display functions  
 `📑` Files functions  
 `📒` Types functions  
@@ -115,6 +116,7 @@ The group convention is to use emojis with a past tense in your commits message 
 `📦` Library  
 `🙈` Gitignore  
 `🍌` Coding-style  
+`💬` Documentation
 `🏷️` Header definition  
 `📝` Makefile / CMakeLists  
 `👷‍♂️` CI Github Action  
