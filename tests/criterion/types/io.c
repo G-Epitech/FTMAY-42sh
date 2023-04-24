@@ -5,7 +5,7 @@
 ** io criterion tests
 */
 
-#include <stdio.h>
+#include <string.h>
 #include <criterion/criterion.h>
 #include "types/io/io.h"
 #include "types/io/defs.h"
