@@ -8,7 +8,7 @@
 #ifndef ARGS_DEFS_H_
     #define ARGS_DEFS_H_
 
-// Represent a argument of command
+// Represent argument of command
 typedef struct s_args {
     char **argv;     //Values of command arguments
     int argc;        //Number of arguments in argc
