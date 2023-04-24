@@ -96,7 +96,7 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_criterion:
+tests_criterion:fclean
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage -s
 				@$(MAKE) tests_objects -s
