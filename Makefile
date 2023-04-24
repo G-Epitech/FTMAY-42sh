@@ -16,11 +16,16 @@ _SRC =			types/node/new.c \
 				\
 				types/io/free.c \
 				types/ios/free.c \
+				\
+				types/var/free.c \
+				types/var/new.c \
+				types/var/set_value.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
+				criterion/types/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -106,7 +111,7 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_criterion:
+tests_criterion:fclean
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage -s
 				@$(MAKE) tests_objects -s

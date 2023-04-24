@@ -39,7 +39,7 @@ jobs:
           uses: actions/checkout@v3
         
         - name: "⚙️ Run tests with Epitech rule"
-          run: make tests_custom
+          run: make tests_criterion
         
         - name: "⚙️ Run lines coverage"
           id: lines_coverage
@@ -60,15 +60,15 @@ jobs:
           uses: thollander/actions-comment-pull-request@v2
           with:
             message: |
-                # 📋 Coverage report @${{ github.event.pull_request.assignee.login }}
+                ### 📋 Coverage report @${{ github.event.pull_request.assignee.login }}
                 <details>
-                <summary><h2>Lines coverage</h2></summary>
+                <summary>Lines coverage</summary>
                 <pre>
                 ${{ steps.lines_coverage.outputs.lines_coverage }}
                 </pre>
                 </details>
                 <details>
-                <summary><h2>Branches coverage</h2></summary>
+                <summary>Branches coverage</summary>
                 <pre>
                 ${{ steps.branch_coverage.outputs.branch_coverage }}
                 </pre>
