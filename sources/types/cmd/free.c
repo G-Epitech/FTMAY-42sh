@@ -11,7 +11,7 @@
 void cmd_free(cmd_t *command)
 {
     if (!command)
-        return NULL;
+        return;
     free(command->input);
     free(command->name);
     free(command);

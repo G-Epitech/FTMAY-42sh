@@ -21,7 +21,7 @@ typedef struct s_args {
 } args_t;
 // =================================
 
-// Represent a prototype of command type enumeration
+// Represent type of command
 typedef enum e_cmd_type {
     CMD_NULL,       // Undefined command (by default)
     CMD_EMPTY,      // Empty command (nothing to do but not an error)
@@ -30,7 +30,7 @@ typedef enum e_cmd_type {
     CMD_BUILTIN     // Builtin command
 } cmd_type_t;
 
-// Represent a prototype of command type structure
+// Represent prototype of command
 typedef struct s_cmd {
     char *input;      // Original input given by user
     char *name;       // Name of command
