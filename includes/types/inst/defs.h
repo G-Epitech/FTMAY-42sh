@@ -21,14 +21,14 @@ typedef enum e_isnt_type {
 
 // Represent link with the next instruction
 typedef enum e_separator {
-    SP_BREAK,        // No link with next command or no next command
+    SP_BREAK,        // No link with next command or no next block
     SP_OR,           // Logical OR link
     SP_AND           // Logical AND link
 } separator_t;
 
-// Represent prototype of command
+// Represent a block of command
 typedef struct s_inst_block {
-    list_t *instructions;   // List of instructions (list of instructions_t)
+    list_t *instructions;   // List of instructions (list of inst_t)
 } inst_block_t;
 
 // Represent value of instruction
@@ -37,12 +37,12 @@ typedef union s_isnt_value {
     inst_block_t *block;    // Block of instructions
 } inst_value_t;
 
-// Represent value of instruction
+// Represent an instruction
 typedef struct s_isnt {
     inst_value_t value;    // Value of instruction
     inst_type_t type;      // Type of instruction
     separator_t separator;  // Separator with next group (default SP_BREAK)
-    char exit_code;         // Exited code of instruction
+    unsigned char exit_code;         // Exited code of instruction
     ios_t ios;              // Input and output to use at runtime
 } inst_t;
 

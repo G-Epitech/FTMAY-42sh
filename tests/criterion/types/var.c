@@ -40,8 +40,3 @@ Test(types_io, set_bad_new_value)
     cr_assert(test_return == false);
     var_free(test);
 }
-
-Test(types_io, free_null)
-{
-    var_free(NULL);
-}

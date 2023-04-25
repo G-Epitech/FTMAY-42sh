@@ -23,6 +23,12 @@ inst_t *inst_new(void);
 void inst_free(inst_t *inst);
 
 /**
+ * @brief Free a instruction data.
+ * @param data Instruction data to free
+ */
+void inst_node_freer(node_data_t data);
+
+/**
  * @brief Create a new block of instruction.
  * @return New block of instruction
  */

@@ -12,6 +12,6 @@
 void inst_block_free(inst_block_t *inst_block)
 {
     if (inst_block)
-        list_free(inst_block->instructions, NULL);
+        list_free(inst_block->instructions, &inst_node_freer);
     free(inst_block);
 }

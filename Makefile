@@ -54,7 +54,7 @@ TESTS_OBJ = 	$(TESTS:.c=.o)
 TESTS_CFLAGS =	-lcriterion --coverage
 
 INC = 			-I.. -I./includes
-CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument
+CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument -g
 
 CC = 			gcc
 

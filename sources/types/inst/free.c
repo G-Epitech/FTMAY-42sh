@@ -19,3 +19,10 @@ void inst_free(inst_t *inst)
         inst_block_free(inst->value.block);
     free(inst);
 }
+
+void inst_node_freer(node_data_t data)
+{
+    inst_t *inst = NODE_DATA_TO_PTR(data, inst_t *);
+
+    inst_free(inst);
+}

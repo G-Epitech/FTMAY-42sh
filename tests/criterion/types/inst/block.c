@@ -22,7 +22,7 @@ Test(types_block_instruction, new_field_block_instruction)
 {
     inst_block_t *instruction = inst_block_new();
 
-    cr_assert(instruction->instructions == NULL);
+    cr_assert(instruction->instructions != NULL);
     cr_assert(instruction != NULL);
     inst_block_free(instruction);
 }
@@ -46,14 +46,12 @@ Test(types_block_instruction, append_instruction)
     inst_t *instruction3 = NULL;
     node_data_t data = {NULL};
 
-    instruction1->instructions = list_new();
     inst_block_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 1);
     data = instruction1->instructions->first->data;
     instruction3 = NODE_DATA_TO_PTR(data, inst_t *);
     cr_assert(instruction3 == instruction2);
     inst_block_free(instruction1);
-    inst_free(instruction2);
 }
 
 Test(types_block_instruction, append_instruction_null)
@@ -63,7 +61,6 @@ Test(types_block_instruction, append_instruction_null)
     inst_t *instruction3 = NULL;
     node_data_t data = {NULL};
 
-    instruction1->instructions = list_new();
     inst_block_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 1);
     data = instruction1->instructions->first->data;
