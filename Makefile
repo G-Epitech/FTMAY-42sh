@@ -31,7 +31,11 @@ _SRC =			types/node/new.c \
 				types/inst/block/append.c \
 				\
 				types/shell/new.c \
-				types/shell/free.c
+				types/shell/free.c \
+				\
+				builtins/exit.c \
+				\
+				utils/is_number.c
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
