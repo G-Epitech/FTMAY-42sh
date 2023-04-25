@@ -5,9 +5,6 @@
 ** list_set
 */
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
 #include "types/var/var.h"
 #include "types/list/defs.h"
 
