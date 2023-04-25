@@ -10,7 +10,7 @@
 #include "types/args/defs.h"
 #include "utils/utils.h"
 
-unsigned char *builtin_exit(args_t *args, shell_t *shell)
+unsigned char builtin_exit(args_t *args, shell_t *shell)
 {
     if (args->argc == 1) {
         shell->status = SH_EXITED;
