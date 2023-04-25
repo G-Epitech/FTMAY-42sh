@@ -39,6 +39,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/ios.c \
 				criterion/types/cmd.c \
 				criterion/types/var.c \
+				criterion/types/shell.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
 
