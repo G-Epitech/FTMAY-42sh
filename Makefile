@@ -14,18 +14,30 @@ _SRC =			types/node/new.c \
 				types/list/append.c \
 				types/list/remove.c \
 				\
+				types/cmd/free.c \
+				types/cmd/new.c \
+				\
 				types/io/free.c \
 				types/ios/free.c \
 				\
 				types/var/free.c \
 				types/var/new.c \
 				types/var/set_value.c \
+				\
+				types/inst/new.c \
+				types/inst/free.c \
+				types/inst/block/free.c \
+				types/inst/block/new.c \
+				types/inst/block/append.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
+				criterion/types/cmd.c \
 				criterion/types/var.c \
+				criterion/types/inst/inst.c \
+				criterion/types/inst/block.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -42,7 +54,7 @@ TESTS_OBJ = 	$(TESTS:.c=.o)
 TESTS_CFLAGS =	-lcriterion --coverage
 
 INC = 			-I.. -I./includes
-CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument
+CFLAGS +=		-Wall -Wextra -Werror -Wno-unused-command-line-argument -g
 
 CC = 			gcc
 
