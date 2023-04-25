@@ -8,8 +8,8 @@
 #include <limits.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "types/shell/shell.h"
 #include "types/list/list.h"
+#include "types/shell/shell.h"
 
 static bool shell_init_data(shell_t *shell, char **env)
 {
