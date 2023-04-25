@@ -26,6 +26,12 @@ var_t *var_new(char *name, char *value);
 void var_free(var_t *variable);
 
 /**
+ * @brief Freer for node containing variable
+ * @param data Data of node
+ */
+void var_node_freer(node_data_t data);
+
+/**
  * @brief Set value of given variable
  * @param variable Variable of which set value
  * @param value Value to set in given variable
@@ -49,5 +55,12 @@ var_t *var_list_get(list_t *vars, char *name);
  * @return Value or NULL if not found
  */
 char *var_list_get_value(list_t *vars, char *name, bool copy);
+
+/**
+ * @brief Unset given variable of list which have given name
+ * @param vars List variables in which search
+ * @param name Name of variable to unset
+ */
+void var_list_unset(list_t *vars, char *name);
 
 #endif /* !VAR_H_ */
