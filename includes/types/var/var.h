@@ -42,7 +42,7 @@ bool var_set_value(var_t *variable, char *value);
 var_t *var_list_get(list_t *vars, char *name);
 
 /**
- * @brief Get value of variable matching
+ * @brief Get value of variable matchingererer
  * @param vars List variables in which search
  * @param name Name of variable of which get value
  * @param copy Specify if value to get needs to be duplicated
