@@ -13,11 +13,13 @@
     #include <stdbool.h>
     #include "types/list/defs.h"
 
-typedef enum e_shell_stats {
+// Represent current shell status
+typedef enum e_shell_status {
     SH_RUNNING,                 // Shell is running
     SH_EXITED                   // Shell is exited
 } shell_status_t;
 
+// Represent a shell
 typedef struct s_shell {
     unsigned char exit_code;    // Last exit code of shell
     shell_status_t status;      // Shell current status
