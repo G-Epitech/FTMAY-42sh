@@ -9,7 +9,7 @@
 #include <criterion/criterion.h>
 #include "types/var/var.h"
 
-Test(types_io, new_struct_var)
+Test(types_var, new_struct_var)
 {
     var_t *var = var_new(strdup("test_name"), strdup("test_value"));
 
@@ -18,7 +18,7 @@ Test(types_io, new_struct_var)
     var_free(var);
 }
 
-Test(types_io, set_new_value)
+Test(types_var, set_new_value)
 {
     var_t *test = var_new("test", "1");
     bool test_return = false;
@@ -30,7 +30,7 @@ Test(types_io, set_new_value)
     var_free(test);
 }
 
-Test(types_io, set_bad_new_value)
+Test(types_var, set_bad_new_value)
 {
     var_t *test = var_new("axel", "matheo");
     bool test_return = false;
@@ -38,5 +38,12 @@ Test(types_io, set_bad_new_value)
     cr_assert_str_eq(test->value, "matheo");
     test_return = var_set_value(test, NULL);
     cr_assert(test_return == false);
+    test_return = var_set_value(NULL, "flavien accepte la pr");
+    cr_assert(test_return == false);
     var_free(test);
+}
+
+Test(types_var, free_null_pointer)
+{
+    var_free(NULL);
 }

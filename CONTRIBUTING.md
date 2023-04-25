@@ -105,9 +105,9 @@ The group convention is to use emojis with a past tense in your commits message 
 ### a - Meaning of emojis
 `✨` New global feature  
 `🔨` Utils functions
-`💡` Display functions  
-`📑` Files functions  
-`📒` Types functions  
+`💡` Display functions
+`📑` Files functions
+`📒` Types functions
 `⚡️`  Optimisation / Performance  
 `🏗️` Code architecture  
 `🍱` Assets  
