@@ -14,6 +14,7 @@ Test(types_cmd, new_cmd)
     cmd_t *command = cmd_new();
 
     cr_assert(command != NULL);
+    cmd_free(command);
 }
 
 Test(types_cmd, new_field_cmd)
@@ -29,6 +30,7 @@ Test(types_cmd, new_field_cmd)
     cr_assert(command->args.argc == 0);
     cr_assert(command->forked == false);
     cr_assert(command != NULL);
+    cmd_free(command);
 }
 
 Test(types_cmd, free_cmd)

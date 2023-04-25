@@ -21,7 +21,7 @@ typedef enum e_cmd_type {
     CMD_BUILTIN     // Builtin command
 } cmd_type_t;
 
-// Represent prototype of command
+// Represent a command
 typedef struct s_cmd {
     char *input;      // Original input given by user
     char *name;       // Name of command

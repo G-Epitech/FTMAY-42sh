@@ -11,13 +11,13 @@
     #include "defs.h"
 
 /**
- * @brief Create a new command
- * @return cmd_t* New command
+ * @brief Create a new command.
+ * @return New command
  */
 cmd_t *cmd_new(void);
 
 /**
- * @brief Free a command
+ * @brief Free a command.
  * @param command Command to free
  */
 void cmd_free(cmd_t *command);

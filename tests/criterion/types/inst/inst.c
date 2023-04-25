@@ -13,6 +13,7 @@ Test(types_instruction, new_instruction)
     inst_t *instruction = inst_new();
 
     cr_assert(instruction != NULL);
+    inst_free(instruction);
 }
 
 Test(types_instruction, new_field_instruction)
@@ -29,6 +30,7 @@ Test(types_instruction, new_field_instruction)
     cr_assert(instruction->ios.output.path == NULL);
     cr_assert(instruction->ios.output.type == IOT_DEFAULT);
     cr_assert(instruction != NULL);
+    inst_free(instruction);
 }
 
 Test(types_instruction, free_block_instruction)

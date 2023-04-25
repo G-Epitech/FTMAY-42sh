@@ -19,7 +19,7 @@ typedef enum e_isnt_type {
     INS_BLOCK      // Instruction is a block
 } inst_type_t;
 
-// Represent type of instruction
+// Represent link with the next instruction
 typedef enum e_separator {
     SP_BREAK,        // No link with next command or no next command
     SP_OR,           // Logical OR link
