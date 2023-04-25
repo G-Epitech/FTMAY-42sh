@@ -29,6 +29,9 @@ _SRC =			types/node/new.c \
 				types/inst/block/free.c \
 				types/inst/block/new.c \
 				types/inst/block/append.c \
+				\
+				types/shell/new.c \
+				types/shell/free.c
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -36,6 +39,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/ios.c \
 				criterion/types/cmd.c \
 				criterion/types/var.c \
+				criterion/types/shell.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
 
