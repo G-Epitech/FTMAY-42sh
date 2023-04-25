@@ -47,6 +47,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
 				criterion/utils/is_number.c \
+				criterion/builtins/exit.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
