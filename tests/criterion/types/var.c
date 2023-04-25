@@ -41,5 +41,9 @@ Test(types_var, set_bad_new_value)
     test_return = var_set_value(NULL, "flavien accepte la pr");
     cr_assert(test_return == false);
     var_free(test);
+}
+
+Test(types_var, free_null_pointer)
+{
     var_free(NULL);
 }
