@@ -9,7 +9,7 @@
 #include <criterion/criterion.h>
 #include "types/var/var.h"
 
-Test(types_car, new_struct_var)
+Test(types_var, new_struct_var)
 {
     var_t *var = var_new(strdup("test_name"), strdup("test_value"));
 
