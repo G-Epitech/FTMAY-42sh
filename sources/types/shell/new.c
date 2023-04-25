@@ -20,12 +20,12 @@ static bool shell_init_data(shell_t *shell, char **env)
     shell->is_tty = isatty(STDIN_FILENO);
     shell->pwd = malloc(PATH_MAX + 1);
     shell->owd = malloc(PATH_MAX + 1);
-    getcwd(shell->pwd, PATH_MAX);
-    shell->owd[0] = '\0';
     if (!shell->pwd || !shell->owd) {
         shell_free(shell);
         return false;
     }
+    getcwd(shell->pwd, PATH_MAX);
+    shell->owd[0] = '\0';
     shell->status = SH_RUNNING;
     shell->vars = list_new();
     return true;
