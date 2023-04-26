@@ -23,12 +23,8 @@ _SRC =			types/node/new.c \
 				types/var/free.c \
 				types/var/new.c \
 				types/var/set.c \
-				types/var/unserialize.c \
-				types/var/serialize.c \
 				types/var/list/get.c \
 				types/var/list/set.c \
-				types/var/list/unserialize.c \
-				types/var/list/serialize.c \
 				\
 				types/inst/new.c \
 				types/inst/free.c \
@@ -38,7 +34,6 @@ _SRC =			types/node/new.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-				types/shell/env.c \
 				types/shell/vars.c \
 
 _TESTS =		criterion/types/list.c \
@@ -48,7 +43,6 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/cmd.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
-				criterion/types/shell/env.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \

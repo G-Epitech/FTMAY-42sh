@@ -48,10 +48,12 @@ Test(types_var, free_null_pointer)
     var_free(NULL);
 }
 
-Test(types_var, var_list_serialization_from_array)
+Test(types_var, var_list_set_in_null_list)
 {
-    char *tests[] = {"V1=salut", "V2=world", "V3=Hello", "LANG=fr.FR", NULL};
-    list_t *vars = var_list_unserialize(tests);
+    cr_assert(!var_list_set(NULL, "hello", "super"));
+}
 
-    cr_assert(vars->len == 4);
+Test(types_var, var_list_unset_in_null_list)
+{
+    var_list_unset(NULL, "hello");
 }

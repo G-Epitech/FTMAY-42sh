@@ -12,9 +12,8 @@
 #include "types/list/list.h"
 #include "types/shell/shell.h"
 
-static bool shell_init_data(shell_t *shell, char **env)
+static bool shell_init_data(shell_t *shell)
 {
-    shell->env = var_list_unserialize(env);
     shell->exit_code = SHELL_EXIT_SUCCESS;
     shell->home = NULL;
     shell->is_tty = isatty(STDIN_FILENO);
@@ -31,16 +30,13 @@ static bool shell_init_data(shell_t *shell, char **env)
     return true;
 }
 
-shell_t *shell_new(char **env)
+shell_t *shell_new(void)
 {
-    shell_t *shell = NULL;
+    shell_t *shell = malloc(sizeof(shell_t));
 
-    if (!env)
-        return NULL;
-    shell = malloc(sizeof(shell_t));
     if (!shell)
         return NULL;
-    if (!shell_init_data(shell, env))
+    if (!shell_init_data(shell))
         return NULL;
     return shell;
 }

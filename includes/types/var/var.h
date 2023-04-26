@@ -71,13 +71,6 @@ void var_list_unset(list_t *vars, char *name);
 var_t *var_unserialize(char *serialized);
 
 /**
- * @brief Serialize given variable.
- * @param variable Variable to serialize
- * @return Serialized value
- */
-char *var_serialize(var_t *variable);
-
-/**
  * @brief Serialize given list of variables.
  * @param list List of variables to serialize
  * @return Serialized list
