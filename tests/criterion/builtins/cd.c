@@ -9,8 +9,8 @@
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <criterion/redirect.h>
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
