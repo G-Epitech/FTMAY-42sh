@@ -37,7 +37,7 @@ void var_node_freer(node_data_t data);
  * @param value Value to set in given variable
  * @return true if no error else false
  */
-bool var_set_value(var_t *variable, char *value);
+bool var_set(var_t *variable, char *value);
 
 /**
  * @brief Get variable matching with given name.
@@ -85,10 +85,19 @@ char *var_serialize(var_t *variable);
 char **var_list_serialize(list_t *list);
 
 /**
- * @brief Unserialize given list of variables
+ * @brief Unserialize given list of variables.
  * @param list List of variables to unszerialize
  * @return Unserialized list
  */
 list_t *var_list_unserialize(char **list);
+
+/**
+ * @brief Set value of variable matching with given name in given list.
+ * @param vars List of variables in which get variable
+ * @param name Name of variable of which set value
+ * @param value Value to set to variable
+ * @return true if no error else false
+ */
+bool var_list_set(list_t *vars, char *name, char *value);
 
 #endif /* !VAR_H_ */

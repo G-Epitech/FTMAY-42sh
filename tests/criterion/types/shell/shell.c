@@ -6,10 +6,18 @@
 */
 
 #include <unistd.h>
-#include <string.h>
 #include <criterion/criterion.h>
 #include "types/list/list.h"
 #include "types/shell/shell.h"
+
+static size_t get_string_array_size(char **array)
+{
+    size_t i = 0;
+
+    while (array[i])
+        i++;
+    return i;
+}
 
 Test(types_shell, new_valid_shell)
 {
@@ -39,9 +47,7 @@ Test(types_shell, new_shell_valid_env_list)
     extern char **environ;
     shell_t *shell = shell_new(environ);
 
-    cr_assert_eq(shell->env->len, 0);
-    cr_assert_null(shell->env->first);
-    cr_assert_null(shell->env->last);
+    cr_assert_eq(shell->env->len, get_string_array_size(environ));
 }
 
 Test(types_shell, free_valid_shell)

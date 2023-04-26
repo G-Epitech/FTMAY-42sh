@@ -8,13 +8,13 @@
 #include <limits.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "types/var/var.h"
 #include "types/list/list.h"
 #include "types/shell/shell.h"
 
 static bool shell_init_data(shell_t *shell, char **env)
 {
-    (void) env;
-    shell->env = list_new();
+    shell->env = var_list_unserialize(env);
     shell->exit_code = SHELL_EXIT_SUCCESS;
     shell->home = NULL;
     shell->is_tty = isatty(STDIN_FILENO);

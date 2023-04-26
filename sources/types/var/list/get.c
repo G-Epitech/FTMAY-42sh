@@ -21,6 +21,7 @@ var_t *var_list_get(list_t *vars, char *name)
         var = NODE_DATA_TO_PTR(node->data, var_t *);
         if (strcmp(var->name, name) == 0)
             return var;
+        node = node->next;
     }
     return NULL;
 }

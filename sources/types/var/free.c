@@ -12,10 +12,10 @@ void var_node_freer(node_data_t data)
 {
     var_t *var = NODE_DATA_TO_PTR(data, var_t *);
 
-    if (!var)
-        return;
-    free(var->name);
-    free(var->value);
+    if (var) {
+        free(var->name);
+        free(var->value);
+    }
     free(var);
 }
 
