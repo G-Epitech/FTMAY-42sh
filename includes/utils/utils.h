@@ -9,7 +9,7 @@
     #define UTILS_H_
 
 /**
- * @brief Check if a string is a valid number
+ * @brief Check if a string is a valid number.
  * @param string String that must be a valid number
  * @return True if the string is a valid number, else false
  */

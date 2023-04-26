@@ -12,7 +12,7 @@
     #include "types/shell/defs.h"
 
 /**
- * @brief Handle exit builtin command
+ * @brief Handle exit builtin command.
  * @param args Arguments object of the command
  * @param shell Shell object
  * @return Exit code of the builtin
