@@ -8,9 +8,9 @@
 #ifndef BUILTINS_H_
     #define BUILTINS_H_
 
+    #include "defs.h"
     #include "types/args/defs.h"
     #include "types/shell/defs.h"
-    #include "defs.h"
 
 /**
  * @brief Handle cd builtin command.
