@@ -9,7 +9,7 @@
 #include <string.h>
 #include "types/var/var.h"
 
-bool var_set_value(var_t *variable, char *value)
+bool var_set(var_t *variable, char *value)
 {
     if (!variable || !value)
         return false;
