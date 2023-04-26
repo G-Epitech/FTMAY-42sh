@@ -41,7 +41,7 @@ void list_remove(list_t *list, node_t *node);
  * @brief Remove given node of given list and free it.
  * @param list List in which remove node
  * @param node Node to remove of list
- * @param freer freer to call to free node data
+ * @param freer Freer to call to free node data
  */
 void list_delete(list_t *list, node_t *node, node_freer_t freer);
 

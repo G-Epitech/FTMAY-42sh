@@ -23,8 +23,12 @@ _SRC =			types/node/new.c \
 				types/var/free.c \
 				types/var/new.c \
 				types/var/set_value.c \
+				types/var/unserialize.c \
+				types/var/serialize.c \
 				types/var/list/get.c \
 				types/var/list/set.c \
+				types/var/list/unserialize.c \
+				types/var/list/serialize.c \
 				\
 				types/inst/new.c \
 				types/inst/free.c \
