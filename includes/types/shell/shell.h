@@ -11,13 +11,13 @@
     #include "defs.h"
 
 /**
- * @brief Create a new shell integrating given environnement variables
+ * @brief Create a new shell integrating given environnement variables.
  * @return New shell object
  */
 shell_t *shell_new(void);
 
 /**
- * @brief Free given shell and all its internal fields
+ * @brief Free given shell and all its internal fields.
  * @param shell Shell object
  */
 void shell_free(shell_t *shell);
