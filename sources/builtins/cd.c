@@ -11,9 +11,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "builtins/defs.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
-#include "builtins/defs.h"
 
 static bool set_new_path(args_t *args, shell_t *shell)
 {
