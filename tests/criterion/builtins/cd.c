@@ -5,15 +5,15 @@
 ** cd
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "builtins/builtins.h"
-#include "types/shell/shell.h"
+#include <criterion/criterion.h>
 #include "types/args/defs.h"
+#include "types/shell/shell.h"
+#include "builtins/builtins.h"
 
 void redirect_all_stdout(void)
 {
