@@ -69,3 +69,13 @@ Test(types_block_instruction, append_instruction_null)
     inst_block_free(instruction1);
     inst_free(instruction2);
 }
+
+Test(types_block_instruction, append_corrupted_instruction)
+{
+    inst_block_t *instruction1 = inst_block_new();
+    inst_t *instruction2 = inst_new();
+
+    instruction1->instructions = NULL;
+    inst_block_append(instruction1, instruction2);
+    inst_free(instruction2);
+}
