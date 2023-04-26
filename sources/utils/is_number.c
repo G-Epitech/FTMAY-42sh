@@ -12,7 +12,7 @@ bool is_number(char *string)
 {
     size_t index = 0;
 
-    if (!string)
+    if (!string || string[0] == '\0')
         return false;
     if (string[0] == '-')
         index++;

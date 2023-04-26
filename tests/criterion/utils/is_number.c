@@ -35,3 +35,7 @@ Test(utils_is_number, unvalid_numbers) {
 Test(utils_is_number, null_number) {
     cr_assert(!is_number(NULL));
 }
+
+Test(utils_is_number, void_string) {
+    cr_assert(!is_number(""));
+}
