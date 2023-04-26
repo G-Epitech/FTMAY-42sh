@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-_SRC =			types/node/new.c \
+_SRC =  builtins/exit.c \
+        \ 
+        types/node/new.c \
 				types/node/free.c \
 				types/node/unlink.c \
 				\
@@ -22,7 +24,9 @@ _SRC =			types/node/new.c \
 				\
 				types/var/free.c \
 				types/var/new.c \
-				types/var/set_value.c \
+				types/var/set.c \
+				types/var/list/get.c \
+				types/var/list/set.c \
 				\
 				types/inst/new.c \
 				types/inst/free.c \
@@ -32,10 +36,9 @@ _SRC =			types/node/new.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
+        types/shell/vars.c \
 				\
-				builtins/exit.c \
-				\
-				utils/is_number.c
+				utils/is_number.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -43,7 +46,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/ios.c \
 				criterion/types/cmd.c \
 				criterion/types/var.c \
-				criterion/types/shell.c \
+				criterion/types/shell/shell.c \
+				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
 				criterion/utils/is_number.c \
