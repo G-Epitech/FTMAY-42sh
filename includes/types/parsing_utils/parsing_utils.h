@@ -14,12 +14,12 @@
  * @brief Free a a struct utils.
  * @param utils Utils to free
  */
-void utils_free(parsing_utils_t utils);
+void parsing_utils_free(parsing_utils_t *utils);
 
 /**
  * @brief Create a new utils.
  * @return New utils struct
  */
-parsing_utils_t *utils_new(char *input_user);
+parsing_utils_t *parsing_utils_new(char *input_user);
 
 #endif /* !UTILS_H_ */

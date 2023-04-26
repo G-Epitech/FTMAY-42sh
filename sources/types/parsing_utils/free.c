@@ -6,9 +6,10 @@
 */
 
 #include <stddef.h>
-#include "types/utils/utils.h"
+#include <stdlib.h>
+#include "types/parsing_utils/parsing_utils.h"
 
-void utils_free(utils_t utils)
+void parsing_utils_free(parsing_utils_t *utils)
 {
     free(utils);
 }

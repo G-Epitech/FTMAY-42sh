@@ -5,39 +5,44 @@
 ** parsing
 */
 
+#include <stdio.h>
 #include <string.h>
-#include "types/parsing_utils/parsing_utils.h"
 #include "types/inst/inst.h"
+#include "types/parsing_utils/parsing_utils.h"
 
-char *concat_str(char *dest, char const *src)
+char *add_char_to_str(char *dest, char charactere)
 {
-    int dest_len = my_strlen(dest);
-    int src_len = my_strlen(src);
-    int i = 0;
-    char *final = malloc(sizeof(char) * dest_len + src_len + 1);
+    int dest_len = strlen(dest);
+    char *final = malloc(sizeof(char) * dest_len + 2 );
 
     for (int y = 0; y < dest_len; y++) {
         final[y] = dest[y];
     }
-    for (int y = 0; y < src_len; y++) {
-        final[dest_len + y] = src[y];
-    }
-    final[dest_len + src_len] = '\0';
+    final[dest_len] = charactere;
+    final[dest_len + 1] = '\0';
     return final;
 }
 
-static char *get_redirection(parsing_utils_t *utils, inst_t *instruction)
+static bool is_redirection(char charactere)
 {
-    bool in_redirection = false;
+    if (charactere == '<' || charactere == '>')
+        return true;
+    else
+        return false;
+}
+
+static char *get_redirection(parsing_utils_t *utils)
+{
+    bool in_redirection = true;
     char *user_redirection = malloc(sizeof(char) * 1);
-    user_redirection[0] = "\0";
+    user_redirection[0] = '\0';
 
     while (in_redirection) {
-        if (USER_INPUT(utils)[INDEX_PARSING(utils)] != ' ') {
-            user_redirection = concat_str(user_redirection,
+        if (is_redirection(USER_INPUT(utils)[INDEX_PARSING(utils)])) {
+            user_redirection = add_char_to_str(user_redirection,
             USER_INPUT(utils)[INDEX_PARSING(utils)]);
         } else {
-            in_redirection = true;
+            in_redirection = false;
         }
         INDEX_PARSING(utils)++;
     }
@@ -47,7 +52,9 @@ static char *get_redirection(parsing_utils_t *utils, inst_t *instruction)
 void parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 {
     char *redirection[4] = {"<", "<<", ">>", ">"};
-    char *input_redirection = get_redirection(utils, instruction);
+    char *input_redirection = get_redirection(utils);
 
+    (void) instruction;
+    (void) redirection;
     printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
 }

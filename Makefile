@@ -30,8 +30,13 @@ _SRC =			types/node/new.c \
 				types/inst/block/new.c \
 				types/inst/block/append.c \
 				\
+				types/parsing_utils/free.c \
+				types/parsing_utils/new.c \
+				\
 				types/shell/new.c \
-				types/shell/free.c
+				types/shell/free.c \
+				\
+				parsing/get_redirection.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
