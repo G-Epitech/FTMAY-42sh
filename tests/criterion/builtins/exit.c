@@ -21,14 +21,13 @@ void redirect_all_stdout(void)
 }
 
 Test(builtins_exit, simple_exit) {
-    extern char **environ;
     char **commands = malloc(sizeof(char) * 1);
     commands[0] = "Exit";
     args_t args = {
         .argc = 1,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
@@ -37,7 +36,6 @@ Test(builtins_exit, simple_exit) {
 
 Test(builtins_exit, number_exit) {
     int commands_size = 2;
-    extern char **environ;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "Exit";
     commands[1] = "100";
@@ -45,7 +43,7 @@ Test(builtins_exit, number_exit) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 100);
@@ -54,7 +52,6 @@ Test(builtins_exit, number_exit) {
 
 Test(builtins_exit, multiple_args, .init=redirect_all_stdout) {
     int commands_size = 3;
-    extern char **environ;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "Exit";
     commands[1] = "100";
@@ -63,7 +60,7 @@ Test(builtins_exit, multiple_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 1);
@@ -72,7 +69,6 @@ Test(builtins_exit, multiple_args, .init=redirect_all_stdout) {
 
 Test(builtins_exit, invalid_string_args, .init=redirect_all_stdout) {
     int commands_size = 2;
-    extern char **environ;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "Exit";
     commands[1] = "test_string";
@@ -80,7 +76,7 @@ Test(builtins_exit, invalid_string_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 1);

@@ -5,9 +5,9 @@
 ## Makefile
 ##
 
-_SRC =  builtins/exit.c \
-        \ 
-        types/node/new.c \
+_SRC =  		builtins/exit.c \
+        		\
+        		types/node/new.c \
 				types/node/free.c \
 				types/node/unlink.c \
 				\
@@ -36,7 +36,7 @@ _SRC =  builtins/exit.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-        types/shell/vars.c \
+        		types/shell/vars.c \
 				\
 				utils/is_number.c \
 
