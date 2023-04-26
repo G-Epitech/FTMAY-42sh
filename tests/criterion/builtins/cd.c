@@ -1,0 +1,180 @@
+/*
+** EPITECH PROJECT, 2023
+** 42sh
+** File description:
+** cd
+*/
+
+#include <unistd.h>
+#include <limits.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <criterion/criterion.h>
+#include <criterion/redirect.h>
+#include "builtins/builtins.h"
+#include "types/shell/shell.h"
+#include "types/args/defs.h"
+
+void redirect_all_stdout(void)
+{
+    cr_redirect_stdout();
+    cr_redirect_stderr();
+}
+
+Test(builtins_cd, simple_cd) {
+    extern char **environ;
+    int commands_size = 1;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+    char *owd = malloc(PATH_MAX);
+    char *pwd = malloc(PATH_MAX);
+
+    shell->home = "sources/";
+    getcwd(owd, PATH_MAX);
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
+    getcwd(pwd, PATH_MAX);
+    cr_assert_str_eq(shell->pwd, pwd);
+    cr_assert_str_eq(shell->owd, owd);
+    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    free(owd);
+    free(pwd);
+}
+
+Test(builtins_cd, with_arg) {
+    extern char **environ;
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = "sources";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+    char *owd = malloc(PATH_MAX);
+    char *pwd = malloc(PATH_MAX);
+
+    getcwd(owd, PATH_MAX);
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
+    getcwd(pwd, PATH_MAX);
+    cr_assert_str_eq(shell->pwd, pwd);
+    cr_assert_str_eq(shell->owd, owd);
+    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    shell_free(shell);
+    free(owd);
+    free(pwd);
+}
+
+Test(builtins_cd, tilde) {
+    extern char **environ;
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = BUILTIN_CD_TILDE;
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+    char *owd = malloc(PATH_MAX);
+    char *pwd = malloc(PATH_MAX);
+
+    shell->home = "sources/";
+    getcwd(owd, PATH_MAX);
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
+    getcwd(pwd, PATH_MAX);
+    cr_assert_str_eq(shell->pwd, pwd);
+    cr_assert_str_eq(shell->owd, owd);
+    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    free(owd);
+    free(pwd);
+}
+
+Test(builtins_cd, back) {
+    extern char **environ;
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = "sources";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+    char *owd = malloc(PATH_MAX);
+    char *pwd = malloc(PATH_MAX);
+
+    getcwd(owd, PATH_MAX);
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
+    getcwd(pwd, PATH_MAX);
+    commands[1] = BUILTIN_CD_DASH;
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
+    cr_assert_str_eq(shell->pwd, owd);
+    cr_assert_str_eq(shell->owd, pwd);
+    shell_free(shell);
+    free(owd);
+    free(pwd);
+}
+
+Test(builtins_cd, no_args) {
+    extern char **environ;
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+
+    exit_status = builtin_cd(NULL, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    shell_free(shell);
+}
+
+Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
+    extern char **environ;
+    int commands_size = 3;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = "sources";
+    commands[2] = "sup";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    cr_assert_stderr_eq_str("cd: Too many arguments.\n");
+    shell_free(shell);
+}
+
+Test(builtins_cd, bad_path, .init=redirect_all_stdout) {
+    extern char **environ;
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = "invalid_folder";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(environ);
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    cr_assert_stderr_eq_str("cd: No such file or directory\n");
+    shell_free(shell);
+}
