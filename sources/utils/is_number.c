@@ -16,9 +16,10 @@ bool is_number(char *string)
         return false;
     if (string[0] == '-')
         index++;
-    for (; string[index] != '\0'; index++) {
+    while (string[index] != '\0') { 
         if (string[index] < '0' || string[index] > '9')
             return false;
+        index++;
     }
     return true;
 }
