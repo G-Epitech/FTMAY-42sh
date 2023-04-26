@@ -22,7 +22,6 @@ void redirect_all_stdout(void)
 }
 
 Test(builtins_cd, simple_cd) {
-    extern char **environ;
     int commands_size = 1;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -30,7 +29,7 @@ Test(builtins_cd, simple_cd) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -48,7 +47,6 @@ Test(builtins_cd, simple_cd) {
 }
 
 Test(builtins_cd, with_arg) {
-    extern char **environ;
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -57,7 +55,7 @@ Test(builtins_cd, with_arg) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -75,7 +73,6 @@ Test(builtins_cd, with_arg) {
 }
 
 Test(builtins_cd, tilde) {
-    extern char **environ;
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -84,7 +81,7 @@ Test(builtins_cd, tilde) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -102,7 +99,6 @@ Test(builtins_cd, tilde) {
 }
 
 Test(builtins_cd, back) {
-    extern char **environ;
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -111,7 +107,7 @@ Test(builtins_cd, back) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -131,8 +127,7 @@ Test(builtins_cd, back) {
 }
 
 Test(builtins_cd, no_args) {
-    extern char **environ;
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(NULL, shell);
@@ -141,7 +136,6 @@ Test(builtins_cd, no_args) {
 }
 
 Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
-    extern char **environ;
     int commands_size = 3;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -151,7 +145,7 @@ Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(&args, shell);
@@ -161,7 +155,6 @@ Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
 }
 
 Test(builtins_cd, bad_path, .init=redirect_all_stdout) {
-    extern char **environ;
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -170,7 +163,7 @@ Test(builtins_cd, bad_path, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new(environ);
+    shell_t *shell = shell_new();
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(&args, shell);
