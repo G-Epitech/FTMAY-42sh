@@ -31,7 +31,9 @@ _SRC =			types/node/new.c \
 				types/inst/block/append.c \
 				\
 				types/shell/new.c \
-				types/shell/free.c
+				types/shell/free.c \
+				\
+				builtins/cd.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -42,6 +44,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/shell.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
+				criterion/builtins/cd.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
