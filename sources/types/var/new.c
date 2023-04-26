@@ -11,7 +11,7 @@
 
 var_t *var_new(char *name, char *value)
 {
-    var_t *new = malloc(sizeof(var_t));
+    var_t *new = (name && value) ? malloc(sizeof(var_t)) : NULL;
 
     if (!new)
         return NULL;

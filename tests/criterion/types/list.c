@@ -35,6 +35,15 @@ Test(types_list, append_one_item)
 
 Test(types_list, append_null_item)
 {
+    list_t *list = NULL;
+    char *str = "HELLO";
+    node_t *node = node_new(NODE_DATA_FROM_PTR(str));
+
+    list_append(list, node);
+}
+
+Test(types_list, append_to_null_list)
+{
     list_t *list = list_new();
 
     list_append(list, NULL);
@@ -126,5 +135,25 @@ Test(types_list, delete_several_items_with_freer)
         node = next;
     }
     cr_assert(list->len == 0);
+    list_free(list, NULL);
+}
+
+Test(types_list, free_null_list)
+{
+    list_t *list = NULL;
+
+    list_free(list, NULL);
+}
+
+Test(types_list, remove_last_node_list)
+{
+    list_t *list = list_new();
+    char *str = "HELLO";
+    node_t *node = node_new(NODE_DATA_FROM_PTR(str));
+    node_t *node2 = node_new(NODE_DATA_FROM_PTR(str));
+
+    list_append(list, node);
+    list_append(list, node2);
+    list_remove(list, node2);
     list_free(list, NULL);
 }
