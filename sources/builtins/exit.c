@@ -12,6 +12,8 @@
 
 unsigned char builtin_exit(args_t *args, shell_t *shell)
 {
+    if (!args)
+        return SHELL_EXIT_ERROR;
     if (args->argc == 1) {
         shell->status = SH_EXITED;
         return SHELL_EXIT_SUCCESS;
