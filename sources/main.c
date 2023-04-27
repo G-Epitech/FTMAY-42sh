@@ -14,11 +14,5 @@
 
 int main(void)
 {
-    parsing_utils_t *test = parsing_utils_new(">      tmp_fic           (ls -l -a | cat -e)");
-    inst_block_t *test_inst_block = inst_block_new();
-    inst_t *test_inst = inst_new();
-
-    inst_block_append(test_inst_block, test_inst);
-
-    parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    return 1;
 }

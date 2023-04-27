@@ -20,6 +20,7 @@ static bool handle_error(parsing_utils_t *utils, int start, int end)
         return false;
     return true;
 }
+
 static void init_char(char *word, int size)
 {
     for (int i = 0; i < size; i++) {

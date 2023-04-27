@@ -7,21 +7,17 @@
 
 #include <stdio.h>
 #include "types/inst/inst.h"
+#include "parsing/parsing.h"
 #include "types/parsing_utils/parsing_utils.h"
 
 void set_type(int index, inst_t *instruction)
 {
-    printf("0\n");
-    if (index == 0)
+    if (index == SIMPLE_LEFT_REDIRECTION)
         instruction->ios.input.type = IOT_SIMPLE;
-    printf("1\n");
-    if (index == 1)
+    if (index == DOUBLE_LEFT_REDIRECTION)
         instruction->ios.input.type = IOT_DOUBLE;
-    printf("2\n");
-    if (index == 2)
+    if (index == DOUBLE_RIGHT_REDIRECTION)
         instruction->ios.output.type = IOT_DOUBLE;
-    printf("3\n");
-    if (index == 3)
+    if (index == SIMPLE_RIGHT_REDIRECTION)
         instruction->ios.output.type = IOT_SIMPLE;
-    printf("4\n");
 }

@@ -11,17 +11,33 @@
     #include "types/inst/defs.h"
     #include "types/parsing_utils/defs.h"
 
+    #define SIMPLE_LEFT_REDIRECTION 0
+    #define DOUBLE_LEFT_REDIRECTION 1
+    #define DOUBLE_RIGHT_REDIRECTION 2
+    #define SIMPLE_RIGHT_REDIRECTION 3
+
 /**
  * @brief Parse the redirection.
- * @param utils Utils struct 
+ * @param utils Utils struct
  * @param instruction Instruction struct
  * @return true if no error else false
  */
 bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction);
 
+/**
+ * @brief Set type of redirection.
+ * @param index Index of redirection
+ * @param instruction Instruction struct
+ */
 void set_type(int index, inst_t *instruction);
 
-void set_path(parsing_utils_t *utils, inst_t *instruction);
+/**
+ * @brief Set path of redirection
+ * @param utils Utils struct
+ * @param instruction Instruction struct
+ * @param index Index of redirection
+ */
+void set_path(parsing_utils_t *utils, inst_t *instruction, int index);
 
 /**
  * @brief Get the word between to positions.

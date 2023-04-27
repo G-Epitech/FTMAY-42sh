@@ -61,9 +61,7 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
     for (int index = 0; index < 4; index++) {
         if (strcmp(redirection[index], input_redirection) == 0) {
             set_type(index, instruction);
-            printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
-            fflush(stdout);
-            set_path(utils, instruction);
+            set_path(utils, instruction, index);
             good_redirection = true;
             break;
         }

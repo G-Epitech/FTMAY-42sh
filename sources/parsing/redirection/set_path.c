@@ -39,17 +39,22 @@ static bool maybe_path(parsing_utils_t *utils)
     return true;
 }
 
-void set_path(parsing_utils_t *utils, inst_t *instruction)
+void set_path(parsing_utils_t *utils, inst_t *instruction,
+int index_redirection)
 {
     char *data = utils->input;
+    char *path = NULL;
     int index = 0;
 
-    while (data[INDEX_PARSING(utils)] == ' ' || data[INDEX_PARSING(utils)] == '\t')
+    while (data[INDEX_PARSING(utils)] == ' ' ||
+    data[INDEX_PARSING(utils)] == '\t')
         INDEX_PARSING(utils)++;
     index = utils->index_parsing;
     while (maybe_path(utils))
         utils->index_parsing++;
-    printf("index_utils : [%i]\n", utils->index_parsing);
-    printf("file : [%s]\n", parsing_get_word(utils, index, utils->index_parsing));
-    (void) instruction;
+    path = parsing_get_word(utils, index, utils->index_parsing);
+    if (index_redirection <= 1)
+        instruction->ios.input.path = path;
+    else
+        instruction->ios.output.path = path;
 }
