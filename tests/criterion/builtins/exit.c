@@ -10,8 +10,8 @@
 #include <string.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "builtins/builtins.h"
 #include "types/args/args.h"
+#include "builtins/builtins.h"
 #include "types/shell/shell.h"
 
 void redirect_all_stdout(void)
