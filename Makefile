@@ -39,7 +39,6 @@ _SRC =			types/node/new.c \
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
 				parsing/redirection/set_type.c \
-				parsing/get_redirection.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
 

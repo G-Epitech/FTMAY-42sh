@@ -14,7 +14,7 @@
 char *add_char_to_str(char *dest, char charactere)
 {
     int dest_len = strlen(dest);
-    char *final = malloc(sizeof(char) * dest_len + 2 );
+    char *final = malloc(sizeof(char) * dest_len + 2);
 
     for (int y = 0; y < dest_len; y++) {
         final[y] = dest[y];
@@ -59,9 +59,11 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
     (void) instruction;
     (void) redirection;
     for (int index = 0; index < 4; index++) {
-        if (strcmp(redirection[index], input_redirection)) {
-            set_path(utils, instruction);
+        if (strcmp(redirection[index], input_redirection) == 0) {
             set_type(index, instruction);
+            printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
+            fflush(stdout);
+            set_path(utils, instruction);
             good_redirection = true;
             break;
         }
@@ -70,5 +72,4 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
         return true;
     else
         return false;
-    printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
 }
