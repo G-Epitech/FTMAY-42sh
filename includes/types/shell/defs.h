@@ -9,6 +9,7 @@
     #define SHELL_DEFS_H_
 
     #define SHELL_EXIT_SUCCESS 0
+    #define SHELL_EXIT_ERROR 1
 
     #include <unistd.h>
     #include <stdbool.h>
