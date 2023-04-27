@@ -37,6 +37,8 @@ _SRC =			types/node/new.c \
 				types/shell/free.c \
 				\
 				parsing/get_redirection.c \
+				parsing/get_word.c \
+				parsing/get_cmd.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

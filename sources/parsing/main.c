@@ -5,9 +5,20 @@
 ** main
 */
 
-#include "types/inst/defs.h"
-#include "types/parsing_utils/parsing_utils.h"
 #include "types/inst/inst.h"
+#include "parsing/parsing.h"
+#include "types/parsing_utils/parsing_utils.h"
+
+static bool maybe_redirection(parsing_utils_t *utils)
+{
+    char *redirection[4] = {"<", "<<", ">>", ">"};
+
+    for (int i = 0; i < 4; i++) {
+        if (redirection[i] == utils->input[INDEX_PARSING(utils)])
+            return true;
+    }
+    return false;
+}
 
 static inst_t *recursivity(parsing_utils_t *utils)
 {
@@ -28,16 +39,18 @@ static inst_t *recursivity(parsing_utils_t *utils)
             utils->index_parsing++;
             return instruction;
         }
+        if (maybe_redirection(utils))
+            parsing_redirection_handler(utils, instruction);
     }
     return instruction;
 }
 
 inst_t *parsing_get_main_block(char *input)
 {
-    parsing_utils_t *utils = utils_new(input);
+    parsing_utils_t *utils = parsing_utils_new(input);
     inst_t *main = NULL;
 
     main = recursivity(utils);
-    utils_free(utils);
+    parsing_utils_free(utils);
     return main;
 }
