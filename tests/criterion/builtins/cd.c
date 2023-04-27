@@ -15,12 +15,6 @@
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
 
-void redirect_all_stdout(void)
-{
-    cr_redirect_stdout();
-    cr_redirect_stderr();
-}
-
 Test(builtins_cd, simple_cd) {
     int commands_size = 1;
     char **commands = malloc(sizeof(char) * commands_size);
@@ -135,7 +129,7 @@ Test(builtins_cd, no_args) {
     shell_free(shell);
 }
 
-Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
+Test(builtins_cd, too_many_args, .init=cr_redirect_stderr) {
     int commands_size = 3;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -150,11 +144,12 @@ Test(builtins_cd, too_many_args, .init=redirect_all_stdout) {
 
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    fflush(stderr);
     cr_assert_stderr_eq_str("cd: Too many arguments.\n");
     shell_free(shell);
 }
 
-Test(builtins_cd, bad_path, .init=redirect_all_stdout) {
+Test(builtins_cd, bad_path, .init=cr_redirect_stderr) {
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "cd";
@@ -168,6 +163,7 @@ Test(builtins_cd, bad_path, .init=redirect_all_stdout) {
 
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    fflush(stderr);
     cr_assert_stderr_eq_str("cd: No such file or directory\n");
     shell_free(shell);
 }
