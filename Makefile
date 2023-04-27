@@ -5,9 +5,11 @@
 ## Makefile
 ##
 
-_SRC =  		builtins/exit.c \
-        		\
-        		types/node/new.c \
+
+_SRC =			builtins/cd.c \
+				builtins/exit.c \
+				\
+				types/node/new.c \
 				types/node/free.c \
 				types/node/unlink.c \
 				\
@@ -50,8 +52,11 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
+				\
 				criterion/utils/is_number.c \
+				\
 				criterion/builtins/exit.c \
+				criterion/builtins/cd.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
