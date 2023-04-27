@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "types/utils/utils.h"
 
-void utils_free(utils_t utils)
+void utils_free(utils_t *utils)
 {
     free(utils);
 }

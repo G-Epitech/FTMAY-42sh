@@ -14,7 +14,7 @@
  * @brief Free a a struct utils.
  * @param utils Utils to free
  */
-void utils_free(parsing_utils_t utils);
+void utils_free(parsing_utils_t *utils);
 
 /**
  * @brief Create a new utils.
