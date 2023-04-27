@@ -6,15 +6,16 @@
 */
 
 #include <stddef.h>
-#include "types/utils/utils.h"
+#include <stdlib.h>
+#include "types/parsing_utils/parsing_utils.h"
 
-utils_t *utils_new(char *input_user)
+parsing_utils_t *parsing_utils_new(char *input_user)
 {
-    utils_t *utils = NULL;
+    parsing_utils_t *utils = NULL;
 
     if (!input_user)
         return NULL;
-    utils = malloc(sizeof(utils_t));
+    utils = malloc(sizeof(parsing_utils_t));
     if (!utils)
         return NULL;
     utils->index_parsing = 0;
