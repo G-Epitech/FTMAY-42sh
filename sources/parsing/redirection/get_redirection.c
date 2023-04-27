@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "parsing/parsing.h"
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
@@ -49,12 +50,25 @@ static char *get_redirection(parsing_utils_t *utils)
     return user_redirection;
 }
 
-void parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
+bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 {
     char *redirection[4] = {"<", "<<", ">>", ">"};
     char *input_redirection = get_redirection(utils);
+    bool good_redirection = false;
 
     (void) instruction;
     (void) redirection;
+    for (int index = 0; index < 4; index++) {
+        if (strcmp(redirection[index], input_redirection)) {
+            set_path(utils, instruction);
+            set_type(index, instruction);
+            good_redirection = true;
+            break;
+        }
+    }
+    if (good_redirection)
+        return true;
+    else
+        return false;
     printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
 }

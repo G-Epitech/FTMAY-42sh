@@ -12,5 +12,7 @@
 int main(void)
 {
     parsing_utils_t *test = parsing_utils_new("> tmp_fic (ls -l -a | cat -e)");
+
+    
     parsing_redirection_handler(test, NULL);
 }
