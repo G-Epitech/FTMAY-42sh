@@ -82,3 +82,9 @@ Test(builtins_exit, invalid_string_args, .init=redirect_all_stdout) {
     cr_assert_eq(exit_status, 1);
     cr_assert_stderr_eq_str("exit: Expression Syntax.\n");
 }
+
+Test(builtins_exit, null_args) {
+    shell_t *shell = shell_new();
+
+    cr_assert_eq(builtin_exit(NULL, shell), SHELL_EXIT_ERROR);
+}

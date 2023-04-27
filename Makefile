@@ -42,6 +42,7 @@ _SRC =			builtins/cd.c \
         		types/shell/vars.c \
 				\
 				utils/is_number.c \
+				utils/malloc2.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -55,8 +56,10 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/block.c \
 				\
 				criterion/utils/is_number.c \
+				criterion/utils/malloc2.c \
 				\
 				criterion/builtins/exit.c \
+				criterion/builtins/env.c \
 				criterion/builtins/cd.c \
 
 SRCDIR = 		sources/

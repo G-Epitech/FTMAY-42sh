@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include "utils/malloc2.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
@@ -36,6 +37,26 @@ Test(builtins_cd, simple_cd) {
     cr_assert_str_eq(shell->pwd, pwd);
     cr_assert_str_eq(shell->owd, owd);
     cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    free(owd);
+    free(pwd);
+}
+
+Test(builtins_cd, simple_cd_with_malloc_fail) {
+    char *argv[] = {"cd"};
+    args_t args = {
+        .argc = 1,
+        .argv = argv
+    };
+    shell_t *shell = shell_new();
+    char *owd = malloc(PATH_MAX);
+    char *pwd = malloc(PATH_MAX);
+
+    shell->home = "sources/";
+    getcwd(owd, PATH_MAX);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    cr_assert_eq(builtin_cd(&args, shell), SHELL_EXIT_ERROR);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    getcwd(pwd, PATH_MAX);
     free(owd);
     free(pwd);
 }

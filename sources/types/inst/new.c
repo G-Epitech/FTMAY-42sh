@@ -6,11 +6,12 @@
 */
 
 #include <stdlib.h>
+#include "utils/malloc2.h"
 #include "types/inst/defs.h"
 
 inst_t *inst_new(void)
 {
-    inst_t *instruction = malloc(sizeof(inst_t));
+    inst_t *instruction = malloc2(sizeof(inst_t));
     io_t empty_io = {NULL, IOT_DEFAULT};
 
     if (!instruction)
