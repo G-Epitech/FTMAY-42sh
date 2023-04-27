@@ -7,6 +7,7 @@
 
 
 _SRC =			builtins/cd.c \
+				builtins/env.c \
 				builtins/exit.c \
 				\
 				types/node/new.c \
