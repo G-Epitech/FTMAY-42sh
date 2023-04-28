@@ -29,14 +29,13 @@ Test(builtins_cd, simple_cd) {
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
 
-    shell->home = "sources/";
     getcwd(owd, PATH_MAX);
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
     getcwd(pwd, PATH_MAX);
     cr_assert_str_eq(shell->pwd, pwd);
     cr_assert_str_eq(shell->owd, owd);
-    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    cr_assert_str_eq(shell->pwd, getenv("HOME"));
     free(owd);
     free(pwd);
 }
@@ -51,7 +50,6 @@ Test(builtins_cd, simple_cd_with_malloc_fail) {
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
 
-    shell->home = "sources/";
     getcwd(owd, PATH_MAX);
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
     cr_assert_eq(builtin_cd(&args, shell), SHELL_EXIT_ERROR);
@@ -101,14 +99,13 @@ Test(builtins_cd, tilde) {
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
 
-    shell->home = "sources/";
     getcwd(owd, PATH_MAX);
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
     getcwd(pwd, PATH_MAX);
     cr_assert_str_eq(shell->pwd, pwd);
     cr_assert_str_eq(shell->owd, owd);
-    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    cr_assert_str_eq(shell->pwd, getenv("HOME"));
     free(owd);
     free(pwd);
 }
