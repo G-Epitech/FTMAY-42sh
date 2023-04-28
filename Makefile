@@ -51,6 +51,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/shell.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
+				criterion/parsing/redirection.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
