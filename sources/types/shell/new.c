@@ -16,7 +16,6 @@
 static bool shell_init_data(shell_t *shell)
 {
     shell->exit_code = SHELL_EXIT_SUCCESS;
-    shell->home = NULL;
     shell->is_tty = isatty(STDIN_FILENO);
     shell->pwd = malloc2(PATH_MAX + 1);
     shell->owd = malloc2(PATH_MAX + 1);
