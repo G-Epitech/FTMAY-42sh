@@ -16,7 +16,7 @@
 
 // Prototype of node structure code_msg_t
 typedef struct s_code_msg {
-    int code;               //Code of error
+    int code;          //Code of error
     char *msg;         //Message corresponding to this error
 } code_msg_t;
 
