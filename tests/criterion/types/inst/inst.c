@@ -6,6 +6,7 @@
 */
 
 #include <criterion/criterion.h>
+#include "utils/malloc2.h"
 #include "types/inst/inst.h"
 
 Test(types_instruction, new_instruction)
@@ -14,6 +15,13 @@ Test(types_instruction, new_instruction)
 
     cr_assert(instruction != NULL);
     inst_free(instruction);
+}
+
+Test(types_instruction, new_instruction_with_malloc_fail)
+{
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    cr_assert_null(inst_new());
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }
 
 Test(types_instruction, new_field_instruction)

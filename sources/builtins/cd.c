@@ -11,6 +11,7 @@
 #include <limits.h>
 #include <string.h>
 #include <stdbool.h>
+#include "utils/malloc2.h"
 #include "builtins/defs.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
@@ -43,7 +44,7 @@ unsigned char builtin_cd(args_t *args, shell_t *shell)
         fprintf(stderr, "cd: Too many arguments.\n");
         return SHELL_EXIT_ERROR;
     }
-    owd = malloc(PATH_MAX);
+    owd = malloc2(PATH_MAX);
     if (!owd)
         return SHELL_EXIT_ERROR;
     getcwd(owd, PATH_MAX);

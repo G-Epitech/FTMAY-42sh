@@ -6,9 +6,9 @@
 */
 
 #include <stdio.h>
-#include "types/shell/defs.h"
-#include "types/args/defs.h"
 #include "utils/utils.h"
+#include "types/args/defs.h"
+#include "types/shell/defs.h"
 
 unsigned char builtin_exit(args_t *args, shell_t *shell)
 {

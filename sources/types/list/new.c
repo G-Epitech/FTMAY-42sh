@@ -6,11 +6,12 @@
 */
 
 #include <stdlib.h>
+#include "utils/malloc2.h"
 #include "types/list/defs.h"
 
 list_t *list_new(void)
 {
-    list_t *list = malloc(sizeof(list_t));
+    list_t *list = malloc2(sizeof(list_t));
 
     if (!list)
         return NULL;

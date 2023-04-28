@@ -6,12 +6,13 @@
 */
 
 #include <stdlib.h>
+#include "utils/malloc2.h"
 #include "types/inst/defs.h"
 #include "types/list/list.h"
 
 inst_block_t *inst_block_new(void)
 {
-    inst_block_t *inst_block = malloc(sizeof(inst_block_t));
+    inst_block_t *inst_block = malloc2(sizeof(inst_block_t));
 
     if (!inst_block)
         return NULL;
