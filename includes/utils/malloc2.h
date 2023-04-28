@@ -17,7 +17,7 @@
     #define MALLOC2_MODE_NORMAL 1
 
 /**
- * @brief Set failing mode of malloc2 function
+ * @brief Set failing mode of malloc2 function.
  * @param set Specify if required action is set or get mode
  * @param new_mode New mode to set to malloc2 function
  * @return Current mode of malloc2
@@ -25,7 +25,7 @@
 int malloc2_mode(int action, int new_mode);
 
 /**
- * @brief Alias of malloc function with failure control
+ * @brief Alias of malloc function with failure control.
  * @param size Size to allocate
  * @return Allocated memory zone
  */
