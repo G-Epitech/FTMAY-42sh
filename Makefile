@@ -9,6 +9,7 @@
 _SRC =			builtins/cd.c \
 				builtins/env.c \
 				builtins/exit.c \
+				builtins/unsetenv.c \
 				\
 				types/node/new.c \
 				types/node/free.c \
@@ -61,6 +62,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
 				criterion/builtins/cd.c \
+				criterion/builtins/unsetenv.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
