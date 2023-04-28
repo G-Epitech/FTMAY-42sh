@@ -55,7 +55,6 @@ static bool builtin_setenv_prevent_errors(args_t *args)
 
 unsigned char builtin_setenv(args_t *args, shell_t *shell)
 {
-    (void) shell;
     if (!args)
         return SHELL_EXIT_ERROR;
     if (args->argc == 1)
