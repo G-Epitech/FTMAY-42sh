@@ -83,6 +83,23 @@ Test(builtins_exit, invalid_string_args, .init=redirect_all_stdout) {
     cr_assert_stderr_eq_str("exit: Expression Syntax.\n");
 }
 
+Test(builtins_exit, invalid_number_of_args, .init=redirect_all_stdout) {
+    int commands_size = 3;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "exit";
+    commands[1] = "2";
+    commands[2] = "3";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new();
+    unsigned char exit_status = builtin_exit(&args, shell);
+
+    cr_assert_eq(exit_status, 1);
+    cr_assert_stderr_eq_str("exit: Expression Syntax.\n");
+}
+
 Test(builtins_exit, null_args) {
     shell_t *shell = shell_new();
 
