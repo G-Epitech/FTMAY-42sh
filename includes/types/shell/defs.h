@@ -32,7 +32,6 @@ typedef struct s_shell {
     list_t *vars;               // Shell variables (list of var_t)
     char *owd;                  // Old working directory
     char *pwd;                  // Path of current working directory
-    char *home;                 // Path of user home directory
 } shell_t;
 
 #endif /* !SHELL_DEFS_H_ */
