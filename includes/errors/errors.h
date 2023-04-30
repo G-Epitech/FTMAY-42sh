@@ -12,7 +12,7 @@
     #include "errors/defs.h"
 
 /**
- * @brief Find the message corresponding to given code
+ * @brief Find the message corresponding to given code.
  * @param messages Array with messages and codes for signals
  * @param messages_size Size of messages and codes array
  * @param code Error codes
