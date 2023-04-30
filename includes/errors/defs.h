@@ -12,7 +12,7 @@
     #include <signal.h>
 
     #define ERRORS_SIG_MSG_LEN 31
-    #define ERRORS_ERRNO_MSG_LEN 125
+    #define ERRORS_ERRNO_MSG_LEN 126
 
 // Prototype of node structure code_msg_t
 typedef struct s_code_msg {
