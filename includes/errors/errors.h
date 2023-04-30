@@ -18,7 +18,7 @@
  * @param code Error codes
  * @return Message string or NULL if code is not found.
  */
-char *errors_get_message_of_code(code_msg_t *messages, size_t messages_size,
+char *errors_get_message_of_code(const code_msg_t *messages, size_t messages_size,
 int code);
 
 #endif /* !ERRORS_H_ */
