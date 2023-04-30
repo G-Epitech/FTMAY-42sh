@@ -53,3 +53,12 @@ Test(errors_get, errors_get_message_errno_return_null)
     ERRORS_ERRNO_MSG_LEN, 999);
     cr_assert(ptr == NULL);
 }
+
+Test(errors_get, errors_get_message_null)
+{
+    char *ptr = NULL;
+
+    ptr = errors_get_message_of_code(NULL,
+    ERRORS_SIG_MSG_LEN, 999);
+    cr_assert(ptr == NULL);
+}
