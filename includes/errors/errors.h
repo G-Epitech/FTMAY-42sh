@@ -8,6 +8,7 @@
 #ifndef ERRORS_H_
     #define ERRORS_H_
 
+    #include <stdio.h>
     #include "errors/defs.h"
 
 /**
