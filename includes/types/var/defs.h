@@ -27,6 +27,6 @@ typedef struct s_var_special {
     char *name;                     //Name of variable
     var_special_getter_t getter;    //Getter of variable value
     var_special_setter_t setter;    //Setter of variable value
-} var_t;
+} var_special_t;
 
 #endif /* !VAR_DEFS_H_ */
