@@ -16,7 +16,7 @@
  * @param messages Array with messages and codes for signals
  * @param messages_size Size of messages and codes array
  * @param code Error codes
- * @return char* on the message string. If code is not found, return NULL.
+ * @return Message string or NULL if code is not found.
  */
 char *errors_get_message_of_code(code_msg_t *messages, size_t messages_size,
 int code);
