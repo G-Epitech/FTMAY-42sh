@@ -22,4 +22,11 @@ typedef struct s_var {
     char *value;    //Value of variable
 } var_t;
 
+// Represent a special variable
+typedef struct s_var_special {
+    char *name;                     //Name of variable
+    var_special_getter_t getter;    //Getter of variable value
+    var_special_setter_t setter;    //Setter of variable value
+} var_t;
+
 #endif /* !VAR_DEFS_H_ */
