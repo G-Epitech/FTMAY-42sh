@@ -7,13 +7,14 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "parsing/parsing.h"
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
 char *add_char_to_str(char *dest, char charactere)
 {
     int dest_len = strlen(dest);
-    char *final = malloc(sizeof(char) * dest_len + 2 );
+    char *final = malloc(sizeof(char) * dest_len + 2);
 
     for (int y = 0; y < dest_len; y++) {
         final[y] = dest[y];
@@ -49,12 +50,24 @@ static char *get_redirection(parsing_utils_t *utils)
     return user_redirection;
 }
 
-void parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
+bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 {
     char *redirection[4] = {"<", "<<", ">>", ">"};
     char *input_redirection = get_redirection(utils);
+    bool good_redirection = false;
 
     (void) instruction;
     (void) redirection;
-    printf("input: [%s] | i: [%i]\n", input_redirection, utils->index_parsing);
+    for (int index = 0; index < 4; index++) {
+        if (strcmp(redirection[index], input_redirection) == 0) {
+            set_type(index, instruction);
+            set_path(utils, instruction, index);
+            good_redirection = true;
+            break;
+        }
+    }
+    if (good_redirection)
+        return true;
+    else
+        return false;
 }
