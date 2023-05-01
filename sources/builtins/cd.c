@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils/malloc2.h"
+#include "errors/errors.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
@@ -29,7 +30,7 @@ static bool set_new_path(args_t *args, shell_t *shell)
     if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH))
         path = shell->owd;
     if (chdir(path) == -1) {
-        fprintf(stderr, "cd: %s\n", strerror(errno));
+        fprintf(stderr, "cd: %s\n", errors_strerror(errno));
         return false;
     }
     getcwd(shell->pwd, PATH_MAX);
