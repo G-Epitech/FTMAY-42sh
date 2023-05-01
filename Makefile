@@ -45,6 +45,9 @@ _SRC =			builtins/cd.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				\
+				parsing/set_command_args.c \
+				parsing/get_len.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
