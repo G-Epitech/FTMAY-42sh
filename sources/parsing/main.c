@@ -24,6 +24,16 @@ static bool append_inst(inst_block_t *block, inst_t *instruction)
     return true;
 }
 
+static bool separator_or_pipe(parsing_utils_t *utils, inst_t *instruction,
+inst_block_t *block)
+{
+    char *data = utils->input;
+
+    if (data[INDEX_PARSING(utils)] == '|')
+        return parsing_pipes_handler(utils, block);
+    
+}
+
 static bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
                         inst_t *instruction)
 {
@@ -37,8 +47,8 @@ static bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
     }
     if (parsing_maybe_redirection(utils))
         return parsing_redirection_handler(utils, instruction);
-    if (data[INDEX_PARSING(utils)] == '|')
-        return parsing_pipes_handler(utils, block);
+    if (!separator_or_pipe(utils, instruction, block))
+        return false;
     if (data[INDEX_PARSING(utils)] == ' ' ||
         data[INDEX_PARSING(utils)] == ';') {
         INDEX_PARSING(utils)++;

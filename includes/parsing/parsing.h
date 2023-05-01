@@ -16,6 +16,8 @@
     #define DOUBLE_RIGHT_REDIRECTION 2
     #define SIMPLE_RIGHT_REDIRECTION 3
 
+    #define 
+
 /**
  * @brief Parse the entire user command.
  * @param input User command
