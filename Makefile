@@ -26,9 +26,9 @@ _SRC =			types/node/new.c \
 				\
 				types/inst/new.c \
 				types/inst/free.c \
+				types/inst/append.c \
 				types/inst/block/free.c \
 				types/inst/block/new.c \
-				types/inst/block/append.c \
 				\
 				types/parsing_utils/free.c \
 				types/parsing_utils/new.c \
@@ -39,6 +39,8 @@ _SRC =			types/node/new.c \
 				parsing/get_redirection.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
+				parsing/main.c \
+				parsing/utils.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

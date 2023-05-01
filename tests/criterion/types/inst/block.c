@@ -46,7 +46,7 @@ Test(types_block_instruction, append_instruction)
     inst_t *instruction3 = NULL;
     node_data_t data = {NULL};
 
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 1);
     data = instruction1->instructions->first->data;
     instruction3 = NODE_DATA_TO_PTR(data, inst_t *);
@@ -61,7 +61,7 @@ Test(types_block_instruction, append_instruction_null)
     inst_t *instruction3 = NULL;
     node_data_t data = {NULL};
 
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 1);
     data = instruction1->instructions->first->data;
     instruction3 = NODE_DATA_TO_PTR(data, inst_t *);

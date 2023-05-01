@@ -22,7 +22,7 @@ Test(types_instruction, new_field_instruction)
 
     cr_assert(instruction->value.block == NULL);
     cr_assert(instruction->value.cmd == NULL);
-    cr_assert(instruction->type == INS_BLOCK);
+    cr_assert(instruction->type == INS_NONE);
     cr_assert(instruction->separator == SP_BREAK);
     cr_assert(instruction->exit_code == 0);
     cr_assert(instruction->ios.input.path == NULL);

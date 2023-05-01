@@ -56,5 +56,5 @@ void parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 
     (void) instruction;
     (void) redirection;
-    printf("input redirection : [%s] | [%i] index of parsing\n", input_redirection, utils->index_parsing);
+    printf("input: [%s] | i: [%i]\n", input_redirection, utils->index_parsing);
 }

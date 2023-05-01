@@ -12,8 +12,11 @@
 
 int main(void)
 {
-    parsing_utils_t *test = parsing_utils_new("ls -l -a");
-    
-    parsing_get_cmd(test, NULL);
-    // parsing_redirection_handler(test, NULL);
+    parsing_utils_t *test = parsing_utils_new("ls -l -a > tmp");
+    inst_t *instruction = NULL;
+
+    instruction = parsing_get_cmd(test);
+    if (instruction)
+        printf("Input: [%s]\n", instruction->value.cmd->input);
+    instruction = parsing_get_main_block("ls -l -a > tmp");
 }
