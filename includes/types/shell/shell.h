@@ -47,5 +47,10 @@ void shell_unset_var(shell_t *shell, char *name);
  */
 char *shell_get_var(shell_t *shell, char *name, bool copy);
 
+/**
+ * @brief Init specials variables of shell
+ * @param shell Shell object
+ */
+void shell_special_vars_init(shell_t *shell);
 
 #endif /* !SHELL_H_ */

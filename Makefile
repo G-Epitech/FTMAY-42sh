@@ -41,7 +41,9 @@ _SRC =			builtins/cd.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-        		types/shell/vars.c \
+        		types/shell/vars/vars.c \
+				types/shell/vars/special/std.c \
+				types/shell/vars/special/init.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \

@@ -12,11 +12,11 @@
 
 var_t *var_new(char *name, char *value)
 {
-    var_t *new = (name && value) ? malloc2(sizeof(var_t)) : NULL;
+    var_t *new = name ? malloc2(sizeof(var_t)) : NULL;
 
     if (!new)
         return NULL;
     new->name = strdup(name);
-    new->value = strdup(value);
+    new->value = strdup(value ? value : "");
     return new;
 }

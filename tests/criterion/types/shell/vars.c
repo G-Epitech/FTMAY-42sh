@@ -14,32 +14,33 @@
 Test(types_shell_vars, shell_set_severals_var)
 {
     shell_t *shell = shell_new();
+    size_t initial = shell->vars->len;
 
-    cr_assert(shell->vars->len == 0);
     cr_assert(shell_set_var(shell, "V1", "super"));
     cr_assert(shell_set_var(shell, "V2", "hello"));
     cr_assert(shell_set_var(shell, "V3", "world"));
-    cr_assert(shell->vars->len == 3);
+    cr_assert(shell->vars->len - initial == 3);
     cr_assert(shell_set_var(shell, "V4", "nice"));
-    cr_assert(shell->vars->len == 4);
+    cr_assert(shell->vars->len - initial == 4);
     shell_free(shell);
 }
 
 Test(types_shell_vars, shell_set_severals_var_and_unset)
 {
     shell_t *shell = shell_new();
+    size_t initial = shell->vars->len;
 
-    cr_assert(shell->vars->len == 0);
+    cr_assert(shell->vars->len - initial == 0);
     cr_assert(shell_set_var(shell, "V1", "super"));
     cr_assert(shell_set_var(shell, "V2", "hello"));
     cr_assert(shell_set_var(shell, "V3", "world"));
-    cr_assert(shell->vars->len == 3);
+    cr_assert(shell->vars->len - initial== 3);
     shell_unset_var(shell, "V1");
-    cr_assert(shell->vars->len == 2);
+    cr_assert(shell->vars->len - initial== 2);
     shell_unset_var(shell, "V3");
-    cr_assert(shell->vars->len == 1);
+    cr_assert(shell->vars->len - initial== 1);
     shell_unset_var(shell, "V2");
-    cr_assert(shell->vars->len == 0);
+    cr_assert(shell->vars->len - initial == 0);
     shell_free(shell);
 }
 
@@ -65,17 +66,19 @@ Test(types_shell_vars, shell_set_env_with_null_value)
 {
     shell_t *shell = shell_new();
 
-    cr_assert(!shell_set_var(shell, "try", NULL));
+    cr_assert(shell_set_var(shell, "try", NULL));
+    cr_assert_str_eq(shell_get_var(shell, "try", false), "");
     shell_free(shell);
 }
 
 Test(types_shell_vars, shell_set_one_var_non_copy)
 {
     shell_t *shell = shell_new();
+    size_t initial = shell->vars->len;
 
-    cr_assert(shell->vars->len == 0);
+    cr_assert(shell->vars->len - initial == 0);
     cr_assert(shell_set_var(shell, "try", "working"));
-    cr_assert(shell->vars->len == 1);
+    cr_assert(shell->vars->len - initial == 1);
     cr_assert_str_eq(shell_get_var(shell, "try", false), "working");
     shell_free(shell);
 }
@@ -83,11 +86,12 @@ Test(types_shell_vars, shell_set_one_var_non_copy)
 Test(types_shell_vars, shell_set_one_var_copy)
 {
     shell_t *shell = shell_new();
+    size_t initial = shell->vars->len;
     char *copy = NULL;
 
-    cr_assert(shell->vars->len == 0);
+    cr_assert(shell->vars->len - initial == 0);
     cr_assert(shell_set_var(shell, "try", "working"));
-    cr_assert(shell->vars->len == 1);
+    cr_assert(shell->vars->len - initial == 1);
     copy = shell_get_var(shell, "try", true);
     cr_assert_not_null(copy);
     cr_assert_str_eq(copy, "working");
@@ -147,4 +151,70 @@ Test(types_shell_vars, shell_unset_var_on_invalid_shell)
 Test(types_shell_vars, shell_get_var_on_null_shell)
 {
     cr_assert_null(shell_get_var(NULL, "V1", "super"));
+}
+
+Test(types_shell_vars, shell_special_var_init_with_null_shell)
+{
+    shell_special_vars_init(NULL);
+}
+
+Test(types_shell_vars, shell_special_var_set_std_with_null_shell)
+{
+    cr_assert_not(shell_special_vars_std_set("home", "super", "HOME", NULL));
+}
+
+Test(types_shell_vars, shell_special_var_set_std_with_null_name)
+{
+    shell_t *shell = shell_new();
+
+    cr_assert_not(shell_special_vars_std_set(NULL, "super", "HOME", shell));
+}
+
+Test(types_shell_vars, shell_special_var_get_std_with_null_name)
+{
+    shell_t *shell = shell_new();
+
+    cr_assert_null(shell_special_vars_std_get(shell, NULL, false));
+}
+
+Test(types_shell_vars, shell_special_var_get_std_with_null_shell)
+{
+    cr_assert_null(shell_special_vars_std_get(NULL, "home", false));
+}
+
+Test(types_shell_vars, shell_special_var_get_std_home)
+{
+    shell_t *shell = shell_new();
+    char *home = shell_special_vars_std_get(shell, "home", false);
+
+    cr_assert_str_eq(home, getenv("HOME"));
+}
+
+Test(types_shell_vars, shell_special_var_get_std_home_unset_env_home)
+{
+    shell_t *shell = shell_new();
+    char *home = NULL;
+    char *old = strdup(getenv("HOME"));
+
+    unsetenv("HOME");
+    home = shell_special_vars_std_get(shell, "home", false);
+    cr_assert_str_eq(old, home);
+}
+
+Test(types_shell_vars, shell_special_var_unset_home)
+{
+    shell_t *shell = shell_new();
+
+    shell_unset_var(shell, "home");
+    cr_assert_null(shell_get_var(shell, "home", false));
+    cr_assert_not_null(getenv("HOME"));
+}
+
+Test(types_shell_vars, shell_special_var_set_home)
+{
+    shell_t *shell = shell_new();
+
+    cr_assert(shell_set_var(shell, "home", "/"));
+    cr_assert_str_eq(shell_get_var(shell, "home", false), "/");
+    cr_assert_str_eq(getenv("HOME"), "/");
 }

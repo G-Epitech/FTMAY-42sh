@@ -110,6 +110,26 @@ Test(builtins_cd, tilde) {
     free(pwd);
 }
 
+Test(builtins_cd, tilde_with_no_home, .init=cr_redirect_stderr) {
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char) * commands_size);
+    commands[0] = "cd";
+    commands[1] = BUILTIN_CD_TILDE;
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    unsetenv("HOME");
+    shell_t *shell = shell_new();
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+
+    exit_status = builtin_cd(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    fflush(stderr);
+    cr_assert_stderr_eq_str("cd: No such file or directory\n");
+    shell_free(shell);
+}
+
 Test(builtins_cd, back) {
     int commands_size = 2;
     char **commands = malloc(sizeof(char) * commands_size);

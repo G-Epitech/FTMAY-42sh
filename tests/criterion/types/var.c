@@ -20,6 +20,19 @@ Test(types_var, new_struct_var)
     var_free(var);
 }
 
+Test(types_var, new_struct_var_with_null_name)
+{
+    cr_assert_null(var_new(NULL, "value"));
+}
+
+Test(types_var, new_struct_var_with_null_value)
+{
+    var_t *var = var_new("try", NULL);
+
+    cr_assert_str_eq(var->value, "");
+    var_free(var);
+}
+
 Test(types_var, new_struct_var_with_malloc_fail)
 {
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);

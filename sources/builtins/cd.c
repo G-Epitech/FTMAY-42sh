@@ -12,9 +12,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils/malloc2.h"
-#include "builtins/defs.h"
 #include "types/args/defs.h"
-#include "types/shell/defs.h"
+#include "types/shell/shell.h"
+#include "builtins/builtins.h"
 
 static bool set_new_path(args_t *args, shell_t *shell)
 {
@@ -22,8 +22,10 @@ static bool set_new_path(args_t *args, shell_t *shell)
 
     if (args->argc == 2)
         path = args->argv[1];
-    if (args->argc == 1 || !strcmp(args->argv[1], BUILTIN_CD_TILDE))
-        path = getenv("HOME");
+    if (args->argc == 1 || !strcmp(args->argv[1], BUILTIN_CD_TILDE)) {
+        path = shell_get_var(shell, "home", false);
+        path = path ? path : "";
+    }
     if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH))
         path = shell->owd;
     if (chdir(path) == -1) {
