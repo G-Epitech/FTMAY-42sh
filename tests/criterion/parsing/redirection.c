@@ -17,7 +17,7 @@ Test(parsing_redirection, redirection_output_simple)
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->ios.output.type, IOT_SIMPLE);
     cr_assert_str_eq(test_inst->ios.output.path, "tmp_fic");
@@ -29,7 +29,7 @@ Test(parsing_redirection, redirection_input_simple)
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->ios.input.type, IOT_SIMPLE);
     cr_assert_str_eq(test_inst->ios.input.path, "tmp_fic_flavien");
@@ -41,7 +41,7 @@ Test(parsing_redirection, redirection_output_double)
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->ios.output.type, IOT_DOUBLE);
     cr_assert_str_eq(test_inst->ios.output.path, "tmp_fic_Alavien");
@@ -53,7 +53,7 @@ Test(parsing_redirection, redirection_input_double)
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     test->index_parsing = 4;
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->ios.input.type, IOT_DOUBLE);
@@ -67,7 +67,7 @@ Test(parsing_redirection, bad_redirection_input_double)
     inst_t *test_inst = inst_new();
     bool good_redirection = false;
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     test->index_parsing = 4;
     good_redirection = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(good_redirection, false);
@@ -79,7 +79,7 @@ Test(parsing_redirection, semicolon_separator)
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
 
-    inst_block_append(test_inst_block, test_inst);
+    inst_append(test_inst_block, test_inst);
     test->index_parsing = 20;
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->ios.output.type, IOT_SIMPLE);

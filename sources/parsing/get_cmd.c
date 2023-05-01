@@ -12,29 +12,30 @@
 #include "types/inst/inst.h"
 #include "parsing/utils.h"
 
-static bool maybe_cmd(parsing_utils_t *utils)
+static bool maybe_cmd(parsing_utils_t *utils, inst_t *instruction)
 {
     char *data = utils->input;
     int index = utils->index_parsing;
 
+    (void)instruction;
     if (data[index] == '\0')
         return false;
     if (data[index] == '(' || data[index] == ')')
         return false;
     if (data[index] == ';' || data[index] == '|')
         return false;
-    if (maybe_redirection(utils))
+    if (parsing_maybe_redirection(utils))
         return false;
     return true;
 }
 
-static char *manage_cmd(parsing_utils_t *utils, int *index)
+static char *manage_cmd(parsing_utils_t *utils, int index)
 {
     char *data = utils->input;
 
     if (data[utils->index_parsing + 1] == '\0')
         utils->index_parsing++;
-    return parsing_get_word(utils, *index, utils->index_parsing);
+    return parsing_get_word(utils, index, utils->index_parsing);
 }
 
 inst_t *parsing_get_cmd(parsing_utils_t *utils)
@@ -44,10 +45,10 @@ inst_t *parsing_get_cmd(parsing_utils_t *utils)
     cmd_t *command = cmd_new();
     char *data = NULL;
 
-    while (maybe_cmd(utils)) {
-        utils->index_parsing++;
+    while (maybe_cmd(utils, instruction)) {
+        INDEX_PARSING(utils)++;
     }
-    data = manage_cmd(utils, &index);
+    data = manage_cmd(utils, index);
     if (!data || !instruction || !command)
         return NULL;
     command->input = data;

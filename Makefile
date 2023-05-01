@@ -43,6 +43,7 @@ _SRC =			types/node/new.c \
 				parsing/get_cmd.c \
 				parsing/main.c \
 				parsing/utils.c \
+				parsing/pipes.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

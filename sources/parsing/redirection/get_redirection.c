@@ -5,69 +5,52 @@
 ** parsing
 */
 
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-char *add_char_to_str(char *dest, char charactere)
+static bool check_ambigious(inst_t *instruction, int index)
 {
-    int dest_len = strlen(dest);
-    char *final = malloc(sizeof(char) * dest_len + 2);
-
-    for (int y = 0; y < dest_len; y++) {
-        final[y] = dest[y];
-    }
-    final[dest_len] = charactere;
-    final[dest_len + 1] = '\0';
-    return final;
-}
-
-static bool is_redirection(char charactere)
-{
-    if (charactere == '<' || charactere == '>')
-        return true;
-    else
+    if (instruction->ios.input.type != IOT_DEFAULT &&
+    (index == SIMPLE_LEFT_REDIRECTION || index == DOUBLE_LEFT_REDIRECTION))
         return false;
+    if (instruction->ios.output.type != IOT_DEFAULT &&
+    (index == SIMPLE_RIGHT_REDIRECTION || index == DOUBLE_RIGHT_REDIRECTION))
+        return false;
+    return true;
 }
 
-static char *get_redirection(parsing_utils_t *utils)
+static bool check_name(inst_t *instruction, int index)
 {
-    bool in_redirection = true;
-    char *user_redirection = malloc(sizeof(char) * 1);
-    user_redirection[0] = '\0';
-
-    while (in_redirection) {
-        if (is_redirection(USER_INPUT(utils)[INDEX_PARSING(utils)])) {
-            user_redirection = add_char_to_str(user_redirection,
-            USER_INPUT(utils)[INDEX_PARSING(utils)]);
-        } else {
-            in_redirection = false;
-        }
-        INDEX_PARSING(utils)++;
+    if ((index <= 1 && instruction->ios.input.path[0] == '\0') ||
+        (index >= 2 && instruction->ios.output.path[0])) {
+        write(1, "Missing name for redirect.\n", 27);
+        return false;
     }
-    return user_redirection;
+    return true;
 }
 
 bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 {
-    char *redirection[4] = {"<", "<<", ">>", ">"};
-    char *input_redirection = get_redirection(utils);
-    bool good_redirection = false;
+    char *redirection[4] = {"<<", "<", ">>", ">"};
+    char *data = utils->input + utils->index_parsing;
+    int index = 0;
 
-    (void) instruction;
-    (void) redirection;
-    for (int index = 0; index < 4; index++) {
-        if (strcmp(redirection[index], input_redirection) == 0) {
-            set_type(index, instruction);
-            set_path(utils, instruction, index);
-            good_redirection = true;
+    for (int i = 0; i < 4; i++) {
+        if (strncmp(redirection[i], data, strlen(redirection[i])) == 0) {
+            index = i;
+            utils->index_parsing += strlen(redirection[i]);
             break;
         }
     }
-    if (good_redirection)
-        return true;
-    else
+    if (!check_ambigious(instruction, index)) {
+        write(1, "Ambiguous input redirect.\n", 26);
         return false;
+    }
+    set_type(index, instruction);
+    set_path(utils, instruction, index);
+    return check_name(instruction, index);
 }

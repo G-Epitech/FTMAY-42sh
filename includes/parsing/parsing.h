@@ -11,8 +11,8 @@
     #include "types/inst/defs.h"
     #include "types/parsing_utils/defs.h"
 
-    #define SIMPLE_LEFT_REDIRECTION 0
-    #define DOUBLE_LEFT_REDIRECTION 1
+    #define SIMPLE_LEFT_REDIRECTION 1
+    #define DOUBLE_LEFT_REDIRECTION 0
     #define DOUBLE_RIGHT_REDIRECTION 2
     #define SIMPLE_RIGHT_REDIRECTION 3
 
@@ -63,5 +63,13 @@ char *parsing_get_word(parsing_utils_t *utils, int start, int end);
  * @return New instruction type command
  */
 inst_t *parsing_get_cmd(parsing_utils_t *utils);
+
+/**
+ * @brief Parse pipes in the user command.
+ * @param utils Utils struct
+ * @param block Instruction Block
+ * @return True in success or False if failed
+ */
+bool parsing_pipes_handler(parsing_utils_t *utils, inst_block_t *block);
 
 #endif /* !PARSING_H_ */

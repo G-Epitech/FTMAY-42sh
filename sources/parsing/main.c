@@ -5,13 +5,14 @@
 ** main
 */
 
+#include <stdio.h>
 #include "parsing/utils.h"
 #include "types/list/list.h"
 #include "types/inst/inst.h"
 #include "parsing/parsing.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-static void append_inst(inst_block_t *block, inst_t *instruction)
+static bool append_inst(inst_block_t *block, inst_t *instruction)
 {
     inst_t *data = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
 
@@ -20,43 +21,55 @@ static void append_inst(inst_block_t *block, inst_t *instruction)
         list_remove(block->instructions, block->instructions->last);
     }
     inst_append(block, instruction);
+    return true;
 }
 
-static void analyse_data(parsing_utils_t *utils, inst_block_t *actual_block,
+static bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
                         inst_t *instruction)
 {
     char *data = utils->input;
     inst_t *child = NULL;
 
-    if (data[utils->index_parsing] == '(') {
-        utils->index_parsing++;
+    if (data[INDEX_PARSING(utils)] == '(') {
+        INDEX_PARSING(utils)++;
         child = recursivity(utils);
-        append_inst(actual_block, child);
-        return;
+        return append_inst(block, child);
     }
-    if (maybe_redirection(utils))
+    if (parsing_maybe_redirection(utils))
         return parsing_redirection_handler(utils, instruction);
-    utils->index_parsing++;
+    if (data[INDEX_PARSING(utils)] == '|')
+        return parsing_pipes_handler(utils, block);
+    if (data[INDEX_PARSING(utils)] == ' ' ||
+        data[INDEX_PARSING(utils)] == ';') {
+        INDEX_PARSING(utils)++;
+        return true;
+    }
+    child = parsing_get_cmd(utils);
+    append_inst(block, child);
+    return true;
 }
 
 inst_t *recursivity(parsing_utils_t *utils)
 {
     inst_t *instruction = inst_new();
-    inst_block_t *actual_block = inst_block_new();
+    inst_block_t *block = inst_block_new();
     inst_t *pending = inst_new();
     char *data = utils->input;
+    inst_t *last = NULL;
 
-    inst_append(actual_block, pending);
+    inst_append(block, pending);
     instruction->type = INS_BLOCK;
-    while (data[utils->index_parsing] != '\0') {
-        if (data[utils->index_parsing] == ')') {
-            instruction->value.block = actual_block;
-            utils->index_parsing++;
+    instruction->value.block = block;
+    while (data[INDEX_PARSING(utils)] != '\0') {
+        if (data[INDEX_PARSING(utils)] == ')') {
+            instruction->value.block = block;
+            INDEX_PARSING(utils)++;
             return instruction;
         }
-        analyse_data(utils, actual_block, instruction);
+        last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
+        if (!analyse_data(utils, block, last))
+            return instruction;
     }
-    instruction->value.block = actual_block;
     return instruction;
 }
 
