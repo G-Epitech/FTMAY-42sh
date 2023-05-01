@@ -29,9 +29,13 @@ inst_block_t *block)
 {
     char *data = utils->input;
 
-    if (data[INDEX_PARSING(utils)] == '|')
+    if (parsing_maybe_separator(utils)) {
+        return parsing_separator_handler(utils, instruction);
+    } else if (data[INDEX_PARSING(utils)] == '|')
         return parsing_pipes_handler(utils, block);
-    
+    else
+        return true;
+
 }
 
 static bool analyse_data(parsing_utils_t *utils, inst_block_t *block,

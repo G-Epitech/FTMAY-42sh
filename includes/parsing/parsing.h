@@ -16,8 +16,6 @@
     #define DOUBLE_RIGHT_REDIRECTION 2
     #define SIMPLE_RIGHT_REDIRECTION 3
 
-    #define 
-
 /**
  * @brief Parse the entire user command.
  * @param input User command
@@ -73,5 +71,12 @@ inst_t *parsing_get_cmd(parsing_utils_t *utils);
  * @return True in success or False if failed
  */
 bool parsing_pipes_handler(parsing_utils_t *utils, inst_block_t *block);
+
+/**
+ * @brief Parse separator in the user command.
+ * @param utils Utils struct
+ * @param instruction Instruction struct
+ */
+bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction);
 
 #endif /* !PARSING_H_ */

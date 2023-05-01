@@ -6,6 +6,7 @@
 */
 
 #include <unistd.h>
+#include <string.h>
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
@@ -44,4 +45,5 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
         return false;
     }
     set_separator(instruction, index);
+    return true;
 }

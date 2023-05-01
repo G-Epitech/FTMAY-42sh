@@ -19,6 +19,12 @@
 bool parsing_maybe_redirection(parsing_utils_t *utils);
 
 /**
+ * @brief Check if there is a separator at the utils index.
+ * @param utils Parsing utils structure
+ */
+bool parsing_maybe_separator(parsing_utils_t *utils);
+
+/**
  * @brief Recursive fonction in parsing.
  * @param utils Parsing utils structure
  * @return new block with block or command in it

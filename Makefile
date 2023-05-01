@@ -44,6 +44,8 @@ _SRC =			types/node/new.c \
 				parsing/main.c \
 				parsing/utils.c \
 				parsing/pipes.c \
+				parsing/separator/utils.c \
+				parsing/separator/separator.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
