@@ -10,9 +10,8 @@
 
     #include <errno.h>
     #include <signal.h>
-
-    #define ERRORS_SIG_MSG_LEN 31
-    #define ERRORS_ERRNO_MSG_LEN 126
+    #include <stdlib.h>
+    #include "utils/os.h"
 
 // Prototype of node structure code_msg_t
 typedef struct s_code_msg {
@@ -21,7 +20,7 @@ typedef struct s_code_msg {
 } code_msg_t;
 
 // Array with messages and codes for signals
-static const code_msg_t errors_sig_msg[ERRORS_SIG_MSG_LEN] = {
+static const code_msg_t errors_sig_msg[] = {
     {SIGHUP, "Hangup"},
     {SIGINT, NULL},
     {SIGQUIT, "Quit"},
@@ -37,7 +36,6 @@ static const code_msg_t errors_sig_msg[ERRORS_SIG_MSG_LEN] = {
     {SIGPIPE, "Broken pipe"},
     {SIGALRM, "Alarm clock"},
     {SIGTERM, "Terminated"},
-    {SIGSTKFLT, "Stack limit exceeded"},
     {SIGCHLD, NULL},
     {SIGCONT, NULL},
     {SIGSTOP, "\nSuspended (signal)"},
@@ -51,12 +49,16 @@ static const code_msg_t errors_sig_msg[ERRORS_SIG_MSG_LEN] = {
     {SIGPROF, "Profiling time alarm"},
     {SIGWINCH, NULL},
     {SIGIO, "Pollable event occurred"},
-    {SIGPWR, "Power failure"},
     {SIGSYS, "Bad system call"},
+    #if defined(OS_IS_LINUX)
+        {SIGSTKFLT, "Stack limit exceeded"},
+        {SIGPWR, "Power failure"},
+    #endif
+    {-1, "Unknown signal"}
 };
 
 // Array with messages and codes for errno errors
-static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
+static const code_msg_t errors_errno_msg[] = {
     {E2BIG, "Argument list too long."},
     {EACCES, "Permission denied."},
     {EADDRINUSE, "Address already in use."},
@@ -64,23 +66,15 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {EAFNOSUPPORT, "Address family not supported."},
     {EAGAIN, "Resource temporarily unavailable."},
     {EALREADY, "Connection already in progress."},
-    {EBADE, "Invalid exchange."},
     {EBADF, "Bad file descriptor."},
-    {EBADFD, "File descriptor in bad state."},
     {EBADMSG, "Bad message."},
-    {EBADR, "Invalid request descriptor."},
-    {EBADRQC, "Invalid request code."},
-    {EBADSLT, "Invalid slot."},
     {EBUSY, "Device or resource busy."},
     {ECANCELED, "Operation canceled."},
     {ECHILD, "No child processes."},
-    {ECHRNG, "Channel number out of range."},
-    {ECOMM, "Communication error on send."},
     {ECONNABORTED, "Connection aborted."},
     {ECONNREFUSED, "Connection refused."},
     {ECONNRESET, "Connection reset."},
     {EDEADLK, "Resource deadlock avoided."},
-    {EDEADLOCK, NULL},
     {EDESTADDRREQ, "Destination address required"},
     {EDOM, "Mathematics argument out of domain of function."},
     {EDQUOT, "Disk quota exceeded."},
@@ -89,7 +83,6 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {EFBIG, "File too large."},
     {EHOSTDOWN, "Host is down."},
     {EHOSTUNREACH, "Host is unreachable."},
-    {EHWPOISON, "Memory page has hardware error."},
     {EIDRM, "Identifier removed."},
     {EILSEQ, NULL},
     {EINPROGRESS, "Operation in progress."},
@@ -98,21 +91,7 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {EIO, "Input/output error."},
     {EISCONN, "Socket is connected"},
     {EISDIR, "Is a directory."},
-    {EISNAM, "Is a named type file."},
-    {EKEYEXPIRED, "Key has expired."},
-    {EKEYREJECTED, "Key was rejected by service."},
-    {EKEYREVOKED, "Key has been revoked."},
-    {EL2HLT, "Level 2 halted."},
-    {EL2NSYNC, "Level 2 not synchronized."},
-    {EL3HLT, "Level 3 halted."},
-    {EL3RST, "Level 3 reset."},
-    {ELIBACC, "Cannot access a needed shared library."},
-    {ELIBBAD, "Accessing a corrupted shared library."},
-    {ELIBMAX, "Attempting to link in too many shared libraries."},
-    {ELIBSCN, ".lib section in a.out corrupted."},
-    {ELIBEXEC, "Cannot exec a shared library directly."},
     {ELOOP, "Too many levels of symbolic links."},
-    {EMEDIUMTYPE, "Wrong medium type."},
     {EMFILE, "Too many open files."},
     {EMLINK, "Too many links."},
     {EMSGSIZE, "Message too long."},
@@ -122,20 +101,15 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {ENETRESET, "Connection aborted by network."},
     {ENETUNREACH, "Network unreachable."},
     {ENFILE, "Too many open files in system."},
-    {ENOANO, "No anode."},
     {ENOBUFS, "No buffer space available."},
     {ENODATA, NULL},
     {ENODEV, "No such device."},
     {ENOENT, "No such file or directory."},
-    {ENOEXEC, "Exec format error."},
-    {ENOKEY, "Required key not available."},
+    {ENOEXEC, "Exec format error. Wrong Architecture."},
     {ENOLCK, "No locks available."},
     {ENOLINK, "Link has been severed."},
-    {ENOMEDIUM, "No medium found."},
     {ENOMEM, "Not enough space/cannot allocate memory."},
     {ENOMSG, "No message of the desired type."},
-    {ENONET, "Machine is not on the network."},
-    {ENOPKG, "Package not installed."},
     {ENOPROTOOPT, "Protocol not available."},
     {ENOSPC, "No space left on device."},
     {ENOSR, "No STREAM resources."},
@@ -149,7 +123,6 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {ENOTSOCK, "Not a socket."},
     {ENOTSUP, "Operation not supported."},
     {ENOTTY, "Inappropriate I/O control operation."},
-    {ENOTUNIQ, "Name not unique on network."},
     {ENXIO, "No such device or address."},
     {EOPNOTSUPP, "Operation not supported on socket."},
     {EOVERFLOW, "Value too large to be stored in data type."},
@@ -161,28 +134,60 @@ static const code_msg_t errors_errno_msg[ERRORS_ERRNO_MSG_LEN] = {
     {EPROTONOSUPPORT, "Protocol not supported."},
     {EPROTOTYPE, "Protocol wrong type for socket."},
     {ERANGE, "Result too large."},
-    {EREMCHG, "Remote address changed."},
     {EREMOTE, "Object is remote."},
-    {EREMOTEIO, "Remote I/O error."},
-    {ERESTART, "Interrupted system call should be restarted."},
-    {ERFKILL, "Operation not possible due to RF-kill."},
     {EROFS, "Read-only filesystem."},
     {ESHUTDOWN, "Cannot send after transport endpoint shutdown."},
     {ESPIPE, "Invalid seek."},
     {ESOCKTNOSUPPORT, "Socket type not supported."},
     {ESRCH, "No such process."},
     {ESTALE, "Stale file handle."},
-    {ESTRPIPE, "Streams pipe error."},
     {ETIME, "Timer expired."},
     {ETIMEDOUT, "Connection timed out."},
     {ETOOMANYREFS, "Too many references: cannot splice."},
     {ETXTBSY, "Text file busy."},
-    {EUCLEAN, "Structure needs cleaning."},
-    {EUNATCH, "Protocol driver not attached."},
     {EUSERS, "Too many users."},
     {EWOULDBLOCK, "Operation would block."},
     {EXDEV, "Improper link."},
-    {EXFULL, "Exchange full."}
+    #if defined(OS_IS_LINUX)
+        {ENOANO, "No anode."},
+        {ENOKEY, "Required key not available."},
+        {ENOMEDIUM, "No medium found."},
+        {ENONET, "Machine is not on the network."},
+        {ENOPKG, "Package not installed."},
+        {ENOTUNIQ, "Name not unique on network."},
+        {EREMCHG, "Remote address changed."},
+        {EREMOTEIO, "Remote I/O error."},
+        {ERESTART, "Interrupted system call should be restarted."},
+        {ERFKILL, "Operation not possible due to RF-kill."},
+        {ESTRPIPE, "Streams pipe error."},
+        {EUCLEAN, "Structure needs cleaning."},
+        {EUNATCH, "Protocol driver not attached."},
+        {EXFULL, "Exchange full."},
+        {EHWPOISON, "Memory page has hardware error."},
+        {EBADE, "Invalid exchange."},
+        {EBADFD, "File descriptor in bad state."},
+        {EBADR, "Invalid request descriptor."},
+        {EBADRQC, "Invalid request code."},
+        {EBADSLT, "Invalid slot."},
+        {ECHRNG, "Channel number out of range."},
+        {ECOMM, "Communication error on send."},
+        {EDEADLOCK, NULL},
+        {EISNAM, "Is a named type file."},
+        {EKEYEXPIRED, "Key has expired."},
+        {EKEYREJECTED, "Key was rejected by service."},
+        {EKEYREVOKED, "Key has been revoked."},
+        {EL2HLT, "Level 2 halted."},
+        {EL2NSYNC, "Level 2 not synchronized."},
+        {EL3HLT, "Level 3 halted."},
+        {EL3RST, "Level 3 reset."},
+        {ELIBACC, "Cannot access a needed shared library."},
+        {ELIBBAD, "Accessing a corrupted shared library."},
+        {ELIBMAX, "Attempting to link in too many shared libraries."},
+        {ELIBSCN, ".lib section in a.out corrupted."},
+        {ELIBEXEC, "Cannot exec a shared library directly."},
+        {EMEDIUMTYPE, "Wrong medium type."},
+    #endif
+    {-1, "Unknown error."}
 };
 
 #endif /* !ERRORS_DEFS_H_ */

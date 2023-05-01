@@ -13,6 +13,8 @@ _SRC =			builtins/cd.c \
 				builtins/setenv.c \
 				\
 				errors/get.c \
+				errors/strerror.c \
+				errors/strsignal.c \
 				\
 				types/node/new.c \
 				types/node/free.c \
@@ -71,6 +73,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/setenv.c \
 				\
 				criterion/errors/get.c \
+				criterion/errors/strerror.c \
+				criterion/errors/strsignal.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

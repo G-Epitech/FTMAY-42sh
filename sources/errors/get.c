@@ -8,14 +8,16 @@
 #include <stdio.h>
 #include "errors/defs.h"
 
-char *errors_get_message_of_code(code_msg_t *messages, size_t messages_size,
-int code)
+char *errors_get_message_of_code(code_msg_t *messages, int code)
 {
+    size_t i = 0;
+
     if (!messages)
         return NULL;
-    for (size_t i = 0; i < messages_size; i++) {
+    while (messages[i].code != -1) {
         if (messages[i].code == code)
             return messages[i].msg;
+        i += 1;
     }
-    return NULL;
+    return messages[i].msg;
 }
