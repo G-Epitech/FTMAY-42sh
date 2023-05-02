@@ -16,13 +16,17 @@ static bool separator_or_pipe(parsing_utils_t *utils, inst_t *instruction,
 inst_block_t *block)
 {
     char *data = utils->input;
+    bool test_return = false;
 
     if (parsing_maybe_separator(utils)) {
-        return parsing_separator_handler(utils, instruction);
-    } else if (data[INDEX_PARSING(utils)] == '|')
+        test_return = parsing_separator_handler(utils, instruction);
+        INDEX_PARSING(utils)+= 2;
+        return test_return;
+    } else if (data[INDEX_PARSING(utils)] == '|') {
         return parsing_pipes_handler(utils, block);
-    else
+    } else {
         return true;
+    }
 
 }
 

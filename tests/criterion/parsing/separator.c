@@ -5,6 +5,7 @@
 ** separator
 */
 
+#include <stdio.h>
 #include <string.h>
 #include <criterion/criterion.h>
 #include "types/inst/inst.h"
@@ -91,3 +92,68 @@ Test(parsing_separator, bad_return_and_separator)
     cr_assert_eq(test, false);
 }
 
+Test(parsing_separator, forgot_cmd_after_separator_and)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls && ");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+    bool test = false;
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 3;
+    parsing_separator_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    test = parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test, false);
+}
+
+Test(parsing_separator, forgot_cmd_after_separator_ou)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls || ");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+    bool test = false;
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 3;
+    parsing_separator_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    test = parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test, false);
+}
+
+Test(parsing_separator, semicolon_after_cmd)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls;");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 2;
+    parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test_inst->separator, SP_BREAK);
+}
+
+Test(parsing_separator, end_of_input)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 2;
+    parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test_inst->separator, SP_BREAK);
+}
+
+Test(parsing_separator, test_with_analyse_data)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls && ls");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 3;
+    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test_inst->separator, SP_AND);
+}

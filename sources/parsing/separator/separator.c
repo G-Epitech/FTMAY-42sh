@@ -14,7 +14,7 @@ static void set_separator(inst_t *instruction, int separator)
 {
     if (separator == 0)
         instruction->separator = SP_OR;
-    else if (separator == 1)
+    if (separator == 1)
         instruction->separator = SP_AND;
 }
 
