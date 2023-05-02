@@ -42,6 +42,8 @@ _SRC =			types/node/new.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
 				parsing/main.c \
+				parsing/recursivity.c \
+				parsing/analyse_data.c \
 				parsing/utils.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
@@ -57,6 +59,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
 				criterion/parsing/redirection.c \
+				criterion/parsing/separator.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

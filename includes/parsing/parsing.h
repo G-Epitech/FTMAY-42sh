@@ -15,6 +15,12 @@
     #define DOUBLE_LEFT_REDIRECTION 0
     #define DOUBLE_RIGHT_REDIRECTION 2
     #define SIMPLE_RIGHT_REDIRECTION 3
+    #define PARSING_ERROR_RECURSIVITY 0
+    #define PARSING_NO_ERROR_RECURSIVITY 1
+    #define PARSING_NO_OPEN_BLOCK 2
+    #define PARSING_NO_SPACE_SEMICOLON 0
+    #define PARSING_NO_ERROR_SEPARATOR 1
+    #define PARSING_ERROR_SEPARATOR 2
 
 /**
  * @brief Parse the entire user command.
@@ -78,5 +84,28 @@ bool parsing_pipes_handler(parsing_utils_t *utils, inst_block_t *block);
  * @param instruction Instruction struct
  */
 bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction);
+
+/**
+ * @brief Parse break separator in the user command.
+ * @param instruction Instruction struct
+ */
+bool parsing_break_separator(inst_t *instruction);
+
+/**
+ * @brief Analyse input of user.
+ * @param utils Utils struct
+ * @param block Instruction block
+ * @param instruction Instruction struct
+ */
+bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
+                    inst_t *instruction);
+
+/**
+ * @brief Recursivity of parsing
+ * @param utils Utils struct
+ * @param block Instruction block
+ * @param instruction Instruction struct
+ */
+inst_t *recursivity(parsing_utils_t *utils);
 
 #endif /* !PARSING_H_ */

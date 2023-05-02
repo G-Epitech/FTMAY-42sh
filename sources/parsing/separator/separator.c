@@ -10,7 +10,7 @@
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-void set_separator(inst_t *instruction, int separator)
+static void set_separator(inst_t *instruction, int separator)
 {
     if (separator == 0)
         instruction->separator = SP_OR;
@@ -18,7 +18,7 @@ void set_separator(inst_t *instruction, int separator)
         instruction->separator = SP_AND;
 }
 
-bool check_error(inst_t *instruction)
+static bool check_error(inst_t *instruction)
 {
     if (instruction->separator == SP_OR)
         return false;
@@ -45,5 +45,16 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
         return false;
     }
     set_separator(instruction, index);
+    return true;
+}
+
+bool parsing_break_separator(inst_t *instruction)
+{
+
+    if (!check_error(instruction)) {
+        write(1, "Invalid null command.\n", 23);
+        return false;
+    }
+    instruction->separator = SP_BREAK;
     return true;
 }
