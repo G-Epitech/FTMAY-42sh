@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "parsing/utils.h"
 
-static void printf_n_space(int index)
+static void printf_space(int index)
 {
     for (int i = 0; i < index; i++) {
         printf("   ");
@@ -17,36 +17,30 @@ static void printf_n_space(int index)
 
 static void display_cmd(cmd_t *cmd, int index)
 {
-    if (!cmd)
-        return;
-    printf_n_space(index);
+    printf_space(index);
     printf("===== COMMAND =====\n");
     if (cmd->input) {
-        printf_n_space(index);
+        printf_space(index);
         printf("Input: %s\n", cmd->input);
     }
-    if (cmd->name) {
-        printf_n_space(index);
-        printf("Name: %s\n", cmd->name);
-    }
-    printf_n_space(index);
+    printf_space(index);
     printf("Type: %d\n", cmd->type);
 }
 
 static void display_redirection(inst_t *instruction, int index)
 {
-    printf_n_space(index);
+    printf_space(index);
     printf("=== REDIRECTIONS ===\n");
-    printf_n_space(index);
+    printf_space(index);
     printf("Input Type: %d\n", instruction->ios.input.type);
     if (instruction->ios.input.path) {
-        printf_n_space(index);
+        printf_space(index);
         printf("Input Path: %s\n", instruction->ios.input.path);
     }
-    printf_n_space(index);
+    printf_space(index);
     printf("Output Type: %d\n", instruction->ios.output.type);
     if (instruction->ios.output.path) {
-        printf_n_space(index);
+        printf_space(index);
         printf("Output Path: %s\n", instruction->ios.output.path);
     }
     printf("\n");
@@ -64,7 +58,7 @@ static void display_block(inst_block_t *block, int index)
             display_redirection(data, index);
         }
         if (data->type == INS_BLOCK) {
-            printf_n_space(index);
+            printf_space(index);
             printf("===== BLOCK =====\n");
             display_block(data->value.block, index + 1);
             display_redirection(data, index);

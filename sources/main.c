@@ -17,7 +17,7 @@ int main(void)
 {
     inst_t *instruction = NULL;
 
-    instruction = parsing_get_main_block("((ls | grep l) | grep M) | cat -e");
+    instruction = parsing_get_main_block("(ls | grep l); cat -e <Makefile");
     if (instruction == NULL)
         return 84;
     parsing_display(instruction);

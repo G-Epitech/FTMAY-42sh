@@ -62,6 +62,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/redirection.c \
 				criterion/parsing/separator.c \
 				criterion/parsing/utils.c \
+				criterion/parsing/get_cmd.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -167,7 +168,7 @@ tests_custom:	$(NAME)
 tests_run: 		tests_criterion
 
 coverage:
-				@gcovr
+				@gcovr --gcov-ignore-parse-errors
 
 coverage_branch:
 				@gcovr --branch
