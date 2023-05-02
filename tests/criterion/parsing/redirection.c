@@ -196,7 +196,7 @@ Test(parsing_redirection, test_ambigous_simple_left)
 
 Test(parsing_redirection, test_ambigous_double_right)
 {
-    parsing_utils_t *test = parsing_utils_new("ls >> test>>test");
+    parsing_utils_t *test = parsing_utils_new("ls > test>>test");
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
     bool test_return = false;
@@ -211,7 +211,7 @@ Test(parsing_redirection, test_ambigous_double_right)
 
 Test(parsing_redirection, test_ambigous_double_left)
 {
-    parsing_utils_t *test = parsing_utils_new("ls << test<<test");
+    parsing_utils_t *test = parsing_utils_new("ls < test<<test");
     inst_block_t *test_inst_block = inst_block_new();
     inst_t *test_inst = inst_new();
     bool test_return = false;
