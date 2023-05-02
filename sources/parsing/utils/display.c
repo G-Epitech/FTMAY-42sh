@@ -2,42 +2,57 @@
 ** EPITECH PROJECT, 2023
 ** 42sh
 ** File description:
-** utils
+** display
 */
 
 #include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
 #include "parsing/utils.h"
-#include "parsing/parsing.h"
-#include "types/node/defs.h"
 
-static void display_cmd(cmd_t *cmd)
+static void printf_n_space(int index)
+{
+    for (int i = 0; i < index; i++) {
+        printf("   ");
+    }
+}
+
+static void display_cmd(cmd_t *cmd, int index)
 {
     if (!cmd)
         return;
+    printf_n_space(index);
     printf("===== COMMAND =====\n");
-    if (cmd->input)
+    if (cmd->input) {
+        printf_n_space(index);
         printf("Input: %s\n", cmd->input);
-    if (cmd->name)
+    }
+    if (cmd->name) {
+        printf_n_space(index);
         printf("Name: %s\n", cmd->name);
+    }
+    printf_n_space(index);
     printf("Type: %d\n", cmd->type);
 }
 
-static void display_redirection(inst_t *instruction)
+static void display_redirection(inst_t *instruction, int index)
 {
+    printf_n_space(index);
     printf("=== REDIRECTIONS ===\n");
+    printf_n_space(index);
     printf("Input Type: %d\n", instruction->ios.input.type);
     if (instruction->ios.input.path) {
+        printf_n_space(index);
         printf("Input Path: %s\n", instruction->ios.input.path);
     }
+    printf_n_space(index);
     printf("Output Type: %d\n", instruction->ios.output.type);
     if (instruction->ios.output.path) {
+        printf_n_space(index);
         printf("Output Path: %s\n", instruction->ios.output.path);
     }
+    printf("\n");
 }
 
-static void display_block(inst_block_t *block)
+static void display_block(inst_block_t *block, int index)
 {
     node_t *tmp = block->instructions->first;
     inst_t *data = NULL;
@@ -45,11 +60,14 @@ static void display_block(inst_block_t *block)
     while (tmp) {
         data = NODE_DATA_TO_PTR(tmp->data, inst_t *);
         if (data->type == INS_CMD) {
-            display_cmd(data->value.cmd);
+            display_cmd(data->value.cmd, index);
+            display_redirection(data, index);
         }
-        display_redirection(data);
         if (data->type == INS_BLOCK) {
-            parsing_display(data);
+            printf_n_space(index);
+            printf("===== BLOCK =====\n");
+            display_block(data->value.block, index + 1);
+            display_redirection(data, index);
         }
         tmp = tmp->next;
     }
@@ -59,22 +77,6 @@ void parsing_display(inst_t *instruction)
 {
     if (!instruction)
         return;
-    if (instruction->type == INS_BLOCK) {
-        printf("======== BLOCK ========\n");
-        if (instruction->ios.input.path)
-            printf("Redirection: %s\n", instruction->ios.input.path);
-        display_block(instruction->value.block);
-    }
-}
-
-bool parsing_maybe_redirection(parsing_utils_t *utils)
-{
-    char *redirection[4] = {"<", "<<", ">>", ">"};
-    char *data = utils->input + utils->index_parsing;
-
-    for (int i = 0; i < 4; i++) {
-        if (strncmp(redirection[i], data, strlen(redirection[i])) == 0)
-            return true;
-    }
-    return false;
+    if (instruction->type == INS_BLOCK)
+        display_block(instruction->value.block, 0);
 }

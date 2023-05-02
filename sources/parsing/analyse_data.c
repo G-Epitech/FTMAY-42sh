@@ -20,7 +20,7 @@ inst_block_t *block)
 
     if (parsing_maybe_separator(utils)) {
         test_return = parsing_separator_handler(utils, instruction);
-        INDEX_PARSING(utils)+= 2;
+        INDEX_PARSING(utils) += 2;
         return test_return;
     } else if (data[INDEX_PARSING(utils)] == '|') {
         return parsing_pipes_handler(utils, block);
