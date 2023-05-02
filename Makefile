@@ -48,6 +48,7 @@ _SRC =			builtins/cd.c \
         		types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
+				types/shell/vars/special/dispatch_env_update.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \

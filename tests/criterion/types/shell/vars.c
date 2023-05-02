@@ -218,3 +218,22 @@ Test(types_shell_vars, shell_special_var_set_home)
     cr_assert_str_eq(shell_get_var(shell, "home", false), "/");
     cr_assert_str_eq(getenv("HOME"), "/");
 }
+
+Test(types_shell_vars, shell_special_var_update_from_env)
+{
+    shell_t *shell = shell_new();
+
+    shell_special_vars_dispatch_env_update(shell, "HOME");
+}
+
+Test(types_shell_vars, shell_special_var_update_from_env_null_var_name)
+{
+    shell_t *shell = shell_new();
+
+    shell_special_vars_dispatch_env_update(shell, NULL);
+}
+
+Test(types_shell_vars, shell_special_var_update_from_env_null_shell)
+{
+    shell_special_vars_dispatch_env_update(NULL, "HOME");
+}
