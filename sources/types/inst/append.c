@@ -11,8 +11,13 @@
 
 void inst_append(inst_block_t *inst_block, inst_t *instruction)
 {
-    node_t *node = node_new(NODE_DATA_FROM_PTR(instruction));
+    node_t *node = NULL;
 
-    if (inst_block && inst_block->instructions && node)
+    if (!inst_block || !instruction)
+        return;
+    if (!inst_block->instructions)
+        return;
+    node = node_new(NODE_DATA_FROM_PTR(instruction));
+    if (node)
         list_append(inst_block->instructions, node);
 }

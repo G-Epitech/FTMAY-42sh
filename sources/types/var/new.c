@@ -7,11 +7,12 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "utils/malloc2.h"
 #include "types/var/var.h"
 
 var_t *var_new(char *name, char *value)
 {
-    var_t *new = malloc(sizeof(var_t));
+    var_t *new = (name && value) ? malloc2(sizeof(var_t)) : NULL;
 
     if (!new)
         return NULL;

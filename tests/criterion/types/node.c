@@ -6,6 +6,7 @@
 */
 
 #include <criterion/criterion.h>
+#include "utils/malloc2.h"
 #include "types/list/list.h"
 #include "types/node/node.h"
 
@@ -19,6 +20,13 @@ Test(types_node, new_node)
     node_t *node = node_new(NODE_DATA_FROM_PTR(NULL));
 
     cr_assert(node != NULL);
+}
+
+Test(types_node, new_node_with_malloc_fail)
+{
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    cr_assert_null(node_new(NODE_DATA_FROM_PTR(NULL)));
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }
 
 Test(types_node, free_node_without_freer)

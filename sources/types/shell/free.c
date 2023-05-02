@@ -6,16 +6,15 @@
 */
 
 #include <stdlib.h>
-#include "types/shell/defs.h"
+#include "types/var/var.h"
 #include "types/list/list.h"
+#include "types/shell/defs.h"
 
 void shell_free(shell_t *shell)
 {
     if (!shell)
         return;
-    list_free(shell->env, NULL);
-    list_free(shell->vars, NULL);
-    free(shell->home);
+    list_free(shell->vars, &var_node_freer);
     free(shell->owd);
     free(shell->pwd);
     free(shell);

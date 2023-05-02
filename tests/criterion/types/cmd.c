@@ -7,6 +7,7 @@
 
 #include <string.h>
 #include <criterion/criterion.h>
+#include "utils/malloc2.h"
 #include "types/cmd/cmd.h"
 
 Test(types_cmd, new_cmd)
@@ -15,6 +16,13 @@ Test(types_cmd, new_cmd)
 
     cr_assert(command != NULL);
     cmd_free(command);
+}
+
+Test(types_cmd, new_cmd_with_malloc_fail)
+{   
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    cr_assert_null(cmd_new());
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }
 
 Test(types_cmd, new_field_cmd)
