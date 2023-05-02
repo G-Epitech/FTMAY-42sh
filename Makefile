@@ -60,7 +60,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/block.c \
 				criterion/parsing/redirection.c \
 				criterion/parsing/separator.c \
-				criterion/parsing/pipe.c
+				criterion/parsing/pipe.c \
+				criterion/parsing/get_word.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
