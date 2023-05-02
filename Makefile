@@ -49,7 +49,7 @@ _SRC =			builtins/cd.c \
         		types/shell/vars.c \
 				\
 				utils/is_number.c \
-				utils/malloc2.c \ \
+				utils/malloc2.c \
 				\
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
