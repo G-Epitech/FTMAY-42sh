@@ -14,9 +14,9 @@ static bool handle_error(parsing_utils_t *utils, int start, int end)
 {
     int len = strlen(utils->input);
 
-    if (len < start || len < end - 1)
-        return false;
     if (start < 0 || end < 0)
+        return false;
+    if (len < start || len < end - 1)
         return false;
     return true;
 }
