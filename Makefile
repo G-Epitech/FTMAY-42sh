@@ -85,6 +85,7 @@ _TESTS =		criterion/types/list.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
