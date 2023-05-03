@@ -51,6 +51,8 @@ _SRC =			builtins/cd.c \
 				utils/is_number.c \
 				utils/malloc2.c \
 				\
+				parsing/set_command_args.c \
+				parsing/get_len.c \
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
 				parsing/redirection/set_type.c \

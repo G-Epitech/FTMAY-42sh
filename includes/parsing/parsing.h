@@ -8,7 +8,10 @@
 #ifndef PARSING_H_
     #define PARSING_H_
 
+    #include "defs.h"
+    #include "types/cmd/defs.h"
     #include "types/inst/defs.h"
+    #include "types/shell/defs.h"
     #include "types/parsing_utils/defs.h"
 
     #define PARSING_SIMPLE_LEFT 1
@@ -21,6 +24,30 @@
     #define PARSING_NO_SPACE_SEMICOLON 0
     #define PARSING_NO_ERROR_SEPARATOR 1
     #define PARSING_ERROR_SEPARATOR 2
+
+/**
+ * @brief Parse command input into string array.
+ * @param command Command object
+ * @param shell Shell main object
+ * @return true if all went well, false else
+ */
+bool parsing_set_command_args(cmd_t *command, shell_t *shell);
+
+/**
+ * @brief Get len of simple input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the simple input part
+ */
+int parsing_get_len_input(char *input, int start);
+
+/**
+ * @brief Get len of string input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the string input part
+ */
+int parsing_get_len_input_string(char *input, int start);
 
 /**
  * @brief Parse the entire user command.
