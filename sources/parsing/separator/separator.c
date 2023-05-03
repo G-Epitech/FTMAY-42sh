@@ -34,9 +34,9 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
     int index = 0;
 
     for (int i = 0; i < 2; i++) {
-        if (strncmp(separator[i], data, strlen(separator[i])) == 0) {
+        if (strncmp(separators[i], data, strlen(separators[i])) == 0) {
             index = i;
-            utils->index_parsing += strlen(separator[i]);
+            utils->index_parsing += strlen(separators[i]);
             break;
         }
     }
