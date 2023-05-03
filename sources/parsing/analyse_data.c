@@ -20,7 +20,6 @@ inst_block_t *block)
 
     if (parsing_maybe_separator(utils)) {
         test_return = parsing_separator_handler(utils, instruction);
-        PARSING_INDEX(utils) += 2;
         return test_return;
     } else if (data[PARSING_INDEX(utils)] == '|') {
         return parsing_pipes_handler(utils, block);
@@ -58,7 +57,6 @@ inst_t *child)
 static int handle_space_semicolon(parsing_utils_t *utils, inst_t *instruction)
 {
     char *data = utils->input;
-
     if (data[PARSING_INDEX(utils)] == ' ') {
         PARSING_INDEX(utils)++;
         return PARSING_NO_ERROR_SEPARATOR;

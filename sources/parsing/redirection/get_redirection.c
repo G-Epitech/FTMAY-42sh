@@ -26,7 +26,7 @@ static bool check_ambiguous(inst_t *instruction, int index)
 static bool check_name(inst_t *instruction, int index)
 {
     if ((index <= 1 && instruction->ios.input.path[0] == '\0') ||
-        (index >= 2 && instruction->ios.output.path[0])) {
+        (index >= 2 && instruction->ios.output.path[0] == '\0')) {
         write(1, "Missing name for redirect.\n", 27);
         return false;
     }

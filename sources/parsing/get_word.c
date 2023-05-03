@@ -28,7 +28,7 @@ char *parsing_get_word(parsing_utils_t *utils, int start, int end)
 
     if (!word || !handle_error(utils, start, end))
         return NULL;
-    memset(word, 'c', end - start + 1);
+    memset(word, '\0', end - start + 1);
     while (start < end) {
         word[index] = utils->input[start];
         index++;

@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include "utils/malloc2.h"
 #include "types/parsing_utils/parsing_utils.h"
 
 parsing_utils_t *parsing_utils_new(char *input_user)
@@ -15,7 +16,7 @@ parsing_utils_t *parsing_utils_new(char *input_user)
 
     if (!input_user)
         return NULL;
-    utils = malloc(sizeof(parsing_utils_t));
+    utils = malloc2(sizeof(parsing_utils_t));
     if (!utils)
         return NULL;
     utils->index_parsing = 0;

@@ -102,7 +102,7 @@ Test(parsing_separator, forgot_cmd_after_separator_and)
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 3;
     parsing_separator_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
-    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    parsing_analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test = parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test, false);
 }
@@ -117,7 +117,7 @@ Test(parsing_separator, forgot_cmd_after_separator_ou)
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 3;
     parsing_separator_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
-    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    parsing_analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test = parsing_break_separator(NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test, false);
 }
@@ -146,7 +146,7 @@ Test(parsing_separator, end_of_input)
     cr_assert_eq(test_inst->separator, SP_BREAK);
 }
 
-Test(parsing_separator, test_with_analyse_data)
+Test(parsing_separator, test_with_parsing_analyse_data)
 {
     parsing_utils_t *utils = parsing_utils_new("ls && ls");
     inst_block_t *test_inst_block = inst_block_new();
@@ -154,6 +154,34 @@ Test(parsing_separator, test_with_analyse_data)
 
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 3;
-    analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    parsing_analyse_data(utils, test_inst_block, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_inst->separator, SP_AND);
+}
+
+Test(parsing_separator, test_with_parsing_analyse_data_end_semicolon)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls &&;");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+    bool test_return = false;
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 3;
+    test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
+    cr_assert_eq(test_return, false);
+}
+
+Test(parsing_separator, test_with_parsing_analyse_data_invalid_null_cmd)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls && &&");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+    bool test_return = false;
+
+    inst_append(test_inst_block, test_inst);
+    utils->index_parsing = 3;
+    test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
+    cr_assert_eq(test_return, true);
+    test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
+    cr_assert_eq(test_return, false);
 }

@@ -50,7 +50,8 @@ void parsing_redirection_set_type(int index, inst_t *instruction);
  * @param instruction Instruction struct
  * @param index Index of redirection
  */
-void parsing_redirection_set_path(parsing_utils_t *utils, inst_t *instruction, int index);
+void parsing_redirection_set_path(parsing_utils_t *utils,
+inst_t *instruction, int index);
 
 /**
  * @brief Get the word between to positions.

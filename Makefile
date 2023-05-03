@@ -197,7 +197,7 @@ tests_custom:	$(NAME)
 tests_run: 		tests_criterion
 
 coverage:
-				@gcovr --gcov-ignore-parse-errors
+				@gcovr
 
 coverage_branch:
 				@gcovr --branch
