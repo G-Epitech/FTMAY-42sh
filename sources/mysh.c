@@ -6,10 +6,20 @@
 */
 
 #include <stdio.h>
+#include "types/shell/shell.h"
 
-unsigned char mysh()
+unsigned char mysh(void)
 {
-    unsigned char exit = '\0';
+    unsigned char exit_code = '\0';
+    shell_t *shell = shell_new();
+    char *input = NULL;
 
-    return exit;
+    while (shell->status == SH_RUNNING) {
+        input = shell_get_input();
+        shell_free_input(input);
+        shell->status = SH_EXITED;
+    }
+    exit_code = shell->exit_code;
+    shell_free(shell);
+    return exit_code;
 }
