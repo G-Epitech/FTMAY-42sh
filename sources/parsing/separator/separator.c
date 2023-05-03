@@ -50,7 +50,6 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
 
 bool parsing_break_separator(inst_t *instruction)
 {
-
     if (!check_error(instruction)) {
         write(1, "Invalid null command.\n", 23);
         return false;
