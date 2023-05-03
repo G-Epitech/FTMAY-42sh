@@ -15,6 +15,7 @@
 
 // Represent type of instruction
 typedef enum e_isnt_type {
+    INS_NONE,      // Instruction is none
     INS_CMD,       // Instruction is a command
     INS_BLOCK      // Instruction is a block
 } inst_type_t;
