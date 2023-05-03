@@ -138,4 +138,30 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
  */
 inst_t *parsing_recursivity(parsing_utils_t *utils);
 
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param shell Shell struct
+ * @return Input with var remplaced
+ */
+char *parsing_var_replace(char *input, shell_t *shell);
+
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param shell Shell struct
+ * @param parsing_index Index parsing of 
+ * @return Value of var
+ */
+char *get_var(char *input, shell_t *shell, int *parsing_index);
+
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param start Start of nor var input
+ * @param end End of nor var input
+ * @return Input who is not var
+ */
+char *get_no_var(char *input, int start, int end);
+
 #endif /* !PARSING_H_ */

@@ -73,6 +73,9 @@ _SRC =			builtins/cd.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/var/replace.c \
+				parsing/var/ger_no_var.c \
+				parsing/var/get_var.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
