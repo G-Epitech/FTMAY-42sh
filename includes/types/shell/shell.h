@@ -54,7 +54,7 @@ char *shell_get_var(shell_t *shell, char *name, bool copy);
 void shell_special_vars_init(shell_t *shell);
 
 /**
- * @brief Update all specials vars depending on environnement
+ * @brief Update all specials vars depending on environnement.
  * variables.
  * @param shell Shell object
  * @param name Name of environnement variable
