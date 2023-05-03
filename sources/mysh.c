@@ -23,4 +23,3 @@ unsigned char mysh(void)
     shell_free(shell);
     return exit_code;
 }
-
