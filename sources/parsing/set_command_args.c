@@ -30,7 +30,7 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
     (*start) = *i;
 }
 
-static bool fill_args(char **argv, char *input)
+static void fill_args(char **argv, char *input)
 {
     size_t index_argv = 0;
     size_t len = 0;
@@ -51,7 +51,6 @@ static bool fill_args(char **argv, char *input)
         argv[index_argv][i - start] = input[i];
     }
     argv[index_argv][len] = '\0';
-    return true;
 }
 
 static int get_input_parse_len(char *input)
@@ -87,8 +86,7 @@ bool parsing_set_command_args(cmd_t *command, shell_t *shell)
     args->argv = malloc2(sizeof(char *) * args->argc);
     if (!args->argv)
         return false;
-    if (!fill_args(args->argv, command->input))
-        return false;
+    fill_args(args->argv, command->input);
     command->name = strdup(args->argv[0]);
     return true;
 }
