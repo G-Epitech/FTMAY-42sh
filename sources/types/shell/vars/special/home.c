@@ -10,13 +10,13 @@
 #include <limits.h>
 #include "types/var/var.h"
 #include "utils/malloc2.h"
+#include "utils/asprintf2.h"
 #include "types/shell/shell.h"
 
 static bool set_home_from_cwd(char *value, shell_t *shell)
 {
     char *cwd = malloc2(PATH_MAX);
     char *new_value = NULL;
-    size_t len = 0;
     bool status = false;
 
     if (!cwd)
@@ -25,10 +25,7 @@ static bool set_home_from_cwd(char *value, shell_t *shell)
     shell_set_var(shell, "cwd", cwd);
     free(cwd);
     cwd = shell_get_var(shell, "cwd", false);
-    new_value = malloc2(strlen(cwd) + strlen(value) + 2);
-    if (new_value)
-        return false;
-    status = sprintf(&new_value, "%s/%s", cwd, value) >= 0;
+    status = asprintf2(&new_value, "%s/%s", cwd, value) >= 0;
     if (status)
         status = var_list_set(shell->vars, "home", new_value);
     free(new_value);
