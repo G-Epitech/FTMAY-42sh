@@ -21,7 +21,7 @@
 bool parsing_set_command_args(cmd_t *command, shell_t *shell);
 
 /**
- * @brief Get len of simple input part
+ * @brief Get len of simple input part.
  * @param input Input string
  * @param start Start index
  * @return The len of the simple input part
@@ -29,7 +29,7 @@ bool parsing_set_command_args(cmd_t *command, shell_t *shell);
 int parsing_get_len_input(char *input, int start);
 
 /**
- * @brief Get len of string input part
+ * @brief Get len of string input part.
  * @param input Input string
  * @param start Start index
  * @return The len of the string input part

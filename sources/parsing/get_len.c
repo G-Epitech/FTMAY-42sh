@@ -26,8 +26,9 @@ int parsing_get_len_input(char *input, int start)
 
     while (input[i + start] != '\0') {
         if (input[i + start] == PARSING_SPACE ||
-        input[i + start] == PARSING_TAB)
+        input[i + start] == PARSING_TAB) {
             return i;
+        }
         i++;
     }
     return i;
