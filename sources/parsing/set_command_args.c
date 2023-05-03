@@ -7,12 +7,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <strings.h>
 #include <stdbool.h>
-#include "parsing/parsing.h"
 #include "utils/malloc2.h"
 #include "types/cmd/defs.h"
 #include "types/var/defs.h"
+#include "parsing/parsing.h"
 #include "types/shell/shell.h"
 
 static void new_args(size_t *start, size_t *len, size_t *i, char *input)
