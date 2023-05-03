@@ -6,7 +6,9 @@
 ##
 
 
-_SRC =			builtins/cd.c \
+_SRC =			mysh.c \
+				\
+				builtins/cd.c \
 				builtins/env.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
