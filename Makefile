@@ -39,9 +39,12 @@ _SRC =			builtins/cd.c \
 				\
 				types/inst/new.c \
 				types/inst/free.c \
+				types/inst/append.c \
 				types/inst/block/free.c \
 				types/inst/block/new.c \
-				types/inst/block/append.c \
+				\
+				types/parsing_utils/free.c \
+				types/parsing_utils/new.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
@@ -53,6 +56,20 @@ _SRC =			builtins/cd.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				\
+				parsing/redirection/get_redirection.c \
+				parsing/redirection/set_path.c \
+				parsing/redirection/set_type.c \
+				parsing/get_word.c \
+				parsing/get_cmd.c \
+				parsing/main.c \
+				parsing/recursivity.c \
+				parsing/analyse_data.c \
+				parsing/utils/utils.c \
+				parsing/utils/display.c \
+				parsing/pipes.c \
+				parsing/separator/utils.c \
+				parsing/separator/separator.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -77,6 +94,13 @@ _TESTS =		criterion/types/list.c \
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \
 				criterion/errors/strsignal.c \
+				\
+				criterion/parsing/redirection.c \
+				criterion/parsing/separator.c \
+				criterion/parsing/pipe.c \
+				criterion/parsing/get_word.c \
+				criterion/parsing/utils.c \
+				criterion/parsing/get_cmd.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

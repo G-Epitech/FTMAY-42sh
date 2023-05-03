@@ -41,10 +41,10 @@ inst_block_t *inst_block_new(void);
 void inst_block_free(inst_block_t *inst_block);
 
 /**
- * @brief Append a command in a block.
+ * @brief Append an instruction in a block.
  * @param inst_block Block to append the command
  * @param instruction Command to append
  */
-void inst_block_append(inst_block_t *inst_block, inst_t *instruction);
+void inst_append(inst_block_t *inst_block, inst_t *instruction);
 
 #endif /* !INST_H_ */

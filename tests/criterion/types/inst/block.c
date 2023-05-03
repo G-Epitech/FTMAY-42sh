@@ -54,7 +54,7 @@ Test(types_block_instruction, append_instruction)
     inst_t *instruction3 = NULL;
     node_data_t data = {NULL};
 
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 1);
     data = instruction1->instructions->first->data;
     instruction3 = NODE_DATA_TO_PTR(data, inst_t *);
@@ -68,7 +68,7 @@ Test(types_block_instruction, append_instruction_with_malloc_fail)
     inst_t *instruction2 = inst_new();
 
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
     cr_assert(instruction1->instructions->len == 0);
     inst_block_free(instruction1);
@@ -80,7 +80,7 @@ Test(types_block_instruction, append_instruction_null)
     inst_block_t *instruction1 = inst_block_new();
     inst_t *instruction2 = NULL;
 
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     cr_assert(instruction1->instructions->len == 0);
     inst_block_free(instruction1);
 }
@@ -92,7 +92,7 @@ Test(types_block_instruction, append_instruction_in_null_block)
 
     instruction->value.block = block;
     instruction->type = INS_BLOCK;
-    inst_block_append(NULL, instruction);
+    inst_append(NULL, instruction);
     inst_free(instruction);
 }
 
@@ -102,6 +102,6 @@ Test(types_block_instruction, append_corrupted_instruction)
     inst_t *instruction2 = inst_new();
 
     instruction1->instructions = NULL;
-    inst_block_append(instruction1, instruction2);
+    inst_append(instruction1, instruction2);
     inst_free(instruction2);
 }

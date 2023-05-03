@@ -103,26 +103,26 @@ The architecture of have to be organized as the follwing tree.
 The group convention is to use emojis with a past tense in your commits message and in your pull requests too.
 
 ### a - Meaning of emojis
-`✨` New global feature  
+`✨` New global feature
 `🔨` Utils functions
 `💡` Display functions
 `📑` Files functions
 `📒` Types functions
-`⚡️`  Optimisation / Performance  
-`🏗️` Code architecture  
-`🍱` Assets  
-`✅` Tests  
-`🚚` Files structure / File rename  
-`📦` Library  
-`🙈` Gitignore  
-`🍌` Coding-style  
+`⚡️`  Optimisation / Performance
+`🏗️` Code architecture
+`🍱` Assets
+`✅` Tests
+`🚚` Files structure / File rename
+`📦` Library
+`🙈` Gitignore
+`🍌` Coding-style
 `💬` Documentation
-`🏷️` Header definition  
-`📝` Makefile / CMakeLists  
-`👷‍♂️` CI Github Action  
-`🐛` Simple fix  
-`💚` Automation fix  
-`🚑️` Hotfix  
+`🏷️` Header definition
+`📝` Makefile / CMakeLists
+`👷‍♂️` CI Github Action
+`🐛` Simple fix
+`💚` Automation fix
+`🚑️` Hotfix
 `🔥` Remove file / function
 
 ### b - Commit syntax

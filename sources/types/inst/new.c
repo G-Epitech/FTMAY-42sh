@@ -18,7 +18,7 @@ inst_t *inst_new(void)
         return NULL;
     instruction->value.cmd = NULL;
     instruction->value.block = NULL;
-    instruction->type = INS_BLOCK;
+    instruction->type = INS_NONE;
     instruction->separator = SP_BREAK;
     instruction->exit_code = 0;
     instruction->ios.input = empty_io;
