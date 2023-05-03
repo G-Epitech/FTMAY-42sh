@@ -5,8 +5,8 @@
 ** parsing
 */
 
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
