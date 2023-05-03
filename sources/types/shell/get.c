@@ -25,3 +25,4 @@ void shell_free_input(char *input)
     if (input)
         free(input);
 }
+
