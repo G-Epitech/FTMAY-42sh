@@ -10,9 +10,8 @@
 
 static void printf_space(int index)
 {
-    for (int i = 0; i < index; i++) {
+    for (int i = 0; i < index; i++)
         printf("   ");
-    }
 }
 
 static void display_cmd(cmd_t *cmd, int index)

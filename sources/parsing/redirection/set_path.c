@@ -7,9 +7,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "parsing/utils.h"
 #include "types/inst/inst.h"
 #include "parsing/parsing.h"
-#include "parsing/utils.h"
 #include "types/parsing_utils/parsing_utils.h"
 
 static bool maybe_redirection(parsing_utils_t *utils)

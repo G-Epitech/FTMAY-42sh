@@ -57,6 +57,7 @@ inst_t *child)
 static int handle_space_semicolon(parsing_utils_t *utils, inst_t *instruction)
 {
     char *data = utils->input;
+
     if (data[PARSING_INDEX(utils)] == ' ') {
         PARSING_INDEX(utils)++;
         return PARSING_NO_ERROR_SEPARATOR;

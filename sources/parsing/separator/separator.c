@@ -29,7 +29,7 @@ static bool check_error(inst_t *instruction)
 
 bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
 {
-    char *separator[2] = {"||", "&&"};
+    char *separators[2] = {"||", "&&"};
     char *data = utils->input + utils->index_parsing;
     int index = 0;
 

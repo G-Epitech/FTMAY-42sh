@@ -35,14 +35,14 @@ static bool check_name(inst_t *instruction, int index)
 
 bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
 {
-    char *redirection[4] = {"<<", "<", ">>", ">"};
+    char *redirections[4] = {"<<", "<", ">>", ">"};
     char *data = utils->input + utils->index_parsing;
     int index = 0;
 
     for (int i = 0; i < 4; i++) {
-        if (strncmp(redirection[i], data, strlen(redirection[i])) == 0) {
+        if (strncmp(redirections[i], data, strlen(redirections[i])) == 0) {
             index = i;
-            utils->index_parsing += strlen(redirection[i]);
+            utils->index_parsing += strlen(redirections[i]);
             break;
         }
     }
