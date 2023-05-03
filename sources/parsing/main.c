@@ -17,7 +17,9 @@ inst_t *parsing_get_main_block(char *input)
     parsing_utils_t *utils = parsing_utils_new(input);
     inst_t *main = NULL;
 
-    main = recursivity(utils);
+    if (!utils || !input)
+        return NULL;
+    main = parsing_recursivity(utils);
     parsing_utils_free(utils);
     if (main == NULL)
         return NULL;

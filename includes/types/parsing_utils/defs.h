@@ -8,8 +8,8 @@
 #ifndef UTILS_DEFS_H_
     #define UTILS_DEFS_H_
 
-    #define INDEX_PARSING(utils) utils->index_parsing
-    #define USER_INPUT(utils) utils->input
+    #define PARSING_INDEX(utils) utils->index_parsing
+    #define PARSING_INPUT(utils) utils->input
 
 // Represent the advancement of parsing
 typedef struct s_parsing_utils {

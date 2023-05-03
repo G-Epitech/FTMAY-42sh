@@ -11,10 +11,10 @@
     #include "types/inst/defs.h"
     #include "types/parsing_utils/defs.h"
 
-    #define SIMPLE_LEFT_REDIRECTION 1
-    #define DOUBLE_LEFT_REDIRECTION 0
-    #define DOUBLE_RIGHT_REDIRECTION 2
-    #define SIMPLE_RIGHT_REDIRECTION 3
+    #define PARSING_SIMPLE_LEFT 1
+    #define PARSING_DOUBLE_LEFT 0
+    #define PARSING_DOUBLE_RIGHT 2
+    #define PARSING_SIMPLE_RIGHT 3
     #define PARSING_ERROR_RECURSIVITY 0
     #define PARSING_NO_ERROR_RECURSIVITY 1
     #define PARSING_NO_OPEN_BLOCK 2
@@ -42,15 +42,15 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction);
  * @param index Index of redirection
  * @param instruction Instruction struct
  */
-void set_type(int index, inst_t *instruction);
+void parsing_redirection_set_type(int index, inst_t *instruction);
 
 /**
- * @brief Set path of redirection
+ * @brief Set path of redirection.
  * @param utils Utils struct
  * @param instruction Instruction struct
  * @param index Index of redirection
  */
-void set_path(parsing_utils_t *utils, inst_t *instruction, int index);
+void parsing_redirection_set_path(parsing_utils_t *utils, inst_t *instruction, int index);
 
 /**
  * @brief Get the word between to positions.
@@ -96,16 +96,18 @@ bool parsing_break_separator(inst_t *instruction);
  * @param utils Utils struct
  * @param block Instruction block
  * @param instruction Instruction struct
+ * @return False if there is a problem when parsing, otherwise True
  */
-bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
+bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
                     inst_t *instruction);
 
 /**
- * @brief Recursivity of parsing
+ * @brief Recursivity of parsing.
  * @param utils Utils struct
  * @param block Instruction block
  * @param instruction Instruction struct
+ * @return New instruction type block with all block/commands in it
  */
-inst_t *recursivity(parsing_utils_t *utils);
+inst_t *parsing_recursivity(parsing_utils_t *utils);
 
 #endif /* !PARSING_H_ */

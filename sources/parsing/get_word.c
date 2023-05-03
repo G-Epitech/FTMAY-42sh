@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
+#include <stdbool.h>
 #include "types/parsing_utils/defs.h"
 
 static bool handle_error(parsing_utils_t *utils, int start, int end)
@@ -21,13 +21,6 @@ static bool handle_error(parsing_utils_t *utils, int start, int end)
     return true;
 }
 
-static void init_char(char *word, int size)
-{
-    for (int i = 0; i < size; i++) {
-        word[i] = '\0';
-    }
-}
-
 char *parsing_get_word(parsing_utils_t *utils, int start, int end)
 {
     char *word = malloc(sizeof(char) * end - start + 1);
@@ -35,7 +28,7 @@ char *parsing_get_word(parsing_utils_t *utils, int start, int end)
 
     if (!word || !handle_error(utils, start, end))
         return NULL;
-    init_char(word, end - start + 1);
+    memset(word, 'c', end - start + 1);
     while (start < end) {
         word[index] = utils->input[start];
         index++;

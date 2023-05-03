@@ -25,14 +25,7 @@ bool parsing_maybe_redirection(parsing_utils_t *utils);
 bool parsing_maybe_separator(parsing_utils_t *utils);
 
 /**
- * @brief Recursive fonction in parsing.
- * @param utils Parsing utils structure
- * @return new block with block or command in it
- */
-inst_t *recursivity(parsing_utils_t *utils);
-
-/**
- * @brief Display Block in order to know what we got
+ * @brief Display Block in order to know what we got.
  * @param instruction Instruction to display
  */
 void parsing_display(inst_t *instruction);

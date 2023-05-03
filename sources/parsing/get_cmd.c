@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "types/cmd/cmd.h"
+#include "parsing/utils.h"
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
-#include "parsing/utils.h"
 
 static bool maybe_cmd(parsing_utils_t *utils, inst_t *instruction)
 {
@@ -45,8 +45,10 @@ inst_t *parsing_get_cmd(parsing_utils_t *utils)
     cmd_t *command = cmd_new();
     char *data = NULL;
 
+    if (!utils)
+        return NULL;
     while (maybe_cmd(utils, instruction)) {
-        INDEX_PARSING(utils)++;
+        PARSING_INDEX(utils)++;
     }
     data = manage_cmd(utils, index);
     if (!data || !instruction || !command)

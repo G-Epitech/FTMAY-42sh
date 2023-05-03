@@ -12,13 +12,13 @@
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-static bool check_ambigious(inst_t *instruction, int index)
+static bool check_ambiguous(inst_t *instruction, int index)
 {
     if (instruction->ios.input.type != IOT_DEFAULT &&
-    (index == SIMPLE_LEFT_REDIRECTION || index == DOUBLE_LEFT_REDIRECTION))
+    (index == PARSING_SIMPLE_LEFT || index == PARSING_DOUBLE_LEFT))
         return false;
     if (instruction->ios.output.type != IOT_DEFAULT &&
-    (index == SIMPLE_RIGHT_REDIRECTION || index == DOUBLE_RIGHT_REDIRECTION))
+    (index == PARSING_SIMPLE_RIGHT || index == PARSING_DOUBLE_RIGHT))
         return false;
     return true;
 }
@@ -46,11 +46,11 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
             break;
         }
     }
-    if (!check_ambigious(instruction, index)) {
+    if (!check_ambiguous(instruction, index)) {
         write(1, "Ambiguous input redirect.\n", 26);
         return false;
     }
-    set_type(index, instruction);
-    set_path(utils, instruction, index);
+    parsing_redirection_set_type(index, instruction);
+    parsing_redirection_set_path(utils, instruction, index);
     return check_name(instruction, index);
 }

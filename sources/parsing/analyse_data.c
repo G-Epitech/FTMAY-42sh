@@ -20,14 +20,12 @@ inst_block_t *block)
 
     if (parsing_maybe_separator(utils)) {
         test_return = parsing_separator_handler(utils, instruction);
-        INDEX_PARSING(utils) += 2;
+        PARSING_INDEX(utils) += 2;
         return test_return;
-    } else if (data[INDEX_PARSING(utils)] == '|') {
+    } else if (data[PARSING_INDEX(utils)] == '|') {
         return parsing_pipes_handler(utils, block);
-    } else {
-        return true;
     }
-
+    return true;
 }
 
 static void append_inst(inst_block_t *block, inst_t *instruction)
@@ -46,9 +44,9 @@ inst_t *child)
 {
     char *data = utils->input;
 
-    if (data[INDEX_PARSING(utils)] == '(') {
-        INDEX_PARSING(utils)++;
-        child = recursivity(utils);
+    if (data[PARSING_INDEX(utils)] == '(') {
+        PARSING_INDEX(utils)++;
+        child = parsing_recursivity(utils);
         if (child == NULL)
             return PARSING_ERROR_RECURSIVITY;
         append_inst(block, child);
@@ -61,12 +59,12 @@ static int handle_space_semicolon(parsing_utils_t *utils, inst_t *instruction)
 {
     char *data = utils->input;
 
-    if (data[INDEX_PARSING(utils)] == ' ') {
-        INDEX_PARSING(utils)++;
+    if (data[PARSING_INDEX(utils)] == ' ') {
+        PARSING_INDEX(utils)++;
         return PARSING_NO_ERROR_SEPARATOR;
     }
-    if (data[INDEX_PARSING(utils)] == ';') {
-        INDEX_PARSING(utils)++;
+    if (data[PARSING_INDEX(utils)] == ';') {
+        PARSING_INDEX(utils)++;
         if (!parsing_break_separator(instruction))
             return PARSING_ERROR_SEPARATOR;
         return PARSING_NO_ERROR_SEPARATOR;
@@ -74,7 +72,7 @@ static int handle_space_semicolon(parsing_utils_t *utils, inst_t *instruction)
     return PARSING_NO_SPACE_SEMICOLON;
 }
 
-bool analyse_data(parsing_utils_t *utils, inst_block_t *block,
+bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
                     inst_t *instruction)
 {
     int result_new_block = 0;

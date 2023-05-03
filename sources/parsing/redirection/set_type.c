@@ -10,14 +10,14 @@
 #include "parsing/parsing.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-void set_type(int index, inst_t *instruction)
+void parsing_redirection_set_type(int index, inst_t *instruction)
 {
-    if (index == SIMPLE_LEFT_REDIRECTION)
+    if (index == PARSING_SIMPLE_LEFT)
         instruction->ios.input.type = IOT_SIMPLE;
-    if (index == DOUBLE_LEFT_REDIRECTION)
+    if (index == PARSING_DOUBLE_LEFT)
         instruction->ios.input.type = IOT_DOUBLE;
-    if (index == DOUBLE_RIGHT_REDIRECTION)
+    if (index == PARSING_DOUBLE_RIGHT)
         instruction->ios.output.type = IOT_DOUBLE;
-    if (index == SIMPLE_RIGHT_REDIRECTION)
+    if (index == PARSING_SIMPLE_RIGHT)
         instruction->ios.output.type = IOT_SIMPLE;
 }
