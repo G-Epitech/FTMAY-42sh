@@ -13,6 +13,8 @@ _SRC =			builtins/cd.c \
 				builtins/setenv.c \
 				\
 				errors/get.c \
+				errors/strerror.c \
+				errors/strsignal.c \
 				\
 				types/node/new.c \
 				types/node/free.c \
@@ -46,10 +48,15 @@ _SRC =			builtins/cd.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-        		types/shell/vars.c \
+        		types/shell/vars/vars.c \
+				types/shell/vars/special/std.c \
+				types/shell/vars/special/init.c \
+				types/shell/vars/special/home.c \
+				types/shell/vars/special/dispatch_env_update.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				utils/asprintf2.c \
 				\
 				parsing/set_command_args.c \
 				parsing/get_len.c \
@@ -88,6 +95,9 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/setenv.c \
 				\
 				criterion/errors/get.c \
+				criterion/errors/strerror.c \
+				criterion/errors/strsignal.c \
+				\
 				criterion/parsing/redirection.c \
 				criterion/parsing/separator.c \
 				criterion/parsing/pipe.c \
