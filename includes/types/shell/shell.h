@@ -47,5 +47,10 @@ void shell_unset_var(shell_t *shell, char *name);
  */
 char *shell_get_var(shell_t *shell, char *name, bool copy);
 
+/**
+ * @brief Wait for all user command entry.
+ * @return Command user input in format char *.
+ */
+char *shell_get_input(void);
 
 #endif /* !SHELL_H_ */

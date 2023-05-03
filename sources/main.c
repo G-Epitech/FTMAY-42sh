@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include "mysh/mysh.h"
 #include "parsing/utils.h"
 #include "parsing/parsing.h"
 #include "types/node/node.h"
@@ -15,5 +16,6 @@
 
 int main(void)
 {
+    mysh();
     return 0;
 }
