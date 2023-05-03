@@ -19,8 +19,8 @@
 static void new_args(size_t *start, size_t *len, size_t *i, char *input)
 {
     (*i)++;
-    if (input[*i] == PARSING_SPACE || input[*i] == PARSING_TAB)
-        i++;
+    while (input[*i] == PARSING_SPACE || input[*i] == PARSING_TAB)
+        (*i)++;
     if (input[*i] == PARSING_STRING) {
         (*i)++;
         (*len) = parsing_get_len_input_string(input, (*i));
@@ -64,8 +64,14 @@ static int get_input_parse_len(char *input)
             in_string = !in_string;
         if (in_string)
             continue;
-        if (input[i] == PARSING_SPACE || input[i] == PARSING_TAB)
-            len++;
+        if (input[i] != PARSING_SPACE && input[i] != PARSING_TAB)
+            continue;
+        while (input[i] == PARSING_SPACE || input[i] == PARSING_TAB)
+            i++;
+        if (input[i] == '\0')
+            break;
+        i--;
+        len++;
     }
     return len;
 }
