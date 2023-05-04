@@ -9,9 +9,9 @@
 #include <string.h>
 #include "types/cmd/cmd.h"
 #include "parsing/utils.h"
+#include "utils/malloc2.h"
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
-#include "utils/malloc2.h"
 
 static void append_cmd(cmd_t *command, char *data)
 {
