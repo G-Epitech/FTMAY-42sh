@@ -56,7 +56,7 @@ Test(prompt_shell, default_prompt, .init=cr_redirect_stdout)
     cr_assert_stdout_eq_str("42sh> ");
 }
 
-Test(exit_shell, shell_exit, .init=cr_redirect_stdout)
+Test(exit_shell, shell_exit_default, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new();
 
