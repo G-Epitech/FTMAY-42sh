@@ -50,6 +50,8 @@ _SRC =			mysh.c \
 				types/shell/free.c \
         		types/shell/vars.c \
 				types/shell/get.c \
+				types/shell/exit.c \
+				types/shell/prompt.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
