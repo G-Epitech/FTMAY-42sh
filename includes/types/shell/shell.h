@@ -49,9 +49,10 @@ char *shell_get_var(shell_t *shell, char *name, bool copy);
 
 /**
  * @brief Wait for all user command entry.
+ * @param shell Shell object
  * @return Command user input in format char *.
  */
-char *shell_get_input(void);
+char *shell_get_input(shell_t *shell);
 
 /**
  * @brief Free given user input if this one was initialized by
@@ -59,5 +60,16 @@ char *shell_get_input(void);
  * @param input Command user input
  */
 void shell_free_input(char *input);
+
+/**
+ * @brief Display before the user input the shell prompt.
+ */
+void shell_prompt_display(void);
+
+/**
+ * @brief Display prompt for exit and set status of shell to SH_EXITED.
+ * @param shell Shell object
+ */
+void shell_exit(shell_t *shell);
 
 #endif /* !SHELL_H_ */
