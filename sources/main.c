@@ -1,19 +1,25 @@
-/*
-** EPITECH PROJECT, 2023
-** 42sh
-** File description:
-** Main file of project
-*/
+#include <ncurses.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include <stdio.h>
-#include <stddef.h>
-#include "parsing/utils.h"
-#include "parsing/parsing.h"
-#include "types/node/node.h"
-#include "types/inst/inst.h"
-#include "types/parsing_utils/parsing_utils.h"
-
-int main(void)
+int main()
 {
+    initscr();
+    newterm(getenv("TERM"), stdout, stdin);
+    printw("Hello World !!!\n");
+    refresh();
+    getch();
+    def_prog_mode();
+    endwin();
+    intrflush(stdscr, false);
+    system("/bin/ls");
+    reset_prog_mode();
+    refresh();
+    getch();
+    printw("Another String\n");
+    refresh();
+    getch();
+    endwin();
     return 0;
+
 }
