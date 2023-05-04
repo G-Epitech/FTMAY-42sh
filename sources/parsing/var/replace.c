@@ -26,32 +26,37 @@ int parsing_index, char **input_replace)
     *input_replace = tmp;
 }
 
-static void concat_var(shell_t *shell, char *input,
+static int concat_var(shell_t *shell, char *input,
 int *parsing_index, char **input_replace)
 {
     char *tmp = NULL;
+    char *var = NULL;
 
-    asprintf2(&tmp, "%s%s", *input_replace, get_var(input, shell, parsing_index));
+    var = get_var(input, shell, parsing_index);
+    if (!var)
+        return VAR_NOT_FOUND;
+    asprintf2(&tmp, "%s%s", *input_replace, var);
     free(*input_replace);
     *input_replace = tmp;
+    return VAR_FOUND;
 }
 
 char *parsing_var_replace(char *input, shell_t *shell)
 {
-    index_word_t index = {
-        .start = 0,
-        .end = 0
-    };
+    index_word_t index = {0};
     char *input_replace = malloc(sizeof(char));
     int parsing_index = 0;
+    int var_exist = 0;
 
     input_replace[0] = '\0';
     while (input[parsing_index] != '\0') {
         if (input[parsing_index] == PARSING_VAR_PREFIX) {
             concat_no_var(&index, input, parsing_index, &input_replace);
-            concat_var(shell, input, &parsing_index, &input_replace);
+            var_exist = concat_var(shell, input, &parsing_index, &input_replace);
             index.start = parsing_index;
         }
+        if (var_exist == VAR_NOT_FOUND)
+            return NULL;
         parsing_index++;
     }
     parsing_index++;

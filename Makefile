@@ -74,7 +74,7 @@ _SRC =			builtins/cd.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
 				parsing/var/replace.c \
-				parsing/var/ger_no_var.c \
+				parsing/var/get_no_var.c \
 				parsing/var/get_var.c \
 
 _TESTS =		criterion/types/list.c \
@@ -109,6 +109,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
 				criterion/parsing/set_command_args.c \
+				criterion/parsing/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

@@ -24,6 +24,9 @@
     #define PARSING_NO_SPACE_SEMICOLON 0
     #define PARSING_NO_ERROR_SEPARATOR 1
     #define PARSING_ERROR_SEPARATOR 2
+    #define VAR_NOT_FOUND 1
+    #define VAR_FOUND 2
+    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char && char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
 
 /**
  * @brief Parse command input into string array.

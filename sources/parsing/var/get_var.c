@@ -27,6 +27,12 @@ static char *get_name(char *input, int start, int end)
     return word;
 }
 
+static void display_error(char *name)
+{
+    fprintf(stderr, "%s: Undefined variable.\n", name);
+    fflush(stderr);
+}
+
 char *get_var(char *input, shell_t *shell, int *parsing_index)
 {
     index_word_t index = {
@@ -37,12 +43,15 @@ char *get_var(char *input, shell_t *shell, int *parsing_index)
     char *value = NULL;
 
     (*parsing_index)++;
-    while (input[*parsing_index] != ' ' && input[*parsing_index] != '\0')
+    
+    while (ALPHA_NUMERIC(input[*parsing_index]))
         (*parsing_index)++;
     index.end = *parsing_index;
     name = get_name(input, index.start, index.end);
     value = shell_get_var(shell, name, true);
     if (value == NULL)
         value = getenv(name);
+    if (value == NULL)
+        display_error(name);
     return value;
 }
