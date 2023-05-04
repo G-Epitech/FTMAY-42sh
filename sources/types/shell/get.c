@@ -7,8 +7,6 @@
 
 #include <stdio.h>
 #include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
 #include "types/shell/shell.h"
 
 char *shell_get_input(shell_t *shell)
