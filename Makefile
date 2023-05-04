@@ -58,7 +58,7 @@ _SRC =			builtins/cd.c \
 				parsing/redirection/set_type.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
-				parsing/main.c \
+				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \

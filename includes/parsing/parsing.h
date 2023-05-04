@@ -14,16 +14,19 @@
     #include "types/shell/defs.h"
     #include "types/parsing_utils/defs.h"
 
+    #define PARSING_STOP_CMD 1
+    #define PARSING_ERROR_CMD 2
     #define PARSING_SIMPLE_LEFT 1
     #define PARSING_DOUBLE_LEFT 0
     #define PARSING_DOUBLE_RIGHT 2
     #define PARSING_SIMPLE_RIGHT 3
-    #define PARSING_ERROR_RECURSIVITY 0
-    #define PARSING_NO_ERROR_RECURSIVITY 1
+    #define PARSING_NO_ERROR_CMD 0
     #define PARSING_NO_OPEN_BLOCK 2
+    #define PARSING_ERROR_SEPARATOR 2
+    #define PARSING_ERROR_RECURSIVITY 0
     #define PARSING_NO_SPACE_SEMICOLON 0
     #define PARSING_NO_ERROR_SEPARATOR 1
-    #define PARSING_ERROR_SEPARATOR 2
+    #define PARSING_NO_ERROR_RECURSIVITY 1
 
 /**
  * @brief Parse command input into string array.
@@ -131,9 +134,7 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
 
 /**
  * @brief Recursivity of parsing.
- * @param utils Utils struct
- * @param block Instruction block
- * @param instruction Instruction struct
+ * @param utils Utils struc
  * @return New instruction type block with all block/commands in it
  */
 inst_t *parsing_recursivity(parsing_utils_t *utils);

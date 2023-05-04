@@ -75,10 +75,11 @@ Test(parsing_utils, display, .init=redirect_all_stdout)
 {
     inst_t *instruction = NULL;
 
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
     instruction = parsing_get_main_block("(ls | grep l); cat -e <Makefile");
     parsing_display(instruction);
     fflush(stdout);
-    cr_assert_stdout_eq_str("===== BLOCK =====\n   ===== COMMAND =====\n   Input: ls \n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 0\n   Output Type: 1\n\n   ===== COMMAND =====\n   Input: grep l\n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 1\n   Output Type: 0\n\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 0\n\n===== COMMAND =====\nInput: cat -e \nType: 0\n=== REDIRECTIONS ===\nInput Type: 2\nInput Path: Makefile\nOutput Type: 0\n\n");
+    cr_assert_stdout_eq_str("===== BLOCK =====\n   ===== COMMAND =====\n   Input: ls \n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 0\n   Output Type: 1\n\n   ===== COMMAND =====\n   Input: grep l\n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 1\n   Output Type: 0\n\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 0\n\n===== COMMAND =====\nInput: cat -e  \nType: 0\n=== REDIRECTIONS ===\nInput Type: 2\nInput Path: Makefile\nOutput Type: 0\n\n");
 }
 
 Test(parsing_utils, display_output, .init=redirect_all_stdout)
@@ -88,7 +89,7 @@ Test(parsing_utils, display_output, .init=redirect_all_stdout)
     instruction = parsing_get_main_block("(ls | grep l); cat Makefile > test");
     parsing_display(instruction);
     fflush(stdout);
-    cr_assert_stdout_eq_str("===== BLOCK =====\n   ===== COMMAND =====\n   Input: ls \n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 0\n   Output Type: 1\n\n   ===== COMMAND =====\n   Input: grep l\n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 1\n   Output Type: 0\n\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 0\n\n===== COMMAND =====\nInput: cat Makefile \nType: 0\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 2\nOutput Path: test\n\n");
+    cr_assert_stdout_eq_str("===== BLOCK =====\n   ===== COMMAND =====\n   Input: ls \n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 0\n   Output Type: 1\n\n   ===== COMMAND =====\n   Input: grep l\n   Type: 0\n   === REDIRECTIONS ===\n   Input Type: 1\n   Output Type: 0\n\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 0\n\n===== COMMAND =====\nInput: cat Makefile  \nType: 0\n=== REDIRECTIONS ===\nInput Type: 0\nOutput Type: 2\nOutput Path: test\n\n");
 }
 
 Test(parsing_utils, input_is_null)

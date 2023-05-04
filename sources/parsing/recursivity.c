@@ -31,6 +31,7 @@ inst_t *instruction, inst_block_t *block)
     if (data[PARSING_INDEX(utils)] == ')') {
         instruction->value.block = block;
         PARSING_INDEX(utils)++;
+        utils->level--;
         return false;
     }
     return true;
@@ -46,13 +47,16 @@ inst_t *parsing_recursivity(parsing_utils_t *utils)
         return NULL;
     set_block(instruction, block);
     while (PARSING_INPUT(utils)[PARSING_INDEX(utils)] != '\0') {
-        if (!close_block(utils, instruction, block))
+        if (!close_block(utils, instruction, block)) {
+
             return instruction;
+        }
         last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
         if (!parsing_analyse_data(utils, block, last))
             return NULL;
     }
-    if (!parsing_break_separator(instruction))
+    if (!parsing_break_separator(instruction)) {
         return NULL;
+    }
     return instruction;
 }
