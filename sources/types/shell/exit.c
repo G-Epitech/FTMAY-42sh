@@ -12,4 +12,5 @@ void shell_exit(shell_t *shell)
 {
     shell->status = SH_EXITED;
     printf("exit\n");
+    fflush(stdout);
 }
