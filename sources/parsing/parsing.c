@@ -30,7 +30,6 @@ inst_t *parsing_get_main_block(char *input)
         write(2, "Too many )'s.\n", 14);
         return NULL;
     }
-    printf("[%d]\n", utils->level);
     parsing_utils_free(utils);
     return main;
 }
