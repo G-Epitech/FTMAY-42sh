@@ -11,4 +11,3 @@ void shell_prompt_display(void)
 {
     printf("42sh> ");
 }
-
