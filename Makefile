@@ -11,6 +11,7 @@ _SRC =			builtins/cd.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
+				builtins/set.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
@@ -142,7 +143,7 @@ TESTS_NAME = 	42sh_tests
 
 TESTS_CUSTOM = tests/custom/launch.py
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re
 
 all: 			$(NAME)
 
