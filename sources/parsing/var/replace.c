@@ -9,10 +9,11 @@
 #include <unistd.h>
 #include <string.h>
 #include "parsing/defs.h"
+#include "utils/malloc2.h"
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
-#include "types/shell/shell.h"
 #include "utils/asprintf2.h"
+#include "types/shell/shell.h"
 #include "types/parsing_utils/parsing_utils.h"
 
 static void concat_no_var(index_word_t *index, char *input,
@@ -45,11 +46,12 @@ int *parsing_index, char **input_replace)
 char *parsing_var_replace(char *input, shell_t *shell)
 {
     index_word_t index = {0};
-    char *input_replace = malloc(sizeof(char));
+    char *input_replace = malloc2(sizeof(char));
     int parsing_index = 0;
     int var_exist = 0;
 
-    input_replace[0] = '\0';
+    if (!input_replace)
+        return NULL;
     while (input[parsing_index] != '\0') {
         if (input[parsing_index] == PARSING_VAR_PREFIX) {
             concat_no_var(&index, input, parsing_index, &input_replace);
@@ -61,7 +63,6 @@ char *parsing_var_replace(char *input, shell_t *shell)
             return NULL;
         parsing_index++;
     }
-    parsing_index++;
-    concat_no_var(&index, input, parsing_index, &input_replace);
+    concat_no_var(&index, input, parsing_index++, &input_replace);
     return input_replace;
 }

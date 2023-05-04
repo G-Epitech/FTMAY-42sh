@@ -11,14 +11,5 @@
 
 int main(void)
 {
-    shell_t *shell = shell_new();
-    shell_set_var(shell, "test1", "axel");
-    shell_set_var(shell, "test2", "flav");
-    shell_set_var(shell, "test3", "yannou");
-
-    char *replace = parsing_var_replace("first var : $test1\t", shell);
-
-    if (replace == NULL)
-        return 84;
-    printf("Résultat : [%s]\n", replace);
+    return 0;
 }

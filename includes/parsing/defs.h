@@ -13,6 +13,7 @@
     #define PARSING_STRING '"'
     #define PARSING_VAR_PREFIX '$'
 
+// Struct of limit of a word.
 typedef struct s_index_word {
     int start;
     int end;
