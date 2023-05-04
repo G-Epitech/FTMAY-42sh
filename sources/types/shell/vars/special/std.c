@@ -23,6 +23,19 @@ shell_t *shell)
     return shell_special_vars_std_update(name, value, shell);
 }
 
+bool shell_special_vars_std_init(char *name, shell_t *shell, char *dependency)
+{
+    char *dependency_value = NULL;
+
+    if (!name || !shell)
+        return false;
+    if (dependency)
+        dependency_value = getenv(dependency);
+    if (!dependency_value)
+        dependency_value = VAR_VOID_VALUE;
+    return var_list_set(shell->vars, name, dependency_value);
+}
+
 char *shell_special_vars_std_get(shell_t *shell, char *name, bool copy)
 {
     if (!shell)
