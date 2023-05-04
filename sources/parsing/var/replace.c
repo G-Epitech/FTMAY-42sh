@@ -21,7 +21,8 @@ int parsing_index, char **input_replace)
     char *tmp = NULL;
 
     index->end = parsing_index;
-    asprintf2(&tmp, "%s%s", *input_replace, get_no_var(input, index->start, index->end));
+    asprintf2(&tmp, "%s%s", *input_replace,
+    get_no_var(input, index->start, index->end));
     free(*input_replace);
     *input_replace = tmp;
 }
@@ -52,7 +53,8 @@ char *parsing_var_replace(char *input, shell_t *shell)
     while (input[parsing_index] != '\0') {
         if (input[parsing_index] == PARSING_VAR_PREFIX) {
             concat_no_var(&index, input, parsing_index, &input_replace);
-            var_exist = concat_var(shell, input, &parsing_index, &input_replace);
+            var_exist = concat_var(shell, input,
+            &parsing_index, &input_replace);
             index.start = parsing_index;
         }
         if (var_exist == VAR_NOT_FOUND)

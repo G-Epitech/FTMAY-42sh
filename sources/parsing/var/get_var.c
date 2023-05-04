@@ -43,7 +43,6 @@ char *get_var(char *input, shell_t *shell, int *parsing_index)
     char *value = NULL;
 
     (*parsing_index)++;
-    
     while (ALPHA_NUMERIC(input[*parsing_index]))
         (*parsing_index)++;
     index.end = *parsing_index;

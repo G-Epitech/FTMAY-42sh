@@ -26,7 +26,8 @@
     #define PARSING_ERROR_SEPARATOR 2
     #define VAR_NOT_FOUND 1
     #define VAR_FOUND 2
-    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char && char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
+    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char \
+&& char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
 
 /**
  * @brief Parse command input into string array.
@@ -153,7 +154,7 @@ char *parsing_var_replace(char *input, shell_t *shell);
  * @brief Replace value of var.
  * @param input Input of user
  * @param shell Shell struct
- * @param parsing_index Index parsing of 
+ * @param parsing_index Index parsing on remplacing var
  * @return Value of var
  */
 char *get_var(char *input, shell_t *shell, int *parsing_index);
