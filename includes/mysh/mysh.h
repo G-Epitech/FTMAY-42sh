@@ -12,6 +12,6 @@
  * @brief Run the main processus.
  * @return Exit code status of shell .
  */
-unsigned char mysh(void);
+int mysh(void);
 
 #endif /* !MYSH_H_ */
