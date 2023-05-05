@@ -20,9 +20,3 @@ char *shell_get_input(shell_t *shell)
         shell_exit(shell);
     return input_user;
 }
-
-void shell_free_input(char *input)
-{
-    if (input)
-        free(input);
-}

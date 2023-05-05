@@ -55,13 +55,6 @@ char *shell_get_var(shell_t *shell, char *name, bool copy);
 char *shell_get_input(shell_t *shell);
 
 /**
- * @brief Free given user input if this one was initialized by
- * shell_get_input(void).
- * @param input Command user input
- */
-void shell_free_input(char *input);
-
-/**
  * @brief Display before the user input the shell prompt.
  * @param shell Shell object
  */
