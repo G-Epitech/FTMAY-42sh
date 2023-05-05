@@ -10,7 +10,9 @@
 
 void shell_exit(shell_t *shell)
 {
-    shell->status = SH_EXITED;
-    printf("exit\n");
-    fflush(stdout);
+    if (shell->is_tty == true) {
+        shell->status = SH_EXITED;
+        printf("exit\n");
+        fflush(stdout);
+    }
 }
