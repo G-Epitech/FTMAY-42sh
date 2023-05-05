@@ -27,6 +27,7 @@ static bool shell_init_data(shell_t *shell)
     shell->owd[0] = '\0';
     shell->status = SH_RUNNING;
     shell->vars = list_new();
+    shell_special_vars_init(shell);
     return true;
 }
 

@@ -66,4 +66,18 @@ void shell_display_prompt(shell_t *shell);
  */
 void shell_exit(shell_t *shell);
 
+/**
+ * @brief Init specials variables of shell.
+ * @param shell Shell object
+ */
+void shell_special_vars_init(shell_t *shell);
+
+/**
+ * @brief Update all specials vars depending on environnement
+ * variables.
+ * @param shell Shell object
+ * @param name Name of environnement variable
+ */
+void shell_special_vars_dispatch_env_update(shell_t *shell, char *name);
+
 #endif /* !SHELL_H_ */

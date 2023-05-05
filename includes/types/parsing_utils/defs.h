@@ -15,6 +15,7 @@
 typedef struct s_parsing_utils {
     char *input;        // Original input given by user
     int index_parsing;  // Index of input parsed
+    int level;          // Level in block of parentheses
 } parsing_utils_t;
 
 #endif /* !UTILS_DEFS_H_ */

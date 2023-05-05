@@ -52,8 +52,11 @@ Test(types_shell, free_bad_shell)
 
 Test(prompt_shell, default_prompt, .init=cr_redirect_stdout)
 {
-    shell_prompt_display();
+    shell_t *shell = shell_new();
+
+    shell_display_prompt(shell);
     cr_assert_stdout_eq_str("42sh> ");
+    shell_free(shell);
 }
 
 Test(exit_shell, shell_exit_default, .init=cr_redirect_stdout)

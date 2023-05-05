@@ -15,6 +15,8 @@ _SRC =			mysh.c \
 				builtins/setenv.c \
 				\
 				errors/get.c \
+				errors/strerror.c \
+				errors/strsignal.c \
 				\
 				types/node/new.c \
 				types/node/free.c \
@@ -48,13 +50,18 @@ _SRC =			mysh.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-        		types/shell/vars.c \
 				types/shell/get.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
+        		types/shell/vars/vars.c \
+				types/shell/vars/special/std.c \
+				types/shell/vars/special/init.c \
+				types/shell/vars/special/home.c \
+				types/shell/vars/special/dispatch_env_update.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				utils/asprintf2.c \
 				\
 				parsing/set_command_args.c \
 				parsing/get_len.c \
@@ -63,7 +70,7 @@ _SRC =			mysh.c \
 				parsing/redirection/set_type.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
-				parsing/main.c \
+				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \
@@ -71,6 +78,11 @@ _SRC =			mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/var/replace.c \
+				parsing/var/get_no_var.c \
+				parsing/var/get_var.c \
+				\
+				execution/double_left.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -85,6 +97,7 @@ _TESTS =		criterion/types/list.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
@@ -93,12 +106,17 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/setenv.c \
 				\
 				criterion/errors/get.c \
+				criterion/errors/strerror.c \
+				criterion/errors/strsignal.c \
+				\
 				criterion/parsing/redirection.c \
 				criterion/parsing/separator.c \
 				criterion/parsing/pipe.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
+				criterion/parsing/set_command_args.c \
+				criterion/parsing/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
