@@ -29,6 +29,30 @@ void cmd_free(cmd_t *command);
 void cmd_display(cmd_t *cmd);
 
 /**
+ * @brief Parse command input into string array.
+ * @param command Command object
+ * @return true if all went well, false else
+ */
+bool cmd_set_args(cmd_t *command);
+
+/**
+ * @brief Get len of simple input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the simple input part
+ */
+int cmd_set_args_get_len_input(char *input, int start);
+
+/**
+ * @brief Get len of string input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the string input part
+ */
+int cmd_set_args_get_len_input_string(char *input, int start);
+
+
+/**
  * @brief Determine if target is builtin and set it if so.
  * @param cmd Command of which determine is target is builtin
  * @param shell Shell object

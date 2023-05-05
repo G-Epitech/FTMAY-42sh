@@ -31,7 +31,7 @@ int execution_cmd(node_t *node_inst, shell_t *shell)
 
     if (!init_execution(inst, &cmd))
         return EXECUTION_ERROR;
-    parsing_set_command_args(cmd, shell);
+    cmd_set_args(cmd);
     cmd_determine_target(cmd, shell);
     cmd_display(cmd);
     parsing_display(inst);

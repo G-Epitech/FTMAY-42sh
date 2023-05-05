@@ -34,6 +34,8 @@ _SRC =			mysh.c \
 				types/cmd/target/system.c \
 				types/cmd/target/absolute.c \
 				types/cmd/target/empty.c \
+				types/cmd/args/get_len.c \
+				types/cmd/args/set_args.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -69,13 +71,11 @@ _SRC =			mysh.c \
 				utils/malloc2.c \
 				utils/asprintf2.c \
 				\
-				parsing/set_command_args.c \
-				parsing/get_len.c \
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
 				parsing/redirection/set_type.c \
-				parsing/get_word.c \
 				parsing/get_cmd.c \
+				parsing/get_word.c \
 				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
@@ -102,6 +102,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/block.c \
 				criterion/types/cmd/cmd.c \
 				criterion/types/cmd/target.c \
+				criterion/types/cmd/set_args.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
@@ -123,7 +124,6 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
-				criterion/parsing/set_command_args.c \
 				criterion/parsing/var.c \
 				\
 				criterion/execution/double_left.c \

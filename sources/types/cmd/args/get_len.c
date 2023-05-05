@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "parsing/defs.h"
 
-int parsing_get_len_input_string(char *input, int start)
+int cmd_set_args_get_len_input_string(char *input, int start)
 {
     size_t i = 0;
 
@@ -20,7 +20,7 @@ int parsing_get_len_input_string(char *input, int start)
     return i;
 }
 
-int parsing_get_len_input(char *input, int start)
+int cmd_set_args_get_len_input(char *input, int start)
 {
     size_t i = 0;
 

@@ -11,7 +11,7 @@
 #include <strings.h>
 #include <stdbool.h>
 #include "utils/malloc2.h"
-#include "types/cmd/defs.h"
+#include "types/cmd/cmd.h"
 #include "types/var/defs.h"
 #include "parsing/parsing.h"
 #include "types/shell/shell.h"
@@ -23,9 +23,9 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
         (*i)++;
     if (input[*i] == PARSING_STRING) {
         (*i)++;
-        (*len) = parsing_get_len_input_string(input, (*i));
+        (*len) = cmd_set_args_get_len_input_string(input, (*i));
     } else {
-        (*len) = parsing_get_len_input(input, (*i));
+        (*len) = cmd_set_args_get_len_input(input, (*i));
     }
     (*start) = *i;
 }
@@ -33,7 +33,7 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
 static void fill_args(char **argv, char *input)
 {
     size_t index_argv = 0;
-    size_t len = parsing_get_len_input(input, 0);
+    size_t len = cmd_set_args_get_len_input(input, 0);
     size_t start = 0;
 
     argv[index_argv] = malloc2(sizeof(char) * len + 1);
@@ -73,11 +73,10 @@ static int get_input_parse_len(char *input)
     return len;
 }
 
-bool parsing_set_command_args(cmd_t *command, shell_t *shell)
+bool cmd_set_args(cmd_t *command)
 {
     args_t *args = &command->args;
 
-    (void) shell;
     if (!command->input)
         return false;
     args->argc = get_input_parse_len(command->input);

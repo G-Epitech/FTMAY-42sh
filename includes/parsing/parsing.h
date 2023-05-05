@@ -30,32 +30,8 @@
     #define PARSING_ERROR_SEPARATOR 2
     #define VAR_NOT_FOUND 1
     #define VAR_FOUND 2
-    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char \
-&& char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
-
-/**
- * @brief Parse command input into string array.
- * @param command Command object
- * @param shell Shell main object
- * @return true if all went well, false else
- */
-bool parsing_set_command_args(cmd_t *command, shell_t *shell);
-
-/**
- * @brief Get len of simple input part.
- * @param input Input string
- * @param start Start index
- * @return The len of the simple input part
- */
-int parsing_get_len_input(char *input, int start);
-
-/**
- * @brief Get len of string input part.
- * @param input Input string
- * @param start Start index
- * @return The len of the string input part
- */
-int parsing_get_len_input_string(char *input, int start);
+    #define ALPHA_NUMERIC(c) (('a' <= c && c <= 'z') || ('A' <= c \
+&& c <= 'Z') || ('0' <= c && c <= '9') || c == '_')
 
 /**
  * @brief Parse the entire user command.
