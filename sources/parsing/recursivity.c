@@ -31,6 +31,7 @@ inst_t *instruction, inst_block_t *block)
     if (data[PARSING_INDEX(utils)] == ')') {
         instruction->value.block = block;
         PARSING_INDEX(utils)++;
+        utils->level--;
         return false;
     }
     return true;

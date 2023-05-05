@@ -70,7 +70,7 @@ _SRC =			builtins/cd.c \
 				parsing/redirection/set_type.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
-				parsing/main.c \
+				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \
@@ -78,6 +78,11 @@ _SRC =			builtins/cd.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/var/replace.c \
+				parsing/var/get_no_var.c \
+				parsing/var/get_var.c \
+				\
+				execution/double_left.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -93,6 +98,7 @@ _TESTS =		criterion/types/list.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
@@ -110,6 +116,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
+				criterion/parsing/set_command_args.c \
+				criterion/parsing/var.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
