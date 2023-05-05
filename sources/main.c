@@ -1,25 +1,24 @@
-#include <ncurses.h>
-#include <stdlib.h>
-#include <string.h>
+/*
+** EPITECH PROJECT, 2023
+** 42sh
+** File description:
+** main
+*/
 
-int main()
+#include <termios.h>
+#include <unistd.h>
+
+void enableRawMode() {
+  struct termios raw;
+  tcgetattr(STDIN_FILENO, &raw);
+  raw.c_lflag &= ~(ECHO);
+  tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
+
+int main(void)
 {
-    initscr();
-    newterm(getenv("TERM"), stdout, stdin);
-    printw("Hello World !!!\n");
-    refresh();
-    getch();
-    def_prog_mode();
-    endwin();
-    intrflush(stdscr, false);
-    system("/bin/ls");
-    reset_prog_mode();
-    refresh();
-    getch();
-    printw("Another String\n");
-    refresh();
-    getch();
-    endwin();
-    return 0;
-
+  enableRawMode();
+  char c;
+  while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
+  return 0;
 }
