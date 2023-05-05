@@ -76,6 +76,8 @@ _SRC =			builtins/cd.c \
 				parsing/var/replace.c \
 				parsing/var/get_no_var.c \
 				parsing/var/get_var.c \
+				\
+				execution/double_left.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
