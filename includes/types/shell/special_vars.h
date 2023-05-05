@@ -12,7 +12,7 @@
     #include <stdbool.h>
     #include "types/var/defs.h"
 
-    #define SHELL_SPECIAL_VARS_LEN 2
+    #define SHELL_SPECIAL_VARS_LEN 4
 
 /**
  * @brief Get special shell variable.
@@ -43,6 +43,14 @@ shell_t *shell);
  */
 bool shell_special_vars_std_update(char *name, char *value, shell_t *shell);
 
+/**
+ * @brief Set special shell variable (std).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_std_init(char *name, shell_t *shell, char *dependency);
 
 /**
  * @brief Get special shell variable (home).
@@ -80,6 +88,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_get,
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
         "TERM"
     },
     {
@@ -87,8 +96,25 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_home_get,
         &shell_special_vars_home_set,
         &shell_special_vars_home_update,
+        &shell_special_vars_std_init,
         "HOME"
-    }
+    },
+    {
+        "uid",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        NULL
+    },
+    {
+        "path",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        "PATH"
+    },
 };
 
 #endif /* !SHELL_SPECIAL_VARS_H_ */

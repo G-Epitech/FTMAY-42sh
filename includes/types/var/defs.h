@@ -8,6 +8,8 @@
 #ifndef VAR_DEFS_H_
     #define VAR_DEFS_H_
 
+    #define VAR_VOID_VALUE ""
+
 typedef struct s_shell shell_t;
 
 // Prototype of special variable setter
@@ -21,6 +23,10 @@ shell_t *shell);
 // Prototype of special variable getter
 typedef char *(*var_special_getter_t)(shell_t *shell, char *name, bool copy);
 
+// Prototype of special variable initer
+typedef bool (*var_special_initer_t)(char *name, shell_t *shell,
+char *dependency);
+
 // Represent a variable
 typedef struct s_var {
     char *name;     //Name of variable
@@ -29,12 +35,13 @@ typedef struct s_var {
 
 // Represent a special variable
 typedef struct s_var_special {
-    char *name;                     //Name of variable
-    var_special_getter_t getter;    //Getter of variable value
-    var_special_setter_t setter;    //Setter of variable value
-    var_special_updater_t updater;  //Value updater from dependency
-    char *dependency;               //Environnement variable dependency of
-                                    //special shell variable
+    char *name;                     // Name of variable
+    var_special_getter_t getter;    // Getter of variable value
+    var_special_setter_t setter;    // Setter of variable value
+    var_special_updater_t updater;  // Value updater from dependency
+    var_special_initer_t initer;    // Initer of variable value
+    char *dependency;               // Environnement variable dependency of
+                                    // special shell variable
 } var_special_t;
 
 #endif /* !VAR_DEFS_H_ */

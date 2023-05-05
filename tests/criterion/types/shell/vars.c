@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <criterion/criterion.h>
+#include "types/var/var.h"
+#include "utils/malloc2.h"
 #include "builtins/defs.h"
 #include "types/list/list.h"
 #include "types/shell/shell.h"
@@ -237,4 +239,55 @@ Test(types_shell_vars, shell_special_var_update_from_env_null_var_name)
 Test(types_shell_vars, shell_special_var_update_from_env_null_shell)
 {
     shell_special_vars_dispatch_env_update(NULL, "HOME");
+}
+
+Test(types_shell_vars, shell_special_vars_home)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    char *value = shell_special_vars_home_get(shell, "home", true);
+    char *real_value = var_list_get_value(shell->vars, "home", true);
+
+    cr_assert_str_eq(real_value, value);
+}
+
+Test(types_shell_vars, shell_special_vars_home_shell_null)
+{
+    char *value = shell_special_vars_home_get(NULL, "home", true);
+
+    cr_assert_null(value);
+}
+
+Test(types_shell_vars, shell_special_vars_home_update_null)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    status = shell_special_vars_home_update(NULL, "/test", shell);
+    cr_assert(!status);
+    status = shell_special_vars_home_update("name", NULL, shell);
+    cr_assert(!status);
+    status = shell_special_vars_home_update("name", "test", NULL);
+    cr_assert(!status);
+    status = shell_special_vars_home_update("", "", shell);
+    cr_assert(!status);
+}
+
+Test(types_shell_vars, shell_special_vars_home_update_bad_malloc)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    status = shell_special_vars_home_update("super", "test", shell);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    cr_assert(!status);
+}
+
+Test(types_shell_vars, shell_special_vars_home_update)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    status = shell_special_vars_home_update("home", "42sh", shell);
+    cr_assert(status);
 }

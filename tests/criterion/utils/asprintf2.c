@@ -6,8 +6,8 @@
 */
 
 #include <criterion/criterion.h>
-#include "utils/asprintf2.h"
 #include "utils/malloc2.h"
+#include "utils/asprintf2.h"
 
 Test(utils_asprintf2, simple_command) {
     bool status = false;

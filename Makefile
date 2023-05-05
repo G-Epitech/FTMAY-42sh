@@ -13,6 +13,9 @@ _SRC =			mysh.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
+				builtins/set.c \
+				builtins/unset.c \
+				builtins/var.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
@@ -110,6 +113,9 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/cd.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
+				criterion/builtins/set.c \
+				criterion/builtins/unset.c \
+				criterion/builtins/var.c \
 				\
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \
@@ -164,7 +170,7 @@ TESTS_NAME = 	42sh_tests
 
 TESTS_CUSTOM = tests/custom/launch.py
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re
 
 all: 			$(NAME)
 
