@@ -6,9 +6,11 @@
 */
 
 #include <stdio.h>
+#include "types/shell/shell.h"
 
-void shell_prompt_display(void)
+void shell_display_prompt(shell_t *shell)
 {
+    (void) shell;
     printf("42sh> ");
     fflush(stdout);
 }
