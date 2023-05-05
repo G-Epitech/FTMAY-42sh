@@ -33,11 +33,9 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
 static bool fill_args(char **argv, char *input)
 {
     size_t index_argv = 0;
-    size_t len = 0;
+    size_t len = parsing_get_len_input(input, 0);
     size_t start = 0;
 
-    len = parsing_get_len_input(input, 0);
-    start = 0;
     argv[index_argv] = malloc2(sizeof(char) * len + 1);
     for (size_t i = 0; input[i] != '\0'; i++) {
         if (start + len == i && input[i + 1] == '\0')

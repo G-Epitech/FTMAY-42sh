@@ -10,7 +10,13 @@
 
     #include <stdbool.h>
     #include "types/args/defs.h"
-    #include "types/target/defs.h"
+    #include "types/builtin/defs.h"
+
+// Represent a target of command
+typedef union s_target {
+    char *path;             //Path to a binary file
+    builtin_target_t builtin; 	//Pointer to a builtin function
+} target_t;
 
 // Represent type of command
 typedef enum e_cmd_type {
