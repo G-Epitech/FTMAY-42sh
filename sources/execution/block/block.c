@@ -34,7 +34,7 @@ static void fork_node(node_t *node, int level)
         instruction->value.cmd->forked = true;
 }
 
-void exec_block(node_t *node, int level)
+void execution_block(node_t *node, int level)
 {
     node_t *parent = get_last_node(node);
     node_t *next = parent->next;
@@ -47,9 +47,9 @@ void exec_block(node_t *node, int level)
     if (parent->prev && instruction->ios.input.type == IOT_PIPED)
         pipe(fd);
     while (parent) {
-        exec_inst(parent, fd, level);
+        execution_inst(parent, fd, level);
         parent = parent->prev;
     }
     if (next)
-        exec_block(next, level);
+        execution_block(next, level);
 }

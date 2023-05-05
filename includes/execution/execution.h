@@ -16,13 +16,13 @@
  * @param fd File descriptor pipe
  * @param level Level of block and priority
  */
-void exec_inst(node_t *node, int fd[2], int level);
+void execution_inst(node_t *node, int fd[2], int level);
 
 /**
  * @brief Execute block instruction.
  * @param node Node from instruction with type block
  * @param level Level of block and priority
  */
-void exec_block(node_t *node, int level);
+void execution_block(node_t *node, int level);
 
 #endif /* !EXECUTION_H_ */
