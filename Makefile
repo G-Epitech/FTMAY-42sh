@@ -66,6 +66,8 @@ _SRC =			builtins/cd.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				\
+				execution/double_left.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
