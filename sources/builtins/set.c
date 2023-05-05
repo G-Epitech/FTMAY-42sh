@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 #include "utils/utils.h"
 #include "utils/malloc2.h"
 #include "types/var/var.h"
