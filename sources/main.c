@@ -9,6 +9,5 @@
 
 int main(void)
 {
-    mysh();
-    return 0;
+    return mysh();
 }
