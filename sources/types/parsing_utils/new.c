@@ -21,5 +21,6 @@ parsing_utils_t *parsing_utils_new(char *input_user)
         return NULL;
     utils->index_parsing = 0;
     utils->input = input_user;
+    utils->level = 0;
     return utils;
 }

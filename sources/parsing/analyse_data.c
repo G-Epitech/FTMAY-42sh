@@ -27,15 +27,25 @@ inst_block_t *block)
     return true;
 }
 
-static void append_inst(inst_block_t *block, inst_t *instruction)
+static bool append_inst(inst_block_t *block, inst_t *instruction)
 {
-    inst_t *data = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
+    inst_t *last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
+    bool inst_ios = instruction->ios.input.type == IOT_DEFAULT;
+    bool last_ios = last->ios.input.type != IOT_DEFAULT;
 
-    if (data->type == INS_NONE) {
-        instruction->ios = data->ios;
+    inst_ios = inst_ios && instruction->ios.output.type == IOT_DEFAULT;
+    last_ios = last_ios && last->ios.output.type != IOT_DEFAULT;
+    if (last->type == INS_NONE) {
+        if (inst_ios)
+            instruction->ios = last->ios;
+        if (!inst_ios && last_ios) {
+            write(2, "Ambiguous input redirect.\n", 26);
+            return false;
+        }
         list_remove(block->instructions, block->instructions->last);
     }
     inst_append(block, instruction);
+    return true;
 }
 
 static int open_new_block(parsing_utils_t *utils, inst_block_t *block,
@@ -45,10 +55,10 @@ inst_t *child)
 
     if (data[PARSING_INDEX(utils)] == '(') {
         PARSING_INDEX(utils)++;
+        utils->level++;
         child = parsing_recursivity(utils);
-        if (child == NULL)
+        if (child == NULL || !append_inst(block, child))
             return PARSING_ERROR_RECURSIVITY;
-        append_inst(block, child);
         return PARSING_NO_ERROR_RECURSIVITY;
     }
     return PARSING_NO_OPEN_BLOCK;
@@ -89,6 +99,8 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
     if (result_space_semicolon != PARSING_NO_SPACE_SEMICOLON)
         return result_space_semicolon == PARSING_NO_ERROR_SEPARATOR;
     child = parsing_get_cmd(utils);
+    if (!child)
+        return false;
     append_inst(block, child);
     return true;
 }
