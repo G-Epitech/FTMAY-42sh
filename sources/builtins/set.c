@@ -13,6 +13,7 @@
 #include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
+#include "builtins/builtins.h"
 
 static bool list_set(shell_t *shell, char *name, char *value)
 {
@@ -71,7 +72,7 @@ unsigned char builtin_set(args_t *args, shell_t *shell)
     if (!args)
         return SHELL_EXIT_ERROR;
     if (args->argc == 1) {
-        return SHELL_EXIT_SUCCESS;
+        return builtin_var(args, shell);
     }
     while (index < args->argc) {
         if (!set_var_value(args, shell, &index)) {

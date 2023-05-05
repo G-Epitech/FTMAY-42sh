@@ -13,7 +13,7 @@
 #include "types/node/defs.h"
 #include "types/var/defs.h"
 
-Test(builtins_set, set_display) {
+Test(builtins_set, set_display, .init=cr_redirect_stdout) {
     int commands_size = 1;
     char **commands = malloc(sizeof(char) * commands_size);
     commands[0] = "set";
