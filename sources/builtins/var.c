@@ -8,11 +8,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "utils/utils.h"
+#include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/list/list.h"
 #include "types/node/node.h"
 #include "types/shell/defs.h"
-#include "types/var/var.h"
 
 static node_t *list_get_lower(list_t *list)
 {

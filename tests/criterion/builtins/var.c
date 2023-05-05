@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include "utils/malloc2.h"
 #include "builtins/builtins.h"
 #include "types/shell/shell.h"
-#include "utils/malloc2.h"
 
 Test(builtins_var, simple_display, .init=cr_redirect_stdout) {
     shell_t *shell = shell_new();

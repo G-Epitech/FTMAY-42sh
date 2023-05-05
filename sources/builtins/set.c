@@ -71,13 +71,11 @@ unsigned char builtin_set(args_t *args, shell_t *shell)
 
     if (!args)
         return SHELL_EXIT_ERROR;
-    if (args->argc == 1) {
+    if (args->argc == 1)
         return builtin_var(args, shell);
-    }
     while (index < args->argc) {
-        if (!set_var_value(args, shell, &index)) {
+        if (!set_var_value(args, shell, &index))
             return SHELL_EXIT_ERROR;
-        }
     }
     return SHELL_EXIT_SUCCESS;
 }
