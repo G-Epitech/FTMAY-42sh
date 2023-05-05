@@ -64,7 +64,7 @@ void shell_free_input(char *input);
 /**
  * @brief Display before the user input the shell prompt.
  */
-void shell_prompt_display(void);
+void shell_display_prompt(shell_t *shell);
 
 /**
  * @brief Display prompt for exit and set status of shell to SH_EXITED.
