@@ -88,6 +88,8 @@ _SRC =			mysh.c \
 				parsing/var/get_var.c \
 				\
 				execution/double_left.c \
+				execution/input.c \
+				execution/output.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
