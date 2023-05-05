@@ -12,7 +12,7 @@
     #include <stdbool.h>
     #include "types/var/defs.h"
 
-    #define SHELL_SPECIAL_VARS_LEN 3
+    #define SHELL_SPECIAL_VARS_LEN 4
 
 /**
  * @brief Get special shell variable.
@@ -106,6 +106,14 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_update,
         &shell_special_vars_std_init,
         NULL
+    },
+    {
+        "path",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        "PATH"
     },
 };
 
