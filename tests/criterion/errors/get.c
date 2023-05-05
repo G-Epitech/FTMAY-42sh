@@ -13,8 +13,7 @@ Test(errors_get, errors_get_message_sig_return_sigint)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(errors_sig_msg,
-    ERRORS_SIG_MSG_LEN, SIGINT);
+    ptr = errors_get_message_of_code(errors_sig_msg, SIGINT);
     cr_assert(ptr == NULL);
 }
 
@@ -22,8 +21,7 @@ Test(errors_get, errors_get_message_sig_return_sigquit)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(errors_sig_msg,
-    ERRORS_SIG_MSG_LEN, SIGQUIT);
+    ptr = errors_get_message_of_code(errors_sig_msg, SIGQUIT);
     cr_assert(!strcmp(ptr, "Quit"));
 }
 
@@ -31,17 +29,15 @@ Test(errors_get, errors_get_message_sig_return_null)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(errors_sig_msg,
-    ERRORS_SIG_MSG_LEN, 999);
-    cr_assert(ptr == NULL);
+    ptr = errors_get_message_of_code(errors_sig_msg, 999);
+    cr_assert_str_eq(ptr, "Unknown signal");
 }
 
 Test(errors_get, errors_get_message_errno_return_eacces)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(errors_errno_msg,
-    ERRORS_ERRNO_MSG_LEN, EACCES);
+    ptr = errors_get_message_of_code(errors_errno_msg, EACCES);
     cr_assert(!strcmp(ptr, "Permission denied."));
 }
 
@@ -49,16 +45,14 @@ Test(errors_get, errors_get_message_errno_return_null)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(errors_sig_msg,
-    ERRORS_ERRNO_MSG_LEN, 999);
-    cr_assert(ptr == NULL);
+    ptr = errors_get_message_of_code(errors_sig_msg, 999);
+    cr_assert_str_eq(ptr, "Unknown signal");
 }
 
 Test(errors_get, errors_get_message_null)
 {
     char *ptr = NULL;
 
-    ptr = errors_get_message_of_code(NULL,
-    ERRORS_SIG_MSG_LEN, 999);
+    ptr = errors_get_message_of_code(NULL, 999);
     cr_assert(ptr == NULL);
 }
