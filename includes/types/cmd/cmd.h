@@ -23,6 +23,12 @@ cmd_t *cmd_new(void);
 void cmd_free(cmd_t *command);
 
 /**
+ * @brief Display given command details.
+ * @param cmd Command of which display details
+ */
+void cmd_display(cmd_t *cmd);
+
+/**
  * @brief Determine if target is builtin and set it if so.
  * @param cmd Command of which determine is target is builtin
  * @param shell Shell object

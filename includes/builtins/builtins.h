@@ -17,7 +17,7 @@
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_exit(args_t *args, shell_t *shell);
+int builtin_exit(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle cd builtin command.
@@ -25,7 +25,7 @@ unsigned char builtin_exit(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_cd(args_t *args, shell_t *shell);
+int builtin_cd(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle env builtin command.
@@ -33,7 +33,7 @@ unsigned char builtin_cd(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_env(args_t *args, shell_t *shell);
+int builtin_env(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle unsetenv builtin command.
@@ -41,7 +41,7 @@ unsigned char builtin_env(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_unsetenv(args_t *args, shell_t *shell);
+int builtin_unsetenv(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle setenv builtin command.
@@ -49,6 +49,6 @@ unsigned char builtin_unsetenv(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_setenv(args_t *args, shell_t *shell);
+int builtin_setenv(args_t *args, shell_t *shell);
 
 #endif /* !BUILTINS_H_ */

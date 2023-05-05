@@ -10,7 +10,7 @@
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
 
-unsigned char builtin_env(args_t *args, shell_t *shell)
+int builtin_env(args_t *args, shell_t *shell)
 {
     size_t i = 0;
 

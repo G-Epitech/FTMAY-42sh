@@ -12,10 +12,9 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include "utils/malloc2.h"
+#include "execution/redirections.h"
 
 #define BUFFER_SIZE 10
-
-void execution_double_left(char *word, int fd[2]);
 
 static void redirect_all_stdout(void)
 {
@@ -38,7 +37,7 @@ Test(double_redirection_left, test_pipe_input, .init=redirect_all_stdout) {
     close(p[1]);
 
     pipe(fd);
-    execution_double_left("end", fd);
+    execution_redirection_get_double_left("end", fd[1]);
 
     read(fd[0], reader, 100);
     cr_assert(strcmp(reader, "0123456789\n") == 0, "Wrong Output");
@@ -63,7 +62,7 @@ Test(double_redirection_left, test_word_without_breakline, .init=redirect_all_st
     close(p[1]);
 
     pipe(fd);
-    execution_double_left("end", fd);
+    execution_redirection_get_double_left("end", fd[1]);
 
     read(fd[0], reader, 100);
     cr_assert(strcmp(reader, "0123456789\n") == 0, "Wrong Output");
@@ -88,7 +87,7 @@ Test(double_redirection_left, test_hard_exit, .init=redirect_all_stdout) {
     close(p[1]);
 
     pipe(fd);
-    execution_double_left("end", fd);
+    execution_redirection_get_double_left("end", fd[1]);
 
     read(fd[0], reader, 100);
     cr_assert(strcmp(reader, "0123456789\n") == 0, "Wrong Output");
@@ -102,6 +101,6 @@ Test(double_redirection_left, malloc_failed) {
     int fd[2] = {0, 0};
 
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    execution_double_left("end", fd);
+    execution_redirection_get_double_left("end", fd[1]);
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }

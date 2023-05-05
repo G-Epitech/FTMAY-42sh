@@ -10,7 +10,7 @@
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
 
-unsigned char builtin_exit(args_t *args, shell_t *shell)
+int builtin_exit(args_t *args, shell_t *shell)
 {
     if (!args)
         return SHELL_EXIT_ERROR;

@@ -31,7 +31,7 @@ static void exit_loop(char *new_word, char *input)
     free(input);
 }
 
-void execution_double_left(char *word, int fd[2])
+void execution_redirection_get_double_left(char *word, int fd)
 {
     char *input = NULL;
     char *new_word = malloc2(sizeof(char) * (strlen(word) + 2));
@@ -48,6 +48,6 @@ void execution_double_left(char *word, int fd[2])
             return exit_loop(new_word, input);
         if (strcmp(input, new_word) == 0 || strcmp(input, word) == 0)
             return exit_loop(new_word, input);
-        write(fd[1], input, strlen(input));
+        write(fd, input, strlen(input));
     }
 }

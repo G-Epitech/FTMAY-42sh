@@ -28,6 +28,7 @@ _SRC =			mysh.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
+				types/cmd/display.c \
 				types/cmd/target/target.c \
 				types/cmd/target/builtin.c \
 				types/cmd/target/system.c \
@@ -55,7 +56,7 @@ _SRC =			mysh.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-				types/shell/get.c \
+				types/shell/get_input.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
         		types/shell/vars/vars.c \
@@ -87,7 +88,8 @@ _SRC =			mysh.c \
 				parsing/var/get_no_var.c \
 				parsing/var/get_var.c \
 				\
-				execution/double_left.c \
+				execution/redirections/double_left.c \
+				execution/cmd/cmd.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \

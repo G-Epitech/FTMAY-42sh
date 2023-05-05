@@ -11,12 +11,13 @@
 
 char *shell_get_input(shell_t *shell)
 {
-    char *input_user = NULL;
-    size_t len = 0;
-    int out = 0;
+    char *input = NULL;
+    size_t size = 0;
+    ssize_t len = 0;
 
-    out = getline(&input_user, &len, stdin);
-    if (out == -1)
+    len = getline(&input, &size, stdin);
+    if (len == -1)
         shell_exit(shell);
-    return input_user;
+    input[len - 1] = (input[len - 1] == '\n') ? '\0' : input[len - 1];
+    return input;
 }
