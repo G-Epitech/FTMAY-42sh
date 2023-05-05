@@ -12,6 +12,7 @@ _SRC =			builtins/cd.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
 				builtins/set.c \
+				builtins/unset.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
@@ -94,6 +95,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
 				criterion/builtins/set.c \
+				criterion/builtins/unset.c \
 				\
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \
