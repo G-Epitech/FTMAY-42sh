@@ -21,6 +21,13 @@ Test(builtins_unset, unvalid_unset, .init=cr_redirect_stderr) {
     shell_free(shell);
 }
 
+Test(builtins_unset, invalid_pointer, .init=cr_redirect_stderr) {
+    shell_t *shell = shell_new();
+
+    cr_assert(builtin_unset(NULL, shell) == SHELL_EXIT_ERROR);
+    shell_free(shell);
+}
+
 Test(builtins_unset, simple_unsetenv) {
     char *argv[] = {"unsetenv", "super"};
     args_t args = {.argc = 2, .argv = argv};
