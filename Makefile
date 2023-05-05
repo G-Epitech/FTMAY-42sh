@@ -6,7 +6,9 @@
 ##
 
 
-_SRC =			builtins/cd.c \
+_SRC =			mysh.c \
+				\
+				builtins/cd.c \
 				builtins/env.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
@@ -53,6 +55,9 @@ _SRC =			builtins/cd.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
+				types/shell/get.c \
+				types/shell/exit.c \
+				types/shell/prompt.c \
         		types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
@@ -118,6 +123,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_cmd.c \
 				criterion/parsing/set_command_args.c \
 				criterion/parsing/var.c \
+				\
+				criterion/execution/double_left.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

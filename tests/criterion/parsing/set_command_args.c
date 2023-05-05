@@ -9,16 +9,17 @@
 #include <string.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "types/inst/inst.h"
-#include "parsing/parsing.h"
-#include "types/parsing_utils/parsing_utils.h"
 #include "types/cmd/cmd.h"
-#include "types/shell/shell.h"
 #include "utils/malloc2.h"
+#include "builtins/defs.h"
+#include "parsing/parsing.h"
+#include "types/inst/inst.h"
+#include "types/shell/shell.h"
+#include "types/parsing_utils/parsing_utils.h"
 
 Test(parsing_set_cmd_args, test_with_guillemet)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
     command->input = "echo \"super $PWD\"";
@@ -30,7 +31,7 @@ Test(parsing_set_cmd_args, test_with_guillemet)
 
 Test(parsing_set_cmd_args, test_without_innibiteur)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
     command->input = "echo super";
@@ -42,7 +43,7 @@ Test(parsing_set_cmd_args, test_without_innibiteur)
 
 Test(parsing_set_cmd_args, test_without_innibiteur_separed_by_space)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
     command->input = "echo\t\tsuper";
@@ -54,7 +55,7 @@ Test(parsing_set_cmd_args, test_without_innibiteur_separed_by_space)
 
 Test(parsing_set_cmd_args, malloc_failed)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
     bool test_return = false;
 
@@ -67,7 +68,7 @@ Test(parsing_set_cmd_args, malloc_failed)
 
 Test(parsing_set_cmd_args, cmd_is_null)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
     bool test_return = false;
 
@@ -78,7 +79,7 @@ Test(parsing_set_cmd_args, cmd_is_null)
 
 Test(parsing_set_cmd_args, put_space_at_end)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
     bool test_return = false;
 
