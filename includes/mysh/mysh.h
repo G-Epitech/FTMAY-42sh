@@ -10,7 +10,7 @@
 
 /**
  * @brief Run the main processus.
- * @return Exit code status of shell .
+ * @return Exit code status of shell
  */
 int mysh(void);
 

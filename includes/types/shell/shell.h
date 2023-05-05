@@ -50,7 +50,7 @@ char *shell_get_var(shell_t *shell, char *name, bool copy);
 /**
  * @brief Wait for all user command entry.
  * @param shell Shell object
- * @return Command user input in format char *.
+ * @return Command user input in format char *
  */
 char *shell_get_input(shell_t *shell);
 
@@ -63,6 +63,7 @@ void shell_free_input(char *input);
 
 /**
  * @brief Display before the user input the shell prompt.
+ * @param shell Shell object
  */
 void shell_display_prompt(shell_t *shell);
 
