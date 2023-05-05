@@ -7,8 +7,8 @@
 
 #include <unistd.h>
 #include <string.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include "types/cmd/cmd.h"
 
 static bool is_absolute(char *path)
