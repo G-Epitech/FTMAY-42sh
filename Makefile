@@ -93,6 +93,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/cd.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
+				criterion/builtins/set.c \
 				\
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \
