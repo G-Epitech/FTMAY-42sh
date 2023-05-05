@@ -117,6 +117,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_cmd.c \
 				criterion/parsing/set_command_args.c \
 				criterion/parsing/var.c \
+				\
+				criterion/execution/double_left.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
