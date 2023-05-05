@@ -48,7 +48,7 @@ Test(parsing_getcmd, empty)
     parsing_utils_t *utils = parsing_utils_new("");
     inst_t *cmd = parsing_get_cmd(utils);
 
-    cr_assert_eq(strcmp(cmd->value.cmd->input, ""), 0);
+    cr_assert_null(cmd);
     parsing_utils_free(utils);
     inst_free(cmd);
 }

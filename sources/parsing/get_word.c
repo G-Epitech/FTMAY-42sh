@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "types/parsing_utils/defs.h"
 #include "utils/malloc2.h"
+#include "types/parsing_utils/defs.h"
 
 static bool handle_error(parsing_utils_t *utils, int start, int end)
 {

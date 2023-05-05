@@ -24,15 +24,11 @@ static bool check_parentheses(char *input)
             result--;
         index++;
     }
-    if (result > 0) {
+    if (result > 0)
         write(2, "Too many ('s.\n", 14);
-        return false;
-    }
-    if (result < 0) {
+    if (result < 0)
         write(2, "Too many )'s.\n", 14);
-        return false;
-    }
-    return true;
+    return !(result > 0 || result < 0);
 }
 
 inst_t *parsing_get_main_block(char *input)
