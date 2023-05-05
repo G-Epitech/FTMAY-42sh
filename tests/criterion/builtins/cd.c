@@ -12,6 +12,7 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include "utils/malloc2.h"
+#include "builtins/defs.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
@@ -24,7 +25,7 @@ Test(builtins_cd, simple_cd) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -46,7 +47,7 @@ Test(builtins_cd, simple_cd_with_malloc_fail) {
         .argc = 1,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
 
@@ -68,7 +69,7 @@ Test(builtins_cd, with_arg) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -94,7 +95,7 @@ Test(builtins_cd, tilde) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -120,7 +121,7 @@ Test(builtins_cd, tilde_with_no_home, .init=cr_redirect_stderr) {
         .argv = commands
     };
     unsetenv("HOME");
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(&args, shell);
@@ -139,7 +140,7 @@ Test(builtins_cd, back) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
     char *owd = malloc(PATH_MAX);
     char *pwd = malloc(PATH_MAX);
@@ -159,7 +160,7 @@ Test(builtins_cd, back) {
 }
 
 Test(builtins_cd, no_args) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(NULL, shell);
@@ -177,7 +178,7 @@ Test(builtins_cd, too_many_args, .init=cr_redirect_stderr) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(&args, shell);
@@ -196,7 +197,7 @@ Test(builtins_cd, bad_path, .init=cr_redirect_stderr) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_cd(&args, shell);

@@ -20,8 +20,16 @@ inst_t *parsing_get_main_block(char *input)
     if (!utils || !input)
         return NULL;
     main = parsing_recursivity(utils);
-    parsing_utils_free(utils);
-    if (main == NULL)
+    if (utils->level > 0) {
+        inst_free(main);
+        write(2, "Too many ('s.\n", 14);
         return NULL;
+    }
+    if (utils->level < 0) {
+        inst_free(main);
+        write(2, "Too many )'s.\n", 14);
+        return NULL;
+    }
+    parsing_utils_free(utils);
     return main;
 }

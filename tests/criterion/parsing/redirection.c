@@ -8,9 +8,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
 #include "types/inst/inst.h"
 #include "parsing/parsing.h"
 #include "types/parsing_utils/parsing_utils.h"
+
+static void redirect_all_stdout(void)
+{
+    cr_redirect_stdout();
+    cr_redirect_stderr();
+}
 
 Test(parsing_redirection, redirection_output_simple)
 {
@@ -61,7 +68,7 @@ Test(parsing_redirection, redirection_input_double)
     cr_assert_str_eq(test_inst->ios.input.path, "test");
 }
 
-Test(parsing_redirection, bad_redirection_input_double)
+Test(parsing_redirection, bad_redirection_input_double, .init=redirect_all_stdout)
 {
     parsing_utils_t *test = parsing_utils_new("cat <<< test (ls -l -a | cat -e)");
     inst_block_t *test_inst_block = inst_block_new();
@@ -72,6 +79,7 @@ Test(parsing_redirection, bad_redirection_input_double)
     test->index_parsing = 4;
     good_redirection = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(good_redirection, false);
+    cr_assert_stdout_eq_str("Missing name for redirect.\n");
 }
 
 Test(parsing_redirection, semicolon_separator)
@@ -165,7 +173,7 @@ Test(parsing_redirection, test_get_path_with_tab)
     cr_assert_str_eq(test_inst->ios.output.path, "test");
 }
 
-Test(parsing_redirection, test_ambigous_simple_right)
+Test(parsing_redirection, test_ambigous_simple_right, .init=redirect_all_stdout)
 {
     parsing_utils_t *test = parsing_utils_new("ls >> test>test");
     inst_block_t *test_inst_block = inst_block_new();
@@ -177,10 +185,10 @@ Test(parsing_redirection, test_ambigous_simple_right)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
-
+    cr_assert_stdout_eq_str("Ambiguous input redirect.\n");
 }
 
-Test(parsing_redirection, test_ambigous_simple_left)
+Test(parsing_redirection, test_ambigous_simple_left, .init=redirect_all_stdout)
 {
     parsing_utils_t *test = parsing_utils_new("ls << test<test");
     inst_block_t *test_inst_block = inst_block_new();
@@ -192,9 +200,10 @@ Test(parsing_redirection, test_ambigous_simple_left)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
+    cr_assert_stdout_eq_str("Ambiguous input redirect.\n");
 }
 
-Test(parsing_redirection, test_ambigous_double_right)
+Test(parsing_redirection, test_ambigous_double_right, .init=redirect_all_stdout)
 {
     parsing_utils_t *test = parsing_utils_new("ls > test>>test");
     inst_block_t *test_inst_block = inst_block_new();
@@ -206,10 +215,11 @@ Test(parsing_redirection, test_ambigous_double_right)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
+    cr_assert_stdout_eq_str("Ambiguous input redirect.\n");
 
 }
 
-Test(parsing_redirection, test_ambigous_double_left)
+Test(parsing_redirection, test_ambigous_double_left, .init=redirect_all_stdout)
 {
     parsing_utils_t *test = parsing_utils_new("ls < test<<test");
     inst_block_t *test_inst_block = inst_block_new();
@@ -221,4 +231,5 @@ Test(parsing_redirection, test_ambigous_double_left)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
+    cr_assert_stdout_eq_str("Ambiguous input redirect.\n");
 }

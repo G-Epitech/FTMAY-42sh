@@ -37,7 +37,7 @@ Test(parsing_getcmd, basic_with_redirection)
     parsing_utils_t *utils = parsing_utils_new("ls -la > tmp");
     inst_t *cmd = parsing_get_cmd(utils);
 
-    cr_assert_eq(strcmp(cmd->value.cmd->input, "ls -la "), 0);
+    cr_assert_eq(strcmp(cmd->value.cmd->input, "ls -la  "), 0);
     parsing_utils_free(utils);
     inst_free(cmd);
 }

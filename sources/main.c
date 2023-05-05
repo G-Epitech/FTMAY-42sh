@@ -5,17 +5,13 @@
 ** Main file of project
 */
 
+#include <stdio.h>
+#include "mysh/mysh.h"
+#include "parsing/parsing.h"
 #include "types/shell/shell.h"
-#include "builtins/builtins.h"
-#include "types/var/var.h"
 
 int main(void)
 {
-    shell_t *shell = shell_new();
-    char *argv[] = {"var"};
-    args_t args = {.argc = 1, .argv = argv};
-
-    builtin_var(&args, shell);
-    shell_free(shell);
-    return 0;
+    setvbuf(stdout, NULL, _IONBF, 0);
+    return mysh();
 }
