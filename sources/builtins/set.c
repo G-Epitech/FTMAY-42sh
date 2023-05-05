@@ -6,8 +6,10 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <strings.h>
 #include "utils/utils.h"
+#include "utils/malloc2.h"
 #include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
@@ -22,6 +24,27 @@ static bool list_set(shell_t *shell, char *name, char *value)
     return true;
 }
 
+static bool parse_value(shell_t *shell, char *name, char *value)
+{
+    char *new_value = malloc2(sizeof(char) * strlen(value) - 2);
+    size_t i = 1;
+
+    if (value[0] != '"') {
+        free(new_value);
+        return list_set(shell, name, value);
+    }
+    while (value[i + 1] != '\0') {
+        new_value[i - 1] = value[i];
+        i++;
+    }
+    if (value[i] != '"') {
+        fprintf(stderr, "Unmatched '\"'.\n");
+        return false;
+    }
+    new_value[strlen(value) - 2] = '\0';
+    return list_set(shell, name, new_value);
+}
+
 static bool set_var_value(args_t *args, shell_t *shell, int *index)
 {
     char *consumable = strdup(args->argv[*index]);
@@ -29,15 +52,16 @@ static bool set_var_value(args_t *args, shell_t *shell, int *index)
     char *value = strtok(NULL, "=");
 
     (*index)++;
-    if (value)
-        return list_set(shell, name, value);
+    if (value) {
+        return parse_value(shell, name, value);
+    }
     if (*index == args->argc || strcmp(args->argv[*index], "="))
         return list_set(shell, name, "");
     (*index)++;
     if (*index == args->argc)
         return list_set(shell, name, "");
     (*index)++;
-    return list_set(shell, name, args->argv[*index - 1]);
+    return parse_value(shell, name, args->argv[*index - 1]);
 }
 
 unsigned char builtin_set(args_t *args, shell_t *shell)
