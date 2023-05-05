@@ -6,7 +6,9 @@
 ##
 
 
-_SRC =			builtins/cd.c \
+_SRC =			mysh.c \
+				\
+				builtins/cd.c \
 				builtins/env.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
@@ -48,6 +50,9 @@ _SRC =			builtins/cd.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
+				types/shell/get.c \
+				types/shell/exit.c \
+				types/shell/prompt.c \
         		types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \

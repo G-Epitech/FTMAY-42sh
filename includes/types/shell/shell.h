@@ -48,6 +48,25 @@ void shell_unset_var(shell_t *shell, char *name);
 char *shell_get_var(shell_t *shell, char *name, bool copy);
 
 /**
+ * @brief Wait for all user command entry.
+ * @param shell Shell object
+ * @return Command user input in format char *
+ */
+char *shell_get_input(shell_t *shell);
+
+/**
+ * @brief Display before the user input the shell prompt.
+ * @param shell Shell object
+ */
+void shell_display_prompt(shell_t *shell);
+
+/**
+ * @brief Display prompt for exit and set status of shell to SH_EXITED.
+ * @param shell Shell object
+ */
+void shell_exit(shell_t *shell);
+
+/**
  * @brief Init specials variables of shell.
  * @param shell Shell object
  */
