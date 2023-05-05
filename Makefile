@@ -89,6 +89,8 @@ _SRC =			mysh.c \
 				parsing/var/get_var.c \
 				\
 				execution/redirections/double_left.c \
+				execution/input.c \
+				execution/output.c \
 				execution/cmd/cmd.c \
 
 _TESTS =		criterion/types/list.c \
