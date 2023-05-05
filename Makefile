@@ -59,6 +59,7 @@ _SRC =			mysh.c \
 				types/shell/new.c \
 				types/shell/free.c \
 				types/shell/get_input.c \
+				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
         		types/shell/vars/vars.c \
