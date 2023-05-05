@@ -85,6 +85,7 @@ _SRC =			mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+<<<<<<< HEAD
 				parsing/var/replace.c \
 				parsing/var/get_no_var.c \
 				parsing/var/get_var.c \
@@ -93,6 +94,11 @@ _SRC =			mysh.c \
 				execution/input.c \
 				execution/output.c \
 				execution/cmd/cmd.c \
+=======
+				\
+				execution/execution.c \
+				execution/block/block.c \
+>>>>>>> origin/execution-block
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
