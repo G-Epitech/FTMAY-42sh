@@ -219,6 +219,21 @@ Test(builtins_set, first_letter_not_alpha, .init=cr_redirect_stderr) {
     cr_assert_stderr_eq_str("set: Variable name must begin with a letter.\n");
 }
 
+Test(builtins_set, first_letter_not_alpha2, .init=cr_redirect_stderr) {
+    int commands_size = 2;
+    char *argv[] = {"set", "{beille"};
+    args_t args = {
+        .argc = commands_size,
+        .argv = argv
+    };
+    shell_t *shell = shell_new();
+    unsigned char exit_status = SHELL_EXIT_SUCCESS;
+
+    exit_status = builtin_set(&args, shell);
+    cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
+    cr_assert_stderr_eq_str("set: Variable name must begin with a letter.\n");
+}
+
 Test(builtins_set, unmatched_quote, .init=cr_redirect_stderr) {
     int commands_size = 2;
     char *argv[] = {"set", "super=\"ahah"};
