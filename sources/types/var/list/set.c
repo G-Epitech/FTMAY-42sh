@@ -32,7 +32,7 @@ bool var_list_set(list_t *vars, char *name, char *value)
     var_t *variable = var_list_get(vars, name);
     node_t *node = NULL;
 
-    if (!vars)
+    if (!vars || !name)
         return false;
     if (variable)
         return var_set(variable, value);

@@ -24,6 +24,10 @@
     #define PARSING_NO_SPACE_SEMICOLON 0
     #define PARSING_NO_ERROR_SEPARATOR 1
     #define PARSING_ERROR_SEPARATOR 2
+    #define VAR_NOT_FOUND 1
+    #define VAR_FOUND 2
+    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char \
+&& char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
 
 /**
  * @brief Parse command input into string array.
@@ -137,5 +141,31 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
  * @return New instruction type block with all block/commands in it
  */
 inst_t *parsing_recursivity(parsing_utils_t *utils);
+
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param shell Shell struct
+ * @return Input with var remplaced
+ */
+char *parsing_var_replace(char *input, shell_t *shell);
+
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param shell Shell struct
+ * @param parsing_index Index parsing on remplacing var
+ * @return Value of var
+ */
+char *get_var(char *input, shell_t *shell, int *parsing_index);
+
+/**
+ * @brief Replace value of var.
+ * @param input Input of user
+ * @param start Start of nor var input
+ * @param end End of nor var input
+ * @return Input who is not var
+ */
+char *get_no_var(char *input, int start, int end);
 
 #endif /* !PARSING_H_ */
