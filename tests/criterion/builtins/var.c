@@ -9,11 +9,12 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include "utils/malloc2.h"
+#include "builtins/defs.h"
 #include "builtins/builtins.h"
 #include "types/shell/shell.h"
 
 Test(builtins_var, simple_display, .init=cr_redirect_stdout) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *argv[] = {"var"};
     args_t args = {.argc = 1, .argv = argv};
     char *argv_set[] = {"set", "super=2", "arthur=1"};
@@ -25,7 +26,7 @@ Test(builtins_var, simple_display, .init=cr_redirect_stdout) {
 }
 
 Test(builtins_var, invalid_pointer) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *argv[] = {"var"};
     args_t args = {.argc = 1, .argv = argv};
 
@@ -35,7 +36,7 @@ Test(builtins_var, invalid_pointer) {
 }
 
 Test(builtins_var, invalid_var_list) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *argv[] = {"var"};
     args_t args = {.argc = 1, .argv = argv};
 
@@ -44,7 +45,7 @@ Test(builtins_var, invalid_var_list) {
 }
 
 Test(builtins_var, invalid_new_list) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *argv[] = {"var"};
     args_t args = {.argc = 1, .argv = argv};
 

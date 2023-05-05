@@ -243,7 +243,7 @@ Test(types_shell_vars, shell_special_var_update_from_env_null_shell)
 
 Test(types_shell_vars, shell_special_vars_home)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *value = shell_special_vars_home_get(shell, "home", true);
     char *real_value = var_list_get_value(shell->vars, "home", true);
 
@@ -259,7 +259,7 @@ Test(types_shell_vars, shell_special_vars_home_shell_null)
 
 Test(types_shell_vars, shell_special_vars_home_update_null)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     bool status = false;
 
     status = shell_special_vars_home_update(NULL, "/test", shell);
@@ -274,7 +274,7 @@ Test(types_shell_vars, shell_special_vars_home_update_null)
 
 Test(types_shell_vars, shell_special_vars_home_update_bad_malloc)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     bool status = false;
 
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
@@ -285,7 +285,7 @@ Test(types_shell_vars, shell_special_vars_home_update_bad_malloc)
 
 Test(types_shell_vars, shell_special_vars_home_update)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     bool status = false;
 
     status = shell_special_vars_home_update("home", "42sh", shell);

@@ -7,11 +7,13 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include "builtins/defs.h"
+#include "types/var/defs.h"
 #include "types/args/args.h"
+#include "types/node/defs.h"
 #include "builtins/builtins.h"
 #include "types/shell/shell.h"
-#include "types/node/defs.h"
-#include "types/var/defs.h"
+
 
 Test(builtins_set, set_display, .init=cr_redirect_stdout) {
     int commands_size = 1;
@@ -21,7 +23,7 @@ Test(builtins_set, set_display, .init=cr_redirect_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -35,7 +37,7 @@ Test(builtins_set, one_set_void) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -51,7 +53,7 @@ Test(builtins_set, one_set_void_equal) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -67,7 +69,7 @@ Test(builtins_set, one_set_arg_block_number) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -83,7 +85,7 @@ Test(builtins_set, one_set_arg_block_string) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -99,7 +101,7 @@ Test(builtins_set, one_set_arg_multi_block_number) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -115,7 +117,7 @@ Test(builtins_set, one_set_arg_multi_block_string) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -131,7 +133,7 @@ Test(builtins_set, multi_set_arg_block_number) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -151,7 +153,7 @@ Test(builtins_set, multi_set_arg_block_string) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -171,7 +173,7 @@ Test(builtins_set, multi_set_arg_multi_block_number) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -191,7 +193,7 @@ Test(builtins_set, multi_set_arg_multi_block_string) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -211,7 +213,7 @@ Test(builtins_set, first_letter_not_alpha, .init=cr_redirect_stderr) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -226,7 +228,7 @@ Test(builtins_set, first_letter_not_alpha2, .init=cr_redirect_stderr) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -241,7 +243,7 @@ Test(builtins_set, unmatched_quote, .init=cr_redirect_stderr) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -256,7 +258,7 @@ Test(builtins_set, multi_block_arg_void) {
         .argc = commands_size,
         .argv = argv
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(&args, shell);
@@ -266,7 +268,7 @@ Test(builtins_set, multi_block_arg_void) {
 }
 
 Test(builtins_set, no_args) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = SHELL_EXIT_SUCCESS;
 
     exit_status = builtin_set(NULL, shell);
