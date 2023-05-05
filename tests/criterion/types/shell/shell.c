@@ -63,6 +63,7 @@ Test(exit_shell, shell_exit_default, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new();
 
+    shell->is_tty = true;
     shell_exit(shell);
     cr_assert_stdout_eq_str("exit\n");
     cr_assert_eq(shell->status, SH_EXITED);
