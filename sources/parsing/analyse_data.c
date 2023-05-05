@@ -12,19 +12,22 @@
 #include "parsing/parsing.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-static bool separator_or_pipe(parsing_utils_t *utils, inst_t *instruction,
+static int separator_or_pipe(parsing_utils_t *utils, inst_t *instruction,
 inst_block_t *block)
 {
     char *data = utils->input;
-    bool test_return = false;
 
     if (parsing_maybe_separator(utils)) {
-        test_return = parsing_separator_handler(utils, instruction);
-        return test_return;
-    } else if (data[PARSING_INDEX(utils)] == '|') {
-        return parsing_pipes_handler(utils, block);
+        if (parsing_separator_handler(utils, instruction))
+            return 1;
+        return 2;
     }
-    return true;
+    if (data[PARSING_INDEX(utils)] == '|') {
+        if (parsing_pipes_handler(utils, block))
+            return 1;
+        return 2;
+    }
+    return 0;
 }
 
 static bool append_inst(inst_block_t *block, inst_t *instruction)
@@ -34,7 +37,7 @@ static bool append_inst(inst_block_t *block, inst_t *instruction)
     bool last_ios = last->ios.input.type != IOT_DEFAULT;
 
     inst_ios = inst_ios && instruction->ios.output.type == IOT_DEFAULT;
-    last_ios = last_ios && last->ios.output.type != IOT_DEFAULT;
+    last_ios = last_ios || last->ios.output.type != IOT_DEFAULT;
     if (last->type == INS_NONE) {
         if (inst_ios)
             instruction->ios = last->ios;
@@ -84,23 +87,22 @@ static int handle_space_semicolon(parsing_utils_t *utils, inst_t *instruction)
 bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
                     inst_t *instruction)
 {
-    int result_new_block = 0;
-    int result_space_semicolon = 0;
+    int result = 0;
     inst_t *child = NULL;
 
-    result_new_block = open_new_block(utils, block, child);
-    if (result_new_block != PARSING_NO_OPEN_BLOCK)
-        return result_new_block == PARSING_NO_ERROR_RECURSIVITY;
+    result = open_new_block(utils, block, child);
+    if (result != PARSING_NO_OPEN_BLOCK)
+        return result == PARSING_NO_ERROR_RECURSIVITY;
     if (parsing_maybe_redirection(utils))
         return parsing_redirection_handler(utils, instruction);
-    if (!separator_or_pipe(utils, instruction, block))
-        return false;
-    result_space_semicolon = handle_space_semicolon(utils, instruction);
-    if (result_space_semicolon != PARSING_NO_SPACE_SEMICOLON)
-        return result_space_semicolon == PARSING_NO_ERROR_SEPARATOR;
+    result = separator_or_pipe(utils, instruction, block);
+    if (result != 0)
+        return result == 1;
+    result = handle_space_semicolon(utils, instruction);
+    if (result != PARSING_NO_SPACE_SEMICOLON)
+        return result == PARSING_NO_ERROR_SEPARATOR;
     child = parsing_get_cmd(utils);
     if (!child)
         return false;
-    append_inst(block, child);
-    return true;
+    return append_inst(block, child);
 }

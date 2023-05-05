@@ -18,6 +18,8 @@ static void append_cmd(cmd_t *command, char *data)
     char *total = NULL;
     int size = 0;
 
+    if (!data || !command)
+        return;
     if (command->input) {
         size = strlen(command->input) + strlen(data) + 3;
         total = malloc2(sizeof(char) * (size));
@@ -52,7 +54,7 @@ int *index_start, cmd_t *command)
         return PARSING_STOP_CMD;
     if (data[index] == '(' || data[index] == ')')
         return PARSING_STOP_CMD;
-    if (data[index] == ';' || data[index] == '|')
+    if (data[index] == ';' || data[index] == '|' || data[index] == '&')
         return PARSING_STOP_CMD;
     return PARSING_NO_ERROR_CMD;
 }

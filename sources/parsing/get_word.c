@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "types/parsing_utils/defs.h"
+#include "utils/malloc2.h"
 
 static bool handle_error(parsing_utils_t *utils, int start, int end)
 {
@@ -23,7 +24,7 @@ static bool handle_error(parsing_utils_t *utils, int start, int end)
 
 char *parsing_get_word(parsing_utils_t *utils, int start, int end)
 {
-    char *word = malloc(sizeof(char) * end - start + 1);
+    char *word = malloc2(sizeof(char) * end - start + 1);
     int index = 0;
 
     if (!word || !handle_error(utils, start, end))

@@ -18,7 +18,7 @@ bool parsing_pipes_handler(parsing_utils_t *utils, inst_block_t *block)
         return false;
     last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
     if (last->ios.output.type != IOT_DEFAULT) {
-        write(1, "Ambiguous input redirect.\n", 26);
+        write(2, "Ambiguous input redirect.\n", 26);
         return false;
     }
     last->ios.output.type = IOT_PIPED;
