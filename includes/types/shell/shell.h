@@ -12,9 +12,10 @@
 
 /**
  * @brief Create a new shell integrating given environnement variables.
+ * @param builtins Builtins command to set to shell
  * @return New shell object
  */
-shell_t *shell_new(void);
+shell_t *shell_new(const builtin_t *builtins);
 
 /**
  * @brief Free given shell and all its internal fields.

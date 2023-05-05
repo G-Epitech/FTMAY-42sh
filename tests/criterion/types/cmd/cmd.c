@@ -8,7 +8,9 @@
 #include <string.h>
 #include <criterion/criterion.h>
 #include "utils/malloc2.h"
+#include "builtins/defs.h"
 #include "types/cmd/cmd.h"
+#include "types/shell/shell.h"
 
 Test(types_cmd, new_cmd)
 {

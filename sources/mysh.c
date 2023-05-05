@@ -6,12 +6,13 @@
 */
 
 #include <stdio.h>
+#include "builtins/defs.h"
 #include "types/shell/shell.h"
 
 int mysh(void)
 {
     int exit_code = 0;
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     char *input = NULL;
 
     while (shell->status == SH_RUNNING) {

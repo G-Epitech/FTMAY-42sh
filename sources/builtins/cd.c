@@ -11,6 +11,7 @@
 #include <limits.h>
 #include <string.h>
 #include <stdbool.h>
+#include "builtins/defs.h"
 #include "utils/malloc2.h"
 #include "errors/errors.h"
 #include "types/args/defs.h"

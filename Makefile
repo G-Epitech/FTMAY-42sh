@@ -28,6 +28,11 @@ _SRC =			mysh.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
+				types/cmd/target/target.c \
+				types/cmd/target/builtin.c \
+				types/cmd/target/system.c \
+				types/cmd/target/absolute.c \
+				types/cmd/target/empty.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -88,12 +93,13 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
-				criterion/types/cmd.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
+				criterion/types/cmd/cmd.c \
+				criterion/types/cmd/target.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
