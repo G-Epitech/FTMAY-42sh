@@ -61,6 +61,6 @@ unsigned char builtin_cd(args_t *args, shell_t *shell)
         free(owd);
         return SHELL_EXIT_ERROR;
     }
-    var_list_set(shell->vars, "cwd", owd);
+    var_list_set(shell->vars, "owd", owd);
     return SHELL_EXIT_SUCCESS;
 }
