@@ -18,8 +18,6 @@ Test(types_shell, new_valid_shell)
     shell_t *shell = shell_new(builtins_cmds);
 
     cr_assert_not_null(shell);
-    cr_assert_not_null(shell->owd);
-    cr_assert_not_null(shell->pwd);
     cr_assert_not_null(shell->vars);
     cr_assert_eq(shell->exit_code, SHELL_EXIT_SUCCESS);
     cr_assert_eq(shell->is_tty, isatty(STDIN_FILENO));

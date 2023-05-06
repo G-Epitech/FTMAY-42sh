@@ -14,6 +14,7 @@
 #include "builtins/defs.h"
 #include "utils/malloc2.h"
 #include "errors/errors.h"
+#include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
@@ -21,6 +22,7 @@
 static bool set_new_path(args_t *args, shell_t *shell)
 {
     char *path = NULL;
+    char *cwd = malloc2(PATH_MAX);
 
     if (args->argc == 2)
         path = args->argv[1];
@@ -29,12 +31,15 @@ static bool set_new_path(args_t *args, shell_t *shell)
         path = path ? path : "";
     }
     if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH))
-        path = shell->owd;
+        path = var_list_get(shell->vars, "owd")->value;
     if (chdir(path) == -1) {
         fprintf(stderr, "cd: %s\n", errors_strerror(errno));
         return false;
     }
-    getcwd(shell->pwd, PATH_MAX);
+    if (!cwd)
+        return false;
+    getcwd(cwd, PATH_MAX);
+    var_list_set(shell->vars, "cwd", cwd);
     return true;
 }
 
@@ -56,7 +61,6 @@ unsigned char builtin_cd(args_t *args, shell_t *shell)
         free(owd);
         return SHELL_EXIT_ERROR;
     }
-    free(shell->owd);
-    shell->owd = owd;
+    var_list_set(shell->vars, "cwd", owd);
     return SHELL_EXIT_SUCCESS;
 }
