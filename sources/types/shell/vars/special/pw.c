@@ -12,7 +12,8 @@
 #include "utils/asprintf2.h"
 #include "types/shell/shell.h"
 
-bool shell_special_vars_pw_uid_init(char *name, shell_t *shell, char *dependency)
+bool shell_special_vars_pw_uid_init(char *name, shell_t *shell,
+char *dependency)
 {
     uid_t uid = 0;
     char *uid_string = NULL;

@@ -17,7 +17,7 @@ char *dependency)
 {
     char *cwd = malloc2(PATH_MAX);
     (void) dependency;
-    
+
     if (!cwd)
         return false;
     if (!getcwd(cwd, PATH_MAX) || !cwd)
