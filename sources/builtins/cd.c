@@ -31,7 +31,7 @@ static bool set_new_path(args_t *args, shell_t *shell)
         path = path ? path : "";
     }
     if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH))
-        path = var_list_get(shell->vars, "owd")->value;
+        path = var_list_get_value(shell->vars, "owd", true);
     if (chdir(path) == -1) {
         fprintf(stderr, "cd: %s\n", errors_strerror(errno));
         return false;
