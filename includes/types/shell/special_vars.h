@@ -81,6 +81,15 @@ shell_t *shell);
  */
 bool shell_special_vars_home_update(char *name, char *value, shell_t *shell);
 
+/**
+ * @brief Set special shell variable (uid).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_uid_init(char *name, shell_t *shell, char *dependency);
+
 // List of special shell variables
 static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
@@ -104,7 +113,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_get,
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_uid_init,
         NULL
     },
     {
