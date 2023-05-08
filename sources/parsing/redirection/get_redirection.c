@@ -27,7 +27,7 @@ static bool check_name(inst_t *instruction, int index)
 {
     if ((index <= 1 && instruction->ios.input.path[0] == '\0') ||
         (index >= 2 && instruction->ios.output.path[0] == '\0')) {
-        write(1, "Missing name for redirect.\n", 27);
+        write(2, "Missing name for redirect.\n", 27);
         return false;
     }
     return true;
@@ -39,6 +39,8 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
     char *data = utils->input + utils->index_parsing;
     int index = 0;
 
+    if (!instruction)
+        return false;
     for (int i = 0; i < 4; i++) {
         if (strncmp(redirections[i], data, strlen(redirections[i])) == 0) {
             index = i;
@@ -47,7 +49,7 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
         }
     }
     if (!check_ambiguous(instruction, index)) {
-        write(1, "Ambiguous input redirect.\n", 26);
+        write(2, "Ambiguous input redirect.\n", 26);
         return false;
     }
     parsing_redirection_set_type(index, instruction);

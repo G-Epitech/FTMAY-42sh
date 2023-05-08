@@ -46,14 +46,15 @@ inst_t *parsing_recursivity(parsing_utils_t *utils)
     if (!instruction || !block)
         return NULL;
     set_block(instruction, block);
-    while (PARSING_INPUT(utils)[PARSING_INDEX(utils)] != '\0') {
+    while (utils->input[PARSING_INDEX(utils)] != '\0') {
         if (!close_block(utils, instruction, block))
             return instruction;
         last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
         if (!parsing_analyse_data(utils, block, last))
             return NULL;
     }
-    if (!parsing_break_separator(instruction))
+    last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
+    if (!parsing_break_separator(last))
         return NULL;
     return instruction;
 }

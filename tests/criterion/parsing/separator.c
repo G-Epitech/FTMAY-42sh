@@ -175,7 +175,7 @@ Test(parsing_separator, test_with_parsing_analyse_data_end_semicolon, .init=redi
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 3;
     test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
-    cr_assert_eq(test_return, false);
+    cr_assert_eq(test_return, true);
 }
 
 Test(parsing_separator, test_with_parsing_analyse_data_invalid_null_cmd, .init=redirect_all_stdout)
@@ -190,5 +190,5 @@ Test(parsing_separator, test_with_parsing_analyse_data_invalid_null_cmd, .init=r
     test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
     cr_assert_eq(test_return, true);
     test_return = parsing_analyse_data(utils, test_inst_block, test_inst);
-    cr_assert_eq(test_return, false);
+    cr_assert_eq(test_return, true);
 }

@@ -11,6 +11,7 @@
 #include "parsing/utils.h"
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
+#include "utils/malloc2.h"
 
 Test(parsing_getcmd, basic)
 {
@@ -47,7 +48,29 @@ Test(parsing_getcmd, empty)
     parsing_utils_t *utils = parsing_utils_new("");
     inst_t *cmd = parsing_get_cmd(utils);
 
-    cr_assert_eq(strcmp(cmd->value.cmd->input, ""), 0);
+    cr_assert_null(cmd);
     parsing_utils_free(utils);
     inst_free(cmd);
+}
+
+Test(parsing_getcmd, malloc_failed)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls -la > tmp");
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    inst_t *cmd = parsing_get_cmd(utils);
+
+    cr_assert_null(cmd);
+    parsing_utils_free(utils);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+}
+
+Test(parsing_getcmd, malloc_failed_word)
+{
+    parsing_utils_t *utils = parsing_utils_new("ls -la > tmp");
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    inst_t *cmd = parsing_get_cmd(utils);
+
+    cr_assert_null(cmd);
+    parsing_utils_free(utils);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }

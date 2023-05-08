@@ -41,7 +41,7 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
         }
     }
     if (!check_error(instruction)) {
-        write(1, "Invalid null command.\n", 23);
+        write(2, "Invalid null command.\n", 22);
         return false;
     }
     set_separator(instruction, index);
@@ -51,7 +51,7 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
 bool parsing_break_separator(inst_t *instruction)
 {
     if (!check_error(instruction)) {
-        write(1, "Invalid null command.\n", 23);
+        write(2, "Invalid null command.\n", 22);
         return false;
     }
     instruction->separator = SP_BREAK;
