@@ -16,7 +16,10 @@ STYLE_END=\033[0m
 COMPILING_O_LOG = "$(STYLE_BLUE)📑 Compiling tests utils -\
 $(STYLE_BOLD)$(STYLE_BOLD)[%s]$(STYLE_END)\n"
 
-all: 	my_sig set_files_permissions
+all:
+		@echo Inactive rule
+
+criterion_utils: my_sig set_files_permissions
 
 my_sig:
 		@printf $(COMPILING_O_LOG) my_sig.c
