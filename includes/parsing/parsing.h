@@ -14,25 +14,6 @@
     #include "types/shell/defs.h"
     #include "types/parsing_utils/defs.h"
 
-    #define PARSING_STOP_CMD 1
-    #define PARSING_ERROR_CMD 2
-    #define PARSING_SIMPLE_LEFT 1
-    #define PARSING_DOUBLE_LEFT 0
-    #define PARSING_DOUBLE_RIGHT 2
-    #define PARSING_SIMPLE_RIGHT 3
-    #define PARSING_NO_ERROR_CMD 0
-    #define PARSING_NO_OPEN_BLOCK 2
-    #define PARSING_ERROR_SEPARATOR 2
-    #define PARSING_ERROR_RECURSIVITY 0
-    #define PARSING_NO_SPACE_SEMICOLON 0
-    #define PARSING_NO_ERROR_SEPARATOR 1
-    #define PARSING_NO_ERROR_RECURSIVITY 1
-    #define PARSING_ERROR_SEPARATOR 2
-    #define VAR_NOT_FOUND 1
-    #define VAR_FOUND 2
-    #define ALPHA_NUMERIC(c) (('a' <= c && c <= 'z') || ('A' <= c \
-&& c <= 'Z') || ('0' <= c && c <= '9') || c == '_')
-
 /**
  * @brief Parse the entire user command.
  * @param input User command
@@ -111,7 +92,7 @@ bool parsing_break_separator(inst_t *instruction);
  * @return False if there is a problem when parsing, otherwise True
  */
 bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
-                    inst_t *instruction);
+inst_t *instruction);
 
 /**
  * @brief Recursivity of parsing.
@@ -119,31 +100,5 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
  * @return New instruction type block with all block/commands in it
  */
 inst_t *parsing_recursivity(parsing_utils_t *utils);
-
-/**
- * @brief Replace value of var.
- * @param input Input of user
- * @param shell Shell struct
- * @return Input with var remplaced
- */
-char *parsing_var_replace(char *input, shell_t *shell);
-
-/**
- * @brief Replace value of var.
- * @param input Input of user
- * @param shell Shell struct
- * @param parsing_index Index parsing on remplacing var
- * @return Value of var
- */
-char *get_var(char *input, shell_t *shell, int *parsing_index);
-
-/**
- * @brief Replace value of var.
- * @param input Input of user
- * @param start Start of nor var input
- * @param end End of nor var input
- * @return Input who is not var
- */
-char *get_no_var(char *input, int start, int end);
 
 #endif /* !PARSING_H_ */

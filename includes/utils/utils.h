@@ -17,6 +17,7 @@
     #define CHAR_IS_LOWER(c) (c >= 'a' && c <= 'z')
     #define CHAR_IS_ALPHA(c) (CHAR_IS_LOWER(c) || CHAR_IS_UPPER(c))
     #define CHAR_IS_ALPHANUM(c) (CHAR_IS_ALPHA(c) || CHAR_IS_NUM(c))
+    #define CHAR_IS_ALPHANUM_EXT(c) (CHAR_IS_ALPHANUM (c) || c == '_')
     #define STAT_MODE_XOK(s) ((s & S_IXUSR) || (s & S_IXGRP) || (s & S_IXOTH))
 
 /**

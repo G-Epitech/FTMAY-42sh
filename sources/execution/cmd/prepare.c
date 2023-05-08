@@ -33,7 +33,7 @@ bool execution_cmd_prepare(node_t *node_inst, shell_t *shell)
 
     if (!init_execution(inst, &cmd))
         return false;
-    if (!cmd_set_args(cmd))
+    if (!cmd_set_args(cmd, shell))
         return false;
     if (!cmd_determine_target(cmd, shell)) {
         execution_cmd_display_error(cmd, ENOENT);

@@ -53,7 +53,7 @@ Test(execution_cmd_can_be_done_tests, cmd_system)
 
     cmd->type = CMD_NULL;
     cmd->input = strdup("ls");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert(cmd->type == CMD_SYSTEM);
     cr_assert(execution_cmd_can_be_done(cmd));
@@ -68,7 +68,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute)
 
     cmd->type = CMD_NULL;
     cmd->input = strdup("/bin/ls");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert(cmd->type == CMD_ABSOLUTE);
     cr_assert(execution_cmd_can_be_done(cmd));
@@ -85,7 +85,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_null_target_path,
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("/bin/ls");
     cmd->target.path = NULL;
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert_not(execution_cmd_can_be_done(cmd));
     fflush(stderr);
     cr_assert_stderr_eq_str("/bin/ls: Command not found.\n");
@@ -101,7 +101,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_acces_denied_target,
 
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("./tests/utils/sh/forbidden.sh");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert_not(execution_cmd_can_be_done(cmd));
     fflush(stderr);
@@ -118,7 +118,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_acces_allowed_target_xusr,
 
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("./tests/utils/sh/allowed-usr.sh");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert(execution_cmd_can_be_done(cmd));
     cmd_free(cmd);
@@ -133,7 +133,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_acces_allowed_target_xgrp,
 
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("./tests/utils/sh/allowed-grp.sh");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert(execution_cmd_can_be_done(cmd));
     cmd_free(cmd);
@@ -148,7 +148,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_acces_allowed_target_xoth,
 
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("./tests/utils/sh/allowed-oth.sh");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cr_assert(cmd_determine_target(cmd, shell));
     cr_assert(execution_cmd_can_be_done(cmd));
     cmd_free(cmd);
@@ -163,7 +163,7 @@ Test(execution_cmd_can_be_done_tests, cmd_absolute_inexists_target,
 
     cmd->type = CMD_ABSOLUTE;
     cmd->input = strdup("./tests/utils/super2.sh");
-    cr_assert(cmd_set_args(cmd));
+    cr_assert(cmd_set_args(cmd, shell));
     cmd->target.path = strdup("./tests/utils/super2.sh");
     cr_assert_not(execution_cmd_can_be_done(cmd));
     fflush(stderr);

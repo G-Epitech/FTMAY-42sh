@@ -28,7 +28,7 @@ Test(execution_cmd_absolute_tests, basic_system, .init = cr_redirect_stdout)
     pid_t pid = 0;
 
     cmd->input = strdup("echo hello world");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cmd->type = CMD_ABSOLUTE;
     pid = fork();
@@ -51,7 +51,7 @@ Test(execution_cmd_absolute_tests, basic_absolute, .init = cr_redirect_stdout)
     pid_t pid = 0;
 
     cmd->input = strdup("/bin/echo hello world");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cmd->type = CMD_ABSOLUTE;
     pid = fork();
@@ -75,7 +75,7 @@ Test(execution_cmd_absolute_tests, basic_absolute_access_denied,
     pid_t pid = 0;
 
     cmd->input = strdup("./tests/utils/sh/forbidden.sh");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd->target.path = strdup("./tests/utils/sh/forbidden.sh");
     cmd->type = CMD_ABSOLUTE;
     pid = fork();
@@ -91,7 +91,7 @@ Test(execution_cmd_absolute_tests, basic_absolute_access_denied,
 }
 
 Test(execution_cmd_absolute_tests, basic_absolute_signaled,
-.init = cr_redirect_stderr, .signal = SIGSEGV)
+.init = cr_redirect_stderr)
 {
     shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
@@ -99,7 +99,7 @@ Test(execution_cmd_absolute_tests, basic_absolute_signaled,
     pid_t pid = 0;
 
     cmd->input = strdup("./tests/utils/my_sig.out 11");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     pid = fork();
     if (pid == 0)
@@ -108,6 +108,8 @@ Test(execution_cmd_absolute_tests, basic_absolute_signaled,
         waitpid(pid, &status, 0);
     cr_assert(WIFSIGNALED(status));
     cr_assert(WTERMSIG(status) == SIGSEGV);
+    fflush(stderr);
+    //TODO:cr_assert_stderr_eq_str("Segmentation fault\n");
     cmd_free(cmd);
     shell_free(shell);
 }
@@ -125,7 +127,7 @@ Test(execution_cmd_absolute_tests, basic_absolute_wrong_architecture,
     #else
         cmd->input = strdup("./tests/utils/bin/bin-macos.bin");
     #endif
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     pid = fork();
     if (pid == 0)

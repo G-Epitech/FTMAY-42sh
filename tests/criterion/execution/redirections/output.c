@@ -85,7 +85,11 @@ Test(execution_get_redirection_output_tests, is_a_directory, .init=cr_redirect_s
     cr_assert_not(execution_redirection_get_output(inst, &fd));
     cr_assert(fcntl(fd, F_GETFD) == -1);
     cr_assert(fd == -1);
-    cr_assert_stderr_eq_str("/: Is a directory.\n");
+    #if defined(OS_IS_MACOS)
+        cr_assert_stderr_eq_str("/: File exists.\n");
+    #else
+       cr_assert_stderr_eq_str("/: Is a directory.\n");
+    #endif
     inst_free(inst);
 }
 

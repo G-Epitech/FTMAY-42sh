@@ -73,12 +73,18 @@ static int get_input_parse_len(char *input)
     return len;
 }
 
-bool cmd_set_args(cmd_t *command)
+bool cmd_set_args(cmd_t *command, shell_t *shell)
 {
     args_t *args = &command->args;
+    char *formated = NULL;
 
     if (!command->input)
         return false;
+    formated = shell_format_string(command->input, shell);
+    if (!formated)
+        return false;
+    free(command->input);
+    command->input = formated;
     args->argc = get_input_parse_len(command->input);
     args->argv = malloc2(sizeof(char *) * (args->argc + 1));
     if (!args->argv)

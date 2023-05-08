@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include "mysh/mysh.h"
 #include "builtins/defs.h"
 #include "parsing/parsing.h"
 #include "types/shell/shell.h"
@@ -18,15 +19,13 @@ int mysh(void)
     inst_t *block = NULL;
     char *input = NULL;
 
+    if (!shell)
+        return SHELL_EXIT_ERROR;
     while (shell->status == SH_RUNNING) {
         shell_display_prompt(shell);
-        input = shell_get_input(shell);
-        if (input)
-            block = parsing_get_main_block(input);
-        if (block)
-            execution_main_block(block, shell);
-        free(input);
-        block = NULL;
+        input = mysh_get_input(shell);
+        block = mysh_parse(input);
+        mysh_execute(block, shell);
     }
     exit_code = shell->exit_code;
     shell_free(shell);

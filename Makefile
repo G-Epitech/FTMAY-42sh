@@ -6,7 +6,10 @@
 ##
 
 
-_SRC =			mysh.c \
+_SRC =			mysh/mysh.c \
+				mysh/execute.c \
+				mysh/input.c \
+				mysh/parse.c \
 				\
 				builtins/cd.c \
 				builtins/env.c \
@@ -61,7 +64,10 @@ _SRC =			mysh.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-				types/shell/get_input.c \
+				types/shell/input.c \
+				types/shell/format/format.c \
+				types/shell/format/get_no_var.c \
+				types/shell/format/get_var.c \
 				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
@@ -88,9 +94,6 @@ _SRC =			mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
-				parsing/var/replace.c \
-				parsing/var/get_no_var.c \
-				parsing/var/get_var.c \
 				\
 				execution/block/block.c \
 				execution/cmd/absolute.c \
@@ -119,7 +122,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/ios.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
-				criterion/types/shell/get_input.c \
+				criterion/types/shell/input.c \
+				criterion/types/shell/format.c \
 				criterion/types/shell/io.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
@@ -151,7 +155,6 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
-				criterion/parsing/var.c \
 				criterion/parsing/parsing.c \
 				\
 				criterion/execution/redirections/input_double.c \
@@ -278,10 +281,7 @@ tests_custom:	$(NAME)
 				@./$(TESTS_CUSTOM)
 				@echo "pass"
 
-tests_run: 		fclean
-				@printf "$(STYLE_RED)🧪 Tests utils compliation...\
-				$(STYLE_END)\n"
-				@make -C $(TESTS_UTILS) -s
+tests_run:
 				@$(MAKE) tests_criterion -s
 
 coverage:

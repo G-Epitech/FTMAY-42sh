@@ -24,7 +24,7 @@ Test(execution_cmd_builtin_tests, basic_cd, .init = cr_redirect_stdout)
 
     getcwd(pwd, PATH_MAX);
     cmd->input = strdup("cd /");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cr_assert(cmd->type == CMD_BUILTIN);
     cr_assert(execution_cmd_launch_builtin(cmd, shell) == SHELL_EXIT_SUCCESS);
@@ -43,7 +43,7 @@ Test(execution_cmd_builtin_tests, no_target, .init = cr_redirect_stdout)
     cmd_t *cmd = cmd_new();
 
     cmd->input = strdup("cd /");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cmd->target.builtin = NULL;
     cr_assert(cmd->type == CMD_BUILTIN);
@@ -61,7 +61,7 @@ Test(execution_cmd_absolute_tests, forked_builtin, .init = cr_redirect_stdout)
 
     shell->is_tty = true;
     cmd->input = strdup("exit 2");
-    cmd_set_args(cmd);
+    cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cmd->type = CMD_BUILTIN;
     cmd->forked = true;

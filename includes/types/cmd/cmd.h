@@ -9,6 +9,7 @@
     #define CMD_H_
 
     #include "defs.h"
+    #include "types/shell/defs.h"
 
 /**
  * @brief Create a new command.
@@ -31,9 +32,10 @@ void cmd_display(cmd_t *cmd);
 /**
  * @brief Parse command input into string array.
  * @param command Command object
+ * @param shell Shell object
  * @return true if all went well, false else
  */
-bool cmd_set_args(cmd_t *command);
+bool cmd_set_args(cmd_t *command, shell_t *shell);
 
 /**
  * @brief Get len of simple input part.

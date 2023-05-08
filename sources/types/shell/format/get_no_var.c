@@ -14,7 +14,7 @@
 #include "utils/asprintf2.h"
 #include "types/shell/shell.h"
 
-char *get_no_var(char *input, int start, int end)
+char *shell_format_string_get_no_var(char *input, int start, int end)
 {
     char *word = malloc2(sizeof(char) * (end - start + 1));
     int index = 0;

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include "utils/utils.h"
 #include "parsing/defs.h"
 #include "utils/malloc2.h"
 #include "parsing/parsing.h"
@@ -33,10 +34,10 @@ static char *get_name(char *input, int start, int end)
 static void display_error(char *name)
 {
     fprintf(stderr, "%s: Undefined variable.\n", name);
-    fflush(stderr);
 }
 
-char *get_var(char *input, shell_t *shell, int *parsing_index)
+char *shell_format_string_get_var(char *input, shell_t *shell,
+int *parsing_index)
 {
     index_word_t index = {
         .start = (*parsing_index) + 1,
@@ -46,7 +47,7 @@ char *get_var(char *input, shell_t *shell, int *parsing_index)
     char *value = NULL;
 
     (*parsing_index)++;
-    while (ALPHA_NUMERIC(input[*parsing_index]))
+    while (CHAR_IS_ALPHANUM_EXT(input[*parsing_index]))
         (*parsing_index)++;
     index.end = *parsing_index;
     name = get_name(input, index.start, index.end);

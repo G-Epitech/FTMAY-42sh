@@ -18,6 +18,9 @@
     #define SHELL_EXIT_ERROR 1
     #define SHELL_EXIT_SUCCESS 0
     #define SHELL_DEFAULT_PATH "/usr/bin:/bin"
+    #define SHELL_VAR_NOT_FOUND 1
+    #define SHELL_VAR_FOUND 2
+
 
 // Environnement variables
 extern char **environ;

@@ -19,69 +19,79 @@
 
 Test(parsing_set_cmd_args, test_with_guillemet)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
-    command->input = "echo \"super $PWD\"";
-    cmd_set_args(command);
+    command->input = strdup("echo \"super HELLO\"");
+    cr_assert(cmd_set_args(command, shell));
     cr_assert_eq(command->args.argc, 2);
     cr_assert_str_eq(command->args.argv[0], "echo");
-    cr_assert_str_eq(command->args.argv[1], "super $PWD");
+    cr_assert_str_eq(command->args.argv[1], "super HELLO");
 }
 
 Test(parsing_set_cmd_args, test_without_innibiteur)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
-    command->input = "echo super";
-    cmd_set_args(command);
+    command->input = strdup("echo super");
+    cr_assert(cmd_set_args(command, shell));
     cr_assert_eq(command->args.argc, 2);
     cr_assert_str_eq(command->args.argv[0], "echo");
     cr_assert_str_eq(command->args.argv[1], "super");
+    shell_free(shell);
+    cmd_free(command);
 }
 
 Test(parsing_set_cmd_args, test_without_innibiteur_separed_by_space)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
 
-    command->input = "echo\t\tsuper";
-    cmd_set_args(command);
+    command->input = strdup("echo\t\tsuper");
+    cr_assert(cmd_set_args(command, shell));
     cr_assert_eq(command->args.argc, 2);
     cr_assert_str_eq(command->args.argv[0], "echo");
     cr_assert_str_eq(command->args.argv[1], "super");
+    shell_free(shell);
+    cmd_free(command);
 }
 
 Test(parsing_set_cmd_args, malloc_failed)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
-    bool test_return = false;
 
-    command->input = "echo\t\tsuper";
+    command->input = strdup("echo\t\tsuper");
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    test_return = cmd_set_args(command);
+    cr_assert_not(cmd_set_args(command, shell));
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
-    cr_assert_eq(test_return, false);
+    shell_free(shell);
+    cmd_free(command);
 }
 
 Test(parsing_set_cmd_args, cmd_is_null)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
-    bool test_return = false;
 
     command->input = NULL;
-    test_return = cmd_set_args(command);
-    cr_assert_eq(test_return, false);
+    cr_assert_not(cmd_set_args(command, shell));
+    shell_free(shell);
+    cmd_free(command);
 }
 
 Test(parsing_set_cmd_args, put_space_at_end)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
-    bool test_return = false;
 
-    command->input = "echo super ";
+    command->input = strdup("echo super ");
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    test_return = cmd_set_args(command);
+    cr_assert_not(cmd_set_args(command, shell));
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
-    cr_assert_eq(test_return, false);
+    shell_free(shell);
+    cmd_free(command);
 }
 
 Test(cmd_get_args_get_len_input_string, test_int_return)
