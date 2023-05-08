@@ -75,17 +75,17 @@ Test(execution_get_redirection_output_tests, double_file)
     remove("file-7.tmp");
 }
 
-Test(execution_get_redirection_output_tests, no_permission)
+Test(execution_get_redirection_output_tests, is_a_directory, .init=cr_redirect_stderr)
 {
     int fd = -1;
     inst_t *inst = inst_new();
 
-    inst->ios.output.path = strdup("tests/utils/forbidden-wx.txt");
+    inst->ios.output.path = strdup("/");
     inst->ios.output.type = IOT_SIMPLE;
-    bool e = execution_redirection_get_output(inst, &fd);
-    fprintf(stderr, "STATUS[%d]\n", e);
+    cr_assert_not(execution_redirection_get_output(inst, &fd));
     cr_assert(fcntl(fd, F_GETFD) == -1);
     cr_assert(fd == -1);
+    cr_assert_stderr_eq_str("/: Is a directory.\n");
     inst_free(inst);
 }
 
