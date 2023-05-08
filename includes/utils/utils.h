@@ -10,12 +10,14 @@
 
     #include <stdlib.h>
     #include <stdbool.h>
+    #include <sys/stat.h>
 
     #define CHAR_IS_NUM(c) (c >= '0' && c <= '9')
     #define CHAR_IS_UPPER(c) (c >= 'A' && c <= 'Z')
     #define CHAR_IS_LOWER(c) (c >= 'a' && c <= 'z')
     #define CHAR_IS_ALPHA(c) (CHAR_IS_LOWER(c) || CHAR_IS_UPPER(c))
     #define CHAR_IS_ALPHANUM(c) (CHAR_IS_ALPHA(c) || CHAR_IS_NUM(c))
+    #define STAT_MODE_XOK(s) ((s & S_IXUSR) || (s & S_IXGRP) || (s & S_IXOTH))
 
 /**
  * @brief Check if a string is a valid number.

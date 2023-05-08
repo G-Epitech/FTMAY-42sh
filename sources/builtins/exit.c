@@ -22,6 +22,8 @@ int builtin_exit(args_t *args, shell_t *shell)
         fprintf(stderr, "exit: Expression Syntax.\n");
         return SHELL_EXIT_ERROR;
     }
+    if (shell->is_tty)
+        printf("exit\n");
     shell->status = SH_EXITED;
     return atoi(args->argv[1]);
 }

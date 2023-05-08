@@ -12,16 +12,14 @@
 #include "types/inst/inst.h"
 #include "execution/execution.h"
 
-bool execution_cmd_launch(node_t *node_inst, int *status)
+bool execution_cmd_launch(node_t *node_inst, shell_t *shell,
+exec_utils_t *utils)
 {
-    inst_t *inst = EXECUTION_GET_INST(node_inst);
-    cmd_t *cmd = inst->value.cmd;
+    cmd_t *cmd = EXECUTION_NODE_TO_INST(node_inst)->value.cmd;
 
-    if (!execution_cmd_can_be_done(cmd, status))
-        return false;
     if (cmd->type == CMD_ABSOLUTE || cmd->type == CMD_SYSTEM)
-        *status = execution_cmd_absolute(cmd);
+        execution_cmd_launch_absolute(cmd);
     else
-        *status = execution_cmd_builtin(cmd);
-    return (*status == 0);
+        utils->status = execution_cmd_launch_builtin(cmd, shell);
+    return (utils->status == 0);
 }

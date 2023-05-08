@@ -5,36 +5,42 @@
 ** block
 */
 
-#include "unistd.h"
+#include <stdio.h>
+#include <unistd.h>
 #include "types/inst/defs.h"
 #include "execution/execution.h"
 
-static node_t *get_last_node(node_t *node)
+static node_t *get_high_node(node_t *first)
 {
-    node_t *tmp = node;
+    node_t *node = first;
     inst_t *inst = NULL;
     bool running = true;
 
-    while (tmp && running) {
-        inst = NODE_DATA_TO_PTR(tmp->data, inst_t *);
+    while (node && running) {
+        inst = NODE_DATA_TO_PTR(node->data, inst_t *);
         running = inst->ios.output.type == IOT_PIPED;
-        tmp = tmp->next;
+        if (running)
+            node = node->next;
     }
-    return tmp;
+    return node;
 }
 
-static void fork_node(node_t *node, int level)
+bool execution_block(node_t *node_inst, shell_t *shell, exec_utils_t *utils)
 {
-    inst_t *instruction = NULL;
+    inst_t *inst = EXECUTION_GET_INST(node_inst);
+    node_t *next = NULL;
+    node_t *node = NULL;
 
-    if (!node)
-        return;
-    instruction = NODE_DATA_TO_PTR(node->data, inst_t *);
-    if (instruction->type == INS_CMD && level > 0)
-        instruction->value.cmd->forked = true;
-}
-
-void execution_block(node_t *node, int level)
-{
-    
+    if (!inst || !shell || !utils)
+        return false;
+    else
+        next = inst->value.block->instructions->first;
+    do {
+        node = get_high_node(next);
+        if (!node)
+            return false;
+        execution_inst(node, shell, utils, EXEC_SUPERIOR);
+        next = node->next;
+    } while (next);
+    return true;
 }

@@ -34,7 +34,7 @@ void execution_input(io_t input, int fd[2])
             break;
         case IOT_DOUBLE:
             dup2(fd[0], STDIN_FILENO);
-            execution_redirection_get_double_left(input.path, fd[1]);
+            execution_redirection_get_input_double(input.path, fd[1]);
             break;
         default:
             break;

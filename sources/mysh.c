@@ -21,9 +21,12 @@ int mysh(void)
     while (shell->status == SH_RUNNING) {
         shell_display_prompt(shell);
         input = shell_get_input(shell);
-        block = parsing_get_main_block(input);
-        execution_cmd(block->value.block->instructions->first, shell);
+        if (input)
+            block = parsing_get_main_block(input);
+        if (block)
+            execution_main_block(block, shell);
         free(input);
+        block = NULL;
     }
     exit_code = shell->exit_code;
     shell_free(shell);

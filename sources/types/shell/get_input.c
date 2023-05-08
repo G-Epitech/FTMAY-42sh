@@ -18,6 +18,7 @@ char *shell_get_input(shell_t *shell)
     len = getline(&input, &size, stdin);
     if (len == -1)
         shell_exit(shell);
-    input[len - 1] = (input[len - 1] == '\n') ? '\0' : input[len - 1];
+    else
+        input[len - 1] = (input[len - 1] == '\n') ? '\0' : input[len - 1];
     return input;
 }

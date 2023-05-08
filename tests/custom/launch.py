@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from os import system, path
+from subprocess import PIPE, Popen, run
 from classes.tester import Tester
 import suites.basics as basics
 import suites.minishell1.cd as minishell1Cd
@@ -11,6 +13,13 @@ import suites.minishell2.semicolon as minishell2Semicolon
 import suites.minishell2.pipe as minishell2Pipe
 import suites.minishell2.redirection as minishellRedirection
 import suites.minishell2.complex as minishell2Complex
+
+def init():
+    utilsFolder = path.dirname(__file__) + "/utils"
+
+    run(f"rm {utilsFolder}/my_sig.out", shell=True, stderr=PIPE, stdout=PIPE);
+    return run(f"gcc -o {utilsFolder}/my_sig.out {utilsFolder}/my_sig.c", shell=True, stderr=PIPE, stdout=PIPE).returncode;
+
 
 if __name__ == '__main__':
     tester = Tester()

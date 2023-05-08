@@ -15,7 +15,7 @@ static char *get_user_input(void)
 {
     char *reader = NULL;
     size_t size = 0;
-    int readed = 0;
+    ssize_t readed = 0;
 
     write(1, "? ", 2);
     while (!reader)
@@ -31,7 +31,7 @@ static void exit_loop(char *new_word, char *input)
     free(input);
 }
 
-void execution_redirection_get_double_left(char *word, int fd)
+void execution_redirection_get_input_double(char *word, int fd)
 {
     char *input = NULL;
     char *new_word = malloc2(sizeof(char) * (strlen(word) + 2));

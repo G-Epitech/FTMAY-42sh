@@ -80,10 +80,11 @@ bool cmd_set_args(cmd_t *command)
     if (!command->input)
         return false;
     args->argc = get_input_parse_len(command->input);
-    args->argv = malloc2(sizeof(char *) * args->argc);
+    args->argv = malloc2(sizeof(char *) * (args->argc + 1));
     if (!args->argv)
         return false;
     fill_args(args->argv, command->input);
+    args->argv[args->argc] = NULL;
     command->name = strdup(args->argv[0]);
     return true;
 }

@@ -8,29 +8,39 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <sys/stat.h>
+#include "utils/utils.h"
 #include "types/cmd/cmd.h"
+#include "types/shell/defs.h"
+#include "execution/execution.h"
 
-static int check_target(char *target)
+static bool check_target(cmd_t *cmd)
 {
-    if (!target)
-        return ENOENT;
-    return access(target, X_OK) == 0 ? 0 : errno;
-}
+    char *target = cmd->target.path;
+    struct stat check;
 
-static int get_status(cmd_t *cmd)
-{
-    if (cmd->type == CMD_EMPTY || cmd->type == CMD_BUILTIN)
-        return 0;
-    else if (cmd->type != CMD_SYSTEM && cmd->type != CMD_ABSOLUTE)
-        return ENOENT;
-    else
-        return check_target(cmd->target);
-}
-
-bool execution_cmd_can_be_done(cmd_t *cmd, int *status)
-{
-    if (!status)
+    if (!target) {
+        execution_cmd_display_error(cmd, ENOENT);
         return false;
-    *status = get_status(cmd);
-    return (*status == 0);
+    }
+    if (stat(target, &check) != 0) {
+        execution_cmd_display_error(cmd, errno);
+        return false;
+    }
+    if (!STAT_MODE_XOK(check.st_mode)) {
+        execution_cmd_display_error(cmd, EACCES);
+        return false;
+    }
+    return true;
+}
+
+bool execution_cmd_can_be_done(cmd_t *cmd)
+{
+    if (!cmd)
+        return false;
+    if (cmd->type == CMD_EMPTY || cmd->type == CMD_BUILTIN)
+        return true;
+    if (cmd->type != CMD_SYSTEM && cmd->type != CMD_ABSOLUTE)
+        return false;
+    return check_target(cmd);
 }
