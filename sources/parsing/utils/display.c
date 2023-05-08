@@ -54,14 +54,13 @@ static void display_block(inst_block_t *block, int index)
         data = NODE_DATA_TO_PTR(tmp->data, inst_t *);
         if (data->type == INS_CMD) {
             display_cmd(data->value.cmd, index);
-            display_redirection(data, index);
         }
         if (data->type == INS_BLOCK) {
             printf_space(index);
             printf("===== BLOCK =====\n");
             display_block(data->value.block, index + 1);
-            display_redirection(data, index);
         }
+            display_redirection(data, index);
         tmp = tmp->next;
     }
 }
