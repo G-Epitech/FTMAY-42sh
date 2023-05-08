@@ -233,3 +233,20 @@ Test(parsing_redirection, test_ambigous_double_left, .init=redirect_all_stdout)
     cr_assert_eq(test_return, false);
     cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
 }
+
+Test(parsing_redirection, test_double_left_parentheses, .init=redirect_all_stdout)
+{
+    parsing_utils_t *test = parsing_utils_new("(ls | cat << end)");
+    inst_block_t *test_inst_block = inst_block_new();
+    inst_t *test_inst = inst_new();
+    bool test_return = false;
+
+    test_inst->type = INS_CMD;
+    test_inst->ios.input.type = IOT_PIPED;
+    test->level = 1;
+    inst_append(test_inst_block, test_inst);
+    test->index_parsing = 10;
+    test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
+    cr_assert_eq(test_return, false);
+    cr_assert_stderr_eq_str("Can't << within ()'s.\n");
+}

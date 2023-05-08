@@ -19,7 +19,7 @@ parsing_utils_t *utils)
     bool left = index == PARSING_SIMPLE_LEFT || index == PARSING_DOUBLE_LEFT;
 
     if (index == PARSING_DOUBLE_LEFT && utils->level != 0) {
-        write(2, "Can't << within ()'s.\n", 23);
+        write(2, "Can't << within ()'s.\n", 22);
         return false;
     }
     if (instruction->ios.input.type != IOT_DEFAULT && left) {
