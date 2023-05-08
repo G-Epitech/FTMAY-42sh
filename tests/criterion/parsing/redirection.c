@@ -185,7 +185,7 @@ Test(parsing_redirection, test_ambigous_simple_right, .init=redirect_all_stdout)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
-    cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
+    cr_assert_stderr_eq_str("Ambiguous output redirect.\n");
 }
 
 Test(parsing_redirection, test_ambigous_simple_left, .init=redirect_all_stdout)
@@ -215,7 +215,7 @@ Test(parsing_redirection, test_ambigous_double_right, .init=redirect_all_stdout)
     parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_redirection_handler(test, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     cr_assert_eq(test_return, false);
-    cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
+    cr_assert_stderr_eq_str("Ambiguous output redirect.\n");
 
 }
 

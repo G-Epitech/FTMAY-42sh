@@ -9,11 +9,6 @@
 #include "builtins/defs.h"
 #include "types/shell/shell.h"
 
-
-#include "parsing/utils.h"
-#include "parsing/parsing.h"
-#include "types/inst/inst.h"
-
 int mysh(void)
 {
     int exit_code = 0;
@@ -23,8 +18,6 @@ int mysh(void)
     while (shell->status == SH_RUNNING) {
         shell_display_prompt(shell);
         input = shell_get_input(shell);
-        inst_t *inst = parsing_get_main_block(input);
-        parsing_display(inst);
         free(input);
     }
     exit_code = shell->exit_code;
