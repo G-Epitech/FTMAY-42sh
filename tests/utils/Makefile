@@ -16,7 +16,7 @@ STYLE_END=\033[0m
 COMPILING_O_LOG = "$(STYLE_BLUE)📑 Compiling tests utils -\
 $(STYLE_BOLD)$(STYLE_BOLD)[%s]$(STYLE_END)\n"
 
-all: 	my_sig
+all: 	my_sig set_files_permissions
 
 my_sig:
 		@printf $(COMPILING_O_LOG) my_sig.c
@@ -26,3 +26,12 @@ clean:
 		@rm -rf my_sig.out
 
 fclean: clean
+
+set_files_permissions:
+		@chmod 444 forbidden-wx.txt
+		@chmod 676 sh/allowed-grp.sh
+		@chmod 667 sh/allowed-oth.sh
+		@chmod 766 sh/allowed-usr.sh
+		@chmod 644 sh/forbidden.sh
+		@chmod 777 bin/bin-linux.bin
+		@chmod 777 bin/bin-macos.bin
