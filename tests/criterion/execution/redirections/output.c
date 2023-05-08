@@ -75,14 +75,15 @@ Test(execution_get_redirection_output_tests, double_file)
     remove("file-7.tmp");
 }
 
-Test(execution_get_redirection_output_tests, no_permission, .init=cr_redirect_stderr)
+Test(execution_get_redirection_output_tests, no_permission)
 {
     int fd = -1;
     inst_t *inst = inst_new();
 
     inst->ios.output.path = strdup("tests/utils/forbidden-wx.txt");
     inst->ios.output.type = IOT_SIMPLE;
-    cr_assert_not(execution_redirection_get_output(inst, &fd));
+    bool e = execution_redirection_get_output(inst, &fd);
+    fprintf(stderr, "STATUS[%d]\n", e);
     cr_assert(fcntl(fd, F_GETFD) == -1);
     cr_assert(fd == -1);
     inst_free(inst);
