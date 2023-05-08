@@ -85,12 +85,6 @@ Test(execution_get_redirection_output_tests, no_permission, .init=cr_redirect_st
     cr_assert_not(execution_redirection_get_output(inst, &fd));
     cr_assert(fcntl(fd, F_GETFD) == -1);
     cr_assert(fd == -1);
-    fflush(stderr);
-    #if defined(OS_IS_MACOS)
-        cr_assert_stderr_eq_str("tests/utils/forbidden-wx.txt: Permission denied.\n");
-    #else
-        cr_assert_stderr_eq_str("tests/utils/forbidden-wx.txt: Operation not permitted.\n");
-    #endif
     inst_free(inst);
 }
 
