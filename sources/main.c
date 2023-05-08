@@ -287,30 +287,94 @@ void editorProcessKeypress() {
       exit(0);
       break;
 
+    case ('p'):
+      enableRawMode();
+      exit(0);
+      break;
+
     case ARROW_UP:
     case ARROW_DOWN:
     case ARROW_LEFT:
     case ARROW_RIGHT:
-      enableRawMode();
       editorMoveCursor(c);
       break;
 
     default:
       disableRawMode();
+      //printf("coucou\n");
       break;
   }
 }
 
-int main() {
-  E.cx = 0;
-  E.cy = 10;
-  enableRawMode();
+// int main() {
+//   E.cx = 0;
+//   E.cy = 10;
+//   //enableRawMode();
 
-  //write(STDOUT_FILENO, "\x1b[2J", 4); cllear l'écran de debut
-  while (1) {
-    editorRefreshScreen();
-    editorProcessKeypress();
-  }
+//   //write(STDOUT_FILENO, "\x1b[2J", 4); cllear l'écran de debut
+//   while (1) {
+//     editorRefreshScreen();
+//     editorProcessKeypress();
+//   }
+// }
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <unistd.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 1024
+
+int main() {
+    char line[MAX_LINE_LENGTH];
+    struct termios orig_termios, new_termios;
+    int i = 0, ch;
+    
+    // Enregistrer les paramètres du terminal d'origine
+    tcgetattr(STDIN_FILENO, &orig_termios);
+    memcpy(&new_termios, &orig_termios, sizeof(struct termios));
+    
+    // Modifier les paramètres du terminal pour activer le mode non-canonique et désactiver l'affichage de l'entrée utilisateur
+    new_termios.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_termios);
+    
+    // Afficher un prompt
+    const char* prompt = "> ";
+    printf("%s", prompt);
+    
+    // Lire la ligne de commande en cours caractère par caractère avec la fonction getchar
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        if (ch == 127 || ch == 8) { // Gérer la touche de suppression
+            if (i > 0) {
+                printf("\b \b");
+                i--;
+            }
+        } else if (ch == 27) { // Ignorer les touches fléchées du haut et du bas
+            ch = getchar(); // lire le caractère suivant
+            if (ch == '[') {
+                ch = getchar(); // lire le caractère suivant après celui-ci
+                if (ch == 'A' || ch == 'B') {
+                    continue; // ignorer la touche fléchée du haut ou du bas
+                }
+            }
+        } else {
+            if (i < MAX_LINE_LENGTH - 1) {
+                line[i++] = ch;
+                putchar(ch);
+            }
+        }
+    }
+    line[i] = '\0';
+    
+    // Traiter la ligne de commande
+    printf("\nVous avez saisi : %s", line);
+    
+    // Restaurer les paramètres du terminal d'origine
+    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
+    
+    return 0;
 }
+
 
 
