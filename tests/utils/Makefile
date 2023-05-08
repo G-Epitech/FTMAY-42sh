@@ -31,7 +31,7 @@ clean:
 fclean: clean
 
 set_files_permissions:
-		@chmod 444 forbidden-wx.txt
+		@chmod 000 forbidden-wx.txt
 		@ls -la forbidden-wx.txt
 		@chmod 676 sh/allowed-grp.sh
 		@chmod 667 sh/allowed-oth.sh
