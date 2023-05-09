@@ -10,7 +10,5 @@
 
 char *mysh_get_input(shell_t *shell)
 {
-    char *typed = shell_get_input(shell);
-
-    return typed;
+    return shell_get_input(shell);
 }

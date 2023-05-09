@@ -75,5 +75,4 @@ void parsing_display(inst_t *instruction)
         display_cmd(instruction->value.cmd, 0);
         display_redirection(instruction, 0);
     }
-
 }
