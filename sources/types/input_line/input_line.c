@@ -21,11 +21,20 @@ int input_line_read_key(void)
         return character;
 }
 
-void input_line_get_content(input_line_t *line)
+static void start_function(int charactere, input_line_t *line, shell_t *shell)
+{
+    if (charactere > 127)
+        return;
+    for (int index = 0; index < CTRL_KEY_HANDLERS_NBR; index++) {
+        if (ctrl_key_handlers[index].key == charactere)
+            ctrl_key_handlers[index].handler(shell, line);
+    }
+}
+
+void input_line_get_content(input_line_t *line, shell_t *shell)
 {
     int character = 0;
 
-    (void) character;
     while (line->status == IL_RUNNING) {
         character = input_line_read_key();
     }

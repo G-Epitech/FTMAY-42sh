@@ -37,8 +37,8 @@ input_line_t *input_line_new(void);;
 /**
  * @brief Get user input with tty raw mode enable.
  * @param line Structure input entry
- */
-void input_line_get_content(input_line_t *line);
+ * @param shell Structure of shell
+void input_line_get_content(input_line_t *line, shell_t shell);
 
 /**
  * @brief Get control character.
