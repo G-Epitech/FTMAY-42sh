@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "types/input_line/input_line.h"
 
-bool intput_line_enable_raw_mode(input_line_t *custom_tty,
+bool input_line_enable_raw_mode(input_line_t *custom_tty,
 struct termios *default_tty)
 {
     if (tcgetattr(STDIN_FILENO, default_tty) == -1)
@@ -23,7 +23,7 @@ struct termios *default_tty)
     return true;
 }
 
-bool intput_line_disable_raw_mode(struct termios *default_tty)
+bool input_line_disable_raw_mode(struct termios *default_tty)
 {
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, default_tty) == -1)
         return false;

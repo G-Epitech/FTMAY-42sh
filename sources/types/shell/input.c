@@ -28,9 +28,13 @@ static char *shell_get_input_no_tty(shell_t *shell)
 static char *shell_get_input_tty(shell_t *shell)
 {
     input_line_t *user_input = input_line_new();
+    struct termios *default_settings;
 
-    (void) shell;
-    (void) user_input;
+    if (!user_input)
+        return NULL;
+    input_line_enable_raw_mode(user_input, default_settings);
+
+    input_line_disable_raw_mode(default_settings);
     return NULL;
 }
 
