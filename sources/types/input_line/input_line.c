@@ -17,9 +17,12 @@ int input_line_read_key(void)
 {
     int character = getchar();
 
-    if (iscntrl(character))
-        return input_line_get_cntrls();
-    else
+    character = input_line_get_character(character);
+    if (character >= CTRL_KEY_REF)
+        return character;
+    if (iscntrl(character)) {
+        return input_line_get_cntrls(character);
+    } else
         return character;
 }
 
@@ -30,7 +33,8 @@ shell_t *shell, int index)
         ctrl_key_handlers[index].handler(shell, line);
 }
 
-static void lunch_control_function(int character, input_line_t *line, shell_t *shell)
+static void lunch_control_function(int character, input_line_t *line,
+shell_t *shell)
 {
     for (int index = 0; index < CTRL_KEY_HANDLERS_NBR; index++) {
         if ((int) ctrl_key_handlers[index].key == character)
