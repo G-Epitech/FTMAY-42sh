@@ -5,9 +5,9 @@
 ** execution
 */
 
+#include "execution/defs.h"
 #include "types/inst/inst.h"
 #include "types/shell/shell.h"
-#include "execution/defs.h"
 #include "execution/execution.h"
 
 void execution_inst_previous_piped(node_t *node_inst,
