@@ -22,11 +22,7 @@ bool history_append_entry(history_t *history, char *input)
         return false;
     new_entry->date = time(NULL);
     new_entry->input = strdup(input);
-    if (history->entries->last) {
-        node_data = history->entries->last->data;
-        last = NODE_DATA_TO_PTR(node_data, history_entry_t *);
-        new_entry->id = last->id + 1;
-    }
+    new_entry->id = history->count + 1;
     node_data = NODE_DATA_FROM_PTR(new_entry);
     node = node_new(node_data);
     list_append(history->entries, node);

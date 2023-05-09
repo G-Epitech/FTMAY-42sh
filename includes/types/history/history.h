@@ -56,4 +56,25 @@ bool history_append_entry(history_t *history, char *input);
  */
 history_entry_t *history_current(history_t *history);
 
+/**
+ * @brief Clear the history.
+ * @param history History to clear
+ * @return Success of the operation
+ */
+bool history_clear(history_t *history);
+
+/**
+ * @brief Get the next command from history.
+ * @param history History data
+ * @return Next data if there was
+ */
+history_entry_t *history_next(history_t *history);
+
+/**
+ * @brief Get the prev command from history.
+ * @param history History data
+ * @return prev data if there was
+ */
+history_entry_t *history_prev(history_t *history);
+
 #endif /* !HISTORY_H_ */

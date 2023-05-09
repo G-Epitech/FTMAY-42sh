@@ -73,6 +73,8 @@ _SRC =			mysh.c \
 				types/history/entry/free.c \
 				types/history/append.c \
 				types/history/current.c \
+				types/history/clear.c \
+				types/history/move.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
