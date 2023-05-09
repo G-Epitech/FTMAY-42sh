@@ -34,4 +34,16 @@ bool input_line_disable_raw_mode(struct termios *default_tty);
  */
 input_line_t *input_line_new(void);;
 
+/**
+ * @brief Get user input with tty raw mode enable.
+ * @param line Structure input entry
+ */
+void input_line_get_content(input_line_t *line);
+
+/**
+ * @brief Get cntrl
+ * @return int 
+ */
+int input_line_get_cntrl(void);
+
 #endif /* !INPUT_LINE_H_ */

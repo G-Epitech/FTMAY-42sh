@@ -7,13 +7,17 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "utils/utils.h"
 #include "types/input_line/input_line.h"
 
 int input_line_read_key(void)
 {
     int character = getchar();
 
-    return character;
+    if (iscntrl(character))
+        return input_line_get_cntrl();
+    else
+        return character;
 }
 
 void input_line_get_content(input_line_t *line)

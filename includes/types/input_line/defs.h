@@ -11,12 +11,12 @@
     #include <termios.h>
 
 // Represent value of arrow key
-typedef enum e_arrow_key {
+typedef enum e_ctrl_key {
     ARROW_KEY_UP = 1000,    // Code of key up
     ARROW_KEY_DOWN,         // Code of key down
     ARROW_KEY_RIGHT,        // Code of key right
     ARROW_KEY_LEFT          // Code of key left
-} arrow_key_t;
+} ctrl_key_t;
 
 // Represent the input of the user
 typedef struct s_input_line_buffer {
