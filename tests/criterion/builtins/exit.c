@@ -10,6 +10,7 @@
 #include <string.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include "builtins/defs.h"
 #include "types/args/args.h"
 #include "builtins/builtins.h"
 #include "types/shell/shell.h"
@@ -27,7 +28,7 @@ Test(builtins_exit, simple_exit) {
         .argc = 1,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
@@ -43,7 +44,7 @@ Test(builtins_exit, number_exit) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 100);
@@ -60,7 +61,7 @@ Test(builtins_exit, multiple_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 1);
@@ -76,7 +77,7 @@ Test(builtins_exit, invalid_string_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 1);
@@ -93,7 +94,7 @@ Test(builtins_exit, invalid_number_of_args, .init=redirect_all_stdout) {
         .argc = commands_size,
         .argv = commands
     };
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
     unsigned char exit_status = builtin_exit(&args, shell);
 
     cr_assert_eq(exit_status, 1);
@@ -101,7 +102,7 @@ Test(builtins_exit, invalid_number_of_args, .init=redirect_all_stdout) {
 }
 
 Test(builtins_exit, null_args) {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
 
     cr_assert_eq(builtin_exit(NULL, shell), SHELL_EXIT_ERROR);
 }

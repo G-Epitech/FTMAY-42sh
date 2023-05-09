@@ -13,7 +13,7 @@
 #include "types/list/list.h"
 #include "types/shell/shell.h"
 
-static bool shell_init_data(shell_t *shell)
+static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
 {
     shell->exit_code = SHELL_EXIT_SUCCESS;
     shell->is_tty = isatty(STDIN_FILENO);
@@ -27,16 +27,18 @@ static bool shell_init_data(shell_t *shell)
     shell->owd[0] = '\0';
     shell->status = SH_RUNNING;
     shell->vars = list_new();
+    shell->builtins = builtins;
+    shell_special_vars_init(shell);
     return true;
 }
 
-shell_t *shell_new(void)
+shell_t *shell_new(const builtin_t *builtins)
 {
     shell_t *shell = malloc2(sizeof(shell_t));
 
     if (!shell)
         return NULL;
-    if (!shell_init_data(shell))
+    if (!shell_init_data(shell, builtins))
         return NULL;
     return shell;
 }

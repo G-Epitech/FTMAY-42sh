@@ -6,14 +6,12 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <unistd.h>
-#include <string.h>
+#include "mysh/mysh.h"
 
 int main()
 {
-    return 0;
+    setvbuf(stdout, NULL, _IONBF, 0);
+    return mysh();
 }
 
 

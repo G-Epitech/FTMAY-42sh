@@ -6,13 +6,20 @@
 ##
 
 
-_SRC =			builtins/cd.c \
+_SRC =			mysh.c \
+				\
+				builtins/cd.c \
 				builtins/env.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
+				builtins/set.c \
+				builtins/unset.c \
+				builtins/var.c \
 				\
 				errors/get.c \
+				errors/strerror.c \
+				errors/strsignal.c \
 				\
 				types/node/new.c \
 				types/node/free.c \
@@ -24,6 +31,11 @@ _SRC =			builtins/cd.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
+				types/cmd/target/target.c \
+				types/cmd/target/builtin.c \
+				types/cmd/target/system.c \
+				types/cmd/target/absolute.c \
+				types/cmd/target/empty.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -46,10 +58,18 @@ _SRC =			builtins/cd.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-        		types/shell/vars.c \
+				types/shell/get.c \
+				types/shell/exit.c \
+				types/shell/prompt.c \
+        		types/shell/vars/vars.c \
+				types/shell/vars/special/std.c \
+				types/shell/vars/special/init.c \
+				types/shell/vars/special/home.c \
+				types/shell/vars/special/dispatch_env_update.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				utils/asprintf2.c \
 				\
 				parsing/set_command_args.c \
 				parsing/get_len.c \
@@ -58,7 +78,7 @@ _SRC =			builtins/cd.c \
 				parsing/redirection/set_type.c \
 				parsing/get_word.c \
 				parsing/get_cmd.c \
-				parsing/main.c \
+				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \
@@ -66,34 +86,52 @@ _SRC =			builtins/cd.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/var/replace.c \
+				parsing/var/get_no_var.c \
+				parsing/var/get_var.c \
+				\
+				execution/double_left.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
-				criterion/types/cmd.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
+				criterion/types/cmd/cmd.c \
+				criterion/types/cmd/target.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
 				criterion/builtins/cd.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
+				criterion/builtins/set.c \
+				criterion/builtins/unset.c \
+				criterion/builtins/var.c \
 				\
 				criterion/errors/get.c \
+				criterion/errors/strerror.c \
+				criterion/errors/strsignal.c \
+				\
 				criterion/parsing/redirection.c \
 				criterion/parsing/separator.c \
 				criterion/parsing/pipe.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
+				criterion/parsing/set_command_args.c \
+				criterion/parsing/var.c \
+				criterion/parsing/parsing.c \
+				\
+				criterion/execution/double_left.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -133,7 +171,7 @@ TESTS_NAME = 	42sh_tests
 
 TESTS_CUSTOM = tests/custom/launch.py
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re
 
 all: 			$(NAME)
 

@@ -7,13 +7,15 @@
 
 #include <unistd.h>
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
+#include "builtins/defs.h"
 #include "utils/malloc2.h"
 #include "types/list/list.h"
 #include "types/shell/shell.h"
 
 Test(types_shell, new_valid_shell)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
 
     cr_assert_not_null(shell);
     cr_assert_not_null(shell->owd);
@@ -29,7 +31,7 @@ Test(types_shell, new_shell_with_malloc_fail)
     shell_t *shell = NULL;
 
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    shell = shell_new();
+    shell = shell_new(builtins_cmds);
     cr_assert_null(shell);
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
     shell_free(shell);
@@ -37,7 +39,7 @@ Test(types_shell, new_shell_with_malloc_fail)
 
 Test(types_shell, free_valid_shell)
 {
-    shell_t *shell = shell_new();
+    shell_t *shell = shell_new(builtins_cmds);
 
     shell_free(shell);
 }
@@ -46,5 +48,25 @@ Test(types_shell, free_bad_shell)
 {
     shell_t *shell = NULL;
 
+    shell_free(shell);
+}
+
+Test(prompt_shell, default_prompt, .init=cr_redirect_stdout)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+
+    shell_display_prompt(shell);
+    cr_assert_stdout_eq_str("42sh> ");
+    shell_free(shell);
+}
+
+Test(exit_shell, shell_exit_default, .init=cr_redirect_stdout)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+
+    shell->is_tty = true;
+    shell_exit(shell);
+    cr_assert_stdout_eq_str("exit\n");
+    cr_assert_eq(shell->status, SH_EXITED);
     shell_free(shell);
 }

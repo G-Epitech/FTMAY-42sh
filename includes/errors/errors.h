@@ -14,11 +14,23 @@
 /**
  * @brief Find the message corresponding to given code.
  * @param messages Array with messages and codes for signals
- * @param messages_size Size of messages and codes array
  * @param code Error codes
  * @return Message string or NULL if code is not found.
  */
-char *errors_get_message_of_code(const code_msg_t *messages,
-size_t messages_size, int code);
+char *errors_get_message_of_code(const code_msg_t *messages, int code);
+
+/**
+ * @brief Get error message corresponding to given errnum.
+ * @param errnum Number of error
+ * @return Message associated to given error number
+ */
+char *errors_strerror(int errnum);
+
+/**
+ * @brief Get error message corresponding to given signal.
+ * @param sig Number of signal
+ * @return Message associated to given signal
+ */
+char *errors_strsignal(int sig);
 
 #endif /* !ERRORS_H_ */

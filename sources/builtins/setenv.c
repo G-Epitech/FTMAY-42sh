@@ -10,7 +10,7 @@
 #include <string.h>
 #include "utils/utils.h"
 #include "types/args/defs.h"
-#include "types/shell/defs.h"
+#include "types/shell/shell.h"
 #include "builtins/builtins.h"
 
 static bool builtin_setenv_check_name(char *name)
@@ -62,5 +62,6 @@ unsigned char builtin_setenv(args_t *args, shell_t *shell)
     if (builtin_setenv_prevent_errors(args))
         return SHELL_EXIT_ERROR;
     setenv(args->argv[1], args->argv[2], true);
+    shell_special_vars_dispatch_env_update(shell, args->argv[1]);
     return SHELL_EXIT_SUCCESS;
 }

@@ -12,9 +12,10 @@
 
 /**
  * @brief Create a new shell integrating given environnement variables.
+ * @param builtins Builtins command to set to shell
  * @return New shell object
  */
-shell_t *shell_new(void);
+shell_t *shell_new(const builtin_t *builtins);
 
 /**
  * @brief Free given shell and all its internal fields.
@@ -47,5 +48,37 @@ void shell_unset_var(shell_t *shell, char *name);
  */
 char *shell_get_var(shell_t *shell, char *name, bool copy);
 
+/**
+ * @brief Wait for all user command entry.
+ * @param shell Shell object
+ * @return Command user input in format char *
+ */
+char *shell_get_input(shell_t *shell);
+
+/**
+ * @brief Display before the user input the shell prompt.
+ * @param shell Shell object
+ */
+void shell_display_prompt(shell_t *shell);
+
+/**
+ * @brief Display prompt for exit and set status of shell to SH_EXITED.
+ * @param shell Shell object
+ */
+void shell_exit(shell_t *shell);
+
+/**
+ * @brief Init specials variables of shell.
+ * @param shell Shell object
+ */
+void shell_special_vars_init(shell_t *shell);
+
+/**
+ * @brief Update all specials vars depending on environnement
+ * variables.
+ * @param shell Shell object
+ * @param name Name of environnement variable
+ */
+void shell_special_vars_dispatch_env_update(shell_t *shell, char *name);
 
 #endif /* !SHELL_H_ */

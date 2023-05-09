@@ -17,7 +17,7 @@ var_t *var_list_get(list_t *vars, char *name)
     node_t *node = vars ? vars->first : NULL;
     var_t *var = NULL;
 
-    while (node) {
+    while (node && name) {
         var = NODE_DATA_TO_PTR(node->data, var_t *);
         if (strcmp(var->name, name) == 0)
             return var;
