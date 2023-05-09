@@ -15,10 +15,11 @@
     #define EXECUTION_NODE_TO_INST(n) (NODE_DATA_TO_PTR(n->data, inst_t *))
     #define EXECUTION_GET_INST(n) (n ? EXECUTION_NODE_TO_INST(n) : NULL)
 
+// Represent type of execution caller
 typedef enum e_exec_caller {
-    EXEC_SUPERIOR,
-    EXEC_SIBLING,
-    EXEC_MAIN
+    EXEC_SUPERIOR,  // The execution is requested by a superior block
+    EXEC_SIBLING,   // The execution is requested by a sibling instruction
+    EXEC_MAIN       // The execution is requested by the main block
 } exec_caller_t;
 
 // Reprensent execution data
