@@ -8,7 +8,7 @@
 #include "utils/utils.h"
 #include "types/input_line/defs.h"
 
-int input_line_read_arrows(void)
+int input_line_get_arrows(void)
 {
     int character = getchar();
 

@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <ctype.h>
 #include <unistd.h>
 #include "utils/utils.h"
 #include "types/input_line/input_line.h"
