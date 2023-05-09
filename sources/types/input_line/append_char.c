@@ -44,5 +44,7 @@ bool append_char(input_line_t *line, int c)
     if (asprintf2(&new_input_user, "%s%s", begin, end) == -1)
         return false;
     line->buffer->content = new_input_user;
+    line->buffer->cursor++;
+    line->buffer->len++;
     return true;
 }
