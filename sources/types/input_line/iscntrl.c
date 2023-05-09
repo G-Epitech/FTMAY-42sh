@@ -37,11 +37,8 @@ int input_line_get_cntrl(void)
     int character = getchar();
 
     switch (character) {
-        case KEY_CTRL_ENTER:
-            character = CTRL_KEY_ENTER;
-            break;
-        case 'D':
-            character = CTRL_KEY_D;
+        case KEY_ARROWS:
+            character = input_line_get_arrows();
             break;
         default:
             break;
@@ -49,16 +46,27 @@ int input_line_get_cntrl(void)
     return character;
 }
 
-int input_line_get_cntrls(void)
+int input_line_get_cntrls(int character)
 {
-    int character = getchar();
-
     switch (character) {
-        case KEY_ARROWS:
-            character = input_line_get_arrows();
+        case 'D':
+            character = CTRL_KEY_D;
             break;
-        case KEY_CTRLS:
+        case KEY_CTRL_ENTER:
+            character = CTRL_KEY_ENTER;
+            break;
+        default:
             character = input_line_get_cntrl();
+            break;
+    }
+    return character;
+}
+
+int input_line_get_character(int character)
+{
+    switch (character) {
+        case KEY_DEL:
+            character = CTRL_KEY_DEL;
             break;
         default:
             break;
