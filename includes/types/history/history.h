@@ -8,6 +8,7 @@
 #ifndef HISTORY_H_
     #define HISTORY_H_
 
+    #include <stdbool.h>
     #include "defs.h"
 
 /**
@@ -39,5 +40,13 @@ void history_entry_free(history_entry_t *history_entry);
  * @param data Node data to free
  */
 void history_entry_node_freer(node_data_t data);
+
+/**
+ * @brief Append a new entry in history.
+ * @param history History struct to complete
+ * @param input User input to append in history
+ * @return Status of Success about the operation
+ */
+bool history_append_entry(history_t *history, char *input);
 
 #endif /* !HISTORY_H_ */
