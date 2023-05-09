@@ -63,7 +63,6 @@ _SRC =			mysh/mysh.c \
 				types/parsing_utils/new.c \
 				\
 				types/input_line/new.c \
-				types/input_line/arrow.c \
 				types/input_line/input_line.c \
 				types/input_line/iscntrl.c \
 				types/input_line/mode.c \
