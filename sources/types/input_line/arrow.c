@@ -5,6 +5,7 @@
 ** arrow
 */
 
+#include <stdio.h>
 #include "utils/utils.h"
 #include "types/input_line/defs.h"
 
