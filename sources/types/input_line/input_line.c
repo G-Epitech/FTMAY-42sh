@@ -25,6 +25,7 @@ void input_line_get_content(input_line_t *line)
 {
     int character = 0;
 
+    (void) character;
     while (line->status == IL_RUNNING) {
         character = input_line_read_key();
     }

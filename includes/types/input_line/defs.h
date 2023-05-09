@@ -9,7 +9,7 @@
     #define INPUT_LINE_DEFS_H_
 
     #include <termios.h>
-    #include "shell/defs.h"
+    #include "types/shell/defs.h"
 
     #define CTRL_KEY_HANDLERS_NBR 4
 
