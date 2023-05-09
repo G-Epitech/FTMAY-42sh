@@ -9,8 +9,9 @@
     #define HANDLERS_H_
 
     #include <stdbool.h>
-    #include "defs.h"
+    #include "types/shell/defs.h"
 
+typedef struct s_input_line input_line_t;
 
 /**
  * @brief Put the cursor in front position.

@@ -5,6 +5,7 @@
 ** cursor
 */
 
+#include <stdio.h>
 #include "types/input_line/defs.h"
 
 void input_line_cursor_backward(shell_t *shell, input_line_t *line)

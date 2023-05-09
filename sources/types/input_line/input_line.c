@@ -23,13 +23,18 @@ int input_line_read_key(void)
         return character;
 }
 
-static void start_function(int charactere, input_line_t *line, shell_t *shell)
+static void call_function(input_line_t *line,
+shell_t *shell, int index)
 {
-    if (charactere > 127)
-        return;
+    if (ctrl_key_handlers[index].handler)
+        ctrl_key_handlers[index].handler(shell, line);
+}
+
+static void lunch_control_function(int character, input_line_t *line, shell_t *shell)
+{
     for (int index = 0; index < CTRL_KEY_HANDLERS_NBR; index++) {
-        if (ctrl_key_handlers[index].key == charactere)
-            ctrl_key_handlers[index].handler(shell, line);
+        if ((int) ctrl_key_handlers[index].key == character)
+            call_function(line, shell, index);
     }
 }
 
@@ -39,13 +44,11 @@ void input_line_get_content(input_line_t *line, shell_t *shell)
 
     while (line->status == IL_RUNNING) {
         character = input_line_read_key();
-        if (ARROW_KEY_LEFT == character)
-            input_line_cursor_backward(NULL, line);
-        if (ARROW_KEY_RIGHT == character)
-            input_line_cursor_forward(NULL, line);
         if (character <= 127) {
             append_char(line, character);
             printf("%c", character);
+        } else {
+            lunch_control_function(character, line, shell);
         }
     }
 }

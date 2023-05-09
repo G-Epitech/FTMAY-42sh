@@ -21,7 +21,6 @@ bool append_char(input_line_t *line, int c)
     new_input[strlen(new_input)] = '\0';
     line->buffer->content = new_input;
     line->buffer->cursor++;
-    if (line->buffer->cursor >= line->buffer->len)
-        line->buffer->len++;
+    line->buffer->len++;
     return true;
 }

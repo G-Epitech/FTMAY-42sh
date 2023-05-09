@@ -10,6 +10,7 @@
 
     #include <termios.h>
     #include "types/shell/defs.h"
+    #include "handlers.h"
 
     #define CTRL_KEY_HANDLERS_NBR 4
 
@@ -21,7 +22,7 @@ typedef enum e_ctrl_key {
     ARROW_KEY_LEFT,         // Code of key left
     CTRL_KEY_ENTER,
     CTRL_KEY_D
-} ctrl_key_t;
+} ctrl_key_e;
 
 // Represent the input of the user
 typedef struct s_input_line_buffer {
@@ -48,7 +49,7 @@ typedef void (*ctrl_handler_t)(shell_t *shell, input_line_t *line);
 
 // Prototype control key handler
 typedef struct s_ctrl_key_handler {
-    ctrl_key_t key;                 // Value of arrow key
+    ctrl_key_e key;                 // Value of arrow key
     ctrl_handler_t handler;         // Function arrow key
 } ctrl_key_handler_t;
 
@@ -56,8 +57,8 @@ typedef struct s_ctrl_key_handler {
 static const ctrl_key_handler_t ctrl_key_handlers[CTRL_KEY_HANDLERS_NBR] = {
     {ARROW_KEY_UP, NULL},
     {ARROW_KEY_DOWN, NULL},
-    {ARROW_KEY_RIGHT, NULL},
-    {ARROW_KEY_LEFT, NULL}
+    {ARROW_KEY_RIGHT, &input_line_cursor_forward},
+    {ARROW_KEY_LEFT, &input_line_cursor_backward}
 };
 
 #endif /* !INPUT_LINE_DEFS_H_ */
