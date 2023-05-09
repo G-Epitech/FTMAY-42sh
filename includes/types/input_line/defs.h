@@ -23,12 +23,12 @@ typedef struct s_input_line_buffer {
     size_t len;             // Len of the user input
     size_t cursor;          // Position in x of the cursor on the content
     char *content;          // Buffer of the user input
-} input_line_buffer_t; 
+} input_line_buffer_t;
 
 // Represent evoluted input entry
 typedef struct s_input_line {
     struct termios settings;        // Settings of the shell
     input_line_buffer_t *buffer;    // Information about user input
-} input_line_t; 
+} input_line_t;
 
 #endif /* !INPUT_LINE_DEFS_H_ */
