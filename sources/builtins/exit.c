@@ -10,7 +10,7 @@
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
 
-unsigned char builtin_exit(args_t *args, shell_t *shell)
+int builtin_exit(args_t *args, shell_t *shell)
 {
     if (!args)
         return SHELL_EXIT_ERROR;
@@ -22,6 +22,8 @@ unsigned char builtin_exit(args_t *args, shell_t *shell)
         fprintf(stderr, "exit: Expression Syntax.\n");
         return SHELL_EXIT_ERROR;
     }
+    if (shell->is_tty)
+        printf("exit\n");
     shell->status = SH_EXITED;
     return atoi(args->argv[1]);
 }

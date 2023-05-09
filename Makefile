@@ -6,7 +6,10 @@
 ##
 
 
-_SRC =			mysh.c \
+_SRC =			mysh/mysh.c \
+				mysh/execute.c \
+				mysh/input.c \
+				mysh/parse.c \
 				\
 				builtins/cd.c \
 				builtins/env.c \
@@ -31,11 +34,14 @@ _SRC =			mysh.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
+				types/cmd/display.c \
 				types/cmd/target/target.c \
 				types/cmd/target/builtin.c \
 				types/cmd/target/system.c \
 				types/cmd/target/absolute.c \
 				types/cmd/target/empty.c \
+				types/cmd/args/get_len.c \
+				types/cmd/args/set_args.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -58,7 +64,11 @@ _SRC =			mysh.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-				types/shell/get.c \
+				types/shell/input.c \
+				types/shell/format/format.c \
+				types/shell/format/get_no_var.c \
+				types/shell/format/get_var.c \
+				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
         		types/shell/vars/vars.c \
@@ -80,13 +90,11 @@ _SRC =			mysh.c \
 				utils/malloc2.c \
 				utils/asprintf2.c \
 				\
-				parsing/set_command_args.c \
-				parsing/get_len.c \
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
 				parsing/redirection/set_type.c \
-				parsing/get_word.c \
 				parsing/get_cmd.c \
+				parsing/get_word.c \
 				parsing/parsing.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
@@ -95,11 +103,27 @@ _SRC =			mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
-				parsing/var/replace.c \
-				parsing/var/get_no_var.c \
-				parsing/var/get_var.c \
 				\
-				execution/double_left.c \
+				execution/block/block.c \
+				execution/cmd/absolute.c \
+				execution/cmd/builtin.c \
+				execution/cmd/can_be_done.c \
+				execution/cmd/error.c \
+				execution/cmd/prepare.c \
+				execution/cmd/launch.c \
+				execution/inst/fd/fd.c \
+				execution/inst/fd/parent.c \
+				execution/inst/fork.c \
+				execution/inst/inst.c \
+				execution/inst/launch.c \
+				execution/inst/previous.c \
+				execution/redirections/error.c \
+				execution/redirections/input_double.c \
+				execution/redirections/input.c \
+				execution/redirections/output.c \
+				execution/redirections/redirections.c \
+				execution/execution.c \
+				execution/utils.c \
 
 _TESTS =		criterion/types/list.c \
 				criterion/types/node.c \
@@ -107,6 +131,9 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/ios.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
+				criterion/types/shell/input.c \
+				criterion/types/shell/format.c \
+				criterion/types/shell/io.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
@@ -115,6 +142,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/history/history.c \
 				criterion/types/history/entry.c \
 				criterion/types/history/append.c \
+				criterion/types/cmd/set_args.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
@@ -139,11 +167,24 @@ _TESTS =		criterion/types/list.c \
 				criterion/parsing/get_word.c \
 				criterion/parsing/utils.c \
 				criterion/parsing/get_cmd.c \
-				criterion/parsing/set_command_args.c \
-				criterion/parsing/var.c \
 				criterion/parsing/parsing.c \
 				\
-				criterion/execution/double_left.c \
+				criterion/execution/redirections/input_double.c \
+				criterion/execution/redirections/input.c \
+				criterion/execution/redirections/output.c \
+				criterion/execution/redirections/error.c \
+				criterion/execution/redirections.c \
+				criterion/execution/block.c \
+				criterion/execution/cmd/absolute.c \
+				criterion/execution/cmd/builtin.c \
+				criterion/execution/cmd/prepare.c \
+				criterion/execution/cmd/launch.c \
+				criterion/execution/cmd/can_be_done.c \
+				criterion/execution/inst/fd.c \
+				criterion/execution/inst/fork.c \
+				criterion/execution/inst/inst.c \
+				criterion/execution/inst/launch.c \
+				criterion/execution/execution.c \
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
@@ -155,6 +196,7 @@ SRC_COVER =		$(SRC:.c=.gcno)
 SRC_PRFL =		$(SRC:.c=.gcda)
 
 TESTSDIR = 		tests/
+TESTS_UTILS = 	$(TESTSDIR)/utils/
 TESTS =			$(addprefix $(TESTSDIR), $(_TESTS))
 TESTS_OBJ = 	$(TESTS:.c=.o)
 TESTS_CFLAGS =	-lcriterion --coverage
@@ -215,12 +257,14 @@ clean:
 				@rm -f $(SRC_COVER)
 				@rm -f $(SRC_PRFL)
 				@rm -f $(TESTS_OBJ)
+				@make -C $(TESTS_UTILS) clean -s
 
 fclean: 		clean
 				@rm -f $(NAME)
 				@rm -f $(TESTS_NAME)
 				@printf "$(STYLE_ORANGE)🧽 $(NAME) was successfully cleaned\
 				$(STYLE_END)\n"
+				@make -C $(TESTS_UTILS) fclean -s
 
 re: 			fclean all
 
@@ -229,7 +273,10 @@ style:			fclean
 				@coding-style . .
 				@cat coding-style-reports.log
 
-tests_criterion:fclean
+tests_criterion: fclean
+				@printf "$(STYLE_RED)🧪 Tests utils compliation...\
+				$(STYLE_END)\n"
+				@make -C $(TESTS_UTILS) criterion_utils -s
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage -s
 				@$(MAKE) tests_objects -s
@@ -246,7 +293,8 @@ tests_custom:	$(NAME)
 				@./$(TESTS_CUSTOM)
 				@echo "pass"
 
-tests_run: 		tests_criterion
+tests_run:
+				@$(MAKE) tests_criterion -s
 
 coverage:
 				@gcovr

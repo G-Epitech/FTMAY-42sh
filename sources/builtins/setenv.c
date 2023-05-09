@@ -53,7 +53,7 @@ static bool builtin_setenv_prevent_errors(args_t *args)
     return false;
 }
 
-unsigned char builtin_setenv(args_t *args, shell_t *shell)
+int builtin_setenv(args_t *args, shell_t *shell)
 {
     if (!args)
         return SHELL_EXIT_ERROR;

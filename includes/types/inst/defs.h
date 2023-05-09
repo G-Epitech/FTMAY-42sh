@@ -40,10 +40,10 @@ typedef union s_isnt_value {
 
 // Represent an instruction
 typedef struct s_isnt {
-    inst_value_t value;    // Value of instruction
-    inst_type_t type;      // Type of instruction
+    inst_value_t value;     // Value of instruction
+    inst_type_t type;       // Type of instruction
     separator_t separator;  // Separator with next group (default SP_BREAK)
-    unsigned char exit_code;         // Exited code of instruction
+    int exit_code;          // Exited code of instruction
     ios_t ios;              // Input and output to use at runtime
 } inst_t;
 

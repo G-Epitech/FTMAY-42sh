@@ -18,6 +18,9 @@
     #define SHELL_EXIT_ERROR 1
     #define SHELL_EXIT_SUCCESS 0
     #define SHELL_DEFAULT_PATH "/usr/bin:/bin"
+    #define SHELL_VAR_NOT_FOUND 1
+    #define SHELL_VAR_FOUND 2
+
 
 // Environnement variables
 extern char **environ;
@@ -28,6 +31,12 @@ typedef enum e_shell_status {
     SH_EXITED                   // Shell is exited
 } shell_status_t;
 
+// Represent shell input and output
+typedef struct s_shell_io {
+    int stdin;           // File descriptor of initial stdin
+    int stdout;          // File descriptor of initial stdout
+} shell_io_t;
+
 // Represent a shell
 typedef struct s_shell {
     unsigned char exit_code;    // Last exit code of shell
@@ -37,6 +46,7 @@ typedef struct s_shell {
     char *owd;                  // Old working directory
     char *pwd;                  // Path of current working directory
     const builtin_t *builtins;  // Builtins command available in shell
+    shell_io_t io;              // Shell input / output
 } shell_t;
 
 #endif /* !SHELL_DEFS_H_ */

@@ -9,6 +9,7 @@
     #define CMD_H_
 
     #include "defs.h"
+    #include "types/shell/defs.h"
 
 /**
  * @brief Create a new command.
@@ -21,6 +22,37 @@ cmd_t *cmd_new(void);
  * @param command Command to free
  */
 void cmd_free(cmd_t *command);
+
+/**
+ * @brief Display given command details.
+ * @param cmd Command of which display details
+ */
+void cmd_display(cmd_t *cmd);
+
+/**
+ * @brief Parse command input into string array.
+ * @param command Command object
+ * @param shell Shell object
+ * @return true if all went well, false else
+ */
+bool cmd_set_args(cmd_t *command, shell_t *shell);
+
+/**
+ * @brief Get len of simple input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the simple input part
+ */
+int cmd_set_args_get_len_input(char *input, int start);
+
+/**
+ * @brief Get len of string input part.
+ * @param input Input string
+ * @param start Start index
+ * @return The len of the string input part
+ */
+int cmd_set_args_get_len_input_string(char *input, int start);
+
 
 /**
  * @brief Determine if target is builtin and set it if so.

@@ -71,4 +71,8 @@ void parsing_display(inst_t *instruction)
         return;
     if (instruction->type == INS_BLOCK)
         display_block(instruction->value.block, 0);
+    if (instruction->type == INS_CMD) {
+        display_cmd(instruction->value.cmd, 0);
+        display_redirection(instruction, 0);
+    }
 }

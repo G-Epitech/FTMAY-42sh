@@ -74,11 +74,52 @@ void shell_exit(shell_t *shell);
 void shell_special_vars_init(shell_t *shell);
 
 /**
- * @brief Update all specials vars depending on environnement
+ * @brief Update all specials vars depending on environnement.
  * variables.
  * @param shell Shell object
  * @param name Name of environnement variable
  */
 void shell_special_vars_dispatch_env_update(shell_t *shell, char *name);
+
+/**
+ * @brief Init shell input / output.
+ * @param shell Shell object
+ * @return Success status of initialization
+ */
+bool shell_init_io(shell_t *shell);
+
+/**
+ * @brief Restore initial input / output of shell.
+ * @param shell Shell object
+ * @return Status of restoring success
+ */
+bool shell_restore_io(shell_t *shell);
+
+/**
+ * @brief Replace value of var in given string.
+ * @param string String to format
+ * @param shell Shell struct
+ * @return String formated
+ */
+char *shell_format_string(char *string, shell_t *shell);
+
+/**
+ * @brief Replace value of variable.
+ * @param string String to format
+ * @param shell Shell struct
+ * @param parsing_index Index parsing on remplacing var
+ * @return Value of variable
+ */
+char *shell_format_string_get_var(char *string, shell_t *shell,
+int *parsing_index);
+
+/**
+ * @brief Get string that containing no variables to replace.
+ * @param string String to format
+ * @param start Start of non var input
+ * @param end End of non var input
+ * @return Copied string
+ */
+char *shell_format_string_get_no_var(char *input, int start, int end);
 
 #endif /* !SHELL_H_ */

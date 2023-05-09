@@ -13,7 +13,7 @@
 typedef struct s_shell shell_t;
 
 // Prototype of builtin command function
-typedef unsigned char (*builtin_target_t)(args_t *args, shell_t *shell);
+typedef int (*builtin_target_t)(args_t *args, shell_t *shell);
 
 // Represent a builtin command
 typedef struct s_builtin {
