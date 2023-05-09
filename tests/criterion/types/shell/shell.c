@@ -55,7 +55,9 @@ Test(prompt_shell, default_prompt, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
 
+    shell->is_tty = true;
     shell_display_prompt(shell);
+    fflush(stdout);
     cr_assert_stdout_eq_str("42sh> ");
     shell_free(shell);
 }
@@ -66,6 +68,7 @@ Test(exit_shell, shell_exit_default, .init=cr_redirect_stdout)
 
     shell->is_tty = true;
     shell_exit(shell);
+    fflush(stdout);
     cr_assert_stdout_eq_str("exit\n");
     cr_assert_eq(shell->status, SH_EXITED);
     shell_free(shell);

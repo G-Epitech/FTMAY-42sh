@@ -38,7 +38,7 @@ static bool set_new_path(args_t *args, shell_t *shell)
     return true;
 }
 
-unsigned char builtin_cd(args_t *args, shell_t *shell)
+int builtin_cd(args_t *args, shell_t *shell)
 {
     char *owd = NULL;
 
