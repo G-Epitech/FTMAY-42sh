@@ -106,11 +106,11 @@ shell_t *shell, exec_utils_t *utils);
 
 /**
  * @brief Check if fork is needed for currenr instruction.
- * @param node_inst Node instruction
+ * @param inst Instruction on which check if fork is needed
  * @param utils Utils data of execution
  * @return Status of requirement
  */
-bool execution_inst_fork_needed(node_t *node_inst, exec_utils_t *utils);
+bool execution_inst_fork_needed(inst_t *inst, exec_utils_t *utils);
 
 /**
  * @brief Launch instruction execution in a forked processus.
@@ -158,5 +158,13 @@ void execution_inst_set_fd(inst_t *inst, exec_utils_t *utils);
  * @param utils Utils data of execution
  */
 void execution_inst_close_fd(exec_utils_t *utils);
+
+/**
+ * @brief Handle status at end of execution.
+ * @param inst Current executed instruction
+ * @param utils Utils data of execution
+ * @return Success status of status handling
+ */
+bool execution_inst_handle_status(inst_t *inst, exec_utils_t *utils);
 
 #endif /* !EXECUTION_H_ */

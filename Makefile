@@ -107,6 +107,7 @@ _SRC =			mysh/mysh.c \
 				execution/inst/fork.c \
 				execution/inst/inst.c \
 				execution/inst/launch.c \
+				execution/inst/status.c \
 				execution/inst/previous.c \
 				execution/redirections/error.c \
 				execution/redirections/input_double.c \

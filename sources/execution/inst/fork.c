@@ -12,10 +12,8 @@
 #include "types/shell/shell.h"
 #include "execution/execution.h"
 
-bool execution_inst_fork_needed(node_t *node_inst, exec_utils_t *utils)
+bool execution_inst_fork_needed(inst_t *inst, exec_utils_t *utils)
 {
-    inst_t *inst = EXECUTION_GET_INST(node_inst);
-
     if (!inst)
         return false;
     if (utils->level > 0)

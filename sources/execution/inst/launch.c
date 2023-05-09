@@ -19,10 +19,12 @@ exec_utils_t *utils)
 void execution_inst_launch(node_t *node_inst, shell_t *shell,
 exec_utils_t *utils)
 {
-    bool fork_needed = execution_inst_fork_needed(node_inst, utils);
+    inst_t *inst = EXECUTION_NODE_TO_INST(node_inst);
+    bool fork_needed = execution_inst_fork_needed(inst, utils);
 
     if (fork_needed)
         execution_inst_launch_fork(node_inst, shell, utils);
     else
         execution_inst_launch_non_fork(node_inst, shell, utils);
+    execution_inst_handle_status(inst, utils);
 }
