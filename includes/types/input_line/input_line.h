@@ -46,4 +46,11 @@ void input_line_get_content(input_line_t *line);
  */
 int input_line_get_cntrls(void);
 
+/**
+ * @brief Append a char in buffer of user input.
+ * @param line Structure input entry
+ * @return Status of success
+ */
+bool append_char(input_line_t *line, int c);
+
 #endif /* !INPUT_LINE_H_ */
