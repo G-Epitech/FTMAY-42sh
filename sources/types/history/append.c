@@ -15,7 +15,6 @@ bool history_append_entry(history_t *history, char *input)
 {
     history_entry_t *new_entry = history_entry_new();
     node_t *node = NULL;
-    history_entry_t *last = NULL;
     node_data_t node_data;
 
     if (!new_entry | !history | !input)
