@@ -25,10 +25,17 @@ typedef struct s_input_line_buffer {
     char *content;          // Buffer of the user input
 } input_line_buffer_t;
 
+// Represent current input_line status
+typedef enum e_input_line_status {
+    IL_RUNNING,                 // Input line is running
+    IL_EXITED                   // Input line is exited
+} input_line_status_t;
+
 // Represent evoluted input entry
 typedef struct s_input_line {
     struct termios *settings;        // Settings of the shell
-    input_line_buffer_t *buffer;    // Information about user input
+    input_line_buffer_t *buffer;     // Information about user input
+    input_line_status_t status;      // Input line current status
 } input_line_t;
 
 #endif /* !INPUT_LINE_DEFS_H_ */
