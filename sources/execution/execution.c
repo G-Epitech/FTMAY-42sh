@@ -22,5 +22,6 @@ bool execution_main_block(inst_t *block, shell_t *shell)
     execution_block(node, shell, &utils);
     shell_restore_io(shell);
     node_free(node, NULL);
+    shell->exit_code = block->exit_code;
     return true;
 }

@@ -37,6 +37,6 @@ exec_caller_t caller)
     if (launch)
         execution_inst_launch(node_inst, shell, &utils);
     else
-        utils.status = SHELL_EXIT_ERROR;
-    inst->exit_code = utils.status;
+        utils.status = W_EXITCODE(SHELL_EXIT_ERROR, 0);
+    execution_inst_handle_status(inst, &utils);
 }

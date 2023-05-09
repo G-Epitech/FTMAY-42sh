@@ -26,5 +26,4 @@ exec_utils_t *utils)
         execution_inst_launch_fork(node_inst, shell, utils);
     else
         execution_inst_launch_non_fork(node_inst, shell, utils);
-    execution_inst_handle_status(inst, utils);
 }
