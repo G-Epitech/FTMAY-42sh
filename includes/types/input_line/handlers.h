@@ -27,4 +27,13 @@ void input_line_cursor_forward(shell_t *shell, input_line_t *line);
  */
 void input_line_cursor_backward(shell_t *shell, input_line_t *line);
 
+/**
+ * @brief Delete character on the buffer->content
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_cursor_del(shell_t *shell, input_line_t *line);
+
+void input_line_keypress_enter(shell_t *shell, input_line_t *line);
+
 #endif /* !HANDLERS_H_ */

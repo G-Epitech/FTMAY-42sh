@@ -34,6 +34,12 @@ bool input_line_disable_raw_mode(struct termios *default_tty);
 input_line_t *input_line_new(void);;
 
 /**
+ * @brief Free the structure line
+ * @param line Structure input entry
+ */
+void input_line_free(input_line_t *line);
+
+/**
  * @brief Get user input with tty raw mode enable.
  * @param line Structure input entry
  * @param shell Structure of shell
@@ -42,9 +48,17 @@ void input_line_get_content(input_line_t *line, shell_t *shell);
 
 /**
  * @brief Get control character.
+ * @param character First character pressed
  * @return Return character controle
  */
-int input_line_get_cntrls(void);
+int input_line_get_cntrls(int character);
+
+/**
+ * @brief Get special key character.
+ * @param character First character pressed
+ * @return Return character controle
+ */
+int input_line_get_character(int character);
 
 /**
  * @brief Append a char in buffer of user input.
