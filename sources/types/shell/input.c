@@ -9,7 +9,7 @@
 #include <stddef.h>
 #include "types/shell/shell.h"
 
-char *shell_get_input(shell_t *shell)
+static char *shell_get_input_no_tty(shell_t *shell)
 {
     char *input = NULL;
     size_t size = 0;
@@ -21,4 +21,17 @@ char *shell_get_input(shell_t *shell)
     else
         input[len - 1] = (input[len - 1] == '\n') ? '\0' : input[len - 1];
     return input;
+}
+
+static char *shell_get_input_tty(shell_t *shell)
+{
+    return NULL;
+}
+
+char *shell_get_input(shell_t *shell)
+{   
+    if (!shell->is_tty)
+        return shell_get_input_no_tty(shell);
+    else
+        return shell_get_input_tty(shell);
 }
