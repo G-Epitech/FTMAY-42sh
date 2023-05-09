@@ -27,12 +27,13 @@ Test(parsing_pipe, ambigous_redirect_with_redirection_before, .init=redirect_all
     inst_t *test_inst = inst_new();
     bool test_return = false;
 
+    test_inst->type = INS_CMD;
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 7;
     parsing_redirection_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
     test_return = parsing_pipes_handler(utils, test_inst_block);
     cr_assert_eq(test_return, false);
-    cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
+    cr_assert_stderr_eq_str("Ambiguous output redirect.\n");
 }
 
 Test(parsing_pipe, simple_pipe)
@@ -42,6 +43,7 @@ Test(parsing_pipe, simple_pipe)
     inst_t *test_inst = inst_new();
     bool test_return = false;
 
+    test_inst->type = INS_CMD;
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 7;
     parsing_redirection_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));
@@ -66,6 +68,7 @@ Test(parsing_pipe, malloc2_failed)
     inst_t *test_inst = inst_new();
     bool test_return = false;
 
+    test_inst->type = INS_CMD;
     inst_append(test_inst_block, test_inst);
     utils->index_parsing = 7;
     parsing_redirection_handler(utils, NODE_DATA_TO_PTR(test_inst_block->instructions->first->data, inst_t *));

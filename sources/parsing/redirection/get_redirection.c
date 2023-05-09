@@ -12,14 +12,24 @@
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
 
-static bool check_ambiguous(inst_t *instruction, int index)
+static bool check_ambiguous(inst_t *instruction, int index,
+parsing_utils_t *utils)
 {
-    if (instruction->ios.input.type != IOT_DEFAULT &&
-    (index == PARSING_SIMPLE_LEFT || index == PARSING_DOUBLE_LEFT))
+    bool right = index == PARSING_SIMPLE_RIGHT || index == PARSING_DOUBLE_RIGHT;
+    bool left = index == PARSING_SIMPLE_LEFT || index == PARSING_DOUBLE_LEFT;
+
+    if (index == PARSING_DOUBLE_LEFT && utils->level != 0) {
+        write(2, "Can't << within ()'s.\n", 22);
         return false;
-    if (instruction->ios.output.type != IOT_DEFAULT &&
-    (index == PARSING_SIMPLE_RIGHT || index == PARSING_DOUBLE_RIGHT))
+    }
+    if (instruction->ios.input.type != IOT_DEFAULT && left) {
+        write(2, "Ambiguous input redirect.\n", 26);
         return false;
+    }
+    if (instruction->ios.output.type != IOT_DEFAULT && right) {
+        write(2, "Ambiguous output redirect.\n", 27);
+        return false;
+    }
     return true;
 }
 
@@ -48,10 +58,8 @@ bool parsing_redirection_handler(parsing_utils_t *utils, inst_t *instruction)
             break;
         }
     }
-    if (!check_ambiguous(instruction, index)) {
-        write(2, "Ambiguous input redirect.\n", 26);
+    if (!check_ambiguous(instruction, index, utils))
         return false;
-    }
     parsing_redirection_set_type(index, instruction);
     parsing_redirection_set_path(utils, instruction, index);
     return check_name(instruction, index);

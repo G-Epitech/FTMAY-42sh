@@ -33,7 +33,7 @@ Test(parsing_main, failed_child_block, .init=redirect_all_stdout)
 {
     inst_t *main = parsing_get_main_block("(ls > tmp | cat -e)");
 
-    cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
+    cr_assert_stderr_eq_str("Ambiguous output redirect.\n");
     inst_free(main);
 }
 
