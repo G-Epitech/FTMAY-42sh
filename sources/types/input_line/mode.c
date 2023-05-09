@@ -5,6 +5,7 @@
 ** mode
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include "types/input_line/input_line.h"
 
@@ -14,7 +15,7 @@ struct termios *default_tty)
     if (tcgetattr(STDIN_FILENO, default_tty) == -1)
         return false;
     line->settings = default_tty;
-    line->settings->c_iflag &= ~(BRKINT | INPCK | ICRNL | ISTRIP);
+    line->settings->c_iflag &= ~(BRKINT | INPCK | ICRNL | ISTRIP | IXON);
     line->settings->c_oflag &= ~(OPOST);
     line->settings->c_cflag |= (CS8);
     line->settings->c_lflag &= ~(ECHO | ICANON);
@@ -25,6 +26,7 @@ struct termios *default_tty)
 
 bool input_line_disable_raw_mode(struct termios *default_tty)
 {
+    printf("\r\n");
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, default_tty) == -1)
         return false;
     return true;

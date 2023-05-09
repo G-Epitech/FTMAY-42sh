@@ -24,3 +24,9 @@ input_line_t *input_line_new(void)
     new->buffer->cursor = 0;
     return new;
 }
+
+void input_line_free(input_line_t *line)
+{
+    free(line->buffer);
+    free(line);
+}

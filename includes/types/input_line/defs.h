@@ -12,15 +12,18 @@
     #include "types/shell/defs.h"
     #include "handlers.h"
 
-    #define CTRL_KEY_HANDLERS_NBR 4
+    #define CTRL_KEY_HANDLERS_NBR 7
+    #define line_clear_after_cursor (printf ("\x1b[J"))
 
 // Represent value of arrow key
 typedef enum e_ctrl_key {
-    ARROW_KEY_UP = 1000,    // Code of key up
+    CTRL_KEY_REF = 1000,
+    ARROW_KEY_UP,           // Code of key up
     ARROW_KEY_DOWN,         // Code of key down
     ARROW_KEY_RIGHT,        // Code of key right
     ARROW_KEY_LEFT,         // Code of key left
     CTRL_KEY_ENTER,
+    CTRL_KEY_DEL,
     CTRL_KEY_D
 } ctrl_key_e;
 
@@ -58,7 +61,10 @@ static const ctrl_key_handler_t ctrl_key_handlers[CTRL_KEY_HANDLERS_NBR] = {
     {ARROW_KEY_UP, NULL},
     {ARROW_KEY_DOWN, NULL},
     {ARROW_KEY_RIGHT, &input_line_cursor_forward},
-    {ARROW_KEY_LEFT, &input_line_cursor_backward}
+    {ARROW_KEY_LEFT, &input_line_cursor_backward},
+    {CTRL_KEY_DEL, &input_line_cursor_del},
+    {CTRL_KEY_ENTER, &input_line_keypress_enter},
+    {CTRL_KEY_D, NULL}
 };
 
 #endif /* !INPUT_LINE_DEFS_H_ */
