@@ -13,11 +13,11 @@
 
 /**
  * @brief Enable on the tty raw mode.
- * @param custom_tty Structure input entry
+ * @param line Structure input entry
  * @param default_tty Structure default tty
  * @return Status of success
  */
-bool intput_line_enable_raw_mode(input_line_t *custom_tty,
+bool input_line_enable_raw_mode(input_line_t *line,
 struct termios *default_tty);
 
 /**
@@ -25,6 +25,6 @@ struct termios *default_tty);
  * @param default_tty Structure default tty
  * @return Status of success
  */
-bool intput_line_disable_raw_mode(struct termios *default_tty);
+bool input_line_disable_raw_mode(struct termios *default_tty);
 
 #endif /* !INPUT_LINE_H_ */
