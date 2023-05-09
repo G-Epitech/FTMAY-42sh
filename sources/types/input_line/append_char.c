@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "utils/malloc2.h"
 #include "types/input_line/input_line.h"
+#include "utils/asprintf2.h"
 
 static char *get_word(char *user_input, int start, int end)
 {
@@ -30,30 +31,18 @@ static char *get_word(char *user_input, int start, int end)
 bool append_char(input_line_t *line, int c)
 {
     char *user_input = line->buffer->content;
-
-    (void) c;
-    // char *new_input = realloc(user_input, sizeof(char) * (strlen(user_input) + 2));
-    // if (!new_input)
-    //     return false;
-    // new_input[strlen(new_input)] = c;
-    // new_input[strlen(new_input)] = '\0';
-
     char *begin = get_word(user_input, 0, line->buffer->cursor);
     char *end = get_word(user_input, line->buffer->cursor, strlen(user_input));
-
-    printf("begin : [%s] | [%s] : end\n", begin, end);
-
     char *new_input = realloc(begin, sizeof(char) * (strlen(begin) + 2));
+    char *new_input_user = NULL;
+
     if (!new_input)
         return false;
     new_input[strlen(new_input)] = c;
     new_input[strlen(new_input)] = '\0';
-
-    
-
-    
-    // line->buffer->content = new_input;
-    // line->buffer->cursor++;
-    // line->buffer->len++;
+    begin = new_input;
+    if (asprintf2(&new_input_user, "%s%s", begin, end) == -1)
+        return false;
+    line->buffer->content = new_input_user;
     return true;
 }
