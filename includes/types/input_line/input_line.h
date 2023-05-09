@@ -10,4 +10,6 @@
 
     #include "defs.h"
 
+input_line_t *input_line_new(void);
+
 #endif /* !INPUT_LINE_H_ */
