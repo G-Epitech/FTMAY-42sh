@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "utils/utils.h"
+#include "types/input_line/handlers.h"
 #include "types/input_line/input_line.h"
 
 int input_line_read_key(void)

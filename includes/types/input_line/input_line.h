@@ -17,7 +17,6 @@
  * @param default_tty Structure default tty
  * @return Status of success
  */
-
 bool input_line_enable_raw_mode(input_line_t *line,
 struct termios *default_tty);
 
@@ -38,7 +37,8 @@ input_line_t *input_line_new(void);;
  * @brief Get user input with tty raw mode enable.
  * @param line Structure input entry
  * @param shell Structure of shell
-void input_line_get_content(input_line_t *line, shell_t shell);
+ */
+void input_line_get_content(input_line_t *line, shell_t *shell);
 
 /**
  * @brief Get control character.
