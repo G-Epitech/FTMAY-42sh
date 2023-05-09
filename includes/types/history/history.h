@@ -49,4 +49,11 @@ void history_entry_node_freer(node_data_t data);
  */
 bool history_append_entry(history_t *history, char *input);
 
+/**
+ * @brief Get current histroy entry.
+ * @param history History to get entry
+ * @return Histroy entry with coresponding data
+ */
+history_entry_t *history_current(history_t *history);
+
 #endif /* !HISTORY_H_ */
