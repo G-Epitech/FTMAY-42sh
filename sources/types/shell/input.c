@@ -34,7 +34,7 @@ static char *shell_get_input_tty(shell_t *shell)
     if (!user_input)
         return NULL;
     input_line_enable_raw_mode(user_input, &default_settings);
-    
+    input_line_get_content(user_input);
     input_line_disable_raw_mode(&default_settings);
     return user_input->buffer->content;
 }
