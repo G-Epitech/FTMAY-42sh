@@ -41,15 +41,9 @@ input_line_t *input_line_new(void);;
 void input_line_get_content(input_line_t *line);
 
 /**
- * @brief Get controle character.
+ * @brief Get control character.
  * @return Return character controle
  */
-int input_line_get_cntrl(void);
-
-/**
- * @brief Get arrow character.
- * @return Return character arrow
- */
-int input_line_get_arrows(void);
+int input_line_get_cntrls(void);
 
 #endif /* !INPUT_LINE_H_ */

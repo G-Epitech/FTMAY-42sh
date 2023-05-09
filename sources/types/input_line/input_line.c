@@ -16,7 +16,7 @@ int input_line_read_key(void)
     int character = getchar();
 
     if (iscntrl(character))
-        return input_line_get_cntrl();
+        return input_line_get_cntrls();
     else
         return character;
 }

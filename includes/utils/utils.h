@@ -20,6 +20,7 @@
     #define CHAR_IS_ALPHANUM_EXT(c) (CHAR_IS_ALPHANUM (c) || c == '_')
     #define STAT_MODE_XOK(s) ((s & S_IXUSR) || (s & S_IXGRP) || (s & S_IXOTH))
     #define KEY_CTRLS 0x1f
+    #define KEY_CTRL_ENTER 0x0b
     #define KEY_ARROWS 0x5b
     #define KEY_ARROW_UP 0x41
     #define KEY_ARROW_DOWN 0x42
