@@ -6,8 +6,8 @@
 */
 
 #include <stdio.h>
-#include "types/history/history.h"
 #include "types/list/list.h"
+#include "types/history/history.h"
 
 bool history_clear(history_t *history)
 {

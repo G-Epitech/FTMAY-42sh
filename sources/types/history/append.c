@@ -7,9 +7,9 @@
 
 #include <string.h>
 #include <stdbool.h>
-#include "types/history/history.h"
 #include "types/list/list.h"
 #include "types/node/node.h"
+#include "types/history/history.h"
 
 bool history_append_entry(history_t *history, char *input)
 {
