@@ -62,6 +62,8 @@ _SRC =			mysh/mysh.c \
 				types/parsing_utils/free.c \
 				types/parsing_utils/new.c \
 				\
+				types/input_line/new.c \
+				\
 				types/shell/new.c \
 				types/shell/free.c \
 				types/shell/input.c \

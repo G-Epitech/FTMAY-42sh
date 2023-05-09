@@ -27,4 +27,10 @@ struct termios *default_tty);
  */
 bool input_line_disable_raw_mode(struct termios *default_tty);
 
+/**
+ * @brief Create struct for user input
+ * @return The struct initialised
+ */
+input_line_t *input_line_new(void);;
+
 #endif /* !INPUT_LINE_H_ */
