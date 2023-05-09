@@ -27,7 +27,7 @@ typedef struct s_input_line_buffer {
 
 // Represent evoluted input entry
 typedef struct s_input_line {
-    struct termios settings;        // Settings of the shell
+    struct termios *settings;        // Settings of the shell
     input_line_buffer_t *buffer;    // Information about user input
 } input_line_t;
 

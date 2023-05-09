@@ -8,8 +8,29 @@
 #ifndef INPUT_LINE_H_
     #define INPUT_LINE_H_
 
+    #include <stdbool.h>
     #include "defs.h"
 
-input_line_t *input_line_new(void);
+/**
+ * @brief Enable on the tty raw mode.
+ * @param custom_tty Structure input entry
+ * @param default_tty Structure default tty
+ * @return Status of success
+ */
+bool intput_line_enable_raw_mode(input_line_t *custom_tty,
+struct termios *default_tty);
+
+/**
+ * @brief Disable on the tty raw mode.
+ * @param default_tty Structure default tty
+ * @return Status of success
+ */
+bool intput_line_disable_raw_mode(struct termios *default_tty);
+
+/**
+ * @brief Create struct for user input
+ * @return The struct initialised
+ */
+input_line_t *input_line_new(void);;
 
 #endif /* !INPUT_LINE_H_ */
