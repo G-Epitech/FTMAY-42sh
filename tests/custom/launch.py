@@ -29,9 +29,9 @@ if __name__ == '__main__':
     # tester.addSuite(minishell1Unsetenv.suite)
     # tester.addSuite(minishell1Setenv.suite)
     # tester.addSuite(minishell1Error.suite)
-    # tester.addSuite(minishell2Semicolon.suite)
-    # tester.addSuite(minishell2Pipe.suite)
-    # tester.addSuite(minishellRedirection.suite)
+    tester.addSuite(minishell2Semicolon.suite)
+    tester.addSuite(minishell2Pipe.suite)
+    tester.addSuite(minishellRedirection.suite)
     # tester.addSuite(minishell2Complex.suite)
 
     if tester.execute():
