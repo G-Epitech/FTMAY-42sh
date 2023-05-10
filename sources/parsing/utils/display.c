@@ -52,12 +52,10 @@ static void display_block(inst_block_t *block, int index)
 
     while (tmp) {
         data = NODE_DATA_TO_PTR(tmp->data, inst_t *);
-        if (data->type == INS_CMD) {
+        if (data->type == INS_CMD)
             display_cmd(data->value.cmd, index);
-        }
-        if (data->type == INS_NONE) {
+        if (data->type == INS_NONE)
             printf(" === NONE === ");
-        }
         if (data->type == INS_BLOCK) {
             printf_space(index);
             printf("===== BLOCK =====\n");
