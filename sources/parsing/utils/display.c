@@ -55,12 +55,15 @@ static void display_block(inst_block_t *block, int index)
         if (data->type == INS_CMD) {
             display_cmd(data->value.cmd, index);
         }
+        if (data->type == INS_NONE) {
+            printf(" === NONE === ");
+        }
         if (data->type == INS_BLOCK) {
             printf_space(index);
             printf("===== BLOCK =====\n");
             display_block(data->value.block, index + 1);
         }
-            display_redirection(data, index);
+        display_redirection(data, index);
         tmp = tmp->next;
     }
 }
@@ -69,6 +72,10 @@ void parsing_display(inst_t *instruction)
 {
     if (!instruction)
         return;
+    if (instruction->type == INS_NONE) {
+        printf(" === NONE === ");
+        display_redirection(instruction, 0);
+    }
     if (instruction->type == INS_BLOCK)
         display_block(instruction->value.block, 0);
     if (instruction->type == INS_CMD) {

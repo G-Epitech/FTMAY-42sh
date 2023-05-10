@@ -109,4 +109,11 @@ inst_t *parsing_recursivity(parsing_utils_t *utils);
  */
 bool append_inst(inst_block_t *block, inst_t *instruction);
 
+/**
+ * @brief Check if last instruction is piped.
+ * @param instruction Instruction to check
+ * @return True if success otherwise False
+ */
+bool parsing_last_inst_pipe(inst_t *instruction);
+
 #endif /* !PARSING_H_ */
