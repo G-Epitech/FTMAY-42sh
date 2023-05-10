@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "types/input_line/defs.h"
+#include "types/history/history.h"
 
 static void replace_buffer_content(input_line_t *line, char *str)
 {
@@ -18,22 +19,26 @@ static void replace_buffer_content(input_line_t *line, char *str)
 
 void input_line_history_prev(shell_t *shell, input_line_t *line)
 {
-    char *str = "Yann, always on the back";
+    history_entry_t *selected = NULL;
 
-    (void) shell;
+    selected = history_prev(shell->history);
+    if (!selected)
+        return;
     printf("\033[%ldD", line->buffer->cursor);
     line_clear_after_cursor;
-    printf("%s", str);
-    replace_buffer_content(line, str);
+    printf("%s", selected->input);
+    replace_buffer_content(line, selected->input);
 }
 
 void input_line_history_next(shell_t *shell, input_line_t *line)
 {
-    char *str = "Yann,                  always on the front";
+    history_entry_t *selected = NULL;
 
-    (void) shell;
+    selected = history_next(shell->history);
+    if (!selected)
+        return;
     printf("\033[%ldD", line->buffer->cursor);
     line_clear_after_cursor;
-    printf("%s", str);
-    replace_buffer_content(line, str);
+    printf("%s", selected->input);
+    replace_buffer_content(line, selected->input);
 }
