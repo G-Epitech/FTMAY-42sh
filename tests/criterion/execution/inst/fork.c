@@ -29,10 +29,9 @@ Test(execution_inst_fork_nedeed_tests, simple_builtin, .init=cr_redirect_stdout)
 
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_MAIN);
-    cr_assert_not(execution_inst_fork_needed(node, &utils));
+    cr_assert_not(execution_inst_fork_needed(inst, &utils));
     shell_free(shell);
     inst_free(block);
-    node_free(node, NULL);
 }
 
 Test(execution_inst_fork_nedeed_tests, simple_system, .init=cr_redirect_stdout)
@@ -45,7 +44,7 @@ Test(execution_inst_fork_nedeed_tests, simple_system, .init=cr_redirect_stdout)
 
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
-    cr_assert(execution_inst_fork_needed(node, &utils));
+    cr_assert(execution_inst_fork_needed(inst, &utils));
     shell_free(shell);
     inst_free(block);
     node_free(node, NULL);
@@ -61,7 +60,7 @@ Test(execution_inst_fork_nedeed_tests, simple_absolute, .init=cr_redirect_stdout
 
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
-    cr_assert(execution_inst_fork_needed(node, &utils));
+    cr_assert(execution_inst_fork_needed(inst, &utils));
     shell_free(shell);
     inst_free(block);
     node_free(node, NULL);
@@ -75,15 +74,6 @@ Test(execution_inst_fork_nedeed_tests, null_node, .init=cr_redirect_stdout)
     cr_assert_not(execution_inst_fork_needed(NULL, &utils));
 }
 
-Test(execution_inst_fork_nedeed_tests, node_with_null_inst, .init=cr_redirect_stdout)
-{
-    node_t *node = node_new(NODE_DATA_FROM_PTR(NULL));
-    exec_utils_t utils;
-
-    cr_assert_not(execution_inst_fork_needed(node, &utils));
-    node_free(node, NULL);
-}
-
 Test(execution_inst_fork_nedeed_tests, inst_level_sup_0, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
@@ -95,7 +85,7 @@ Test(execution_inst_fork_nedeed_tests, inst_level_sup_0, .init=cr_redirect_stdou
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
     utils.level = 3;
-    cr_assert(execution_inst_fork_needed(node, &utils));
+    cr_assert(execution_inst_fork_needed(inst, &utils));
     shell_free(shell);
     inst_free(block);
     node_free(node, NULL);
@@ -110,7 +100,7 @@ Test(execution_inst_fork_nedeed_tests, inst_block, .init=cr_redirect_stdout)
 
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
-    cr_assert(execution_inst_fork_needed(node, &utils));
+    cr_assert(execution_inst_fork_needed(block, &utils));
     shell_free(shell);
     inst_free(block);
     node_free(node, NULL);
@@ -125,7 +115,7 @@ Test(execution_inst_fork_nedeed_tests, inst_main_block, .init=cr_redirect_stdout
 
     execution_cmd_prepare(node, shell);
     execution_utils_init(&utils, NULL, EXEC_MAIN);
-    cr_assert_not(execution_inst_fork_needed(node, &utils));
+    cr_assert_not(execution_inst_fork_needed(block, &utils));
     shell_free(shell);
     inst_free(block);
     node_free(node, NULL);

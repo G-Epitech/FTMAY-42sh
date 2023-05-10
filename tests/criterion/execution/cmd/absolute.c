@@ -90,8 +90,7 @@ Test(execution_cmd_absolute_tests, basic_absolute_access_denied,
     shell_free(shell);
 }
 
-Test(execution_cmd_absolute_tests, basic_absolute_signaled,
-.init = cr_redirect_stderr)
+Test(execution_cmd_absolute_tests, basic_absolute_signaled)
 {
     shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
@@ -108,8 +107,6 @@ Test(execution_cmd_absolute_tests, basic_absolute_signaled,
         waitpid(pid, &status, 0);
     cr_assert(WIFSIGNALED(status));
     cr_assert(WTERMSIG(status) == SIGSEGV);
-    fflush(stderr);
-    //TODO:cr_assert_stderr_eq_str("Segmentation fault\n");
     cmd_free(cmd);
     shell_free(shell);
 }

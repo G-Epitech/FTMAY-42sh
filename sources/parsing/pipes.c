@@ -18,7 +18,7 @@ static bool check_errors(inst_t *last)
         return false;
     }
     if (last->ios.output.type != IOT_DEFAULT) {
-        write(2, "Ambiguous output redirect.\n", 27);
+        fprintf(stderr, "Ambiguous output redirect.\n");
         return false;
     }
     return true;
