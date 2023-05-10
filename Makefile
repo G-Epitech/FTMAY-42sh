@@ -68,6 +68,8 @@ _SRC =			mysh.c \
 				types/shell/vars/special/pw.c \
 				types/shell/vars/special/group.c \
 				types/shell/vars/special/cwd.c \
+				types/shell/vars/special/shell.c \
+				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
 				\
 				utils/is_number.c \
