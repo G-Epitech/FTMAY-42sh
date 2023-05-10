@@ -27,8 +27,10 @@ exec_caller_t caller)
     bool launch = true;
     exec_utils_t utils;
 
-    if (prevent_errors(inst, shell))
+    if (prevent_errors(inst, shell)) {
+        printf("ERROR\n");
         return;
+    }
     execution_utils_init(&utils, herited, caller);
     if (inst->type == INS_CMD)
         launch = execution_cmd_prepare(node_inst, shell);
