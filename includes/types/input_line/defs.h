@@ -33,7 +33,9 @@ typedef enum e_ctrl_key {
 typedef struct s_input_line_buffer {
     size_t len;             // Len of the user input
     size_t cursor;          // Position in x of the cursor on the content
+    size_t history_cursor;  // Position in x of the cursor on the history
     char *content;          // Buffer of the user input
+    char *history_content;  // Buffer of the history
 } input_line_buffer_t;
 
 // Represent current input_line status

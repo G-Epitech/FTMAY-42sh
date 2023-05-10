@@ -9,6 +9,16 @@
 #include <stddef.h>
 #include "types/input_line/input_line.h"
 
+static char *malloc_new_buffer_content(void)
+{
+    char *string = malloc(sizeof(char));
+
+    if (!string)
+        return NULL;
+    string[0] = '\0';
+    return string;
+}
+
 input_line_t *input_line_new(void)
 {
     input_line_t *new = malloc(sizeof(input_line_t));
@@ -18,10 +28,11 @@ input_line_t *input_line_new(void)
     new->buffer = malloc(sizeof(input_line_buffer_t));
     if (new->buffer == NULL)
         return NULL;
-    new->buffer->content = malloc(sizeof(char));
-    new->buffer->content[0] = '\0';
+    new->buffer->content = malloc_new_buffer_content();
+    new->buffer->history_content = malloc_new_buffer_content();
     new->buffer->len = 0;
     new->buffer->cursor = 0;
+    new->buffer->history_cursor = 0;
     return new;
 }
 
