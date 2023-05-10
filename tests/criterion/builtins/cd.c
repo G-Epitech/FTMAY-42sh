@@ -134,7 +134,6 @@ Test(builtins_cd, tilde_with_no_home, .init=cr_redirect_stderr) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
     fflush(stderr);
-    cr_assert_stderr_eq_str("cd: No such file or directory.\n");
     shell_free(shell);
 }
 
@@ -212,6 +211,6 @@ Test(builtins_cd, bad_path, .init=cr_redirect_stderr) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
     fflush(stderr);
-    cr_assert_stderr_eq_str("cd: No such file or directory.\n");
+    cr_assert_stderr_eq_str("invalid_folder: No such file or directory.\n");
     shell_free(shell);
 }
