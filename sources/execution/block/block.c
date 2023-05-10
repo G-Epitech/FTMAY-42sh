@@ -28,6 +28,7 @@ static node_t *get_high_node(node_t *first)
 bool execution_block(node_t *node_inst, shell_t *shell, exec_utils_t *utils)
 {
     inst_t *inst = EXECUTION_GET_INST(node_inst);
+    int code = SHELL_EXIT_SUCCESS;
     node_t *next = NULL;
     node_t *node = NULL;
 
@@ -39,8 +40,9 @@ bool execution_block(node_t *node_inst, shell_t *shell, exec_utils_t *utils)
         node = get_high_node(next);
         if (!node)
             return false;
-        execution_inst(node, shell, utils, EXEC_SUPERIOR);
+        code = execution_inst(node, shell, utils, EXEC_SUPERIOR);
         next = node->next;
     } while (next);
+    utils->status = code;
     return true;
 }

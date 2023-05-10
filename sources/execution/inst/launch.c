@@ -13,7 +13,11 @@
 void execution_inst_launch_non_fork(node_t *node_inst, shell_t *shell,
 exec_utils_t *utils)
 {
+    inst_t *inst = EXECUTION_NODE_TO_INST(node_inst);
+
+    execution_inst_set_fd(inst, utils);
     execution_cmd_launch(node_inst, shell, utils);
+    execution_inst_close_fd(utils);
 }
 
 void execution_inst_launch(node_t *node_inst, shell_t *shell,

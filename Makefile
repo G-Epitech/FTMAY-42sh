@@ -173,6 +173,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/inst/fork.c \
 				criterion/execution/inst/inst.c \
 				criterion/execution/inst/launch.c \
+				criterion/execution/inst/status.c \
 				criterion/execution/execution.c \
 
 SRCDIR = 		sources/
@@ -278,9 +279,10 @@ tests_criterion: fclean
 ftest:			$(NAME)
 				@echo "pass"
 
-tests_custom:	$(NAME)
+tests_custom:
+				@$(MAKE) fclean
+				@$(MAKE) $(NAME)
 				@./$(TESTS_CUSTOM)
-				@echo "pass"
 
 tests_run:
 				@$(MAKE) tests_criterion -s

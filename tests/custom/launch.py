@@ -14,25 +14,18 @@ import suites.minishell2.pipe as minishell2Pipe
 import suites.minishell2.redirection as minishellRedirection
 import suites.minishell2.complex as minishell2Complex
 
-def init():
-    utilsFolder = path.dirname(__file__) + "/utils"
-
-    run(f"rm {utilsFolder}/my_sig.out", shell=True, stderr=PIPE, stdout=PIPE);
-    return run(f"gcc -o {utilsFolder}/my_sig.out {utilsFolder}/my_sig.c", shell=True, stderr=PIPE, stdout=PIPE).returncode;
-
-
 if __name__ == '__main__':
     tester = Tester()
-    # tester.addSuite(basics.suite)
-    # tester.addSuite(minishell1Cd.suite)
-    # tester.addSuite(minishell1Env.suite)
-    # tester.addSuite(minishell1Unsetenv.suite)
+    tester.addSuite(basics.suite)
+    tester.addSuite(minishell1Cd.suite)
+    #tester.addSuite(minishell1Env.suite)
+    #tester.addSuite(minishell1Unsetenv.suite)
     # tester.addSuite(minishell1Setenv.suite)
-    # tester.addSuite(minishell1Error.suite)
-    # tester.addSuite(minishell2Semicolon.suite)
-    # tester.addSuite(minishell2Pipe.suite)
-    # tester.addSuite(minishellRedirection.suite)
-    # tester.addSuite(minishell2Complex.suite)
+    tester.addSuite(minishell1Error.suite)
+    #tester.addSuite(minishell2Semicolon.suite)
+    tester.addSuite(minishell2Pipe.suite)
+    #tester.addSuite(minishellRedirection.suite)
+    #tester.addSuite(minishell2Complex.suite)
 
     if tester.execute():
         exit(0)

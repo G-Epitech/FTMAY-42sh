@@ -5,6 +5,7 @@
 ** pipes
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include "types/inst/inst.h"
 #include "types/parsing_utils/parsing_utils.h"
@@ -12,11 +13,11 @@
 static bool check_errors(inst_t *last)
 {
     if (last->type == INS_NONE) {
-        write(2, "Invalid null command.\n", 23);
+        fprintf(stderr, "Invalid null command.\n");
         return false;
     }
     if (last->ios.output.type != IOT_DEFAULT) {
-        write(2, "Ambiguous output redirect.\n", 27);
+        fprintf(stderr, "Ambiguous output redirect.\n");
         return false;
     }
     return true;

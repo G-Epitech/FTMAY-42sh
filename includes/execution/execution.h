@@ -82,8 +82,9 @@ bool execution_cmd_can_be_done(cmd_t *cmd);
  * @param shell Shell object
  * @param herited Herited utils execution data from parent or sibling
  * @param caller Type of instruction caller
+ * @return Exit code of instruction
  */
-void execution_inst(node_t *node_inst, shell_t *shell, exec_utils_t *herited,
+int execution_inst(node_t *node_inst, shell_t *shell, exec_utils_t *herited,
 exec_caller_t caller);
 
 /**

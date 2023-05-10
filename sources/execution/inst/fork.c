@@ -41,7 +41,7 @@ exec_utils_t *utils)
         inst->value.cmd->forked = true;
         execution_cmd_launch(node_inst, shell, utils);
     }
-    exit(SHELL_EXIT_SUCCESS);
+    exit(utils->status);
 }
 
 void execution_inst_launch_fork(node_t *node_inst, shell_t *shell,

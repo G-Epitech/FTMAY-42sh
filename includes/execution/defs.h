@@ -8,12 +8,14 @@
 #ifndef EXECUTION_DEFS_H_
     #define EXECUTION_DEFS_H_
 
+    #include <sys/wait.h>
     #include "types/node/defs.h"
     #include "types/inst/defs.h"
 
     #define EXECUTION_ERROR 1
     #define EXECUTION_NODE_TO_INST(n) (NODE_DATA_TO_PTR(n->data, inst_t *))
     #define EXECUTION_GET_INST(n) (n ? EXECUTION_NODE_TO_INST(n) : NULL)
+    #define EXECUTION_SIG_EXITCODE(c) (WTERMSIG(c) + 128)
 
 // Represent type of execution caller
 typedef enum e_exec_caller {

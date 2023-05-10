@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <sys/wait.h>
 #include "errors/errors.h"
 #include "execution/defs.h"
 #include "types/inst/defs.h"
@@ -13,7 +14,7 @@
 
 static void handle_signaled_status(inst_t *inst, int status)
 {
-    inst->exit_code = status;
+    inst->exit_code = EXECUTION_SIG_EXITCODE(status);
     fprintf(stderr, "%s", errors_strsignal(WTERMSIG(status)));
     if (WCOREDUMP(status))
         fprintf(stderr, " (core dumped)");
