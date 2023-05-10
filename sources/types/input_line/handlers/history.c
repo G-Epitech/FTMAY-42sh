@@ -24,7 +24,7 @@ void input_line_history_prev(shell_t *shell, input_line_t *line)
     
     if (!selected)
         return;
-    if (line->buffer->history_cursor == 0 && !line->buffer->history_content)
+    if (line->buffer->history_cursor == 0)
         line->buffer->history_content = line->buffer->content;
     if (line->buffer->history_cursor > 0)
         selected = history_prev(shell->history);
@@ -40,16 +40,16 @@ void input_line_history_next(shell_t *shell, input_line_t *line)
 {
     history_entry_t *selected = history_next(shell->history);
 
-    if (line->buffer->history_cursor == 0 && line->buffer->history_content) {
+    if (line->buffer->history_cursor > 0)
+        line->buffer->history_cursor--;
+    if (line->buffer->history_cursor == 0) {
         line->buffer->content = line->buffer->history_content;
-        replace_buffer_content(line, line->buffer->content);
+        replace_buffer_content(line, line->buffer->history_content);
         refresh_screen(line);
-        line->buffer->history_content = NULL;
     }
     if (!selected)
         return;
     line->buffer->content = selected->input;
-    line->buffer->history_cursor--;
     replace_buffer_content(line, selected->input);
     refresh_screen(line);
 }
