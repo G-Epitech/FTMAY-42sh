@@ -16,8 +16,8 @@ bool shell_special_vars_cwd_init(char *name, shell_t *shell,
 char *dependency)
 {
     char *cwd = malloc2(PATH_MAX);
-    (void) dependency;
 
+    (void) dependency;
     if (!cwd)
         return false;
     if (!getcwd(cwd, PATH_MAX) || !cwd)
