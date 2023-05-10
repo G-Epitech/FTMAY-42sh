@@ -25,9 +25,7 @@ int mysh(void)
     while (shell->status == SH_RUNNING) {
         shell_display_prompt(shell);
         input = mysh_get_input(shell);
-        block = mysh_parse(input);
-        if (block)
-            history_append_entry(shell->history, input);
+        block = mysh_parse(input, shell);
         mysh_execute(block, shell);
     }
     exit_code = shell->exit_code;

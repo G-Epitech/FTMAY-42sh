@@ -29,9 +29,10 @@ char *mysh_get_input(shell_t *shell);
  * @brief Parse input in order to convert it in executable
  * instructions.
  * @param input Input to parse
+ * @param shell Shell object
  * @return Main block of instruction on success or NULL on failure
  */
-inst_t *mysh_parse(char *input);
+inst_t *mysh_parse(char *input, shell_t *shell);
 
 /**
  * @brief Launch execution of main block of instructions.
