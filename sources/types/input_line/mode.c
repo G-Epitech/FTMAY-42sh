@@ -12,9 +12,13 @@
 bool input_line_enable_raw_mode(input_line_t *line,
 struct termios *default_tty)
 {
+    struct termios settings;
+
     if (tcgetattr(STDIN_FILENO, default_tty) == -1)
         return false;
-    line->settings = default_tty;
+    if (tcgetattr(STDIN_FILENO, &settings) == -1)
+        return false;
+    line->settings = &settings;
     line->settings->c_iflag &= ~(BRKINT | INPCK | ICRNL | ISTRIP | IXON);
     line->settings->c_oflag &= ~(OPOST);
     line->settings->c_cflag |= (CS8);
