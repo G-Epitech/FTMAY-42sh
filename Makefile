@@ -197,6 +197,11 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/inst/inst.c \
 				criterion/execution/inst/launch.c \
 				criterion/execution/execution.c \
+				\
+				criterion/types/input_lines/utils.c \
+				criterion/types/input_lines/handlers.c \
+				criterion/types/input_lines/iscntrl.c \
+				\
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
