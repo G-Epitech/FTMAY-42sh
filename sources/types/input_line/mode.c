@@ -26,8 +26,8 @@ struct termios *default_tty)
 
 bool input_line_disable_raw_mode(struct termios *default_tty)
 {
-    printf("\r\n");
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, default_tty) == -1)
         return false;
+    printf("\r\n");
     return true;
 }

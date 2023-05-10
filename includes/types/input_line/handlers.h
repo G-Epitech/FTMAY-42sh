@@ -28,12 +28,40 @@ void input_line_cursor_forward(shell_t *shell, input_line_t *line);
 void input_line_cursor_backward(shell_t *shell, input_line_t *line);
 
 /**
- * @brief Delete character on the buffer->content
+ * @brief Delete character on the buffer->content.
  * @param line Structure input entry
  * @param shell Structure of shell
  */
 void input_line_cursor_del(shell_t *shell, input_line_t *line);
 
-void input_line_keypress_enter(shell_t *shell, input_line_t *line);
+/**
+ * @brief Close the input_line and return of the main function the user input.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_keypressed_enter(shell_t *shell, input_line_t *line);
+
+/**
+ * @brief Close the input_line and exit the program.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_keypressed_d(shell_t *shell, input_line_t *line);
+
+/**
+ * @brief Select the prev instruction on the history.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_history_prev(shell_t *shell, input_line_t *line);
+
+/**
+ * @brief Select the next instruction on the history.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_history_next(shell_t *shell, input_line_t *line);
+
+void input_line_keypressed_a(shell_t *shell, input_line_t *line);
 
 #endif /* !HANDLERS_H_ */

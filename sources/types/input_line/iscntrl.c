@@ -49,7 +49,10 @@ int input_line_get_cntrl(void)
 int input_line_get_cntrls(int character)
 {
     switch (character) {
-        case 'D':
+        case KEY_CTRL_A:
+            character = CTRL_KEY_A;
+            break;
+        case KEY_CTRL_D:
             character = CTRL_KEY_D;
             break;
         case KEY_CTRL_ENTER:
