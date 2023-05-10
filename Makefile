@@ -88,6 +88,15 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/home.c \
 				types/shell/vars/special/dispatch_env_update.c \
 				\
+				types/history/new.c \
+				types/history/free.c \
+				types/history/entry/new.c \
+				types/history/entry/free.c \
+				types/history/append.c \
+				types/history/current.c \
+				types/history/clear.c \
+				types/history/move.c \
+				\
 				utils/is_number.c \
 				utils/malloc2.c \
 				utils/asprintf2.c \
@@ -105,6 +114,7 @@ _SRC =			mysh/mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/append.c \
 				\
 				execution/block/block.c \
 				execution/cmd/absolute.c \
@@ -141,6 +151,9 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/inst/block.c \
 				criterion/types/cmd/cmd.c \
 				criterion/types/cmd/target.c \
+				criterion/types/history/history.c \
+				criterion/types/history/entry.c \
+				criterion/types/history/append.c \
 				criterion/types/cmd/set_args.c \
 				\
 				criterion/utils/is_number.c \

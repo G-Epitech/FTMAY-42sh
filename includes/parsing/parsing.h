@@ -101,4 +101,12 @@ inst_t *instruction);
  */
 inst_t *parsing_recursivity(parsing_utils_t *utils);
 
+/**
+ * @brief Append a new instruction in a block.
+ * @param block Block to append instruction
+ * @param instruction Instruction to append
+ * @return Success of the operation
+ */
+bool append_inst(inst_block_t *block, inst_t *instruction);
+
 #endif /* !PARSING_H_ */

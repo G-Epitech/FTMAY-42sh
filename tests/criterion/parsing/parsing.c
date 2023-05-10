@@ -25,7 +25,7 @@ Test(parsing_main, analyse_data, .init=redirect_all_stdout)
 {
     inst_t *main = parsing_get_main_block(">tmp ls >> hello ; cat -e");
 
-    cr_assert_stderr_eq_str("Ambiguous input redirect.\n");
+    cr_assert_stderr_eq_str("Ambiguous output redirect.\n");
     inst_free(main);
 }
 
