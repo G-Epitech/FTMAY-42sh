@@ -50,6 +50,7 @@ void input_line_get_content(input_line_t *line, shell_t *shell)
         character = input_line_read_key();
         if (character <= 127) {
             append_char(line, character);
+            refresh_screen(line);
         } else {
             lunch_control_function(character, line, shell);
         }

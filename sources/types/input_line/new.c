@@ -7,11 +7,12 @@
 
 #include <stdlib.h>
 #include <stddef.h>
+#include "utils/malloc2.h"
 #include "types/input_line/input_line.h"
 
 static char *malloc_new_buffer_content(void)
 {
-    char *string = malloc(sizeof(char));
+    char *string = malloc2(sizeof(char));
 
     if (!string)
         return NULL;
@@ -21,11 +22,11 @@ static char *malloc_new_buffer_content(void)
 
 input_line_t *input_line_new(void)
 {
-    input_line_t *new = malloc(sizeof(input_line_t));
+    input_line_t *new = malloc2(sizeof(input_line_t));
 
     if (!new)
         return NULL;
-    new->buffer = malloc(sizeof(input_line_buffer_t));
+    new->buffer = malloc2(sizeof(input_line_buffer_t));
     if (new->buffer == NULL)
         return NULL;
     new->status = IL_RUNNING;
