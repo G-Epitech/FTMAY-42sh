@@ -10,8 +10,6 @@
 
 void shell_display_prompt(shell_t *shell)
 {
-    if (!shell->is_tty)
+    if (shell->is_tty)
         printf("42sh> ");
-    else
-        printf("\r42sh> ");
 }

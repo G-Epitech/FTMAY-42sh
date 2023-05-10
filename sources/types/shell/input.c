@@ -44,8 +44,8 @@ static char *shell_get_input_tty(shell_t *shell)
 
 char *shell_get_input(shell_t *shell)
 {
-    if (!shell->is_tty)
-        return shell_get_input_no_tty(shell);
-    else
+    if (shell->is_tty)
         return shell_get_input_tty(shell);
+    else
+        return shell_get_input_no_tty(shell);
 }
