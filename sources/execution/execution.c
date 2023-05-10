@@ -5,6 +5,7 @@
 ** execution
 */
 
+#include <sys/wait.h>
 #include "execution/defs.h"
 #include "types/inst/inst.h"
 #include "types/node/node.h"
@@ -22,5 +23,6 @@ bool execution_main_block(inst_t *block, shell_t *shell)
     execution_block(node, shell, &utils);
     shell_restore_io(shell);
     node_free(node, NULL);
+    shell->exit_code = utils.status;
     return true;
 }

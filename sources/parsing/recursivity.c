@@ -56,5 +56,7 @@ inst_t *parsing_recursivity(parsing_utils_t *utils)
     last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
     if (!parsing_break_separator(last))
         return NULL;
+    if (!parsing_last_inst_pipe(last))
+        return NULL;
     return instruction;
 }

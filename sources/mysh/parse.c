@@ -5,6 +5,8 @@
 ** execution
 */
 
+#include <stdio.h>
+#include <string.h>
 #include "mysh/mysh.h"
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
@@ -14,8 +16,9 @@
 inst_t *mysh_parse(char *input, shell_t *shell)
 {
     inst_t *block = NULL;
+    size_t len = input ? strlen(input) : 0;
 
-    if (!input)
+    if (!input || !len)
         return NULL;
     block = parsing_get_main_block(input);
     if (block)
