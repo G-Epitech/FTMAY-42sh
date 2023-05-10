@@ -30,27 +30,6 @@ inst_block_t *block)
     return 0;
 }
 
-static bool append_inst(inst_block_t *block, inst_t *instruction)
-{
-    inst_t *last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
-    bool inst_ios = instruction->ios.input.type == IOT_DEFAULT;
-    bool last_ios = last->ios.input.type != IOT_DEFAULT;
-
-    inst_ios = inst_ios && instruction->ios.output.type == IOT_DEFAULT;
-    last_ios = last_ios || last->ios.output.type != IOT_DEFAULT;
-    if (last->type == INS_NONE) {
-        if (inst_ios)
-            instruction->ios = last->ios;
-        if (!inst_ios && last_ios) {
-            write(2, "Ambiguous input redirect.\n", 26);
-            return false;
-        }
-        list_remove(block->instructions, block->instructions->last);
-    }
-    inst_append(block, instruction);
-    return true;
-}
-
 static int open_new_block(parsing_utils_t *utils, inst_block_t *block,
 inst_t *child)
 {

@@ -103,6 +103,7 @@ _SRC =			mysh/mysh.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
+				parsing/append.c \
 				\
 				execution/block/block.c \
 				execution/cmd/absolute.c \
