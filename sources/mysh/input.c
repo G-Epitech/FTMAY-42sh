@@ -11,8 +11,5 @@
 
 char *mysh_get_input(shell_t *shell)
 {
-    char *c = shell_get_input(shell);
-
-    printf("input [%s]\n", c);
-    return c;
+    return shell_get_input(shell);
 }

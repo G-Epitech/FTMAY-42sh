@@ -17,8 +17,6 @@ void input_line_keypressed_enter(shell_t *shell, input_line_t *line)
 
 void input_line_keypressed_d(shell_t *shell, input_line_t *line)
 {
-    (void) shell;
-    (void) line;
     line->status = IL_EXITED;
     shell->status = SH_EXITED;
 }

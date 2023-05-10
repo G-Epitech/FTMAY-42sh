@@ -23,6 +23,8 @@ struct termios *default_tty)
     line->settings->c_oflag &= ~(OPOST);
     line->settings->c_cflag |= (CS8);
     line->settings->c_lflag &= ~(ECHO | ICANON);
+    line->settings->c_cc[VTIME] = 0;
+    line->settings->c_cc[VMIN] = 1;
     if (tcsetattr(STDIN_FILENO, TCSANOW, line->settings) == -1)
         return false;
     return true;
@@ -30,8 +32,8 @@ struct termios *default_tty)
 
 bool input_line_disable_raw_mode(struct termios *default_tty)
 {
-    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, default_tty) == -1)
+    if (tcsetattr(STDIN_FILENO, TCSANOW, default_tty) == -1)
         return false;
-    printf("\r\n");
+    printf("\n");
     return true;
 }

@@ -28,6 +28,7 @@ input_line_t *input_line_new(void)
     new->buffer = malloc(sizeof(input_line_buffer_t));
     if (new->buffer == NULL)
         return NULL;
+    new->status = IL_RUNNING;
     new->buffer->content = malloc_new_buffer_content();
     new->buffer->history_content = malloc_new_buffer_content();
     new->buffer->len = 0;
