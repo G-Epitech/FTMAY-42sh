@@ -39,7 +39,7 @@ inst_t *child)
         PARSING_INDEX(utils)++;
         utils->level++;
         child = parsing_recursivity(utils);
-        if (child == NULL || !append_inst(block, child))
+        if (child == NULL || !parsing_append_inst(block, child))
             return PARSING_ERROR_RECURSIVITY;
         return PARSING_NO_ERROR_RECURSIVITY;
     }
