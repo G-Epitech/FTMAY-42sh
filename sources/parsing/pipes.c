@@ -39,7 +39,7 @@ bool parsing_pipes_handler(parsing_utils_t *utils, inst_block_t *block)
     if (!new)
         return false;
     new->ios.input.type = IOT_PIPED;
-    append_inst(block, new);
+    inst_append(block, new);
     utils->index_parsing++;
     return true;
 }

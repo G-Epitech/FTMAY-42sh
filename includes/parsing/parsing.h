@@ -107,7 +107,7 @@ inst_t *parsing_recursivity(parsing_utils_t *utils);
  * @param instruction Instruction to append
  * @return Success of the operation
  */
-bool append_inst(inst_block_t *block, inst_t *instruction);
+bool parsing_append_inst(inst_block_t *block, inst_t *instruction);
 
 /**
  * @brief Check if last instruction is piped.

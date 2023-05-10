@@ -83,5 +83,5 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
     child = parsing_get_cmd(utils);
     if (!child)
         return false;
-    return append_inst(block, child);
+    return parsing_append_inst(block, child);
 }

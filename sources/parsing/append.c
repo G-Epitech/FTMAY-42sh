@@ -32,7 +32,7 @@ static bool check_ambiguous(inst_block_t *block, inst_t *instruction)
     return true;
 }
 
-bool append_inst(inst_block_t *block, inst_t *instruction)
+bool parsing_append_inst(inst_block_t *block, inst_t *instruction)
 {
     inst_t *last = NODE_DATA_TO_PTR(block->instructions->last->data, inst_t *);
 
