@@ -14,7 +14,7 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("Redirection")
 
-simpleWrongRedirection = Test("Simple redirection left", "echo \"ls > axel; grep l < axel; rm axel\" | {shell}")
+simpleWrongRedirection = Test("Simple redirection left", "echo \"ls > axel; grep l < axel; rm -f axel\" | {shell}")
 suite.addTest(simpleWrongRedirection)
 
 simpleRedirectionBegin = Test("Simple redirection left at begin", "echo \"cat -e < Makefile\" | {shell}")
@@ -29,13 +29,13 @@ suite.addTest(simpleRedirectionEnd)
 simpleWrongRedirection = Test("Simple redirection left", "echo \"ls < \" | {shell}")
 suite.addTest(simpleWrongRedirection)
 
-simpleRedirectionRight = Test("Simple redirection right", "echo \"ls > axel; rm axel\" | {shell}")
+simpleRedirectionRight = Test("Simple redirection right", "echo \"ls > axel; rm -f axel\" | {shell}")
 suite.addTest(simpleRedirectionRight)
 
 simpleWrongRedirection = Test("Simple redirection right", "echo \"ls > \" | {shell}")
 suite.addTest(simpleWrongRedirection)
 
-doubleRedirectionRight = Test("Double redirection right", "echo \"ls >> axel; rm axel\" | {shell}")
+doubleRedirectionRight = Test("Double redirection right", "echo \"ls >> axel; rm -f axel\" | {shell}")
 suite.addTest(doubleRedirectionRight)
 
 doubleWrongRedirection = Test("Double redirection right", "echo \"ls >> \" | {shell}")

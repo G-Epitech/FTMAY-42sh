@@ -20,7 +20,7 @@ suite.addTest(simpleSemi)
 doubleSemi = Test("Double semicolon", "echo \"ls; echo salut; pwd\" | {shell}")
 suite.addTest(doubleSemi)
 
-tripleSemi = Test("Triple semicolon", "echo \"ls; pwd; touch axxel; rm -rf axxel\" | {shell}")
+tripleSemi = Test("Triple semicolon", "echo \"ls; pwd; touch axxel; rm -f axxel\" | {shell}")
 suite.addTest(tripleSemi)
 
 wrong = Test("wrong", "echo \";\" | {shell}")

@@ -21,6 +21,7 @@ static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
     shell->vars = list_new();
     shell->builtins = builtins;
     shell_special_vars_init(shell);
+    shell_init_io(shell);
     return true;
 }
 

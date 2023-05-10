@@ -25,18 +25,18 @@ class Test:
         proc = Popen(command, stderr=PIPE, stdout=PIPE, shell=True)
         proc.wait()
         if not self.execution['expected']['out']:
-            self.execution['expected']['out'] = proc.stdout.read().decode()
+            self.execution['expected']['out'] = proc.stdout.read().decode(encoding="latin-1")
         if (self.allStdOut):
-            self.execution['expected']['out'] += proc.stderr.read().decode()
+            self.execution['expected']['out'] += proc.stderr.read().decode(encoding="latin-1")
         else:
-            self.execution['expected']['err'] = proc.stderr.read().decode()
+            self.execution['expected']['err'] = proc.stderr.read().decode(encoding="latin-1")
 
     def execute42Sh(self):
         command = self.command.format(shell="./42sh")
         proc = Popen(command, stderr=PIPE, stdout=PIPE, shell=True)
         proc.wait()
-        self.execution['found']['out'] = proc.stdout.read().decode()
-        self.execution['found']['err'] = proc.stderr.read().decode()
+        self.execution['found']['out'] = proc.stdout.read().decode(encoding="latin-1")
+        self.execution['found']['err'] = proc.stderr.read().decode(encoding="latin-1")
 
     def execute(self) -> bool:
         success = True

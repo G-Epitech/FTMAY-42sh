@@ -14,49 +14,6 @@
     #include "types/shell/defs.h"
     #include "types/parsing_utils/defs.h"
 
-    #define PARSING_STOP_CMD 1
-    #define PARSING_ERROR_CMD 2
-    #define PARSING_SIMPLE_LEFT 1
-    #define PARSING_DOUBLE_LEFT 0
-    #define PARSING_DOUBLE_RIGHT 2
-    #define PARSING_SIMPLE_RIGHT 3
-    #define PARSING_NO_ERROR_CMD 0
-    #define PARSING_NO_OPEN_BLOCK 2
-    #define PARSING_ERROR_SEPARATOR 2
-    #define PARSING_ERROR_RECURSIVITY 0
-    #define PARSING_NO_SPACE_SEMICOLON 0
-    #define PARSING_NO_ERROR_SEPARATOR 1
-    #define PARSING_NO_ERROR_RECURSIVITY 1
-    #define PARSING_ERROR_SEPARATOR 2
-    #define VAR_NOT_FOUND 1
-    #define VAR_FOUND 2
-    #define ALPHA_NUMERIC(char) (('a' <= char && char <= 'z') || ('A' <= char \
-&& char <= 'Z') || ('0' <= char && char <= '9') || char == '_')
-
-/**
- * @brief Parse command input into string array.
- * @param command Command object
- * @param shell Shell main object
- * @return true if all went well, false else
- */
-bool parsing_set_command_args(cmd_t *command, shell_t *shell);
-
-/**
- * @brief Get len of simple input part.
- * @param input Input string
- * @param start Start index
- * @return The len of the simple input part
- */
-int parsing_get_len_input(char *input, int start);
-
-/**
- * @brief Get len of string input part.
- * @param input Input string
- * @param start Start index
- * @return The len of the string input part
- */
-int parsing_get_len_input_string(char *input, int start);
-
 /**
  * @brief Parse the entire user command.
  * @param input User command
@@ -135,7 +92,7 @@ bool parsing_break_separator(inst_t *instruction);
  * @return False if there is a problem when parsing, otherwise True
  */
 bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
-                    inst_t *instruction);
+inst_t *instruction);
 
 /**
  * @brief Recursivity of parsing.
@@ -145,29 +102,18 @@ bool parsing_analyse_data(parsing_utils_t *utils, inst_block_t *block,
 inst_t *parsing_recursivity(parsing_utils_t *utils);
 
 /**
- * @brief Replace value of var.
- * @param input Input of user
- * @param shell Shell struct
- * @return Input with var remplaced
+ * @brief Append a new instruction in a block.
+ * @param block Block to append instruction
+ * @param instruction Instruction to append
+ * @return Success of the operation
  */
-char *parsing_var_replace(char *input, shell_t *shell);
+bool parsing_append_inst(inst_block_t *block, inst_t *instruction);
 
 /**
- * @brief Replace value of var.
- * @param input Input of user
- * @param shell Shell struct
- * @param parsing_index Index parsing on remplacing var
- * @return Value of var
+ * @brief Check if last instruction is piped.
+ * @param instruction Instruction to check
+ * @return True if success otherwise False
  */
-char *get_var(char *input, shell_t *shell, int *parsing_index);
-
-/**
- * @brief Replace value of var.
- * @param input Input of user
- * @param start Start of nor var input
- * @param end End of nor var input
- * @return Input who is not var
- */
-char *get_no_var(char *input, int start, int end);
+bool parsing_last_inst_pipe(inst_t *instruction);
 
 #endif /* !PARSING_H_ */

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from os import system, path
+from subprocess import PIPE, Popen, run
 from classes.tester import Tester
 import suites.basics as basics
 import suites.minishell1.cd as minishell1Cd
@@ -14,16 +16,16 @@ import suites.minishell2.complex as minishell2Complex
 
 if __name__ == '__main__':
     tester = Tester()
-    # tester.addSuite(basics.suite)
-    # tester.addSuite(minishell1Cd.suite)
-    # tester.addSuite(minishell1Env.suite)
-    # tester.addSuite(minishell1Unsetenv.suite)
-    # tester.addSuite(minishell1Setenv.suite)
-    # tester.addSuite(minishell1Error.suite)
-    # tester.addSuite(minishell2Semicolon.suite)
-    # tester.addSuite(minishell2Pipe.suite)
-    # tester.addSuite(minishellRedirection.suite)
-    # tester.addSuite(minishell2Complex.suite)
+    tester.addSuite(basics.suite)
+    tester.addSuite(minishell1Cd.suite)
+    #tester.addSuite(minishell1Env.suite)
+    #tester.addSuite(minishell1Unsetenv.suite)
+    #tester.addSuite(minishell1Setenv.suite)
+    tester.addSuite(minishell1Error.suite)
+    tester.addSuite(minishell2Semicolon.suite)
+    tester.addSuite(minishell2Pipe.suite)
+    tester.addSuite(minishellRedirection.suite)
+    tester.addSuite(minishell2Complex.suite)
 
     if tester.execute():
         exit(0)

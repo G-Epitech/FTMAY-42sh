@@ -5,6 +5,7 @@
 ** separator
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include "types/inst/inst.h"
@@ -41,7 +42,7 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
         }
     }
     if (!check_error(instruction)) {
-        write(1, "Invalid null command.\n", 23);
+        fprintf(stderr, "Invalid null command.\n");
         return false;
     }
     set_separator(instruction, index);
@@ -51,7 +52,7 @@ bool parsing_separator_handler(parsing_utils_t *utils, inst_t *instruction)
 bool parsing_break_separator(inst_t *instruction)
 {
     if (!check_error(instruction)) {
-        write(1, "Invalid null command.\n", 23);
+        fprintf(stderr, "Invalid null command.\n");
         return false;
     }
     instruction->separator = SP_BREAK;
