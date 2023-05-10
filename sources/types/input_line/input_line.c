@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/ioctl.h>
 #include "utils/utils.h"
 #include "types/input_line/handlers.h"
 #include "types/input_line/input_line.h"
@@ -42,10 +43,18 @@ shell_t *shell)
     }
 }
 
+static void get_position_curseur(int *row, int *col)
+{
+    printf("\033[6n");
+    scanf("\033[%d;%dR", row, col);
+}
+
 void input_line_get_content(input_line_t *line, shell_t *shell)
 {
     int character = 0;
+    int x = 0;
 
+    get_position_curseur(&line->buffer->rows_start_cursor, &x);
     while (line->status == IL_RUNNING) {
         character = input_line_read_key();
         if (character <= 127) {

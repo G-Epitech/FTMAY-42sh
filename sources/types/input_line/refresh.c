@@ -12,7 +12,8 @@
 
 void refresh_screen(input_line_t *line)
 {
-    printf("\x1b[%dG\x1b[0J", PROMPT_LEN);
+    printf("\x1b[%d;%dH", line->buffer->rows_start_cursor, PROMPT_LEN);
+    printf("\x1b[0J");
     printf("%s", line->buffer->content);
     printf("\x1b[%ldG", line->buffer->cursor + PROMPT_LEN);
 }
