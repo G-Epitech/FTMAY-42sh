@@ -106,6 +106,7 @@ _SRC =			mysh/mysh.c \
 				parsing/append.c \
 				\
 				execution/block/block.c \
+				execution/block/next.c \
 				execution/cmd/absolute.c \
 				execution/cmd/builtin.c \
 				execution/cmd/can_be_done.c \
@@ -176,7 +177,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/redirections/output.c \
 				criterion/execution/redirections/error.c \
 				criterion/execution/redirections.c \
-				criterion/execution/block.c \
+				criterion/execution/block/block.c \
+				criterion/execution/block/next.c \
 				criterion/execution/cmd/absolute.c \
 				criterion/execution/cmd/builtin.c \
 				criterion/execution/cmd/prepare.c \
