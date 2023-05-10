@@ -12,6 +12,7 @@
 #include "types/var/var.h"
 #include "types/list/list.h"
 #include "types/shell/shell.h"
+#include "types/history/history.h"
 
 static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
 {
@@ -30,6 +31,7 @@ static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
     shell->builtins = builtins;
     shell_special_vars_init(shell);
     shell_init_io(shell);
+    shell->history = history_new();
     return true;
 }
 
