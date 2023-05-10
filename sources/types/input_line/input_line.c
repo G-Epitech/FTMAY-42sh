@@ -50,9 +50,6 @@ void input_line_get_content(input_line_t *line, shell_t *shell)
         character = input_line_read_key();
         if (character <= 127) {
             append_char(line, character);
-            printf("\x1b[%dG\x1b[0J", 7);
-            printf("%s", line->buffer->content);
-            printf("\x1b[%ldG", line->buffer->cursor + 7);
         } else {
             lunch_control_function(character, line, shell);
         }

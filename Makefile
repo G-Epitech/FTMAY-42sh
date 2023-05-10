@@ -62,6 +62,8 @@ _SRC =			mysh/mysh.c \
 				types/parsing_utils/free.c \
 				types/parsing_utils/new.c \
 				\
+				types/input_line/refresh.c \
+				types/input_line/delete_char.c \
 				types/input_line/handlers/cursor.c \
 				types/input_line/handlers/keypressed.c \
 				types/input_line/handlers/history.c \

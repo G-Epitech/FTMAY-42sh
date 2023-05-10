@@ -67,4 +67,6 @@ int input_line_get_character(int character);
  */
 bool append_char(input_line_t *line, int c);
 
+void refresh_screen(input_line_t *line);
+
 #endif /* !INPUT_LINE_H_ */

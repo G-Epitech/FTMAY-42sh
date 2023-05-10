@@ -64,4 +64,6 @@ void input_line_history_next(shell_t *shell, input_line_t *line);
 
 void input_line_keypressed_a(shell_t *shell, input_line_t *line);
 
+void delete_char(shell_t *shell, input_line_t *line);
+
 #endif /* !HANDLERS_H_ */
