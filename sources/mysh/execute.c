@@ -13,9 +13,7 @@
 
 bool mysh_execute(char *input, inst_t *block, shell_t *shell)
 {
-    size_t len = input ? strlen(input) : -1;
-
-    if (len == 0) {
+    if (input && strlen(input) == 0) {
         shell->exit_code = SHELL_EXIT_SUCCESS;
         return true;
     }
