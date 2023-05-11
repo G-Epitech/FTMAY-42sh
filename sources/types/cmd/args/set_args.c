@@ -31,12 +31,14 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
 
 static void fill_args(char **argv, char *input)
 {
+    size_t i = -1;
     size_t index_argv = 0;
-    size_t len = cmd_set_args_get_len_input(input, 0);
+    size_t len = 0;
     size_t start = 0;
 
+    new_args(&start, &len, &i, input);
     argv[index_argv] = malloc2(sizeof(char) * len + 1);
-    for (size_t i = 0; input[i] != '\0'; i++) {
+    while (input[i] != '\0') {
         if (start + len == i && input[i + 1] == '\0')
             break;
         if (start + len == i) {
@@ -46,6 +48,7 @@ static void fill_args(char **argv, char *input)
             argv[index_argv] = malloc2(sizeof(char) * len + 1);
         }
         argv[index_argv][i - start] = input[i];
+        i++;
     }
     argv[index_argv][len] = '\0';
 }
