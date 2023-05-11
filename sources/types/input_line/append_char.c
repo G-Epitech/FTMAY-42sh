@@ -14,12 +14,11 @@
 
 static char *get_word(char *user_input, int start, int end)
 {
-    char *word = malloc2(sizeof(char) * end - start + 1);
+    char *word = calloc(end - start + 1, sizeof(char));
     int index = 0;
 
     if (!word)
         return NULL;
-    memset(word, '\0', end - start + 1);
     while (start < end) {
         word[index] = user_input[start];
         index++;
@@ -35,11 +34,12 @@ bool append_char(input_line_t *line, int c)
     char *end = get_word(user_input, line->buffer->cursor, strlen(user_input));
     char *new_input = realloc(begin, sizeof(char) * (strlen(begin) + 2));
     char *new_input_user = NULL;
+    int len_new_input = strlen(new_input);
 
     if (!new_input)
         return false;
-    new_input[strlen(new_input)] = c;
-    new_input[strlen(new_input)] = '\0';
+    new_input[len_new_input] = c;
+    new_input[len_new_input + 1] = '\0';
     begin = new_input;
     if (asprintf2(&new_input_user, "%s%s", begin, end) == -1)
         return false;
