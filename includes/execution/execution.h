@@ -168,4 +168,27 @@ void execution_inst_close_fd(exec_utils_t *utils);
  */
 bool execution_inst_handle_status(inst_t *inst, exec_utils_t *utils);
 
+/**
+ * @brief Get next block instruction to execute.
+ * @param current Current node instruction
+ * @param code Eexit code of previous instruction
+ * @return Next node instruction or NULL if end reached
+ */
+node_t *execution_block_get_next(node_t *current, int code);
+
+/**
+ * @brief Check if immediate next instruction needs to be executed.
+ * @param inst Current instruction
+ * @param code Code produced by instruction evaluation
+ * @return Needed status
+ */
+bool execution_block_need_next(inst_t *inst, int code);
+
+/**
+ * @brief Skip all not needed instructions until next required.
+ * @param current Current node instruction
+ * @return Next node to execute.
+ */
+node_t *execution_block_skip_not_needed(node_t *current);
+
 #endif /* !EXECUTION_H_ */

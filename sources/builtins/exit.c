@@ -16,6 +16,8 @@ int builtin_exit(args_t *args, shell_t *shell)
         return SHELL_EXIT_ERROR;
     if (args->argc == 1) {
         shell->status = SH_EXITED;
+        if (shell->is_tty)
+            printf("exit\n");
         return SHELL_EXIT_SUCCESS;
     }
     if (args->argc != 2 || !is_number(args->argv[1])) {
