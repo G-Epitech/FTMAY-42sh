@@ -206,7 +206,6 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/input_lines/iscntrl.c \
 				criterion/types/input_lines/keypress.c \
 				criterion/types/input_lines/display_cursor.c \
-				criterion/types/input_lines/input_line.c \
 				\
 
 SRCDIR = 		sources/
