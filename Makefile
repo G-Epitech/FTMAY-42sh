@@ -19,6 +19,7 @@ _SRC =			mysh/mysh.c \
 				builtins/set.c \
 				builtins/unset.c \
 				builtins/var.c \
+				builtins/which.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
