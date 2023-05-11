@@ -39,7 +39,7 @@ Test(shell_get_input_tests, basic)
 }
 
 Test(shell_get_input_tests, exit_shell, .init=cr_redirect_stdout) {
-    char* test_input = "\0";
+    char* test_input = "";
     shell_t *shell = shell_new(builtins_cmds);
     char reader[100];
     int p[2] = {0, 0};
