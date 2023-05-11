@@ -30,6 +30,15 @@ Test(builtins_setenv, simple_setenv_with_args) {
     shell_free(shell);
 }
 
+Test(builtins_setenv, simple_setenv_without_value) {
+    char *argv[] = {"setenv", "var"};
+    args_t args = {.argc = 2, .argv = argv};
+    shell_t *shell = shell_new(builtins_cmds);
+
+    cr_assert(builtin_setenv(&args, shell) == SHELL_EXIT_SUCCESS);
+    shell_free(shell);
+}
+
 Test(builtins_setenv, simple_setenv_with_args_name_upper) {
     char *argv[] = {"setenv", "Var", "hello"};
     args_t args = {.argc = 3, .argv = argv};
