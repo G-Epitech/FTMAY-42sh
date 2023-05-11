@@ -22,7 +22,7 @@ struct termios *default_tty)
     line->settings->c_iflag &= ~(BRKINT | INPCK | ICRNL | ISTRIP | IXON);
     line->settings->c_oflag &= ~(OPOST);
     line->settings->c_cflag |= (CS8);
-    line->settings->c_lflag &= ~(ECHO | ICANON);
+    line->settings->c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
     line->settings->c_cc[VTIME] = 0;
     line->settings->c_cc[VMIN] = 1;
     if (tcsetattr(STDIN_FILENO, TCSANOW, line->settings) == -1)
