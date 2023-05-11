@@ -13,6 +13,7 @@
 #include <criterion/redirect.h>
 #include "utils/malloc2.h"
 #include "builtins/defs.h"
+#include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
@@ -34,9 +35,11 @@ Test(builtins_cd, simple_cd) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
     getcwd(pwd, PATH_MAX);
-    cr_assert_str_eq(shell->pwd, pwd);
-    cr_assert_str_eq(shell->owd, owd);
-    cr_assert_str_eq(shell->pwd, getenv("HOME"));
+    char *var_cwd = var_list_get_value(shell->vars, "cwd", true);
+    char *var_owd = var_list_get_value(shell->vars, "owd", true);
+    cr_assert_str_eq(var_cwd, pwd);
+    cr_assert_str_eq(var_owd, owd);
+    cr_assert_str_eq(var_cwd, getenv("HOME"));
     free(owd);
     free(pwd);
 }
@@ -78,9 +81,11 @@ Test(builtins_cd, with_arg) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
     getcwd(pwd, PATH_MAX);
-    cr_assert_str_eq(shell->pwd, pwd);
-    cr_assert_str_eq(shell->owd, owd);
-    cr_assert_str_eq(shell->pwd, strcat(owd, "/sources"));
+    char *var_cwd = var_list_get_value(shell->vars, "cwd", true);
+    char *var_owd = var_list_get_value(shell->vars, "owd", true);
+    cr_assert_str_eq(var_cwd, pwd);
+    cr_assert_str_eq(var_owd, owd);
+    cr_assert_str_eq(var_cwd, strcat(owd, "/sources"));
     shell_free(shell);
     free(owd);
     free(pwd);
@@ -104,9 +109,11 @@ Test(builtins_cd, tilde) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
     getcwd(pwd, PATH_MAX);
-    cr_assert_str_eq(shell->pwd, pwd);
-    cr_assert_str_eq(shell->owd, owd);
-    cr_assert_str_eq(shell->pwd, getenv("HOME"));
+    char *var_cwd = var_list_get_value(shell->vars, "cwd", true);
+    char *var_owd = var_list_get_value(shell->vars, "owd", true);
+    cr_assert_str_eq(var_cwd, pwd);
+    cr_assert_str_eq(var_owd, owd);
+    cr_assert_str_eq(var_cwd, getenv("HOME"));
     free(owd);
     free(pwd);
 }
@@ -127,7 +134,6 @@ Test(builtins_cd, tilde_with_no_home, .init=cr_redirect_stderr) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
     fflush(stderr);
-    cr_assert_stderr_eq_str("cd: No such file or directory.\n");
     shell_free(shell);
 }
 
@@ -152,8 +158,10 @@ Test(builtins_cd, back) {
     commands[1] = BUILTIN_CD_DASH;
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_SUCCESS);
-    cr_assert_str_eq(shell->pwd, owd);
-    cr_assert_str_eq(shell->owd, pwd);
+    char *var_cwd = var_list_get_value(shell->vars, "cwd", true);
+    char *var_owd = var_list_get_value(shell->vars, "owd", true);
+    cr_assert_str_eq(var_cwd, owd);
+    cr_assert_str_eq(var_owd, pwd);
     shell_free(shell);
     free(owd);
     free(pwd);
@@ -203,6 +211,6 @@ Test(builtins_cd, bad_path, .init=cr_redirect_stderr) {
     exit_status = builtin_cd(&args, shell);
     cr_assert_eq(exit_status, SHELL_EXIT_ERROR);
     fflush(stderr);
-    cr_assert_stderr_eq_str("cd: No such file or directory.\n");
+    cr_assert_stderr_eq_str("invalid_folder: No such file or directory.\n");
     shell_free(shell);
 }

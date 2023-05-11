@@ -75,6 +75,11 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
 				types/shell/vars/special/home.c \
+				types/shell/vars/special/pw.c \
+				types/shell/vars/special/group.c \
+				types/shell/vars/special/cwd.c \
+				types/shell/vars/special/shell.c \
+				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
 				\
 				types/history/new.c \

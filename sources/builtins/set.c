@@ -65,7 +65,7 @@ static bool set_var_value(args_t *args, shell_t *shell, int *index)
     return parse_value(shell, name, args->argv[*index - 1]);
 }
 
-unsigned char builtin_set(args_t *args, shell_t *shell)
+int builtin_set(args_t *args, shell_t *shell)
 {
     int index = 0;
 

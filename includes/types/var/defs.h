@@ -9,6 +9,7 @@
     #define VAR_DEFS_H_
 
     #define VAR_VOID_VALUE ""
+    #define SHELL_PATH "/bin/42sh"
 
 typedef struct s_shell shell_t;
 
