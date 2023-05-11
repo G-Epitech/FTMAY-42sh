@@ -165,6 +165,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/set.c \
 				criterion/builtins/unset.c \
 				criterion/builtins/var.c \
+				criterion/builtins/which.c \
 				\
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \

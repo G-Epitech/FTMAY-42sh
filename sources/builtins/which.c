@@ -37,6 +37,8 @@ static bool find_command(char *command, shell_t *shell)
 
 int builtin_which(args_t *args, shell_t *shell)
 {
+    int status = SHELL_EXIT_SUCCESS;
+
     if (!shell || !args)
         return SHELL_EXIT_ERROR;
     if (args->argc == 1) {
@@ -44,8 +46,9 @@ int builtin_which(args_t *args, shell_t *shell)
         return SHELL_EXIT_ERROR;
     }
     for (size_t i = 1; i < (size_t) args->argc; i++) {
-        if (!find_command(args->argv[i], shell))
-            return SHELL_EXIT_ERROR;
+        if (!find_command(args->argv[i], shell) &&
+        status == SHELL_EXIT_SUCCESS)
+            status = SHELL_EXIT_ERROR;
     }
-    return SHELL_EXIT_SUCCESS;
+    return status;
 }
