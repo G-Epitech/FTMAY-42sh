@@ -48,7 +48,7 @@ static bool builtin_setenv_prevent_errors(args_t *args)
     }
     if (!builtin_setenv_check_name(args->argv[1]))
         return true;
-    if (!builtin_setenv_check_value(args->argv[2]))
+    if (args->argc == 3 && !builtin_setenv_check_value(args->argv[2]))
         return true;
     return false;
 }
@@ -61,7 +61,11 @@ int builtin_setenv(args_t *args, shell_t *shell)
         return builtin_env(args, shell);
     if (builtin_setenv_prevent_errors(args))
         return SHELL_EXIT_ERROR;
-    setenv(args->argv[1], args->argv[2], true);
+    if (args->argc == 2) {
+        setenv(args->argv[1], "", true);
+    } else {
+        setenv(args->argv[1], args->argv[2], true);
+    }
     shell_special_vars_dispatch_env_update(shell, args->argv[1]);
     return SHELL_EXIT_SUCCESS;
 }
