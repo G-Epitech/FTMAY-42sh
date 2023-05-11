@@ -62,8 +62,18 @@ void input_line_history_prev(shell_t *shell, input_line_t *line);
  */
 void input_line_history_next(shell_t *shell, input_line_t *line);
 
+/**
+ * @brief Display cursor position.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
 void input_line_keypressed_a(shell_t *shell, input_line_t *line);
 
+/**
+ * @brief Delete a char in the user entry.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
 void delete_char(shell_t *shell, input_line_t *line);
 
 #endif /* !HANDLERS_H_ */

@@ -67,8 +67,16 @@ int input_line_get_character(int character);
  */
 bool append_char(input_line_t *line, int c);
 
+/**
+ * @brief Refresh the screen after an action.
+ * @param line Structure input entry
+ */
 void refresh_screen(input_line_t *line);
 
+/**
+ * @brief Display the cursor.
+ * @param line Structure input entry
+ */
 void display_cursor(input_line_t *line);
 
 #endif /* !INPUT_LINE_H_ */
