@@ -24,12 +24,6 @@ cmd_t *cmd_new(void);
 void cmd_free(cmd_t *command);
 
 /**
- * @brief Display given command details.
- * @param cmd Command of which display details
- */
-void cmd_display(cmd_t *cmd);
-
-/**
  * @brief Parse command input into string array.
  * @param command Command object
  * @param shell Shell object
