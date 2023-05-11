@@ -43,7 +43,6 @@ void delete_char(shell_t *shell, input_line_t *line)
     line->buffer->content = new_input_user;
     line->buffer->cursor--;
     line->buffer->len--;
-    line->buffer->pos_col_cursor--;
     refresh_screen(line);
     return;
 }

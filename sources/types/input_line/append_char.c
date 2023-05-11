@@ -46,6 +46,5 @@ bool append_char(input_line_t *line, int c)
     line->buffer->content = new_input_user;
     line->buffer->cursor++;
     line->buffer->len++;
-    line->buffer->pos_col_cursor++;
     return true;
 }

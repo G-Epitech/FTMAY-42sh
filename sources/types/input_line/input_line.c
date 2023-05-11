@@ -43,12 +43,6 @@ shell_t *shell)
     }
 }
 
-static void get_position_curseur(int *row, int *col)
-{
-    printf("\033[6n");
-    scanf("\033[%d;%dR", row, col);
-}
-
 static void get_terminal_size(int *rows, int *columns)
 {
     struct winsize size;
@@ -61,18 +55,14 @@ void input_line_get_content(input_line_t *line, shell_t *shell)
 {
     int character = 0;
     int x = 0;
-    int size_term_rows = 0;
-    int size_term_col = 0;
 
-    get_terminal_size(&size_term_rows, &size_term_col);
-    get_position_curseur(&line->buffer->rows_start_cursor, &x);
-    line->buffer->pos_rows_cursor = line->buffer->rows_start_cursor;
+    printf("\033[6n");
+    scanf("\033[%d;%dR", &line->buffer->rows_start_cursor, &x);
     while (line->status == IL_RUNNING) {
+        get_terminal_size(&line->buffer->term_size->nb_rows,
+        &line->buffer->term_size->nb_cols);
+        display_cursor(line);
         character = input_line_read_key();
-        if (line->buffer->pos_col_cursor >= size_term_col) {
-            line->buffer->pos_rows_cursor++;
-            line->buffer->pos_col_cursor = 0;
-        }
         if (character <= 127) {
             append_char(line, character);
             refresh_screen(line);

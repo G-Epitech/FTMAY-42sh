@@ -27,17 +27,17 @@ input_line_t *input_line_new(void)
     if (!new)
         return NULL;
     new->buffer = malloc2(sizeof(input_line_buffer_t));
-    if (new->buffer == NULL)
+    new->buffer->term_size = malloc2(sizeof(termine_size_t));
+    if (new->buffer == NULL || new->buffer->term_size == NULL)
         return NULL;
+    new->buffer->term_size->nb_cols = 0;
+    new->buffer->term_size->nb_rows = 0;
     new->status = IL_RUNNING;
     new->buffer->content = malloc_new_buffer_content();
     new->buffer->history_content = malloc_new_buffer_content();
     new->buffer->len = 0;
     new->buffer->cursor = 0;
     new->buffer->rows_start_cursor = 0;
-    new->buffer->pos_rows_cursor = 0;
-    new->buffer->nb_rows = 0;
-    new->buffer->pos_col_cursor = PROMPT_LEN;
     new->buffer->history_cursor = 0;
     return new;
 }

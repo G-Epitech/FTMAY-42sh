@@ -29,14 +29,18 @@ typedef enum e_ctrl_key {
     CTRL_KEY_D
 } ctrl_key_e;
 
+// Represent the terminale size 
+typedef struct s_terminale_size {
+    int nb_rows;    // Number of rows of the terminal
+    int nb_cols;    // Number of colonne of the terminal
+} termine_size_t;
+
 // Represent the input of the user
 typedef struct s_input_line_buffer {
     size_t len;                     // Len of the user input
     size_t cursor;                  // Pos in x of the cursor on the content
     int rows_start_cursor;          // Pos y of the curs at the start of command
-    int pos_col_cursor;             // Number orws of the command
-    int pos_rows_cursor;            // Number orws of the command
-    int nb_rows;
+    termine_size_t *term_size;      // Sizes of terminal
     size_t history_cursor;          // Pos in x of the cursor on the history
     char *history_content;          // Buffer of the history
     char *content;                  // Buffer of the user input
