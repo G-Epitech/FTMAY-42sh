@@ -14,7 +14,7 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("error")
 
-segfault_core_dumped = Test("Segmentation with code dumped", "echo \"./tests/custom/utils/my_segfault\" | {shell}")
+segfault_core_dumped = Test("Segmentation with code dumped", "echo \"./tests/utils/my_sig.out 11\" | {shell}")
 suite.addTest(segfault_core_dumped)
 
 floating_core_dumped = Test("Floating point with code dumped", "echo \"./tests/custom/utils/my_floating_point\" | {shell}")

@@ -12,6 +12,7 @@ from classes.test import Test
 pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
+
 suite = TestSuite("env")
 
 simpleenv = Test("Simple env command", "echo \"env\" | {shell}")
