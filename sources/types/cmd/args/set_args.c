@@ -38,7 +38,7 @@ static void fill_args(char **argv, char *input)
 
     new_args(&start, &len, &i, input);
     argv[index_argv] = malloc2(sizeof(char) * len + 1);
-    for (; input[i] != '\0'; i++) {
+    while (input[i] != '\0') {
         if (start + len == i && input[i + 1] == '\0')
             break;
         if (start + len == i) {
@@ -48,6 +48,7 @@ static void fill_args(char **argv, char *input)
             argv[index_argv] = malloc2(sizeof(char) * len + 1);
         }
         argv[index_argv][i - start] = input[i];
+        i++;
     }
     argv[index_argv][len] = '\0';
 }
