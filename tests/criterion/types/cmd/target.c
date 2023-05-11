@@ -287,6 +287,7 @@ Test(types_cmd_target, determine_target_empty_with_null_cmd)
 
 Test(types_cmd_target, determine_target_system_basic)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         "ls"
@@ -295,13 +296,14 @@ Test(types_cmd_target, determine_target_system_basic)
     cmd->args.argc = 1;
     cmd->args.argv = argv;
     cmd->name = "ls";
-    cr_assert(cmd_determine_target_is_system(cmd));
+    cr_assert(cmd_determine_target_is_system(cmd, shell));
     cr_assert(cmd->type == CMD_SYSTEM);
     cr_assert_not_null(cmd->target.path);
 }
 
 Test(types_cmd_target, determine_target_system_with_null_cmd_name)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         NULL
@@ -310,13 +312,15 @@ Test(types_cmd_target, determine_target_system_with_null_cmd_name)
     cmd->args.argc = 1;
     cmd->args.argv = argv;
     cmd->name = NULL;
-    cr_assert_not(cmd_determine_target_is_system(cmd));
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
     cr_assert_not(cmd->type == CMD_SYSTEM);
     cr_assert_null(cmd->target.path);
+    shell_free(shell);
 }
 
 Test(types_cmd_target, determine_target_system_with_default_path)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         NULL
@@ -329,15 +333,17 @@ Test(types_cmd_target, determine_target_system_with_default_path)
     cmd->args.argv = argv;
     cmd->name = NULL;
     unsetenv("PATH");
-    cr_assert_not(cmd_determine_target_is_system(cmd));
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
     cr_assert_not(cmd->type == CMD_SYSTEM);
     cr_assert_null(cmd->target.path);
     if (old_path)
         setenv("PATH", old_path, true);
+    shell_free(shell);
 }
 
 Test(types_cmd_target, determine_target_system_with_empty_path)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         "ls"
@@ -349,17 +355,19 @@ Test(types_cmd_target, determine_target_system_with_empty_path)
     cmd->args.argc = 1;
     cmd->args.argv = argv;
     cmd->name = "ls";
-    setenv("PATH", "", true);
-    cr_assert_not(cmd_determine_target_is_system(cmd));
+    shell_set_var(shell, "path", "");
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
     cr_assert_not(cmd->type == CMD_SYSTEM);
     cr_assert_null(cmd->target.path);
     if (old_path)
-        setenv("PATH", old_path, true);
+        shell_set_var(shell, "path", old_path);
+    shell_free(shell);
 }
 
 
 Test(types_cmd_target, determine_target_system_with_unknwon_cmd)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         "supercommand"
@@ -368,13 +376,15 @@ Test(types_cmd_target, determine_target_system_with_unknwon_cmd)
     cmd->args.argc = 1;
     cmd->args.argv = argv;
     cmd->name = "supercommand";
-    cr_assert_not(cmd_determine_target_is_system(cmd));
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
     cr_assert_not(cmd->type == CMD_SYSTEM);
     cr_assert_null(cmd->target.path);
+    shell_free(shell);
 }
 
 Test(types_cmd_target, determine_target_system_cmd_on_malloc_fail)
 {
+    shell_t *shell = shell_new(builtins_cmds);
     cmd_t *cmd = cmd_new();
     char *argv[] = {
         "ls",
@@ -385,8 +395,68 @@ Test(types_cmd_target, determine_target_system_cmd_on_malloc_fail)
     cmd->args.argv = argv;
     cmd->name = "ls";
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
-    cr_assert_not(cmd_determine_target_is_system(cmd));
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
     cr_assert_not(cmd->type == CMD_SYSTEM);
     cr_assert_null(cmd->target.path);
-     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    shell_free(shell);
+}
+
+Test(types_cmd_target, determine_target_system_without_shell)
+{
+    cmd_t *cmd = cmd_new();
+    char *argv[] = {
+        "ls",
+        "/"
+    };
+
+    cmd->args.argc = 2;
+    cmd->args.argv = argv;
+    cmd->name = "ls";
+    cr_assert_not(cmd_determine_target_is_system(cmd, NULL));
+    cr_assert_not(cmd->type == CMD_SYSTEM);
+    cr_assert_null(cmd->target.path);
+}
+
+Test(types_cmd_target, determine_target_system_without_path_var)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    cmd_t *cmd = cmd_new();
+    char *argv[] = {
+        "ls",
+        "/"
+    };
+
+    cmd->args.argc = 2;
+    cmd->args.argv = argv;
+    cmd->name = "ls";
+    shell_unset_var(shell, "path");
+    cr_assert_not(cmd_determine_target_is_system(cmd, shell));
+    cr_assert_not(cmd->type == CMD_SYSTEM);
+    cr_assert_null(cmd->target.path);
+    shell_free(shell);
+}
+
+
+Test(types_cmd_target, determine_target_system_without_default_path)
+{
+    char *original_path = strdup(getenv("PATH"));
+    unsetenv("PATH");
+    shell_t *shell = shell_new(builtins_cmds);
+    char *path = shell_get_var(shell, "path", false);
+    cmd_t *cmd = cmd_new();
+    char *argv[] = {
+        "ls",
+        "/"
+    };
+
+    cmd->args.argc = 2;
+    cmd->args.argv = argv;
+    cmd->name = "ls";
+    cr_assert_str_eq(path, SHELL_DEFAULT_PATH);
+    cr_assert(cmd_determine_target_is_system(cmd, shell));
+    cr_assert(cmd->type == CMD_SYSTEM);
+    cr_assert_not_null(cmd->target.path);
+    shell_free(shell);
+    setenv("PATH", original_path, true);
 }

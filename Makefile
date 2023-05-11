@@ -35,7 +35,6 @@ _SRC =			mysh/mysh.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
-				types/cmd/display.c \
 				types/cmd/target/target.c \
 				types/cmd/target/builtin.c \
 				types/cmd/target/system.c \
@@ -77,6 +76,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/init.c \
 				types/shell/vars/special/home.c \
 				types/shell/vars/special/pw.c \
+				types/shell/vars/special/path.c \
 				types/shell/vars/special/group.c \
 				types/shell/vars/special/cwd.c \
 				types/shell/vars/special/shell.c \
@@ -105,7 +105,6 @@ _SRC =			mysh/mysh.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \
-				parsing/utils/display.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
