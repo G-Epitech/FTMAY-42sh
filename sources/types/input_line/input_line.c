@@ -14,7 +14,7 @@
 #include "types/input_line/handlers.h"
 #include "types/input_line/input_line.h"
 
-int input_line_read_key(void)
+static int input_line_read_key(void)
 {
     int character = getchar();
 
@@ -46,6 +46,7 @@ shell_t *shell)
 static void get_terminal_size(int *rows, int *columns)
 {
     struct winsize size;
+
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
     *rows = size.ws_row;
     *columns = size.ws_col;
