@@ -29,16 +29,18 @@ char *mysh_get_input(shell_t *shell);
  * @brief Parse input in order to convert it in executable
  * instructions.
  * @param input Input to parse
+ * @param shell Shell object
  * @return Main block of instruction on success or NULL on failure
  */
-inst_t *mysh_parse(char *input);
+inst_t *mysh_parse(char *input, shell_t *shell);
 
 /**
  * @brief Launch execution of main block of instructions.
+ * @param input Input given by user
  * @param block Main block of instructions
  * @param shell Shell object
  * @return Success status of execution
  */
-bool mysh_execute(inst_t *block, shell_t *shell);
+bool mysh_execute(char *input, inst_t *block, shell_t *shell);
 
 #endif /* !MYSH_H_ */

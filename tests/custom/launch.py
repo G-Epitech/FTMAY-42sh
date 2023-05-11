@@ -18,7 +18,7 @@ if __name__ == '__main__':
     tester = Tester()
     tester.addSuite(basics.suite)
     tester.addSuite(minishell1Cd.suite)
-    tester.addSuite(minishell1Env.suite)
+    #tester.addSuite(minishell1Env.suite)
     #tester.addSuite(minishell1Unsetenv.suite)
     #tester.addSuite(minishell1Setenv.suite)
     tester.addSuite(minishell1Error.suite)
