@@ -13,8 +13,6 @@
 
 void refresh_screen(input_line_t *line)
 {
-    //int pos_col_cursor = line->buffer->pos_col_cursor;
-
     printf("\x1b[%d;%dH", line->buffer->rows_start_cursor, PROMPT_LEN);
     printf("\x1b[0J");
     printf("%s", line->buffer->content);
