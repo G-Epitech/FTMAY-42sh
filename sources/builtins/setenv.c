@@ -61,11 +61,10 @@ int builtin_setenv(args_t *args, shell_t *shell)
         return builtin_env(args, shell);
     if (builtin_setenv_prevent_errors(args))
         return SHELL_EXIT_ERROR;
-    if (args->argc == 2) {
+    if (args->argc == 2)
         setenv(args->argv[1], "", true);
-    } else {
+    else
         setenv(args->argv[1], args->argv[2], true);
-    }
     shell_special_vars_dispatch_env_update(shell, args->argv[1]);
     return SHELL_EXIT_SUCCESS;
 }
