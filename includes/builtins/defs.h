@@ -14,6 +14,7 @@
 
     #define BUILTIN_CD_TILDE "~"
     #define BUILTIN_CD_DASH "-"
+    #define BUILTIN_CD_NO_HOME_MSG "No $home variable set.\n"
 
 static const builtin_t builtins_cmds[] = {
     {"cd", &builtin_cd},

@@ -87,8 +87,9 @@ bool cmd_determine_target_is_empty(cmd_t *cmd);
 /**
  * @brief Determine if target is system and set it if so.
  * @param cmd Command of which determine is target is system
+ * @param shell Shell object
  * @return Status that indicates if command is system
  */
-bool cmd_determine_target_is_system(cmd_t *cmd);
+bool cmd_determine_target_is_system(cmd_t *cmd, shell_t *shell);
 
 #endif /* !CMD_H_ */

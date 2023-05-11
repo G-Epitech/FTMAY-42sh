@@ -140,6 +140,26 @@ bool shell_special_vars_tty_init(char *name, shell_t *shell, char *dependency);
 bool shell_special_vars_shell_init(char *name, shell_t *shell,
 char *dependency);
 
+/**
+ * @brief Initialize special variable path.
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_path_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Initialize special variable home.
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_home_init(char *name, shell_t *shell,
+char *dependency);
+
 // List of special shell variables
 static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
@@ -155,7 +175,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_home_get,
         &shell_special_vars_home_set,
         &shell_special_vars_home_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_home_init,
         "HOME"
     },
     {
@@ -171,7 +191,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_get,
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_path_init,
         "PATH"
     },
     {

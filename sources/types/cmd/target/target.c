@@ -14,7 +14,7 @@ bool cmd_determine_target(cmd_t *cmd, shell_t *shell)
         return true;
     if (cmd_determine_target_is_builtin(cmd, shell))
         return true;
-    if (cmd_determine_target_is_system(cmd))
+    if (cmd_determine_target_is_system(cmd, shell))
         return true;
     if (cmd_determine_target_is_absolute(cmd))
         return true;
