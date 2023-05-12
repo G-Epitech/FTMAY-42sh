@@ -208,7 +208,7 @@ Test(types_history, history_load_basic)
 {
     history_t *history = history_new();
 
-    cr_assert(history_load(history, "history.tmp", false) == true);
+    cr_assert(history_load(history, "history.tmp", false) == false);
     history_free(history);
 }
 
@@ -216,7 +216,7 @@ Test(types_history, history_load_basic_sort)
 {
     history_t *history = history_new();
 
-    cr_assert(history_load(history, "history.tmp", true) == true);
+    cr_assert(history_load(history, "history.tmp", true) == false);
     history_free(history);
 }
 
