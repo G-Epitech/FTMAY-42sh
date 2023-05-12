@@ -15,6 +15,6 @@ bool history_clear(history_t *history)
         return false;
     list_free(history->entries, &history_entry_node_freer);
     history->selected = NULL;
-    history->entries = NULL;
+    history->entries = list_new();
     return true;
 }

@@ -10,6 +10,16 @@
 
     #include <stdbool.h>
     #include "defs.h"
+    #include "types/shell/defs.h"
+
+    #define BUILTIN_HISTORY_C(array) (array[0])
+    #define BUILTIN_HISTORY_H(array) (array[1])
+    #define BUILTIN_HISTORY_R(array) (array[2])
+    #define BUILTIN_HISTORY_S(array) (array[3])
+    #define BUILTIN_HISTORY_L(array) (array[4])
+    #define BUILTIN_HISTORY_M(array) (array[5])
+    #define BUILTIN_HISTORY_T(array) (array[6])
+    #define BUILTIN_HISTORY_SAVE_PATH ".42sh.history"
 
 /**
  * @brief Create a new history structure.
@@ -76,5 +86,29 @@ history_entry_t *history_next(history_t *history);
  * @return prev data if there was
  */
 history_entry_t *history_prev(history_t *history);
+
+/**
+ * @brief Save an history in a file.
+ * @param history History to save
+ * @param file Target file
+ * @return False if there is an error, otherwise it's True
+ */
+bool history_save(history_t *history, char *file);
+
+/**
+ * @brief Load an history from a file.
+ * @param history History to append new commands
+ * @param file File to load
+ * @return False if there is an error, otherwise, it's True
+ */
+bool history_load(history_t *history, char *file);
+
+/**
+ * @brief Display the Shell history.
+ * @param shell Shell object
+ * @param occurrences Number of occurrences
+ * @param array Bool array with option in it;
+ */
+void history_display(shell_t *shell, int occurrences, bool *array);
 
 #endif /* !HISTORY_H_ */

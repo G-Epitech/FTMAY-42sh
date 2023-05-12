@@ -14,6 +14,7 @@
     #include "types/var/defs.h"
     #include "types/list/defs.h"
     #include "types/builtin/defs.h"
+    #include "types/history/defs.h"
 
     #define SHELL_EXIT_ERROR 1
     #define SHELL_EXIT_SUCCESS 0
@@ -47,6 +48,7 @@ typedef struct s_shell {
     char *pwd;                  // Path of current working directory
     const builtin_t *builtins;  // Builtins command available in shell
     shell_io_t io;              // Shell input / output
+    history_t *history;         // Shell history
 } shell_t;
 
 #endif /* !SHELL_DEFS_H_ */

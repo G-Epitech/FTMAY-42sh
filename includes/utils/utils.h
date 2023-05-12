@@ -27,4 +27,11 @@
  */
 bool is_number(char *string);
 
+/**
+ * @brief Give the len number.
+ * @param nb Number to have len
+ * @return Number of number
+ */
+int len_number(int nb);
+
 #endif /* !UTILS_H_ */

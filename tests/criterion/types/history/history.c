@@ -176,3 +176,63 @@ Test(types_history, history_next_next)
     cr_assert_null(data);
     history_free(history);
 }
+
+Test(types_history, history_load_basic)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "history.tmp") == true);
+    history_free(history);
+}
+
+Test(types_history, history_load_null)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, NULL) == false);
+    history_free(history);
+}
+
+Test(types_history, history_load_history_null)
+{
+    history_t *history = NULL;
+
+    cr_assert(history_load(history, "history.tmp") == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_basic)
+{
+    history_t *history = history_new();
+
+    history_append_entry(history, "ls -la");
+    history_append_entry(history, "echo 1");
+    history_append_entry(history, "echo 2");
+    history_append_entry(history, "pwd");
+    cr_assert(history_save(history, "history.tmp") == true);
+    history_free(history);
+}
+
+Test(types_history, history_save_null_path)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, NULL) == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_null_history)
+{
+    history_t *history = NULL;
+
+    cr_assert(history_save(NULL, "history.tmp") == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_no_cmd)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, "history.tmp") == false);
+    history_free(history);
+}

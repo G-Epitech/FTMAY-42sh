@@ -25,7 +25,7 @@ int mysh(void)
         shell_display_prompt(shell);
         input = mysh_get_input(shell);
         if (shell->status == SH_RUNNING) {
-            block = mysh_parse(input);
+            block = mysh_parse(shell, input);
             mysh_execute(block, shell);
         }
     }
