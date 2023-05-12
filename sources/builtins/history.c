@@ -67,7 +67,7 @@ static int handle_options(args_t *args, shell_t *shell, bool *array)
     if (args->argv[1][0] == '-') {
         if (!check_args(args, array)) {
             error = "Usage: history [-chrSLMT] [# number of events].\n";
-            fprintf(stderr, error);
+            fprintf(stderr, "%s", error);
             return -3;
         }
         if (args->argc > 2)
@@ -76,7 +76,7 @@ static int handle_options(args_t *args, shell_t *shell, bool *array)
     } else {
         if (!is_number(args->argv[1])) {
             error = "history: Badly formed number.\n";
-            fprintf(stderr, error);
+            fprintf(stderr, "%s", error);
             return -3;
         }
         return atoi(args->argv[1]);
