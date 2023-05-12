@@ -62,6 +62,18 @@ _SRC =			mysh/mysh.c \
 				types/parsing_utils/free.c \
 				types/parsing_utils/new.c \
 				\
+				types/input_line/display_cursor.c \
+				types/input_line/refresh.c \
+				types/input_line/delete_char.c \
+				types/input_line/handlers/cursor.c \
+				types/input_line/handlers/keypressed.c \
+				types/input_line/handlers/history.c \
+				types/input_line/new.c \
+				types/input_line/append_char.c \
+				types/input_line/input_line.c \
+				types/input_line/iscntrl.c \
+				types/input_line/mode.c \
+				\
 				types/shell/new.c \
 				types/shell/free.c \
 				types/shell/input.c \
@@ -196,6 +208,13 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/inst/launch.c \
 				criterion/execution/inst/status.c \
 				criterion/execution/execution.c \
+				\
+				criterion/types/input_lines/utils.c \
+				criterion/types/input_lines/handlers.c \
+				criterion/types/input_lines/iscntrl.c \
+				criterion/types/input_lines/keypress.c \
+				criterion/types/input_lines/display_cursor.c \
+				\
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

@@ -11,6 +11,7 @@
 #include "parsing/parsing.h"
 #include "types/shell/shell.h"
 #include "execution/execution.h"
+#include "types/history/history.h"
 
 int mysh(void)
 {
