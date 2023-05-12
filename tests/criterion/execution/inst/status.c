@@ -136,6 +136,23 @@ Test(execution_handle_status_tests, with_null_utils)
     cr_assert_not(execution_inst_handle_status(inst, NULL));
 }
 
+
+Test(execution_handle_status_tests, with_max_code, .init=cr_redirect_stderr)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    inst_t *block = parsing_get_main_block("./tests/utils/my_sig.out 10");
+    inst_t *inst = NODE_DATA_TO_PTR(block->value.block->instructions->first->data, inst_t *);
+    node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
+    exec_utils_t utils;
+
+    execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
+    execution_inst_get_redirections(inst, &utils);
+    execution_cmd_prepare(node, shell);
+    execution_inst_launch(node, shell, &utils);
+    utils.status = 255;
+    cr_assert(execution_inst_handle_status(inst, &utils));
+}
+
 Test(execution_handle_status_tests, with_null_args)
 {
     cr_assert_not(execution_inst_handle_status(NULL, NULL));

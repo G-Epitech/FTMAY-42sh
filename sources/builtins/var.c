@@ -47,7 +47,7 @@ static list_t *list_sort(list_t *list)
     return sort_list;
 }
 
-unsigned char builtin_var(args_t *args, shell_t *shell)
+int builtin_var(args_t *args, shell_t *shell)
 {
     node_t *node = NULL;
 

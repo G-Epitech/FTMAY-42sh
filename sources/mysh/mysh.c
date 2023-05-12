@@ -16,9 +16,9 @@
 int mysh(void)
 {
     int exit_code = 0;
-    shell_t *shell = shell_new(builtins_cmds);
-    inst_t *block = NULL;
     char *input = NULL;
+    inst_t *block = NULL;
+    shell_t *shell = shell_new(builtins_cmds);
 
     if (!shell)
         return SHELL_EXIT_ERROR;
@@ -27,7 +27,7 @@ int mysh(void)
         input = mysh_get_input(shell);
         if (shell->status == SH_RUNNING) {
             block = mysh_parse(input, shell);
-            mysh_execute(block, shell);
+            mysh_execute(input, block, shell);
         }
     }
     exit_code = shell->exit_code;

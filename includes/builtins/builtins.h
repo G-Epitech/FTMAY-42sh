@@ -57,7 +57,7 @@ int builtin_setenv(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_set(args_t *args, shell_t *shell);
+int builtin_set(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle unset builtin command.
@@ -65,7 +65,7 @@ unsigned char builtin_set(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_unset(args_t *args, shell_t *shell);
+int builtin_unset(args_t *args, shell_t *shell);
 
 /**
  * @brief Handle var builtin command.
@@ -73,6 +73,14 @@ unsigned char builtin_unset(args_t *args, shell_t *shell);
  * @param shell Shell object
  * @return Exit code of the builtin
  */
-unsigned char builtin_var(args_t *args, shell_t *shell);
+int builtin_var(args_t *args, shell_t *shell);
+
+/**
+ * @brief Handle which builtin command.
+ * @param args Arguments of the command
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
+int builtin_which(args_t *args, shell_t *shell);
 
 #endif /* !BUILTINS_H_ */

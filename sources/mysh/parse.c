@@ -15,13 +15,11 @@
 
 inst_t *mysh_parse(char *input, shell_t *shell)
 {
-    inst_t *block = NULL;
     size_t len = input ? strlen(input) : 0;
 
-    if (!input || !len)
+    if (!input || !len) {
+        shell->exit_code = SHELL_EXIT_SUCCESS;
         return NULL;
-    block = parsing_get_main_block(input);
-    if (block)
-        history_append_entry(shell->history, input);
-    return block;
+    }
+    return parsing_get_main_block(input);
 }

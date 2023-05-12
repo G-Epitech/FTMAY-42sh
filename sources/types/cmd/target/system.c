@@ -47,15 +47,15 @@ static bool is_system(char *path)
     return (stat(path, &target) == 0);
 }
 
-bool cmd_determine_target_is_system(cmd_t *cmd)
+bool cmd_determine_target_is_system(cmd_t *cmd, shell_t *shell)
 {
-    char *dirs = getenv("PATH");
+    char *dirs = shell_get_var(shell, "path", true);
     char *dir = NULL;
     char *path = NULL;
     bool found = false;
 
-    dirs = dirs ? dirs : SHELL_DEFAULT_PATH;
-    dirs = strdup(dirs);
+    if (!dirs)
+        return false;
     dir = strtok(dirs, ":");
     while (dir && !found) {
         path = get_path(dir, cmd->name);

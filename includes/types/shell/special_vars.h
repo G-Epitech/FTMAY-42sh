@@ -12,7 +12,7 @@
     #include <stdbool.h>
     #include "types/var/defs.h"
 
-    #define SHELL_SPECIAL_VARS_LEN 4
+    #define SHELL_SPECIAL_VARS_LEN 12
 
 /**
  * @brief Get special shell variable.
@@ -81,6 +81,85 @@ shell_t *shell);
  */
 bool shell_special_vars_home_update(char *name, char *value, shell_t *shell);
 
+/**
+ * @brief Set special shell variable (uid).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_pw_uid_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Set special shell variable (gid).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_pw_gid_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Set special shell variable (group).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_group_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Set special shell variable (cwd).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_cwd_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Set special shell variable (tty).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_tty_init(char *name, shell_t *shell, char *dependency);
+
+/**
+ * @brief Set special shell variable (shell).
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_shell_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Initialize special variable path.
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_path_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Initialize special variable home.
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_home_init(char *name, shell_t *shell,
+char *dependency);
+
 // List of special shell variables
 static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
@@ -96,7 +175,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_home_get,
         &shell_special_vars_home_set,
         &shell_special_vars_home_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_home_init,
         "HOME"
     },
     {
@@ -104,7 +183,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_get,
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_pw_uid_init,
         NULL
     },
     {
@@ -112,9 +191,73 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_get,
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
-        &shell_special_vars_std_init,
+        &shell_special_vars_path_init,
         "PATH"
     },
+    {
+        "user",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        "USER"
+    },
+    {
+        "group",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_group_init,
+        "GROUP"
+    },
+    {
+        "gid",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_pw_gid_init,
+        NULL
+    },
+    {
+        "cwd",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_cwd_init,
+        NULL
+    },
+    {
+        "owd",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        NULL
+    },
+    {
+        "_",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_std_init,
+        NULL
+    },
+    {
+        "shell",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_shell_init,
+        NULL
+    },
+    {
+        "tty",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        &shell_special_vars_std_update,
+        &shell_special_vars_tty_init,
+        NULL
+    }
 };
 
 #endif /* !SHELL_SPECIAL_VARS_H_ */
