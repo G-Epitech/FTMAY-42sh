@@ -119,6 +119,6 @@ void history_display(shell_t *shell, int occurrences, bool *array);
  * @param date Date
  * @return False if there is an error, otherwise, it's True
  */
-bool history_append_entry_date(history_t *history, char *input, int date);
+bool history_append_entry_date(history_t *history, char *input, long int date);
 
 #endif /* !HISTORY_H_ */

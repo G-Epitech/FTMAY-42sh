@@ -101,6 +101,33 @@ Test(types_history, history_prev_basic)
     history_free(history);
 }
 
+#include <stdio.h>
+Test(types_history, history_append_date_basic)
+{
+    history_t *history = history_new();
+    history_entry_t *data = NULL;
+
+    history_append_entry(history, "history");
+    history_append_entry_date(history, "ls -la", 0);
+    history_append_entry_date(history, "cat Makefile -e", 1);
+    history_append_entry_date(history, "echo hey", 2);
+    data = NODE_DATA_TO_PTR(history->selected->data, history_entry_t *);
+    cr_assert(strcmp(data->input, "history") == 0);
+    history_free(history);
+}
+
+Test(types_history, history_append_date_after)
+{
+    history_t *history = history_new();
+    history_entry_t *data = NULL;
+
+    history_append_entry(history, "history");
+    history_append_entry_date(history, "echo hey", 28683895518);
+    data = NODE_DATA_TO_PTR(history->selected->data, history_entry_t *);
+    cr_assert(strcmp(data->input, "echo hey") == 0);
+    history_free(history);
+}
+
 Test(types_history, history_prev_null)
 {
     history_t *history = NULL;
@@ -181,7 +208,23 @@ Test(types_history, history_load_basic)
 {
     history_t *history = history_new();
 
-    cr_assert(history_load(history, "history.tmp") == true);
+    cr_assert(history_load(history, "history.tmp", false) == true);
+    history_free(history);
+}
+
+Test(types_history, history_load_basic_sort)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "history.tmp", true) == true);
+    history_free(history);
+}
+
+Test(types_history, history_load_no_file_sort)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "qsdgknsfogieoef", true) == false);
     history_free(history);
 }
 
@@ -189,7 +232,7 @@ Test(types_history, history_load_null)
 {
     history_t *history = history_new();
 
-    cr_assert(history_load(history, NULL) == false);
+    cr_assert(history_load(history, NULL, false) == false);
     history_free(history);
 }
 
@@ -197,7 +240,7 @@ Test(types_history, history_load_history_null)
 {
     history_t *history = NULL;
 
-    cr_assert(history_load(history, "history.tmp") == false);
+    cr_assert(history_load(history, "history.tmp", false) == false);
     history_free(history);
 }
 
@@ -218,6 +261,14 @@ Test(types_history, history_save_null_path)
     history_t *history = history_new();
 
     cr_assert(history_save(history, NULL) == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_no_file_path)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, "qdegfsefghezrgzerh") == false);
     history_free(history);
 }
 

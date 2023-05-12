@@ -202,3 +202,122 @@ Test(builtins_history, option_T, .init=redirect_all_stdout) {
     shell_free(shell);
     free(commands);
 }
+
+Test(builtins_history, option_wrong, .init=redirect_all_stdout) {
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char*) * commands_size);
+    commands[0] = "history";
+    commands[1] = "-Tyt";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(builtins_cmds);
+    int exit_status = 0;
+    
+    history_append_entry(shell->history, "ls");
+    history_append_entry(shell->history, "pwd");
+    history_append_entry(shell->history, "echo j'en");
+    history_append_entry(shell->history, "echo ai");
+    history_append_entry(shell->history, "echo marre");
+    exit_status = builtin_history(&args, shell);
+    cr_assert_stderr_eq_str("Usage: history [-chrSLMT] [# number of events].\n");
+    cr_assert_eq(exit_status, 1);
+    shell_free(shell);
+    free(commands);
+}
+
+Test(builtins_history, option_with_number, .init=redirect_all_stdout) {
+    int commands_size = 3;
+    char **commands = malloc(sizeof(char*) * commands_size);
+    commands[0] = "history";
+    commands[1] = "-h";
+    commands[2] = "10";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(builtins_cmds);
+    int exit_status = 0;
+    
+    history_append_entry(shell->history, "ls");
+    history_append_entry(shell->history, "pwd");
+    history_append_entry(shell->history, "echo j'en");
+    history_append_entry(shell->history, "echo ai");
+    history_append_entry(shell->history, "echo marre");
+    exit_status = builtin_history(&args, shell);
+    cr_assert_eq(exit_status, 0);
+    shell_free(shell);
+    free(commands);
+}
+
+Test(builtins_history, number, .init=redirect_all_stdout) {
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char*) * commands_size);
+    commands[0] = "history";
+    commands[1] = "10";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(builtins_cmds);
+    int exit_status = 0;
+    
+    history_append_entry(shell->history, "ls");
+    history_append_entry(shell->history, "pwd");
+    history_append_entry(shell->history, "echo j'en");
+    history_append_entry(shell->history, "echo ai");
+    history_append_entry(shell->history, "echo marre");
+    exit_status = builtin_history(&args, shell);
+    cr_assert_eq(exit_status, 0);
+    shell_free(shell);
+    free(commands);
+}
+
+Test(builtins_history, bad_number, .init=redirect_all_stdout) {
+    int commands_size = 2;
+    char **commands = malloc(sizeof(char*) * commands_size);
+    commands[0] = "history";
+    commands[1] = "tty10";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(builtins_cmds);
+    int exit_status = 0;
+    
+    history_append_entry(shell->history, "ls");
+    history_append_entry(shell->history, "pwd");
+    history_append_entry(shell->history, "echo j'en");
+    history_append_entry(shell->history, "echo ai");
+    history_append_entry(shell->history, "echo marre");
+    exit_status = builtin_history(&args, shell);
+    cr_assert_eq(exit_status, 1);
+    shell_free(shell);
+    free(commands);
+}
+
+Test(builtins_history, too_many_args, .init=redirect_all_stdout) {
+    int commands_size = 4;
+    char **commands = malloc(sizeof(char*) * commands_size);
+    commands[0] = "history";
+    commands[1] = "tty10";
+    commands[2] = "tty10";
+    commands[3] = "tty10";
+    args_t args = {
+        .argc = commands_size,
+        .argv = commands
+    };
+    shell_t *shell = shell_new(builtins_cmds);
+    int exit_status = 0;
+    
+    history_append_entry(shell->history, "ls");
+    history_append_entry(shell->history, "pwd");
+    history_append_entry(shell->history, "echo j'en");
+    history_append_entry(shell->history, "echo ai");
+    history_append_entry(shell->history, "echo marre");
+    exit_status = builtin_history(&args, shell);
+    cr_assert_eq(exit_status, 1);
+    shell_free(shell);
+    free(commands);
+}
