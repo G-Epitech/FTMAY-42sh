@@ -218,6 +218,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/input_lines/keypress.c \
 				criterion/types/input_lines/display_cursor.c \
 				\
+				criterion/builtins/where.c \
+				\
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))
