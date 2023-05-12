@@ -13,7 +13,6 @@
     #include "handlers.h"
 
     #define CTRL_KEY_HANDLERS_NBR 9
-    #define line_clear_after_cursor (printf ("\x1b[J"))
     #define PROMPT_LEN 7
 
 // Represent value of arrow key
