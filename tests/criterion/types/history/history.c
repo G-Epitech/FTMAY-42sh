@@ -84,7 +84,7 @@ Test(types_history, history_clear_basic)
     history_append_entry(history, "ls -la");
     cr_assert(history_clear(history) == true);
     cr_assert(history->selected == NULL);
-    cr_assert(history->entries == NULL);
+    cr_assert(history->entries != NULL);
     history_free(history);
 }
 
@@ -98,6 +98,33 @@ Test(types_history, history_prev_basic)
     history_append_entry(history, "echo hey");
     data = history_prev(history);
     cr_assert(strcmp(data->input, "cat Makefile -e") == 0);
+    history_free(history);
+}
+
+#include <stdio.h>
+Test(types_history, history_append_date_basic)
+{
+    history_t *history = history_new();
+    history_entry_t *data = NULL;
+
+    history_append_entry(history, "history");
+    history_append_entry_date(history, "ls -la", 0);
+    history_append_entry_date(history, "cat Makefile -e", 1);
+    history_append_entry_date(history, "echo hey", 2);
+    data = NODE_DATA_TO_PTR(history->selected->data, history_entry_t *);
+    cr_assert(strcmp(data->input, "history") == 0);
+    history_free(history);
+}
+
+Test(types_history, history_append_date_after)
+{
+    history_t *history = history_new();
+    history_entry_t *data = NULL;
+
+    history_append_entry(history, "history");
+    history_append_entry_date(history, "echo hey", 28683895518);
+    data = NODE_DATA_TO_PTR(history->selected->data, history_entry_t *);
+    cr_assert(strcmp(data->input, "echo hey") == 0);
     history_free(history);
 }
 
@@ -174,5 +201,89 @@ Test(types_history, history_next_next)
     history_append_entry(history, "ls -la");
     data = history_next(history);
     cr_assert_null(data);
+    history_free(history);
+}
+
+Test(types_history, history_load_basic)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "./tests/utils/.history", false) == true);
+    history_free(history);
+}
+
+Test(types_history, history_load_basic_sort)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "./tests/utils/.history", true) == true);
+    history_free(history);
+}
+
+Test(types_history, history_load_no_file_sort)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, "qsdgknsfogieoef", true) == false);
+    history_free(history);
+}
+
+Test(types_history, history_load_null)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_load(history, NULL, false) == false);
+    history_free(history);
+}
+
+Test(types_history, history_load_history_null)
+{
+    history_t *history = NULL;
+
+    cr_assert(history_load(history, "./tests/utils/.history", false) == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_basic)
+{
+    history_t *history = history_new();
+
+    history_append_entry(history, "ls -la");
+    history_append_entry(history, "echo 1");
+    history_append_entry(history, "echo 2");
+    history_append_entry(history, "pwd");
+    cr_assert(history_save(history, "./tests/utils/.history") == true);
+    history_free(history);
+}
+
+Test(types_history, history_save_null_path)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, NULL) == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_no_file_path)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, "qdegfsefghezrgzerh") == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_null_history)
+{
+    history_t *history = NULL;
+
+    cr_assert(history_save(NULL, "./tests/utils/.history") == false);
+    history_free(history);
+}
+
+Test(types_history, history_save_no_cmd)
+{
+    history_t *history = history_new();
+
+    cr_assert(history_save(history, "./tests/utils/.history") == false);
     history_free(history);
 }

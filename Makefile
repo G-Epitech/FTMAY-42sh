@@ -19,6 +19,7 @@ _SRC =			mysh/mysh.c \
 				builtins/set.c \
 				builtins/unset.c \
 				builtins/var.c \
+				builtins/history.c \
 				builtins/which.c \
 				\
 				errors/get.c \
@@ -83,7 +84,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
-        		types/shell/vars/vars.c \
+        types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
 				types/shell/vars/special/home.c \
@@ -103,10 +104,14 @@ _SRC =			mysh/mysh.c \
 				types/history/current.c \
 				types/history/clear.c \
 				types/history/move.c \
+				types/history/save.c \
+				types/history/load.c \
+				types/history/display.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
 				utils/asprintf2.c \
+				utils/len_number.c \
 				\
 				parsing/redirection/get_redirection.c \
 				parsing/redirection/set_path.c \
@@ -176,6 +181,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/set.c \
 				criterion/builtins/unset.c \
 				criterion/builtins/var.c \
+				criterion/builtins/history.c \
 				criterion/builtins/which.c \
 				\
 				criterion/errors/get.c \
