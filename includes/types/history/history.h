@@ -19,7 +19,7 @@
     #define BUILTIN_HISTORY_L(array) (array[4])
     #define BUILTIN_HISTORY_M(array) (array[5])
     #define BUILTIN_HISTORY_T(array) (array[6])
-    #define BUILTIN_HISTORY_PATH ".42sh.history"
+    #define BUILTIN_HISTORY_PATH ".42sh./utils/.history"
 
 /**
  * @brief Create a new history structure.
