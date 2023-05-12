@@ -12,7 +12,7 @@ from classes.test import Test
 pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
-suite = TestSuite("cd")
+suite = TestSuite("Builtin cd")
 
 simplecd = Test("Simple cd command", "echo \"pwd ; cd sources ; pwd ; cd .. ; pwd\" | {shell}")
 suite.addTest(simplecd)

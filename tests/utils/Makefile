@@ -19,7 +19,7 @@ $(STYLE_BOLD)$(STYLE_BOLD)[%s]$(STYLE_END)\n"
 all:
 		@echo Inactive rule
 
-criterion_utils: my_sig set_files_permissions
+utils: my_sig set_files_permissions
 
 my_sig:
 		@printf $(COMPILING_O_LOG) my_sig.c
