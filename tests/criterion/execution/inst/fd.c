@@ -135,7 +135,7 @@ Test(execution_inst_set_fd_tests, set_double_output_file)
     cr_assert(fd != -1);
     cr_assert(read(fd, buff, 50) == 12);
     close(fd);
-    buff[13] = '\0';
+    buff[12] = '\0';
     cr_assert_str_eq(buff, "LINE1\nLINE2\n");
     remove("file-3.tmp");
 }

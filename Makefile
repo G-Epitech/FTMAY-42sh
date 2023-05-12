@@ -20,6 +20,7 @@ _SRC =			mysh/mysh.c \
 				builtins/unset.c \
 				builtins/var.c \
 				builtins/history.c \
+				builtins/which.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
@@ -35,7 +36,6 @@ _SRC =			mysh/mysh.c \
 				types/list/remove.c \
 				\
 				types/cmd/free.c \
-				types/cmd/display.c \
 				types/cmd/target/target.c \
 				types/cmd/target/builtin.c \
 				types/cmd/target/system.c \
@@ -63,6 +63,18 @@ _SRC =			mysh/mysh.c \
 				types/parsing_utils/free.c \
 				types/parsing_utils/new.c \
 				\
+				types/input_line/display_cursor.c \
+				types/input_line/refresh.c \
+				types/input_line/delete_char.c \
+				types/input_line/handlers/cursor.c \
+				types/input_line/handlers/keypressed.c \
+				types/input_line/handlers/history.c \
+				types/input_line/new.c \
+				types/input_line/append_char.c \
+				types/input_line/input_line.c \
+				types/input_line/iscntrl.c \
+				types/input_line/mode.c \
+				\
 				types/shell/new.c \
 				types/shell/free.c \
 				types/shell/input.c \
@@ -72,10 +84,16 @@ _SRC =			mysh/mysh.c \
 				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
-        		types/shell/vars/vars.c \
+        types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
 				types/shell/vars/special/home.c \
+				types/shell/vars/special/pw.c \
+				types/shell/vars/special/path.c \
+				types/shell/vars/special/group.c \
+				types/shell/vars/special/cwd.c \
+				types/shell/vars/special/shell.c \
+				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
 				\
 				types/history/new.c \
@@ -104,13 +122,13 @@ _SRC =			mysh/mysh.c \
 				parsing/recursivity.c \
 				parsing/analyse_data.c \
 				parsing/utils/utils.c \
-				parsing/utils/display.c \
 				parsing/pipes.c \
 				parsing/separator/utils.c \
 				parsing/separator/separator.c \
 				parsing/append.c \
 				\
 				execution/block/block.c \
+				execution/block/next.c \
 				execution/cmd/absolute.c \
 				execution/cmd/builtin.c \
 				execution/cmd/can_be_done.c \
@@ -164,6 +182,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/unset.c \
 				criterion/builtins/var.c \
 				criterion/builtins/history.c \
+				criterion/builtins/which.c \
 				\
 				criterion/errors/get.c \
 				criterion/errors/strerror.c \
@@ -182,7 +201,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/redirections/output.c \
 				criterion/execution/redirections/error.c \
 				criterion/execution/redirections.c \
-				criterion/execution/block.c \
+				criterion/execution/block/block.c \
+				criterion/execution/block/next.c \
 				criterion/execution/cmd/absolute.c \
 				criterion/execution/cmd/builtin.c \
 				criterion/execution/cmd/prepare.c \
@@ -194,6 +214,13 @@ _TESTS =		criterion/types/list.c \
 				criterion/execution/inst/launch.c \
 				criterion/execution/inst/status.c \
 				criterion/execution/execution.c \
+				\
+				criterion/types/input_lines/utils.c \
+				criterion/types/input_lines/handlers.c \
+				criterion/types/input_lines/iscntrl.c \
+				criterion/types/input_lines/keypress.c \
+				criterion/types/input_lines/display_cursor.c \
+				\
 
 SRCDIR = 		sources/
 SRC =			$(addprefix $(SRCDIR), $(_SRC))

@@ -14,27 +14,51 @@
 #include "builtins/defs.h"
 #include "utils/malloc2.h"
 #include "errors/errors.h"
+#include "types/var/var.h"
 #include "types/args/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
 
+static bool handle_specials(char **path, args_t *args, shell_t *shell,
+bool *error)
+{
+    char *home = NULL;
+
+    if (args->argc == 1 || !strcmp(args->argv[1], BUILTIN_CD_TILDE)) {
+        home = shell_get_var(shell, "home", false);
+        if (!home) {
+            fprintf(stderr, BUILTIN_CD_NO_HOME_MSG);
+            *error = true;
+        }
+        *path = home;
+        return true;
+    }
+    if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH)) {
+        *path = var_list_get_value(shell->vars, "owd", true);
+        return true;
+    }
+    return false;
+}
+
 static bool set_new_path(args_t *args, shell_t *shell)
 {
     char *path = NULL;
+    bool error = false;
+    char *cwd = NULL;
 
     if (args->argc == 2)
         path = args->argv[1];
-    if (args->argc == 1 || !strcmp(args->argv[1], BUILTIN_CD_TILDE)) {
-        path = shell_get_var(shell, "home", false);
-        path = path ? path : "";
-    }
-    if (args->argc == 2 && !strcmp(args->argv[1], BUILTIN_CD_DASH))
-        path = shell->owd;
+    if (handle_specials(&path, args, shell, &error) && error)
+        return false;
     if (chdir(path) == -1) {
-        fprintf(stderr, "cd: %s\n", errors_strerror(errno));
+        fprintf(stderr, "%s: %s\n", path, errors_strerror(errno));
         return false;
     }
-    getcwd(shell->pwd, PATH_MAX);
+    cwd = malloc2(PATH_MAX);
+    if (!cwd)
+        return false;
+    getcwd(cwd, PATH_MAX);
+    var_list_set(shell->vars, "cwd", cwd);
     return true;
 }
 
@@ -56,7 +80,6 @@ int builtin_cd(args_t *args, shell_t *shell)
         free(owd);
         return SHELL_EXIT_ERROR;
     }
-    free(shell->owd);
-    shell->owd = owd;
+    var_list_set(shell->vars, "owd", owd);
     return SHELL_EXIT_SUCCESS;
 }

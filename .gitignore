@@ -19,3 +19,4 @@ unit_tests*
 .idea/
 42sh_tests
 .42sh*
+core

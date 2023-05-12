@@ -48,7 +48,7 @@ typedef struct s_shell {
     char *pwd;                  // Path of current working directory
     const builtin_t *builtins;  // Builtins command available in shell
     shell_io_t io;              // Shell input / output
-    history_t *history;         // Shell history
+    history_t *history;         // Shell history of commands
 } shell_t;
 
 #endif /* !SHELL_DEFS_H_ */

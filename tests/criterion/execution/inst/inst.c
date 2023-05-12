@@ -51,8 +51,7 @@ Test(execution_inst_tests, null_node_inst, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
 
-    execution_inst(NULL, shell, NULL, EXEC_SUPERIOR);
-    cr_assert(shell->exit_code == SHELL_EXIT_ERROR);
+    cr_assert(execution_inst(NULL, shell, NULL, EXEC_SUPERIOR) == SHELL_EXIT_ERROR);
     shell_free(shell);
 }
 
@@ -61,8 +60,7 @@ Test(execution_inst_tests, node_with_null_inst, .init=cr_redirect_stdout)
     shell_t *shell = shell_new(builtins_cmds);
     node_t *node = node_new(NODE_DATA_FROM_PTR(NULL));
 
-    execution_inst(node, shell, NULL, EXEC_SUPERIOR);
-    cr_assert(shell->exit_code == SHELL_EXIT_ERROR);
+    cr_assert(execution_inst(node, shell, NULL, EXEC_SUPERIOR) == SHELL_EXIT_ERROR);
     shell_free(shell);
     node_free(node, NULL);
 }
@@ -74,8 +72,7 @@ Test(execution_inst_tests, node_with_none_inst, .init=cr_redirect_stdout)
     inst->type = INS_NONE;
     node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
 
-    execution_inst(node, shell, NULL, EXEC_SUPERIOR);
-    cr_assert(shell->exit_code == SHELL_EXIT_ERROR);
+    cr_assert(execution_inst(node, shell, NULL, EXEC_SUPERIOR) == SHELL_EXIT_SUCCESS);
     shell_free(shell);
     inst_free(inst);
     node_free(node, NULL);

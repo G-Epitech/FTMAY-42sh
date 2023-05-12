@@ -5,7 +5,6 @@
 ** block
 */
 
-#include <stdio.h>
 #include <unistd.h>
 #include "types/inst/defs.h"
 #include "execution/execution.h"
@@ -41,7 +40,7 @@ bool execution_block(node_t *node_inst, shell_t *shell, exec_utils_t *utils)
         if (!node)
             return false;
         code = execution_inst(node, shell, utils, EXEC_SUPERIOR);
-        next = node->next;
+        next = execution_block_get_next(node, code);
     } while (next);
     utils->status = code;
     return true;

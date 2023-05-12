@@ -44,6 +44,16 @@ bool shell_special_vars_home_update(char *name, char *value, shell_t *shell)
         return set_home_from_cwd(value, shell);
 }
 
+bool shell_special_vars_home_init(char *name, shell_t *shell,
+char *dependency)
+{
+    char *value = getenv(dependency);
+
+    if (!value)
+        return false;
+    return var_list_set(shell->vars, name, value);
+}
+
 bool shell_special_vars_home_set(char *name, char *value, char *dependency,
 shell_t *shell)
 {

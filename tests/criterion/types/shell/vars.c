@@ -283,11 +283,52 @@ Test(types_shell_vars, shell_special_vars_home_update_bad_malloc)
     cr_assert(!status);
 }
 
-Test(types_shell_vars, shell_special_vars_home_update)
+Test(types_shell_vars, shell_special_vars_home_update_test)
 {
     shell_t *shell = shell_new(builtins_cmds);
     bool status = false;
 
     status = shell_special_vars_home_update("home", "42sh", shell);
     cr_assert(status);
+}
+
+Test(types_shell_vars, shell_special_vars_init_shell)
+{
+    bool status = false;
+
+    status = shell_special_vars_shell_init("shell", NULL, NULL);
+    cr_assert(!status);
+}
+
+Test(types_shell_vars, shell_special_vars_init_pw_uid)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    status = shell_special_vars_pw_uid_init("uid", shell, NULL);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    cr_assert(!status);
+}
+
+Test(types_shell_vars, shell_special_vars_init_pw_gid)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    status = shell_special_vars_pw_gid_init("gid", shell, NULL);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    cr_assert(!status);
+}
+
+Test(types_shell_vars, shell_special_vars_init_cwd)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    status = shell_special_vars_cwd_init("cwd", shell, NULL);
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    cr_assert(!status);
 }

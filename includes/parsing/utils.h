@@ -24,10 +24,4 @@ bool parsing_maybe_redirection(parsing_utils_t *utils);
  */
 bool parsing_maybe_separator(parsing_utils_t *utils);
 
-/**
- * @brief Display Block in order to know what we got.
- * @param instruction Instruction to display
- */
-void parsing_display(inst_t *instruction);
-
 #endif /* !PARSING_UTILS_H_ */
