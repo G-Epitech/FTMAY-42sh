@@ -21,5 +21,6 @@ inst_t *mysh_parse(char *input, shell_t *shell)
         shell->exit_code = SHELL_EXIT_SUCCESS;
         return NULL;
     }
+    history_append_entry(shell->history, input);
     return parsing_get_main_block(input);
 }

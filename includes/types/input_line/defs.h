@@ -12,7 +12,7 @@
     #include "types/shell/defs.h"
     #include "handlers.h"
 
-    #define CTRL_KEY_HANDLERS_NBR 8
+    #define CTRL_KEY_HANDLERS_NBR 9
     #define line_clear_after_cursor (printf ("\x1b[J"))
     #define PROMPT_LEN 7
 
@@ -26,7 +26,8 @@ typedef enum e_ctrl_key {
     CTRL_KEY_ENTER,
     CTRL_KEY_DEL,
     CTRL_KEY_A,
-    CTRL_KEY_D
+    CTRL_KEY_D,
+    TAB
 } ctrl_key_e;
 
 // Represent the terminale size.
@@ -77,7 +78,8 @@ static const ctrl_key_handler_t ctrl_key_handlers[CTRL_KEY_HANDLERS_NBR] = {
     {CTRL_KEY_DEL, &delete_char},
     {CTRL_KEY_ENTER, &input_line_keypressed_enter},
     {CTRL_KEY_D, &input_line_keypressed_d},
-    {CTRL_KEY_A, &input_line_keypressed_a}
+    {CTRL_KEY_A, &input_line_keypressed_a},
+    {TAB, &input_line_keypressed_tab}
 };
 
 #endif /* !INPUT_LINE_DEFS_H_ */

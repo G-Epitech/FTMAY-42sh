@@ -32,3 +32,9 @@ void input_line_keypressed_a(shell_t *shell, input_line_t *line)
     scanf("\033[%d;%dR", &y, &x);
     printf("Cursor position\t[y:%d\tx:%d)]\r\n", y, x);
 }
+
+void input_line_keypressed_tab(shell_t *shell, input_line_t *line)
+{
+    (void) shell;
+    (void) line;
+}

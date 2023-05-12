@@ -70,6 +70,13 @@ void input_line_history_next(shell_t *shell, input_line_t *line);
 void input_line_keypressed_a(shell_t *shell, input_line_t *line);
 
 /**
+ * @brief Handle tabulation 
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_keypressed_tab(shell_t *shell, input_line_t *line);
+
+/**
  * @brief Delete a char in the user entry.
  * @param line Structure input entry
  * @param shell Structure of shell

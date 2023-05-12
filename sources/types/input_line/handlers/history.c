@@ -20,6 +20,8 @@ static void replace_buffer_content(input_line_t *line, char *str)
 
 void input_line_history_prev(shell_t *shell, input_line_t *line)
 {
+    if (shell->history->selected == NULL)
+        printf("his null\r\n");
     history_entry_t *selected = history_current(shell->history);
 
     if (!selected)

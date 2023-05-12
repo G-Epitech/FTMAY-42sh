@@ -5,6 +5,7 @@
 ** current
 */
 
+#include <stdio.h>
 #include "types/history/history.h"
 
 history_entry_t *history_current(history_t *history)
