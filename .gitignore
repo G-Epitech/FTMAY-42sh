@@ -18,3 +18,4 @@ unit_tests*
 42sh
 .idea/
 42sh_tests
+.42sh*

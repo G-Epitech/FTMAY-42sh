@@ -19,7 +19,7 @@
     #define BUILTIN_HISTORY_L(array) (array[4])
     #define BUILTIN_HISTORY_M(array) (array[5])
     #define BUILTIN_HISTORY_T(array) (array[6])
-    #define BUILTIN_HISTORY_SAVE_PATH ".42sh.history"
+    #define BUILTIN_HISTORY_PATH ".42sh.history"
 
 /**
  * @brief Create a new history structure.
@@ -99,9 +99,10 @@ bool history_save(history_t *history, char *file);
  * @brief Load an history from a file.
  * @param history History to append new commands
  * @param file File to load
+ * @param sort Sort entries
  * @return False if there is an error, otherwise, it's True
  */
-bool history_load(history_t *history, char *file);
+bool history_load(history_t *history, char *file, bool sort);
 
 /**
  * @brief Display the Shell history.
@@ -110,5 +111,14 @@ bool history_load(history_t *history, char *file);
  * @param array Bool array with option in it;
  */
 void history_display(shell_t *shell, int occurrences, bool *array);
+
+/**
+ * @brief Append a new entry in history.
+ * @param history SHell history
+ * @param input User input
+ * @param date Date
+ * @return False if there is an error, otherwise, it's True
+ */
+bool history_append_entry_date(history_t *history, char *input, int date);
 
 #endif /* !HISTORY_H_ */

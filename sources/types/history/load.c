@@ -9,6 +9,12 @@
 #include <string.h>
 #include "types/history/history.h"
 
+static int append_sort(history_t *history, char *line, int date)
+{
+    history_append_entry_date(history, line, date);
+    return -1;
+}
+
 static int append(history_t *history, char *line, int date)
 {
     history_entry_t *entry = NULL;
@@ -21,7 +27,7 @@ static int append(history_t *history, char *line, int date)
     return -1;
 }
 
-static void loop(history_t *history, FILE *stream)
+static void loop(history_t *history, FILE *stream, bool sort)
 {
     char *line = NULL;
     int read = 0;
@@ -32,15 +38,19 @@ static void loop(history_t *history, FILE *stream)
         read = getline(&line, &len, stream);
         if (read == -1)
             break;
+        line[read - 1] = (line[read - 1] == '\n') ? '\0' : line[read - 1];
         if (line[0] == '#') {
             date = atoi(++line);
             continue;
         }
-        date = append(history, line, date);
+        if (!sort)
+            date = append(history, line, date);
+        else
+            date = append_sort(history, line, date);
     }
 }
 
-bool history_load(history_t *history, char *file)
+bool history_load(history_t *history, char *file, bool sort)
 {
     FILE *stream;
 
@@ -49,7 +59,7 @@ bool history_load(history_t *history, char *file)
     stream = fopen(file, "r");
     if (!stream)
         return false;
-    loop(history, stream);
+    loop(history, stream, sort);
     fclose(stream);
     return true;
 }

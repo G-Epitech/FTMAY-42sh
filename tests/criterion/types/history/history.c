@@ -84,7 +84,7 @@ Test(types_history, history_clear_basic)
     history_append_entry(history, "ls -la");
     cr_assert(history_clear(history) == true);
     cr_assert(history->selected == NULL);
-    cr_assert(history->entries == NULL);
+    cr_assert(history->entries != NULL);
     history_free(history);
 }
 

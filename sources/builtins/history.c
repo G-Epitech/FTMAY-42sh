@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "utils/utils.h"
 #include "types/shell/shell.h"
 #include "types/history/history.h"
@@ -35,18 +36,24 @@ static bool check_args(args_t *args, bool *array)
     return true;
 }
 
-static int manage_options(shell_t *shell, bool *array)
+static int manage_options(shell_t *shell, bool *array, char *path)
 {
+    char *file = path ? path : BUILTIN_HISTORY_PATH;
+
     if (BUILTIN_HISTORY_C(array)) {
         history_clear(shell->history);
         return -2;
     }
     if (BUILTIN_HISTORY_S(array)) {
-        history_save(shell->history, BUILTIN_HISTORY_SAVE_PATH);
+        history_save(shell->history, file);
         return -2;
     }
     if (BUILTIN_HISTORY_L(array)) {
-        history_load(shell->history, BUILTIN_HISTORY_SAVE_PATH);
+        history_load(shell->history, file, false);
+        return -2;
+    }
+    if (BUILTIN_HISTORY_M(array)) {
+        history_load(shell->history, file, true);
         return -2;
     }
     return -1;
@@ -55,6 +62,7 @@ static int manage_options(shell_t *shell, bool *array)
 static int handle_options(args_t *args, shell_t *shell, bool *array)
 {
     char *error = NULL;
+    char *path = NULL;
 
     if (args->argv[1][0] == '-') {
         if (!check_args(args, array)) {
@@ -62,7 +70,9 @@ static int handle_options(args_t *args, shell_t *shell, bool *array)
             fprintf(stderr, error);
             return -3;
         }
-        return manage_options(shell, array);
+        if (args->argc > 2)
+            path = args->argv[2];
+        return manage_options(shell, array, path);
     } else {
         if (!is_number(args->argv[1])) {
             error = "history: Badly formed number.\n";
@@ -71,7 +81,6 @@ static int handle_options(args_t *args, shell_t *shell, bool *array)
         }
         return atoi(args->argv[1]);
     }
-    return -1;
 }
 
 int builtin_history(args_t *args, shell_t *shell)
@@ -79,7 +88,7 @@ int builtin_history(args_t *args, shell_t *shell)
     int result = 100;
     bool array[7] = {false};
 
-    if (!args || args->argc > 2)
+    if (!args || args->argc > 3)
         return SHELL_EXIT_ERROR;
     if (args->argc > 1)
         result = handle_options(args, shell, array);
