@@ -5,6 +5,7 @@
 ** input
 */
 
+#include <stdio.h>
 #include "parsing/parsing.h"
 #include "types/shell/shell.h"
 
