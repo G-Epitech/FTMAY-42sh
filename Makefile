@@ -20,6 +20,9 @@ _SRC =			mysh/mysh.c \
 				builtins/unset.c \
 				builtins/var.c \
 				builtins/which.c \
+				builtins/where/where.c \
+				builtins/where/utils.c \
+				builtins/where/determine_targets.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
