@@ -23,23 +23,26 @@ suite.addTest(doubleSemi)
 tripleSemi = Test("Triple semicolon", "echo \"ls; pwd; touch axxel; rm -f axxel\" | {shell}")
 suite.addTest(tripleSemi)
 
-wrong = Test("wrong", "echo \";\" | {shell}")
+wrong = Test("Empty command", "echo \";\" | {shell}")
 suite.addTest(wrong)
 
-spaceWrong = Test("wrong with one space", "echo \" ;\" | {shell}")
+spaceWrong = Test("Semicolon with space and empty command", "echo \" ;\" | {shell}")
 suite.addTest(spaceWrong)
 
-tabWrong = Test("wrong with one tab", "echo \"    ;\" | {shell}")
+tabWrong = Test("Semicolon with tab and empty command", "echo \"    ;\" | {shell}")
 suite.addTest(tabWrong)
 
-tabSpaceWrong = Test("wrong with one space and one tab", "echo \"        ;\" | {shell}")
+tabSpaceWrong = Test("Semicolon with space, tab and empty command", "echo \"        ;\" | {shell}")
 suite.addTest(tabSpaceWrong)
 
-simpleWrongTab = Test("wrong with one command and tab", "echo \"ls ;      \" | {shell}")
+simpleWrongTab = Test("Semicolon with space, tab and valid command", "echo \"ls ;      \" | {shell}")
 suite.addTest(simpleWrongTab)
 
-simpleWrongTabSpace = Test("Complex wrong cmd", "echo \"ls         ;      \" | {shell}")
+simpleWrongTabSpace = Test("Simple command with spaces and semicolon", "echo \"ls         ;      \" | {shell}")
 suite.addTest(simpleWrongTabSpace)
 
-inversedWrong = Test("wrong inversed cmd semicolon", "echo \"; ls\" | {shell}")
+inversedWrong = Test("Empty command with semicolon followed by valid command", "echo \"; ls\" | {shell}")
 suite.addTest(inversedWrong)
+
+manySemicolons = Test("Many semicolons", "echo \";;;;;;;;;;\" | {shell}")
+suite.addTest(manySemicolons)

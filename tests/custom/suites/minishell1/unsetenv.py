@@ -14,11 +14,11 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("unsetenv")
 
-simpleunsetenv = Test("Simple unsetenv command", "echo \"env ; unsetenv USER ; env\" | {shell}")
+simpleunsetenv = Test("Simple unsetenv command", "echo \"echo \"env\" ; echo \"unsetenv USER\" ; echo \"env\"\" | {shell} | env -i tcsh")
 suite.addTest(simpleunsetenv)
 
-doubleunsetenv = Test("Double unsetenv execution", "echo \"env ; unsetenv USER MAIL ; env\" | {shell}")
+doubleunsetenv = Test("Double unsetenv execution", "echo \"echo \"env\" ; echo \"unsetenv USER\" ; echo \"env\"\" | {shell} | env -i tcsh")
 suite.addTest(doubleunsetenv)
 
-multipleunsetenv = Test("Mutiple unsetenv execution", "echo \"env ; unsetenv USER MAIL LANG GROUP ; env\" | {shell}")
+multipleunsetenv = Test("Mutiple unsetenv execution", "echo \"echo \"env\" ; echo \"unsetenv USER MAIL LANG GROUP\"; echo \"env\"\" | {shell} | env -i tcsh")
 suite.addTest(multipleunsetenv)

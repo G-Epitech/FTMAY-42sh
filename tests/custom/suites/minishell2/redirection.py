@@ -12,7 +12,7 @@ from classes.test import Test
 pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
-suite = TestSuite("Redirection")
+suite = TestSuite("Redirections")
 
 simpleWrongRedirection = Test("Simple redirection left", "echo \"ls > axel; grep l < axel; rm -f axel\" | {shell}")
 suite.addTest(simpleWrongRedirection)
@@ -41,5 +41,5 @@ suite.addTest(doubleRedirectionRight)
 doubleWrongRedirection = Test("Double redirection right", "echo \"ls >> \" | {shell}")
 suite.addTest(doubleWrongRedirection)
 
-doubleWrongRedirection = Test("double redirection left", "echo \"ls << \" | {shell}")
+doubleWrongRedirection = Test("Double redirection left", "echo \"ls << \" | {shell}")
 suite.addTest(doubleWrongRedirection)

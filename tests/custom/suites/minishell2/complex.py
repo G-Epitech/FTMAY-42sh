@@ -14,14 +14,14 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("Complex")
 
-pipeRedirection = Test("one pipe to a file and multi cmd", "echo \"ls | grep l > axel; grep l < axel; rm -f axel\" | {shell}")
+pipeRedirection = Test("One pipe to a file and multi command", "echo \"ls | grep l > axel; grep l < axel; rm -f axel\" | {shell}")
 suite.addTest(pipeRedirection)
 
-multiCmd = Test("testing complex cmd", "echo \"echo begin; ls | grep l >> axel; rm -f axel;  echo end\" | {shell}")
+multiCmd = Test("Complex command", "echo \"echo begin; ls | grep l >> axel; rm -f axel;  echo end\" | {shell}")
 suite.addTest(multiCmd)
 
-multiWrongCmd = Test("testing wrong complex cmd", "echo \"< | > ; ||\" | {shell}")
+multiWrongCmd = Test("Wrong complex command", "echo \"< | > ; ||\" | {shell}")
 suite.addTest(multiWrongCmd)
 
-multiLittleCmd = Test("testing multiple of simple cmd", "echo \"cd ..; pwd; cd; cd .; ls\" | {shell}")
+multiLittleCmd = Test("Multiple simple command", "echo \"cd ..; pwd; cd; cd .; ls\" | {shell}")
 suite.addTest(multiLittleCmd)

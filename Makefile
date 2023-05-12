@@ -312,7 +312,7 @@ style:			fclean
 tests_criterion: fclean
 				@printf "$(STYLE_RED)🧪 Tests utils compliation...\
 				$(STYLE_END)\n"
-				@make -C $(TESTS_UTILS) criterion_utils -s
+				@make -C $(TESTS_UTILS) utils -s
 				@printf "$(STYLE_RED)🧪 Tests compliation...$(STYLE_END)\n"
 				@$(MAKE) objects CFLAGS+=--coverage -s
 				@$(MAKE) tests_objects -s
@@ -327,6 +327,7 @@ ftest:			$(NAME)
 
 tests_custom:
 				@$(MAKE) fclean
+				@make -C $(TESTS_UTILS) utils -s
 				@$(MAKE) $(NAME)
 				@./$(TESTS_CUSTOM)
 
