@@ -70,7 +70,7 @@ void input_line_history_next(shell_t *shell, input_line_t *line);
 void input_line_keypressed_a(shell_t *shell, input_line_t *line);
 
 /**
- * @brief Handle tabulation 
+ * @brief Handle tabulation
  * @param line Structure input entry
  * @param shell Structure of shell
  */
