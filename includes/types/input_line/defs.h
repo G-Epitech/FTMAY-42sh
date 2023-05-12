@@ -9,24 +9,24 @@
     #define INPUT_LINE_DEFS_H_
 
     #include <termios.h>
-    #include "types/shell/defs.h"
     #include "handlers.h"
+    #include "types/shell/defs.h"
 
-    #define CTRL_KEY_HANDLERS_NBR 9
     #define PROMPT_LEN 7
+    #define CTRL_KEY_HANDLERS_NBR 9
 
 // Represent value of arrow key
 typedef enum e_ctrl_key {
-    CTRL_KEY_REF = 1000,
+    CTRL_KEY_REF = 1000,    // Code of key ref
     ARROW_KEY_UP,           // Code of key up
     ARROW_KEY_DOWN,         // Code of key down
     ARROW_KEY_RIGHT,        // Code of key right
     ARROW_KEY_LEFT,         // Code of key left
-    CTRL_KEY_ENTER,
-    CTRL_KEY_DEL,
-    CTRL_KEY_A,
-    CTRL_KEY_D,
-    TAB
+    CTRL_KEY_ENTER,         // Code of key controle enter
+    CTRL_KEY_DEL,           // Code of key controle delete
+    CTRL_KEY_A,             // Code of key controle a
+    CTRL_KEY_D,             // Code of key controle d
+    TAB                     // Code of key tabulation
 } ctrl_key_e;
 
 // Represent the terminale size.

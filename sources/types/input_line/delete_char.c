@@ -35,9 +35,9 @@ void delete_char(shell_t *shell, input_line_t *line)
     char *end = get_word(user_input, line->buffer->cursor, strlen(user_input));
     char *new_input_user = NULL;
 
+    (void) shell;
     if (line->buffer->cursor <= 0)
         return;
-    (void) shell;
     if (asprintf2(&new_input_user, "%s%s", begin, end) == -1)
         return;
     line->buffer->content = new_input_user;

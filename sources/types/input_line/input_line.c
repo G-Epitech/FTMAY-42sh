@@ -19,13 +19,12 @@ static int input_line_read_key(void)
     int character = getchar();
 
     character = input_line_get_character(character);
-    if (character >= CTRL_KEY_REF) {
+    if (character >= CTRL_KEY_REF)
         return character;
-    } else if (iscntrl(character)) {
+    else if (iscntrl(character))
         return input_line_get_cntrls(character);
-    } else {
+    else
         return character;
-    }
 }
 
 static void call_function(input_line_t *line,

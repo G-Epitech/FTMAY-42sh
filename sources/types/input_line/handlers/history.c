@@ -12,7 +12,7 @@
 
 static void replace_buffer_content(input_line_t *line, char *str)
 {
-    int len = strlen(str);
+    size_t len = strlen(str);
 
     line->buffer->cursor = len;
     line->buffer->len = len;
