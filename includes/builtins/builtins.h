@@ -11,6 +11,8 @@
     #include "types/args/defs.h"
     #include "types/shell/defs.h"
 
+typedef struct s_cmd cmd_t;
+
 /**
  * @brief Handle exit builtin command.
  * @param args Arguments object of the command
@@ -82,6 +84,37 @@ int builtin_var(args_t *args, shell_t *shell);
  * @return Exit code of the builtin
  */
 int builtin_which(args_t *args, shell_t *shell);
+
+/**
+ * @brief Handle where builtin command.
+ * @param args Arguments of the command
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
+int builtin_where(args_t *args, shell_t *shell);
+
+/**
+ * @brief Handle where command are storage.
+ * @param cmd The command to find
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
+bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell);
+
+/**
+ * @brief Get the path of the command.
+ * @param dir The directory of command
+ * @param name Name of command
+ * @return The path of the command
+ */
+char *builtin_where_get_path(char *dir, char *name);
+
+/**
+ * @brief Determine if the path cmd is system.
+ * @param path Path of command
+ * @return true if cmd is system else false
+ */
+bool builtin_where_is_system(char *path);
 
 /**
  * @brief Handle history builtin command.

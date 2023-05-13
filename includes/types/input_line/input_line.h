@@ -23,9 +23,10 @@ struct termios *default_tty);
 /**
  * @brief Disable on the tty raw mode.
  * @param default_tty Structure default tty
+ * @param new_line true if new line else false
  * @return Status of success
  */
-bool input_line_disable_raw_mode(struct termios *default_tty);
+bool input_line_disable_raw_mode(struct termios *default_tty, bool new_line);
 
 /**
  * @brief Create struct for user input.
