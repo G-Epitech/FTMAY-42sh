@@ -47,7 +47,7 @@ Test(execution_inst_launch_tests, launch_direct_non_fork, .init=cr_redirect_stdo
 Test(execution_inst_launch_tests, launch_fork, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
-    inst_t *block = parsing_get_main_block("echo HELLO_IN_UPPER");
+    inst_t *block = parsing_get_main_block("/bin/echo HELLO_IN_UPPER");
     inst_t *inst = NODE_DATA_TO_PTR(block->value.block->instructions->first->data, inst_t *);
     node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
     exec_utils_t utils;

@@ -27,6 +27,7 @@ static const builtin_t builtins_cmds[] = {
     {"unset", &builtin_unset},
     {"@", &builtin_var},
     {"which", &builtin_which},
+    {"echo", &builtin_echo},
     {"where", &builtin_where},
     {NULL, NULL}
 };

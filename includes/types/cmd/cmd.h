@@ -47,6 +47,12 @@ int cmd_set_args_get_len_input(char *input, int start);
  */
 int cmd_set_args_get_len_input_string(char *input, int start);
 
+/**
+ * @brief Get new value for a reverse solidus.
+ * @param character Character that you want to replace
+ * @return char New replace character
+ */
+char cmd_get_new_value(char character);
 
 /**
  * @brief Determine if target is builtin and set it if so.
