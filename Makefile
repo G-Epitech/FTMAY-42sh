@@ -43,6 +43,7 @@ _SRC =			mysh/mysh.c \
 				types/cmd/target/empty.c \
 				types/cmd/args/get_len.c \
 				types/cmd/args/set_args.c \
+				types/cmd/args/get_new_value.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -84,7 +85,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
-        types/shell/vars/vars.c \
+        		types/shell/vars/vars.c \
 				types/shell/vars/special/std.c \
 				types/shell/vars/special/init.c \
 				types/shell/vars/special/home.c \
