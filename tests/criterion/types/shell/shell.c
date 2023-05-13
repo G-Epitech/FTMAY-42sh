@@ -79,7 +79,7 @@ Test(exit_shell, shell_exit_tty_off, .init=cr_redirect_stdout)
     shell->is_tty = false;
     shell_exit(shell);
     fflush(stdout);
-    cr_assert_stdout_eq_str("exit\n");
+    cr_assert_stdout_eq_str("");
     cr_assert_eq(shell->status, SH_EXITED);
     shell_free(shell);
 }
