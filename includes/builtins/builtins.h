@@ -93,10 +93,27 @@ int builtin_which(args_t *args, shell_t *shell);
  */
 int builtin_where(args_t *args, shell_t *shell);
 
+/**
+ * @brief Handle where command are storage.
+ * @param cmd The command to find
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
 bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell);
 
+/**
+ * @brief Get the path of the command.
+ * @param dir The directory of command
+ * @param name Name of command
+ * @return The path of the command
+ */
 char *get_path(char *dir, char *name);
 
+/**
+ * @brief Determine if the path cmd is system
+ * @param path Path of command
+ * @return true if cmd is system else false
+ */
 bool is_system(char *path);
 
 #endif /* !BUILTINS_H_ */
