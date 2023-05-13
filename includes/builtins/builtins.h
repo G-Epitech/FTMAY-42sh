@@ -107,14 +107,14 @@ bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell);
  * @param name Name of command
  * @return The path of the command
  */
-char *get_path(char *dir, char *name);
+char *builtin_where_get_path(char *dir, char *name);
 
 /**
  * @brief Determine if the path cmd is system
  * @param path Path of command
  * @return true if cmd is system else false
  */
-bool is_system(char *path);
+bool builtin_where_is_system(char *path);
 
 /**
  * @brief Handle history builtin command.
