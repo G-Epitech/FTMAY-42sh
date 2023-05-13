@@ -27,9 +27,9 @@ suite.addTest(test)
 test = Test("Several parentheses with pipes", "echo \"(cat Makefile | grep s) | (cat -e | wc -l)\" | {shell}")
 suite.addTest(test)
 
-# test = Test("Several parentheses in parenthesis",
-#             "echo \"echo super_content > file.tmp; (cat Makefile | (grep > file.tmp) && echo salut) | (cat -e | wc -l) && echo end of command\" | {shell}")
-# suite.addTest(test)
+test = Test("Several parentheses in parenthesis",
+            "echo \"echo super_content > file.tmp; (cat Makefile | (grep > file.tmp) && echo salut) | (cat -e | wc -l) && echo end of command\" | {shell}")
+suite.addTest(test)
 
 test = Test("Several parentheses in parenthesis with error",
             "echo \"echo super_content > file.tmp; (cat Makefile | (grep < file.tmp) && echo salut)\" | {shell}")

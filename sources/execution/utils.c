@@ -19,6 +19,7 @@ exec_caller_t caller)
     utils->pipe[0] = -1;
     utils->pipe[1] = -1;
     utils->status = 0;
+    utils->sub_status = 0;
     if (caller == EXEC_SIBLING) {
         utils->level = herited->level + 1;
     } else if (caller == EXEC_SUPERIOR) {
