@@ -21,6 +21,9 @@ _SRC =			mysh/mysh.c \
 				builtins/var.c \
 				builtins/history.c \
 				builtins/which.c \
+				builtins/where/where.c \
+				builtins/where/utils.c \
+				builtins/where/determine_targets.c \
 				\
 				errors/get.c \
 				errors/strerror.c \
@@ -221,6 +224,8 @@ _TESTS =		criterion/types/list.c \
 				criterion/types/input_lines/iscntrl.c \
 				criterion/types/input_lines/keypress.c \
 				criterion/types/input_lines/display_cursor.c \
+				\
+				criterion/builtins/where.c \
 				\
 
 SRCDIR = 		sources/

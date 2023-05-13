@@ -30,10 +30,11 @@ struct termios *default_tty)
     return true;
 }
 
-bool input_line_disable_raw_mode(struct termios *default_tty)
+bool input_line_disable_raw_mode(struct termios *default_tty, bool new_line)
 {
     if (tcsetattr(STDIN_FILENO, TCSANOW, default_tty) == -1)
         return false;
-    printf("\n");
+    if (new_line)
+        printf("\n");
     return true;
 }

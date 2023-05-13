@@ -57,7 +57,7 @@ Test(new_struct, bad_new_struct)
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
 }
 
-Test(test_thermios, enable_disable)
+Test(test_thermios, enable_disable, .init=cr_redirect_stdout)
 {
     input_line_t *user_input = input_line_new();
     struct termios default_settings;
@@ -66,6 +66,6 @@ Test(test_thermios, enable_disable)
 
     test_enable = input_line_enable_raw_mode(user_input, &default_settings);
     cr_assert_eq(test_enable, false);
-    test_disable = input_line_disable_raw_mode(&default_settings);
+    test_disable = input_line_disable_raw_mode(&default_settings, true);
     cr_assert_eq(test_disable, false);
 }
