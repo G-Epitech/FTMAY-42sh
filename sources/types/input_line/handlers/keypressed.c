@@ -21,6 +21,15 @@ void input_line_keypressed_d(shell_t *shell, input_line_t *line)
     shell->status = SH_EXITED;
 }
 
+void input_line_keypressed_c(shell_t *shell, input_line_t *line)
+{
+    (void) shell;
+    (void) line;
+    //printf("%s\r\n", line->buffer->content);
+    line->buffer->content = "";
+    line->status = IL_EXITED;
+}
+
 void input_line_keypressed_a(shell_t *shell, input_line_t *line)
 {
     int y = 0;

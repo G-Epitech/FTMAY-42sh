@@ -49,7 +49,7 @@ void input_line_history_next(shell_t *shell, input_line_t *line)
     }
     if (!selected)
         return;
-    line->buffer->content = selected->input;
+    line->buffer->content = strdup(selected->input);
     replace_buffer_content(line, selected->input);
     refresh_screen(line);
 }
