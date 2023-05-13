@@ -93,7 +93,7 @@ int builtin_which(args_t *args, shell_t *shell);
  */
 int builtin_where(args_t *args, shell_t *shell);
 
-bool cmd_determine_targets(cmd_t *cmd, shell_t *shell);
+bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell);
 
 char *get_path(char *dir, char *name);
 

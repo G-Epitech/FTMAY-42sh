@@ -51,14 +51,16 @@ static bool cmd_determine_targets_is_system(cmd_t *cmd, shell_t *shell)
     return is_found;
 }
 
-bool cmd_determine_targets(cmd_t *cmd, shell_t *shell)
+bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell)
 {
     int find = false;
 
     if (cmd_determine_target_is_empty(cmd))
         find = true;
-    if (cmd_determine_target_is_builtin(cmd, shell))
+    if (cmd_determine_target_is_builtin(cmd, shell)) {
+        fprintf(stdout, "%s is a shell built-in\n", cmd->input);
         find = true;
+    }
     if (cmd_determine_targets_is_system(cmd, shell))
         find = true;
     if (cmd_determine_target_is_absolute(cmd))

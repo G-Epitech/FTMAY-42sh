@@ -30,14 +30,22 @@ static bool find_paths_command(char *command, shell_t *shell)
     cmd->input = strdup(command);
     if (!cmd_set_args(cmd, shell))
         return false;
-    if (!cmd_determine_targets(cmd, shell) || cmd->type == CMD_NULL ||
-    cmd->type == CMD_EMPTY)
+    if (!builtin_where_determine_targets(cmd, shell) || cmd->type == CMD_NULL ||
+    cmd->type == CMD_EMPTY) {
         return false;
-    if (cmd->type == CMD_BUILTIN) {
-        printf("%s is a shell built-in\n", command);
-        return true;
     }
     return true;
+}
+
+static bool contain_slash(char *cmd)
+{
+    for (size_t index = 0; index < strlen(cmd); index++) {
+        if (cmd[index] == '/') {
+            fprintf(stderr, "where: / in command makes no sense\n");
+            return true;
+        }
+    }
+    return false;
 }
 
 int builtin_where(args_t *args, shell_t *shell)
@@ -51,10 +59,14 @@ int builtin_where(args_t *args, shell_t *shell)
         return SHELL_EXIT_ERROR;
     }
     for (size_t i = 1; i < (size_t) args->argc; i++) {
-        if (!find_paths_command(args->argv[i], shell) &&
-        status == SHELL_EXIT_SUCCESS)
+        if (contain_slash(args->argv[i])) {
             status = SHELL_EXIT_ERROR;
+            continue;
+        }
+        if (!find_paths_command(args->argv[i], shell) &&
+        status == SHELL_EXIT_SUCCESS) {
+            status = SHELL_EXIT_ERROR;
+        }
     }
     return status;
-    return 0;
 }
