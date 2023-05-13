@@ -53,7 +53,7 @@ void execution_inst_wait_main_fork(pid_t pid, exec_utils_t *utils)
         signaler = wait(&status);
         if (signaler == pid)
             utils->status = status;
-        if (signaler == pid && status && signaler != SHELL_EXIT_SUCCESS)
+        if (signaler != pid && signaler != 0 && status)
             utils->sub_status = status;
     }
     if (utils->status == SHELL_EXIT_SUCCESS)
