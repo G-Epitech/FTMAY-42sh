@@ -15,10 +15,11 @@ int builtin_exit(args_t *args, shell_t *shell)
 {
     if (!args)
         return SHELL_EXIT_ERROR;
+    shell->exit_in = 0;
     if (args->argc == 1) {
         shell->status = SH_EXITED;
         if (shell->is_tty)
-            shell_exit(shell);
+            printf("exit\n");
         return SHELL_EXIT_SUCCESS;
     }
     if (args->argc != 2 || !is_number(args->argv[1])) {
@@ -26,7 +27,7 @@ int builtin_exit(args_t *args, shell_t *shell)
         return SHELL_EXIT_ERROR;
     }
     if (shell->is_tty)
-        shell_exit(shell);
+        printf("exit\n");
     shell->status = SH_EXITED;
     return atoi(args->argv[1]);
 }
