@@ -14,29 +14,35 @@
 #include "execution/defs.h"
 #include "parsing/parsing.h"
 #include "types/node/node.h"
+#include "utils/asprintf2.h"
 #include "types/inst/inst.h"
 #include "types/shell/shell.h"
 #include "execution/execution.h"
 
 Test(execution_cmd_launch_tests, basic_system, .init=cr_redirect_stdout)
 {
+    char path[PATH_MAX];
+    char *pwd = NULL;
     shell_t *shell = shell_new(builtins_cmds);
     cmd_t *command = cmd_new();
     inst_t *inst = inst_new();
     node_t *node = NULL;
     exec_utils_t utils;
 
+    getcwd(path, PATH_MAX);
+    asprintf2(&pwd, "%s\n", path);
     inst->type = INS_CMD;
     inst->value.cmd = command;
-    command->input = strdup("echo 12");
+    command->input = strdup("pwd");
     node = node_new(NODE_DATA_FROM_PTR(inst));
     execution_utils_init(&utils, NULL, EXEC_MAIN);
     execution_cmd_prepare(node, shell);
     execution_cmd_launch(node, shell, &utils);
-    cr_assert_stdout_eq_str("12\n");
+    cr_assert_stdout_eq_str(pwd);
     inst_free(inst);
     node_free(node, NULL);
     shell_free(shell);
+    free(pwd);
 }
 
 Test(execution_cmd_launch_tests, basic_builtin)
@@ -78,27 +84,6 @@ Test(execution_cmd_launch_tests, basic_absolute, .init=cr_redirect_stdout)
     inst->type = INS_CMD;
     inst->value.cmd = command;
     command->input = strdup("/bin/echo 12");
-    node = node_new(NODE_DATA_FROM_PTR(inst));
-    execution_utils_init(&utils, NULL, EXEC_MAIN);
-    execution_cmd_prepare(node, shell);
-    execution_cmd_launch(node, shell, &utils);
-    cr_assert_stdout_eq_str("12\n");
-    inst_free(inst);
-    node_free(node, NULL);
-    shell_free(shell);
-}
-
-Test(execution_cmd_launch_tests, null_instruction, .init=cr_redirect_stdout)
-{
-    shell_t *shell = shell_new(builtins_cmds);
-    cmd_t *command = cmd_new();
-    inst_t *inst = inst_new();
-    node_t *node = NULL;
-    exec_utils_t utils;
-
-    inst->type = INS_CMD;
-    inst->value.cmd = command;
-    command->input = strdup("echo 12");
     node = node_new(NODE_DATA_FROM_PTR(inst));
     execution_utils_init(&utils, NULL, EXEC_MAIN);
     execution_cmd_prepare(node, shell);

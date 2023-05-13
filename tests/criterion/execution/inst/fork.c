@@ -37,7 +37,7 @@ Test(execution_inst_fork_nedeed_tests, simple_builtin, .init=cr_redirect_stdout)
 Test(execution_inst_fork_nedeed_tests, simple_system, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
-    inst_t *block = parsing_get_main_block("echo 12");
+    inst_t *block = parsing_get_main_block("ls");
     inst_t *inst = NODE_DATA_TO_PTR(block->value.block->instructions->first->data, inst_t *);
     node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
     exec_utils_t utils;
@@ -133,6 +133,7 @@ Test(execution_inst_fork_nedeed_tests, launch_fork_block, .init=cr_redirect_stdo
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
     execution_inst_launch_fork(node, shell, &utils);
     cr_assert(WEXITSTATUS(utils.status) == 0);
+    fflush(stdout);
     cr_assert_stdout_eq_str("SUPERCOOL\n");
     shell_free(shell);
     inst_free(block);
@@ -151,6 +152,7 @@ Test(execution_inst_fork_nedeed_tests, launch_fork_cmd, .init=cr_redirect_stdout
     execution_utils_init(&utils, NULL, EXEC_SUPERIOR);
     execution_inst_launch_fork(node, shell, &utils);
     cr_assert(WEXITSTATUS(utils.status) == 0);
+    fflush(stdout);
     cr_assert_stdout_eq_str("SUPERCOOL\n");
     shell_free(shell);
     inst_free(block);

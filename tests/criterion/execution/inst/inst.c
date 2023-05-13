@@ -41,6 +41,7 @@ Test(execution_inst_tests, simple_blocks, .init=cr_redirect_stdout)
 
     execution_inst(node, shell, NULL, EXEC_SUPERIOR);
     cr_assert(shell->exit_code == SHELL_EXIT_SUCCESS);
+    fflush(stdout);
     cr_assert_stdout_eq_str("hello$\nworld$\n");
     shell_free(shell);
     inst_free(block);
@@ -81,7 +82,7 @@ Test(execution_inst_tests, node_with_none_inst, .init=cr_redirect_stdout)
 Test(execution_inst_tests, simple_absolute_cmd, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
-    inst_t *block = parsing_get_main_block("echo test");
+    inst_t *block = parsing_get_main_block("/bin/echo test");
     inst_t *inst = NODE_DATA_TO_PTR(block->value.block->instructions->first->data, inst_t *);
     node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
 

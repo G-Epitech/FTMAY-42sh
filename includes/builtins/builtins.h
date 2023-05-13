@@ -91,4 +91,12 @@ int builtin_which(args_t *args, shell_t *shell);
  */
 int builtin_history(args_t *args, shell_t *shell);
 
+/**
+ * @brief Print given arguments on standard output.
+ * @param args Arguments of the command
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
+int builtin_echo(args_t *args, shell_t *shell);
+
 #endif /* !BUILTINS_H_ */
