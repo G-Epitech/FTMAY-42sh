@@ -55,10 +55,10 @@ static void get_terminal_size(int *rows, int *columns)
 void input_line_get_content(input_line_t *line, shell_t *shell)
 {
     int character = 0;
-    int x = 0;
 
     printf("\033[6n");
-    scanf("\033[%d;%dR", &line->buffer->rows_start_cursor, &x);
+    scanf("\033[%d;%dR", &line->buffer->rows_start_cursor,
+    &line->buffer->index_start_cmd);
     while (line->status == IL_RUNNING) {
         get_terminal_size(&line->buffer->term_size->nb_rows,
         &line->buffer->term_size->nb_cols);
