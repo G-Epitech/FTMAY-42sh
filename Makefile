@@ -13,6 +13,7 @@ _SRC =			mysh/mysh.c \
 				\
 				builtins/cd.c \
 				builtins/env.c \
+				builtins/echo.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
@@ -151,7 +152,9 @@ _SRC =			mysh/mysh.c \
 				execution/execution.c \
 				execution/utils.c \
 
-_TESTS =		criterion/types/list.c \
+_TESTS =		criterion/main.c \
+				\
+				criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/io.c \
 				criterion/types/ios.c \
@@ -177,6 +180,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
 				criterion/builtins/cd.c \
+				criterion/builtins/echo.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
 				criterion/builtins/set.c \

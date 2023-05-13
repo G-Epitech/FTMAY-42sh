@@ -27,7 +27,7 @@ Test(execution_cmd_absolute_tests, basic_system, .init = cr_redirect_stdout)
     int status = 0;
     pid_t pid = 0;
 
-    cmd->input = strdup("echo hello world");
+    cmd->input = strdup("/bin/echo hello world");
     cmd_set_args(cmd, shell);
     cmd_determine_target(cmd, shell);
     cmd->type = CMD_ABSOLUTE;

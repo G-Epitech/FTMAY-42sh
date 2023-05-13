@@ -20,6 +20,7 @@ Test(execution_tests, basic, .init=cr_redirect_stdout)
     inst_t *block = parsing_get_main_block("echo salut");
 
     cr_assert(execution_main_block(block, shell));
+    fflush(stdout);
     cr_assert_stdout_eq_str("salut\n");
     inst_free(block);
     shell_free(shell);
