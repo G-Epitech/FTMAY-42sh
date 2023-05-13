@@ -116,4 +116,12 @@ char *get_path(char *dir, char *name);
  */
 bool is_system(char *path);
 
+/**
+ * @brief Handle history builtin command.
+ * @param args Arguments of the command
+ * @param shell Shell object
+ * @return Exit code of the builtin
+ */
+int builtin_history(args_t *args, shell_t *shell);
+
 #endif /* !BUILTINS_H_ */

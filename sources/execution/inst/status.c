@@ -14,11 +14,15 @@
 
 static void handle_signaled_status(inst_t *inst, int status)
 {
+    char *msg = errors_strsignal(WTERMSIG(status));
+
     inst->exit_code = EXECUTION_SIG_EXITCODE(status);
-    fprintf(stderr, "%s", errors_strsignal(WTERMSIG(status)));
-    if (WCOREDUMP(status))
+    if (msg)
+        fprintf(stderr, "%s", msg);
+    if (msg && WCOREDUMP(status))
         fprintf(stderr, " (core dumped)");
-    fprintf(stderr, "\n");
+    if (msg)
+        fprintf(stderr, "\n");
 }
 
 static void handle_exited_status(inst_t *inst, int status)

@@ -21,27 +21,6 @@
 #include "execution/execution.h"
 #include "execution/redirections.h"
 
-static struct rlimit limit;
-static bool limit_set = false;
-static struct rlimit default_limit;
-
-static void set_core_dump_mode()
-{   
-    if (!limit_set) {
-        getrlimit(RLIMIT_CORE, &default_limit);
-        getrlimit(RLIMIT_CORE, &limit);
-        limit.rlim_cur = limit.rlim_max;
-        setrlimit(RLIMIT_CORE, &limit);
-        limit_set = true;
-    }
-}
-
-static void reset_core_dump_mode()
-{   
-    limit_set = false;
-    setrlimit(RLIMIT_CORE, &default_limit);
-}
-
 Test(execution_handle_status_tests, simple_command,
 .init=cr_redirect_stdout)
 {
@@ -96,9 +75,8 @@ Test(execution_handle_status_tests, simple_signal, .init=cr_redirect_stderr)
 
 Test(execution_handle_status_tests, with_core_dump, .init=cr_redirect_stderr)
 {
-    set_core_dump_mode();
     shell_t *shell = shell_new(builtins_cmds);
-    inst_t *block = parsing_get_main_block("./tests/utils/my_sig.out 11");
+    inst_t *block = parsing_get_main_block("./tests/utils/my_sig.out 11 true");
     inst_t *inst = NODE_DATA_TO_PTR(block->value.block->instructions->first->data, inst_t *);
     node_t *node = node_new(NODE_DATA_FROM_PTR(inst));
     int sig = SIGSEGV;
@@ -111,7 +89,6 @@ Test(execution_handle_status_tests, with_core_dump, .init=cr_redirect_stderr)
     cr_assert(execution_inst_handle_status(inst, &utils));
     cr_assert(inst->exit_code == EXECUTION_SIG_EXITCODE(sig));
     cr_assert_stderr_eq_str("Segmentation fault (core dumped)\n");
-    reset_core_dump_mode();
 }
 
 Test(execution_handle_status_tests, with_null_inst, .init=cr_redirect_stderr)

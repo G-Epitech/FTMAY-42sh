@@ -44,6 +44,22 @@ exec_utils_t *utils)
     exit(utils->status);
 }
 
+void execution_inst_wait_main_fork(pid_t pid, exec_utils_t *utils)
+{
+    int status = 0;
+    pid_t signaler = 0;
+
+    while (pid != signaler) {
+        signaler = wait(&status);
+        if (signaler == pid)
+            utils->status = status;
+        if (signaler != pid && signaler != 0 && status)
+            utils->sub_status = status;
+    }
+    if (utils->status == SHELL_EXIT_SUCCESS)
+        utils->status = utils->sub_status;
+}
+
 void execution_inst_launch_fork(node_t *node_inst, shell_t *shell,
 exec_utils_t *utils)
 {
@@ -56,7 +72,7 @@ exec_utils_t *utils)
     } else {
         execution_inst_set_parent_fd(inst, utils);
         if (utils->level == 0)
-            waitpid(pid, &utils->status, 0);
+            execution_inst_wait_main_fork(pid, utils);
     }
     execution_inst_close_fd(utils);
 }

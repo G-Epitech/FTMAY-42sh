@@ -22,6 +22,7 @@ static const builtin_t builtins_cmds[] = {
     {"env", &builtin_env},
     {"setenv", &builtin_setenv},
     {"unsetenv", &builtin_unsetenv},
+    {"history", &builtin_history},
     {"set", &builtin_set},
     {"unset", &builtin_unset},
     {"@", &builtin_var},

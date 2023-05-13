@@ -13,7 +13,7 @@
 #include "types/shell/defs.h"
 #include "types/history/history.h"
 
-inst_t *mysh_parse(char *input, shell_t *shell)
+inst_t *mysh_parse(shell_t *shell, char *input)
 {
     size_t len = input ? strlen(input) : 0;
 

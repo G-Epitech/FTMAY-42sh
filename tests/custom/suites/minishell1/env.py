@@ -15,5 +15,8 @@ global suite
 
 suite = TestSuite("env")
 
-simpleenv = Test("Simple env command", "echo \"env\" | {shell}")
+simpleenv = Test("Simple env command", "echo \"echo 'env'\" | {shell} | tcsh")
+suite.addTest(simpleenv)
+
+simpleenv = Test("Simple cleared env", "echo \"echo 'env'\" | {shell} | env -i tcsh")
 suite.addTest(simpleenv)
