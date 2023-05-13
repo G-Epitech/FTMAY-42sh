@@ -41,6 +41,7 @@ typedef struct s_shell_io {
 // Represent a shell
 typedef struct s_shell {
     int exit_code;              // Last exit code of shell
+    int exit_in;                // Counter before exit if ignoreeof is set
     shell_status_t status;      // Shell current status
     bool is_tty;                // Specify if shell is in TTY mode
     list_t *vars;               // Shell variables (list of var_t)
