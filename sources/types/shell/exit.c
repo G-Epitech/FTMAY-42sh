@@ -31,7 +31,7 @@ void shell_exit(shell_t *shell)
     if (!ignoreeof || shell->status == SH_EXITED)
         return exit_shell(shell);
     else if (shell->exit_in > 0) {
-        printf("\r\nUse \"exit\" to leave tcsh.");
+        printf("\nUse \"exit\" to leave tcsh.");
     } else
         return exit_shell(shell);
 }
