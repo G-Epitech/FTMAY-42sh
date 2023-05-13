@@ -30,6 +30,7 @@ typedef struct s_exec_utils {
     int fd_my[2];       // File descriptors created by current command
     int level;          // Recursivity proof
     int status;         // Status code of current execution
+    int sub_status;     // Status code of sub process
     int pipe[2];        // Pipe for input
 } exec_utils_t;
 
