@@ -29,8 +29,8 @@
     #define PARSING_NO_ERROR_SEPARATOR 1
     #define PARSING_NO_ERROR_RECURSIVITY 1
     #define PARSING_ERROR_SEPARATOR 2
-    #define PARSING_SPECIAL_CHAR "abefnrtv"
-    #define PARSING_SPECIAL_REPLACE "\a\b\e\f\n\r\t\v"
+    #define PARSING_SPECIAL_CHAR "abefnrtv\""
+    #define PARSING_SPECIAL_REPLACE "\a\b\e\f\n\r\t\v\""
 
 // Struct of limit of a word.
 typedef struct s_index_word {

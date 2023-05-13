@@ -17,7 +17,7 @@ import suites.minishell2.complex as minishell2Complex
 import suites.parenthesis as parenthesis
 import suites.operators as operators
 import suites.complexes as complexes
-import suites.inhibitors as inhibitors
+import suites.builtins.echo as echo
 
 if __name__ == '__main__':
     tester = Tester()
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     tester.addSuite(parenthesis.suite)
     tester.addSuite(operators.suite)
     tester.addSuite(complexes.suite)
-    tester.addSuite(inhibitors.suite)
+    tester.addSuite(echo.suite)
 
     if tester.execute():
         exit(0)
