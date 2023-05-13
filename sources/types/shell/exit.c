@@ -11,17 +11,15 @@
 
 static void exit_shell(shell_t *shell)
 {
-    if (shell->status == SH_EXITED)
-        printf("exit\n");
-    else
-        shell->status = SH_EXITED;
+    printf("exit\n");
+    shell->status = SH_EXITED;
 }
 
 void shell_exit(shell_t *shell)
 {
     char *ignoreeof = NULL;
 
-    if (shell->is_tty != true)
+    if (shell->is_tty == false)
         return exit_shell(shell);
     ignoreeof = shell_get_var(shell, "ignoreeof", false);
     if (ignoreeof)
