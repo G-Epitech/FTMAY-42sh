@@ -11,7 +11,8 @@
 
 static void exit_shell(shell_t *shell)
 {
-    printf("exit\n");
+    if (shell->is_tty == true)
+        printf("exit\n");
     shell->status = SH_EXITED;
 }
 
