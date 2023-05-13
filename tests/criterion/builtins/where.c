@@ -144,8 +144,10 @@ Test(builtins_where_test, arg_slash)
     args->argv[2] = strdup("/");
     args->argv[3] = strdup("ss");
     fflush(stdout);
+    fflush(stderr);
     cr_assert_eq(builtin_where(args, shell), SHELL_EXIT_ERROR);
     fflush(stdout);
+    fflush(stderr);
     cr_assert_stderr_eq_str("where: / in command makes no sense\n");
     cr_assert_stdout_eq_str("/usr/bin/wc\n/bin/wc\n/usr/sbin/ss\n");
 }
