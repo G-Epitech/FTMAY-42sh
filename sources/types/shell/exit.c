@@ -13,10 +13,8 @@ static void exit_shell(shell_t *shell)
 {
     if (shell->status == SH_EXITED)
         printf("exit\n");
-    else {
+    else
         shell->status = SH_EXITED;
-        printf("exit");
-    }
 }
 
 void shell_exit(shell_t *shell)
@@ -28,10 +26,12 @@ void shell_exit(shell_t *shell)
     ignoreeof = shell_get_var(shell, "ignoreeof", false);
     if (ignoreeof)
         shell->exit_in--;
-    if (!ignoreeof || shell->status == SH_EXITED)
+    if (!ignoreeof || (shell->status == SH_EXITED && shell->exit_in == 0))
         return exit_shell(shell);
     else if (shell->exit_in > 0) {
-        printf("\nUse \"exit\" to leave tcsh.");
-    } else
+        shell->status = SH_RUNNING;
+        printf("\nUse \"exit\" to leave tcsh.\n");
+    } else {
         return exit_shell(shell);
+    }
 }
