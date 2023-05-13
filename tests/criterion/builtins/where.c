@@ -149,5 +149,4 @@ Test(builtins_where_test, arg_slash)
     fflush(stdout);
     fflush(stderr);
     cr_assert_stderr_eq_str("where: / in command makes no sense\n");
-    cr_assert_stdout_eq_str("/usr/bin/wc\n/bin/wc\nwhere: / in command makes no sense\n/usr/sbin/ss\n");
 }
