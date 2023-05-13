@@ -31,7 +31,7 @@ static char *clear_dir(char *dir)
     return dir;
 }
 
-char *get_path(char *dir, char *name)
+char *builtin_where_get_path(char *dir, char *name)
 {
     char *path = NULL;
 
@@ -43,7 +43,7 @@ char *get_path(char *dir, char *name)
     return path;
 }
 
-bool is_system(char *path)
+bool builtin_where_is_system(char *path)
 {
     struct stat target;
 

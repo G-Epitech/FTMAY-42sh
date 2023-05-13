@@ -16,13 +16,13 @@
 #include <criterion/redirect.h>
 #include "utils/utils.h"
 #include "types/cmd/cmd.h"
+#include "builtins/defs.h"
 #include "types/cmd/defs.h"
 #include "utils/asprintf2.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
 #include "types/shell/shell.h"
 #include "builtins/builtins.h"
-#include "builtins/defs.h"
 
 Test(builtins_where_test, test_is_system, .init=cr_redirect_stdout)
 {

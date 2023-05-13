@@ -38,8 +38,8 @@ static bool cmd_determine_targets_is_system(cmd_t *cmd, shell_t *shell)
         return false;
     dir = strtok(dirs, ":");
     while (dir) {
-        path = get_path(dir, cmd->name);
-        if (is_system(path))
+        path = builtin_where_get_path(dir, cmd->name);
+        if (builtin_where_is_system(path))
             dir = path_is_found(cmd, &is_found, path);
         else
             dir = strtok(NULL, ":");

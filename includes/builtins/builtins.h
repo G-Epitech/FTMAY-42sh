@@ -110,7 +110,7 @@ bool builtin_where_determine_targets(cmd_t *cmd, shell_t *shell);
 char *builtin_where_get_path(char *dir, char *name);
 
 /**
- * @brief Determine if the path cmd is system.
+ * @brief Determine if the path cmd is system
  * @param path Path of command
  * @return true if cmd is system else false
  */
