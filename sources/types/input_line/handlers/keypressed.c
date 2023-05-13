@@ -25,7 +25,6 @@ void input_line_keypressed_c(shell_t *shell, input_line_t *line)
 {
     (void) shell;
     (void) line;
-    //printf("%s\r\n", line->buffer->content);
     line->buffer->content = "";
     line->status = IL_EXITED;
 }
