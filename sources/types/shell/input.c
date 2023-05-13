@@ -36,7 +36,9 @@ static char *shell_get_input_tty(shell_t *shell)
         return NULL;
     input_line_enable_raw_mode(user_input, &default_settings);
     input_line_get_content(user_input, shell);
-    input_line_disable_raw_mode(&default_settings);
+    input_line_disable_raw_mode(&default_settings, shell->status != SH_EXITED);
+    if (shell->status == SH_EXITED)
+        shell_exit(shell);
     input = user_input->buffer->content;
     input_line_free(user_input);
     return input;
