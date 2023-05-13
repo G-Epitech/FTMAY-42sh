@@ -39,6 +39,7 @@ typedef struct s_terminale_size {
 typedef struct s_input_line_buffer {
     size_t len;                     // Len of the user input
     size_t cursor;                  // Pos in x of the cursor on the content
+    int index_start_cmd;            // Pos where line edition begin
     int rows_start_cursor;          // Pos y of the curs at the start of command
     termine_size_t *term_size;      // Sizes of terminal
     size_t history_cursor;          // Pos in x of the cursor on the history
