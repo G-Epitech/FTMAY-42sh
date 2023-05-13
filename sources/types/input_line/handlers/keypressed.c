@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "types/shell/shell.h"
 #include "types/input_line/defs.h"
 
 void input_line_keypressed_enter(shell_t *shell, input_line_t *line)
@@ -18,7 +19,7 @@ void input_line_keypressed_enter(shell_t *shell, input_line_t *line)
 void input_line_keypressed_d(shell_t *shell, input_line_t *line)
 {
     line->status = IL_EXITED;
-    shell->status = SH_EXITED;
+    shell_exit(shell);
 }
 
 void input_line_keypressed_a(shell_t *shell, input_line_t *line)
