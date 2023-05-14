@@ -8,9 +8,9 @@
 #include <string.h>
 #include "mysh/mysh.h"
 #include "types/inst/inst.h"
+#include "utils/asprintf2.h"
 #include "types/shell/shell.h"
 #include "execution/execution.h"
-#include "utils/asprintf2.h"
 
 bool mysh_execute(char *input, inst_t *block, shell_t *shell)
 {
