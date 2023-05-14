@@ -49,7 +49,7 @@ Test(builtins_which, multi_args, .init=cr_redirect_stdout) {
     shell_free(shell);
 }
 
-Test(builtins_which, bad_args_not_command, .init=cr_redirect_stderr) {
+Test(builtins_which, bad_args_not_command, .init=cr_redirect_stdout) {
     char *argv[] = {"which", "not_command"};
     args_t args = {.argc = 2, .argv = argv};
     shell_t *shell = shell_new(builtins_cmds);
@@ -57,6 +57,7 @@ Test(builtins_which, bad_args_not_command, .init=cr_redirect_stderr) {
 
     status = builtin_which(&args, shell);
     cr_assert_eq(status, SHELL_EXIT_ERROR);
+    fflush(stdout);
     shell_free(shell);
 }
 
@@ -70,6 +71,7 @@ Test(builtins_which, bad_malloc, .init=cr_redirect_stdout) {
     status = builtin_which(&args, shell);
     cr_assert_eq(status, SHELL_EXIT_ERROR);
     malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_NORMAL);
+    fflush(stdout);
     shell_free(shell);
 }
 
@@ -83,5 +85,6 @@ Test(builtins_which, bad_args, .init=cr_redirect_stdout) {
     cr_assert_eq(status, SHELL_EXIT_ERROR);
     status = builtin_which(&args, NULL);
     cr_assert_eq(status, SHELL_EXIT_ERROR);
+    fflush(stdout);
     shell_free(shell);
 }

@@ -108,4 +108,12 @@ int *parsing_index);
  */
 char *shell_format_string_get_no_var(char *input, int start, int end);
 
+/**
+ * @brief Check the format of var
+ * @param input Input of user
+ * @param shell Shell struct
+ * @return true if no error else false
+ */
+bool shell_format_check(shell_t *shell, char *input);
+
 #endif /* !SHELL_H_ */

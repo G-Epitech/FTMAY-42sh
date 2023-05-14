@@ -17,10 +17,9 @@
     #define CHAR_IS_LOWER(c) (c >= 'a' && c <= 'z')
     #define CHAR_IS_ALPHA(c) (CHAR_IS_LOWER(c) || CHAR_IS_UPPER(c))
     #define CHAR_IS_ALPHANUM(c) (CHAR_IS_ALPHA(c) || CHAR_IS_NUM(c))
-    #define CHAR_IS_ALPHA_EXT(c) (CHAR_IS_ALPHA (c) || c == '_' || \
-c == '?')
-    #define CHAR_IS_ALPHANUM_EXT(c) (CHAR_IS_ALPHANUM (c) || c == '_' || \
-c == '?')
+    #define CHAR_IS_SPECIAL(c) (CHAR_IS_ALPHA(c) || CHAR_IS_NUM(c))
+    #define CHAR_IS_ALPHA_EXT(c) (CHAR_IS_ALPHA (c) || c == '_')
+    #define CHAR_IS_ALPHANUM_EXT(c) (CHAR_IS_ALPHANUM (c) || c == '_')
     #define STAT_MODE_XOK(s) ((s & S_IXUSR) || (s & S_IXGRP) || (s & S_IXOTH))
     #define KEY_CTRLS 0x1f
     #define KEY_DEL 0x7f

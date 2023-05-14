@@ -47,7 +47,8 @@ int *parsing_index)
     char *value = NULL;
 
     (*parsing_index)++;
-    while (CHAR_IS_ALPHANUM_EXT(input[*parsing_index]))
+    while (CHAR_IS_ALPHANUM_EXT(input[*parsing_index])
+    || input[*parsing_index] == '?')
         (*parsing_index)++;
     index.end = *parsing_index;
     name = get_name(input, index.start, index.end);

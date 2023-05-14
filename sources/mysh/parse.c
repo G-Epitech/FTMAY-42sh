@@ -11,6 +11,7 @@
 #include "parsing/parsing.h"
 #include "types/inst/inst.h"
 #include "types/shell/defs.h"
+#include "types/shell/shell.h"
 #include "types/history/history.h"
 
 inst_t *mysh_parse(shell_t *shell, char *input)
@@ -21,6 +22,8 @@ inst_t *mysh_parse(shell_t *shell, char *input)
         shell->exit_code = SHELL_EXIT_SUCCESS;
         return NULL;
     }
+    if (!shell_format_check(shell, input))
+        return NULL;
     history_append_entry(shell->history, input);
     return parsing_get_main_block(input);
 }
