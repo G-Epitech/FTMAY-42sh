@@ -9,11 +9,13 @@
 #include "utils/utils.h"
 #include "types/args/defs.h"
 #include "types/shell/defs.h"
+#include "types/shell/shell.h"
 
 int builtin_exit(args_t *args, shell_t *shell)
 {
     if (!args)
         return SHELL_EXIT_ERROR;
+    shell->exit_in = 0;
     if (args->argc == 1) {
         shell->status = SH_EXITED;
         if (shell->is_tty)

@@ -86,7 +86,6 @@ _SRC =			mysh/mysh.c \
 				types/shell/format/format.c \
 				types/shell/format/get_no_var.c \
 				types/shell/format/get_var.c \
-				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
         		types/shell/vars/vars.c \
@@ -100,6 +99,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/shell.c \
 				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
+				types/shell/vars/special/ignoreeof.c \
 				\
 				types/history/new.c \
 				types/history/free.c \
@@ -165,7 +165,6 @@ _TESTS =		criterion/main.c \
 				criterion/types/shell/shell.c \
 				criterion/types/shell/input.c \
 				criterion/types/shell/format.c \
-				criterion/types/shell/io.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
