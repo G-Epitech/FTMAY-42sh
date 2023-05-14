@@ -31,15 +31,6 @@ static bool builtin_setenv_check_name(char *name)
     return true;
 }
 
-static bool builtin_setenv_check_value(char *value)
-{
-    if (strchr(value, '=')) {
-        write(2, "Directory stack not that deep.\n", 31);
-        return false;
-    }
-    return true;
-}
-
 static bool builtin_setenv_prevent_errors(args_t *args)
 {
     if (args->argc != 2 && args->argc != 3) {
@@ -47,8 +38,6 @@ static bool builtin_setenv_prevent_errors(args_t *args)
         return true;
     }
     if (!builtin_setenv_check_name(args->argv[1]))
-        return true;
-    if (args->argc == 3 && !builtin_setenv_check_value(args->argv[2]))
         return true;
     return false;
 }

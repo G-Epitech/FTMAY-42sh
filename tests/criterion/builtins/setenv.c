@@ -164,16 +164,6 @@ Test(builtins_setenv, setenv_bad_var_name10, .init=cr_redirect_stderr) {
     shell_free(shell);
 }
 
-Test(builtins_setenv, setenv_with_bad_value, .init=cr_redirect_stderr) {
-    char *argv[] = {"setenv", "var", "=hello"};
-    args_t args = {.argc = 3, .argv = argv};
-    shell_t *shell = shell_new(builtins_cmds);
-
-    cr_assert(builtin_setenv(&args, shell) == SHELL_EXIT_ERROR);
-    cr_assert_stderr_eq_str("Directory stack not that deep.\n");
-    shell_free(shell);
-}
-
 Test(builtins_setenv, setenv_too_many_args, .init=cr_redirect_stderr) {
     char *argv[] = {"setenv", "var", "hello", "super3"};
     args_t args = {.argc = 4, .argv = argv};
