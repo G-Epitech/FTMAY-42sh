@@ -18,8 +18,6 @@ exec_caller_t caller)
     utils->fd_herited[1] = herited ? herited->pipe[1] : STDOUT_FILENO;
     utils->pipe[0] = -1;
     utils->pipe[1] = -1;
-    utils->fd_saved[0] = STDIN_FILENO;
-    utils->fd_saved[1] = STDOUT_FILENO;
     utils->status = 0;
     utils->sub_status = 0;
     if (caller == EXEC_SIBLING)

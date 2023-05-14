@@ -35,6 +35,12 @@ typedef struct s_hist_replace_utils {
     bool updated;            // Specify input has been replaced
 } hist_replace_utils_t;
 
+// Represent shell input and output
+typedef struct s_shell_io {
+    int stdin;                  // File descriptor of initial stdin
+    int stdout;                 // File descriptor of initial stdout
+} shell_io_t;
+
 // Represent current shell status
 typedef enum e_shell_status {
     SH_RUNNING,                 // Shell is running
@@ -51,6 +57,7 @@ typedef struct s_shell {
     char *owd;                  // Old working directory
     char *pwd;                  // Path of current working directory
     const builtin_t *builtins;  // Builtins command available in shell
+    shell_io_t io;              // Shell input / output
     history_t *history;         // Shell history of commands
     char *last_history_pattern; // Last serached history pattern
 } shell_t;
