@@ -307,7 +307,7 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
         "status",
         &shell_special_vars_std_get,
-        NULL,
+        &shell_special_vars_std_set,
         NULL,
         &shell_special_vars_status_init,
         NULL
