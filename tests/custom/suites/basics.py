@@ -22,3 +22,6 @@ suite.addTest(wrong)
 
 simple = Test("Simple execution", "echo \"ls -la\" | {shell}")
 suite.addTest(simple)
+
+pdf = Test("PDF command", "echo \"cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo OK\" | {shell}")
+suite.addTest(pdf)

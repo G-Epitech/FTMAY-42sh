@@ -15,7 +15,7 @@
 #include "parsing/parsing.h"
 #include "types/shell/shell.h"
 
-static void new_args(size_t *start, size_t *len, size_t *i, char *input)
+static bool new_args(int *start, int *len, int *i, char *input)
 {
     (*i)++;
     while (input[*i] == PARSING_SPACE || input[*i] == PARSING_TAB)
@@ -27,30 +27,45 @@ static void new_args(size_t *start, size_t *len, size_t *i, char *input)
         (*len) = cmd_set_args_get_len_input(input, (*i));
     }
     (*start) = *i;
+    return (input[*i - 1] == PARSING_STRING) ? true : false;
+}
+
+static void fill_string(index_word_t *world, char *string, int *i,
+char *input)
+{
+    if (input[*i] == PARSING_BACKSLASH) {
+        (*i)++;
+        world->start++;
+        if (world->is_string)
+            string[*i - world->start] = cmd_get_new_value(input[*i]);
+        else
+            string[*i - world->start] = input[*i];
+    } else {
+        string[*i - world->start] = input[*i];
+    }
+    (*i)++;
 }
 
 static void fill_args(char **argv, char *input)
 {
-    size_t i = -1;
-    size_t index_argv = 0;
-    size_t len = 0;
-    size_t start = 0;
+    int i = -1;
+    int index_argv = 0;
+    index_word_t world = {0, 0, false};
 
-    new_args(&start, &len, &i, input);
-    argv[index_argv] = malloc2(sizeof(char) * len + 1);
+    world.is_string = new_args(&world.start, &world.end, &i, input);
+    argv[index_argv] = malloc2(sizeof(char) * world.end + 1);
     while (input[i] != '\0') {
-        if (start + len == i && input[i + 1] == '\0')
+        if (world.start + world.end == i && input[i + 1] == '\0')
             break;
-        if (start + len == i) {
-            argv[index_argv][len] = '\0';
-            new_args(&start, &len, &i, input);
+        if (world.start + world.end == i) {
+            argv[index_argv][world.end] = '\0';
+            world.is_string = new_args(&world.start, &world.end, &i, input);
             index_argv++;
-            argv[index_argv] = malloc2(sizeof(char) * len + 1);
+            argv[index_argv] = malloc2(sizeof(char) * world.end + 1);
         }
-        argv[index_argv][i - start] = input[i];
-        i++;
+        fill_string(&world, argv[index_argv], &i, input);
     }
-    argv[index_argv][len] = '\0';
+    argv[index_argv][world.end] = '\0';
 }
 
 static int get_input_parse_len(char *input)
@@ -58,7 +73,7 @@ static int get_input_parse_len(char *input)
     int len = 1;
     bool in_string = false;
 
-    for (size_t i = 0; input[i] != '\0'; i++) {
+    for (int i = 0; input[i] != '\0'; i++) {
         if (input[i] == PARSING_STRING)
             in_string = !in_string;
         if (in_string)

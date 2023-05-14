@@ -29,6 +29,30 @@ Test(parsing_set_cmd_args, test_with_guillemet)
     cr_assert_str_eq(command->args.argv[1], "super HELLO");
 }
 
+Test(parsing_set_cmd_args, test_with_baskslash_quote)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    cmd_t *command = cmd_new();
+
+    command->input = strdup("echo \"\\ta\\na\"");
+    cr_assert(cmd_set_args(command, shell));
+    cr_assert_eq(command->args.argc, 2);
+    cr_assert_str_eq(command->args.argv[0], "echo");
+    cr_assert_str_eq(command->args.argv[1], "\ta\na");
+}
+
+Test(parsing_set_cmd_args, test_with_baskslash)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    cmd_t *command = cmd_new();
+
+    command->input = strdup("echo \\ta\\na");
+    cr_assert(cmd_set_args(command, shell));
+    cr_assert_eq(command->args.argc, 2);
+    cr_assert_str_eq(command->args.argv[0], "echo");
+    cr_assert_str_eq(command->args.argv[1], "tana");
+}
+
 Test(parsing_set_cmd_args, test_without_innibiteur)
 {
     shell_t *shell = shell_new(builtins_cmds);
