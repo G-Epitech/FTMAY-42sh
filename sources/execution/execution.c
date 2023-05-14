@@ -22,6 +22,6 @@ bool execution_main_block(inst_t *block, shell_t *shell)
     execution_utils_init(&utils, NULL, EXEC_MAIN);
     execution_block(node, shell, &utils);
     node_free(node, NULL);
-    shell->exit_code = utils.status;
+    shell_set_exit_code(shell, utils.status);
     return true;
 }

@@ -150,7 +150,6 @@ shell_t *shell);
 void shell_input_replace_history_get_pattern(char *input, size_t i,
 size_t *pattern_len);
 
-
 /**
  * @brief Handle history replacement occurrence.
  * @param utils Utils replacement data
@@ -205,5 +204,13 @@ shell_t *shell);
  * @return Status of success replacement
  */
 bool shell_input_replace_escape_char(hist_replace_utils_t *utils);
+
+/**
+ * @brief Set the exit code of the shell.
+ * @param shell Shell struct
+ * @param code Code exit
+ * @return Status of success
+ */
+bool shell_set_exit_code(shell_t *shell, int code);
 
 #endif /* !SHELL_H_ */
