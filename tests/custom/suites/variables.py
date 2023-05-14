@@ -20,7 +20,7 @@ suite.addTest(test)
 test = Test("Fail : no command", "echo \'toto; echo $?\' | {shell}")
 suite.addTest(test)
 
-test = Test("Fail : grep", "echo \'grep > file.txt; echo $?; rm file.txt; echo $?;\' | {shell}")
+test = Test("Fail : grep", "echo \'grep t > file.txt; echo $?; rm -f file.txt; echo $?;\' | {shell}")
 suite.addTest(test)
 
 test = Test("Fail : ls | tree", "echo \'ls | tree; echo $?;\' | {shell}")
