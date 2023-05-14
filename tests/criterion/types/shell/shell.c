@@ -139,3 +139,32 @@ Test(ignoreeof_shell, shell_exit_tty_on_with_ignoreeof_var, .init=cr_redirect_st
     cr_assert_eq(shell->exit_in, 1);
     shell_free(shell);
 }
+
+Test(shell_exit_code, shell_exit_error_code_succes)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+
+    shell_set_exit_code(shell, 0);
+    cr_assert_eq(shell->exit_code, 0);
+    shell_free(shell);
+}
+
+Test(shell_exit_code, shell_exit_error_code_failed)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+
+    shell_set_exit_code(shell, 84);
+    cr_assert_eq(shell->exit_code, 84);
+    shell_free(shell);
+}
+
+Test(shell_exit_code, shell_exit_error_asprintf2_failed)
+{
+    shell_t *shell = shell_new(builtins_cmds);
+    bool status = false;
+
+    malloc2_mode(MALLOC2_SET_MODE, MALLOC2_MODE_FAIL);
+    status = shell_set_exit_code(shell, 84);
+    cr_assert_eq(status, false);
+    shell_free(shell);
+}
