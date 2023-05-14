@@ -20,7 +20,7 @@ suite.addTest(test)
 test = Test("One arg system", "echo \"which wc\" | {shell}")
 suite.addTest(test)
 
-test = Test("Multiple args system", "echo \"which wc grep pwd\" | {shell}")
+test = Test("Multiple args system", "echo \"which wc ss pwd\" | {shell}")
 suite.addTest(test)
 
 test = Test("One arg builtin", "echo \"which echo\" | {shell}")
