@@ -85,6 +85,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/input/occur.c \
 				types/shell/input/pattern.c \
 				types/shell/input/replace_all.c \
+				types/shell/input/replace_escape_char.c \
 				types/shell/input/replace_occur_entry.c \
 				types/shell/input/replace_occur_last.c \
 				types/shell/input/replace_occur_special.c \

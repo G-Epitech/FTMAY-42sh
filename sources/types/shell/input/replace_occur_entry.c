@@ -19,6 +19,7 @@ size_t pattern_len, history_entry_t *entry)
     char *left = strndup(utils->final, utils->i);
     char *right = utils->final + utils->i + 1 + pattern_len;
 
+    utils->updated |= entry ? true : false;
     if (!left)
         return false;
     if (asprintf2(&tmp, "%s%s%s", left, replace, right) == -1)

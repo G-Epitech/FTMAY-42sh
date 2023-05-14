@@ -13,7 +13,7 @@
 
 static bool is_special(char *input, size_t i)
 {
-    if (input[i - 1] == '\\')
+    if (i > 0 && input[i - 1] == '\\')
         return true;
     if (input[i + 1] == '?')
         return true;
@@ -57,12 +57,7 @@ char *pattern, history_entry_t *entry, shell_t *shell)
 bool shell_input_replace_history_handle_occur(hist_replace_utils_t *utils,
 shell_t *shell)
 {
-    if (strlen(utils->final + utils->i) <= 1) {
-        utils->i += 1;
-        return true;
-    }
-    if (is_special(utils->final, utils->i)) {
+    if (is_special(utils->final, utils->i))
         return shell_input_replace_history_entry_special(utils, shell);
-    }
     return replace_occur(utils, shell);
 }

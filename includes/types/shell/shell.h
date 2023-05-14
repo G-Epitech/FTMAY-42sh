@@ -127,11 +127,13 @@ char *shell_format_string_get_no_var(char *input, int start, int end);
 /**
  * @brief Replace all pattern with symbol '!' with matching history entry.
  * @param original Original input given by user
+ * @param final Pointer to string in which export user input
+ * @param updated Specify if given input has been updated
  * @param shell Shell object
- * @param final Pointer to string in which store replaced input
  * @return Success status
  */
-bool shell_input_replace_history(char *original, char **final, shell_t *shell);
+bool shell_input_replace_history(char *original, char **final, bool *updated,
+shell_t *shell);
 
 /**
  * @brief During replacing step, get entry matching with pattern if exists.
@@ -209,5 +211,13 @@ shell_t *shell);
  */
 bool shell_input_replace_history_entry_last(hist_replace_utils_t *utils,
 shell_t *shell);
+
+/**
+ * @brief Replace '!' symbol and escape it.
+ * @param utils Utils replacement data
+ * @param shell Shell object
+ * @return Status of success replacement
+ */
+bool shell_input_replace_escape_char(hist_replace_utils_t *utils);
 
 #endif /* !SHELL_H_ */

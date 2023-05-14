@@ -17,6 +17,8 @@ shell_t *shell)
     char *final = utils->final;
     size_t i = utils->i;
 
+    if (final[i - 1] == '\\')
+        return shell_input_replace_escape_char(utils);
     if (final[i + 1] == '?')
         return shell_input_replace_history_entry_last(utils, shell);
     utils->i = i + 1;

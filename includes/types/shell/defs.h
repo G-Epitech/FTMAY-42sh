@@ -28,9 +28,10 @@ extern char **environ;
 
 // Represent all utils data to replace history occurences in input
 typedef struct s_hist_replace_utils {
-    char *final;           // Final input
-    size_t i;              // Current index
+    char *final;            // Final input
+    size_t i;               // Current index
     bool error;             // Specify if an error already occured
+    bool updated;            // Specify input has been replaced
 } hist_replace_utils_t;
 
 // Represent current shell status

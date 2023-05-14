@@ -48,13 +48,17 @@ bool shell_get_input(shell_t *shell, char **input)
 {
     char *original = NULL;
     bool success = true;
+    bool updated = false;
 
     if (shell->is_tty)
         original = shell_get_input_tty(shell);
     else
         original = shell_get_input_no_tty(shell);
-    success = shell_input_replace_history(original, input, shell);
-    if (*input != original)
+    success = shell_input_replace_history(original, input, &updated, shell);
+    if (*input != original) {
         free(original);
+        if (success && updated)
+            printf("%s\n", *input);
+    }
     return success;
 }
