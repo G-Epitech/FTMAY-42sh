@@ -27,7 +27,8 @@ bool mysh_execute(char *input, inst_t *block, shell_t *shell)
     }
     success = execution_main_block(block, shell);
     if (success) {
-        asprintf2(&exit_code, "%i", shell->exit_code);
+        if (asprintf2(&exit_code, "%i", shell->exit_code) == -1)
+            return false;
         shell_set_var(shell, "?", exit_code);
         shell_set_var(shell, "status", exit_code);
     }
