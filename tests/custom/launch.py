@@ -20,6 +20,7 @@ import suites.complexes as complexes
 import suites.inhibitors as inhibitors
 import suites.builtins.echo as echo
 import suites.builtins.where as where
+import suites.builtins.which as which
 
 if __name__ == '__main__':
     tester = Tester()
@@ -40,6 +41,7 @@ if __name__ == '__main__':
     tester.addSuite(inhibitors.suite)
     tester.addSuite(echo.suite)
     tester.addSuite(where.suite)
+    tester.addSuite(which.suite)
 
     if tester.execute():
         exit(0)
