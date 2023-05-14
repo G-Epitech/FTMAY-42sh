@@ -41,6 +41,13 @@ c == '?')
 bool is_number(char *string);
 
 /**
+ * @brief Check if given string is empty.
+ * @param str String to check
+ * @return Empty status
+ */
+bool str_is_empty(const char *str);
+
+/**
  * @brief Give the len number.
  * @param nb Number to have len
  * @return Number of number

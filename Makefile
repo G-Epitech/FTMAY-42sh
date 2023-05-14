@@ -123,6 +123,7 @@ _SRC =			mysh/mysh.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				utils/str_is_empty.c \
 				utils/asprintf2.c \
 				utils/len_number.c \
 				\
@@ -184,6 +185,7 @@ _TESTS =		criterion/main.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/str_is_empty.c \
 				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \
