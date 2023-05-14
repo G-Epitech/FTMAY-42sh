@@ -17,10 +17,10 @@ suite = TestSuite("Builtin which")
 test = Test("No args", "echo \"which\" | {shell}")
 suite.addTest(test)
 
-test = Test("One arg system", "echo \"which ls\" | {shell}")
+test = Test("One arg system", "echo \"which wc\" | {shell}")
 suite.addTest(test)
 
-test = Test("Multiple args system", "echo \"which wc ls pwd\" | {shell}")
+test = Test("Multiple args system", "echo \"which wc grep pwd\" | {shell}")
 suite.addTest(test)
 
 test = Test("One arg builtin", "echo \"which echo\" | {shell}")
@@ -35,5 +35,5 @@ suite.addTest(test)
 test = Test("Invalid command multiple", "echo \"which invalidcommandsystem secondinvalid otherinvalid\" | {shell}")
 suite.addTest(test)
 
-test = Test("Mix valid and invalid commands", "echo \"which ls invalidcommand setenv superinvalid pwd\" | {shell}")
+test = Test("Mix valid and invalid commands", "echo \"which wc invalidcommand setenv superinvalid pwd\" | {shell}")
 suite.addTest(test)
