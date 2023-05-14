@@ -43,3 +43,6 @@ suite.addTest(test)
 
 test = Test("Set with string", "echo \"set test=\"big string for test\" && echo $test\" | {shell}")
 suite.addTest(test)
+
+test = Test("Invalid variable name", "echo \"set 2test\" | {shell}")
+suite.addTest(test)

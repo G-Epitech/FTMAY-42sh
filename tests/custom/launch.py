@@ -23,6 +23,7 @@ import suites.builtins.where as where
 import suites.builtins.which as which
 import suites.variables as variables
 import suites.builtins.set as set
+import suites.builtins.unset as unset
 
 if __name__ == '__main__':
     tester = Tester()
@@ -44,8 +45,9 @@ if __name__ == '__main__':
     tester.addSuite(echo.suite)
     tester.addSuite(where.suite)
     tester.addSuite(which.suite)
-    tester.addSuite(set.suite)
     tester.addSuite(variables.suite)
+    tester.addSuite(set.suite)
+    tester.addSuite(unset.suite)
 
     if tester.execute():
         exit(0)
