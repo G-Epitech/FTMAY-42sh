@@ -17,12 +17,12 @@ static bool builtin_setenv_check_name(char *name)
 {
     size_t len = strlen(name);
 
-    if (!CHAR_IS_ALPHA(name[0])) {
+    if (!CHAR_IS_ALPHA_EXT(name[0])) {
         write(2, "setenv: Variable name must begin with a letter.\n", 48);
         return false;
     }
     for (size_t i = 1; i < len; i++) {
-        if (!CHAR_IS_ALPHANUM(name[i])) {
+        if (!CHAR_IS_ALPHANUM_EXT(name[i])) {
             write(2, "setenv: Variable name must contain "
             "alphanumeric characters.\n", 60);
             return false;

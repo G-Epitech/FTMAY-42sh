@@ -111,6 +111,14 @@ int *parsing_index);
 char *shell_format_string_get_no_var(char *input, int start, int end);
 
 /**
+ * @brief Check the format of var.
+ * @param input Input of user
+ * @param shell Shell struct
+ * @return true if no error else false
+ */
+bool shell_format_check(char *input);
+
+/**
  * @brief Replace all pattern with symbol '!' with matching history entry.
  * @param original Original input given by user
  * @param final Pointer to string in which export user input
@@ -212,5 +220,6 @@ bool shell_input_replace_escape_char(hist_replace_utils_t *utils);
  * @return Status of success
  */
 bool shell_set_exit_code(shell_t *shell, int code);
+
 
 #endif /* !SHELL_H_ */

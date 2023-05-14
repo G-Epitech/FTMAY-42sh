@@ -14,10 +14,10 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("Builtin echo")
 
-test = Test("Simple echo", "echo hello world | {shell}")
+test = Test("Simple echo", "echo \"echo hello world\" | {shell}")
 suite.addTest(test)
 
-test = Test("With quotes", "echo \"hello world\" | {shell}")
+test = Test("With quotes", "echo \"echo \"hello world\"\" | {shell}")
 suite.addTest(test)
 
 test = Test("With quotes and special chars", "echo \"echo \"\\thello \\nworld\"\" | {shell}")

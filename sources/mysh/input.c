@@ -18,5 +18,7 @@ char *mysh_get_input(shell_t *shell)
 
     if (!str_is_empty(input))
         history_append_entry(shell->history, input);
+    if (!success)
+        shell_set_exit_code(shell, SHELL_EXIT_ERROR);
     return success ? input : NULL;
 }

@@ -26,11 +26,11 @@ suite.addTest(multiple)
 multiple_without = Test("Multiple inhibitors without quote", "echo \"echo \\ta\\na\" | {shell}")
 suite.addTest(multiple_without)
 
-# bonded_inibitors = Test("Bounded inibitors", "echo \"\\t\\t\\tahah\\t\\t\\t\"")
-# suite.addTest(bonded_inibitors)
+bonded_inibitors = Test("Bounded inibitors", "echo \"echo \"\\t\\t\\tahah\\t\\t\\t\"\" | {shell}")
+suite.addTest(bonded_inibitors)
 
-# bonded_inibitors_without = Test("Bounded inibitosr without quote", "echo \\t\\t\\tahah\\t\\t\\t")
-# suite.addTest(bonded_inibitors_without)
+bonded_inibitors_without = Test("Bounded inibitosr without quote", "echo \"echo \\t\\t\\tahah\\t\\t\\t\" | {shell}")
+suite.addTest(bonded_inibitors_without)
 
 bad_inibitors = Test("Bad inhibitors", "echo \"echo \"super test n n n ttt t\"\" | {shell}")
 suite.addTest(bad_inibitors)

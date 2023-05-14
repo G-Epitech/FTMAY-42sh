@@ -43,3 +43,6 @@ suite.addTest(doubleWrongRedirection)
 
 doubleWrongRedirection = Test("Double redirection left", "echo \"ls << \" | {shell}")
 suite.addTest(doubleWrongRedirection)
+
+redirectionWithPipe = Test("Redirection with pipes", "echo \"ls | grep l > test; cat test; rm -f test\" | {shell}")
+suite.addTest(redirectionWithPipe)
