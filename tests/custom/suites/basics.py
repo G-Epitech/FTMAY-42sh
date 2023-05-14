@@ -25,3 +25,40 @@ suite.addTest(simple)
 
 pdf = Test("PDF command", "echo \"cd ; </etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd - && echo OK\" | {shell}")
 suite.addTest(pdf)
+
+simple = Test("Simple execution", "echo \"ls -la\" | {shell}")
+suite.addTest(simple)
+
+simple = Test("Simple execution", "echo \"Hello, World!\" | {shell}")
+suite.addTest(simple)
+
+redirection = Test("Redirection", "echo \"echo Hello > output.txt; cat output.txt; rm output.txt\"  | {shell}")
+suite.addTest(redirection)
+
+variables = Test("Environment variables", "echo \"echo $PATH\"  | {shell}")
+suite.addTest(variables)
+
+pipes = Test("Pipes", "echo \"ls | grep \"\.txt\" | wc -l\"  | {shell}")
+suite.addTest(pipes)
+
+options = Test("Command with options", "echo \"ls -l\"  | {shell}")
+suite.addTest(options)
+
+substitution = Test("Variable substitution", "echo \"set var = \"Hello\"; echo $var\" | {shell}")
+suite.addTest(substitution)
+
+regex = Test("Regular expressions", "echo \"echo \"Hello, World!\" | sed -E s/World/Universe/\" | {shell}")
+suite.addTest(regex)
+
+interactive = Test("Interactive options", "echo \"rm -i file.txt\" | {shell}")
+suite.addTest(interactive)
+
+command_substitution = Test("Command substitution", "echo \"echo \"Today is $(date)\"\" | {shell}")
+suite.addTest(command_substitution)
+
+external_command = Test("External command", "echo \"/usr/bin/ls -l\"  | {shell}")
+suite.addTest(external_command)
+
+process_substitution = Test("Process substitution", "echo \"diff <(sort file1.txt) <(sort file2.txt)\"  | {shell}")
+suite.addTest(process_substitution)
+
