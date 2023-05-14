@@ -25,3 +25,6 @@ suite.addTest(test)
 
 test = Test("double var (env, spe)", "echo \"echo $path; echo $PATH\" | {shell}")
 suite.addTest(test)
+
+test = Test("double var (env, spe) and one wrong", "echo \"echo $path; echo $PATH; echo $wrong\" | {shell}")
+suite.addTest(test)
