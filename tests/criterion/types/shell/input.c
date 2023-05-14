@@ -29,7 +29,7 @@ Test(shell_get_input_tests, basic)
     dup2(piped[0], STDIN_FILENO);
     write(piped[1], "echo salut\n", 11);
     close(piped[1]);
-    input = shell_get_input(shell);
+    cr_assert(shell_get_input(shell, &input));
     cr_assert_str_eq(input, "echo salut");
     close(piped[0]);
     dup2(saved_stdin, STDIN_FILENO);

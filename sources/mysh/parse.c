@@ -18,14 +18,11 @@ inst_t *mysh_parse(shell_t *shell, char *input)
 {
     size_t len = input ? strlen(input) : 0;
 
-    if (!input || !len) {
-        shell_set_exit_code(shell, SHELL_EXIT_SUCCESS);
+    if (!input || !len)
         return NULL;
-    }
     if (!shell_format_check(input)) {
         shell_set_exit_code(shell, SHELL_EXIT_ERROR);
         return NULL;
     }
-    history_append_entry(shell->history, input);
     return parsing_get_main_block(input);
 }
