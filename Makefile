@@ -82,7 +82,15 @@ _SRC =			mysh/mysh.c \
 				\
 				types/shell/new.c \
 				types/shell/free.c \
-				types/shell/input.c \
+				types/shell/input/get.c \
+				types/shell/input/history_entry.c \
+				types/shell/input/occur.c \
+				types/shell/input/pattern.c \
+				types/shell/input/replace_all.c \
+				types/shell/input/replace_escape_char.c \
+				types/shell/input/replace_occur_entry.c \
+				types/shell/input/replace_occur_last.c \
+				types/shell/input/replace_occur_special.c \
 				types/shell/format/format.c \
 				types/shell/format/get_no_var.c \
 				types/shell/format/get_var.c \
@@ -116,6 +124,7 @@ _SRC =			mysh/mysh.c \
 				\
 				utils/is_number.c \
 				utils/malloc2.c \
+				utils/str_is_empty.c \
 				utils/asprintf2.c \
 				utils/len_number.c \
 				\
@@ -160,7 +169,6 @@ _TESTS =		criterion/main.c \
 				\
 				criterion/types/list.c \
 				criterion/types/node.c \
-				criterion/types/io.c \
 				criterion/types/ios.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
@@ -178,6 +186,7 @@ _TESTS =		criterion/main.c \
 				\
 				criterion/utils/is_number.c \
 				criterion/utils/malloc2.c \
+				criterion/utils/str_is_empty.c \
 				criterion/utils/asprintf2.c \
 				\
 				criterion/builtins/exit.c \

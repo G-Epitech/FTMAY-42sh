@@ -44,10 +44,21 @@ static char *shell_get_input_tty(shell_t *shell)
     return input;
 }
 
-char *shell_get_input(shell_t *shell)
+bool shell_get_input(shell_t *shell, char **input)
 {
+    char *original = NULL;
+    bool success = true;
+    bool updated = false;
+
     if (shell->is_tty)
-        return shell_get_input_tty(shell);
+        original = shell_get_input_tty(shell);
     else
-        return shell_get_input_no_tty(shell);
+        original = shell_get_input_no_tty(shell);
+    success = shell_input_replace_history(original, input, &updated, shell);
+    if (*input != original) {
+        free(original);
+        if (success && updated)
+            printf("%s\n", *input);
+    }
+    return success;
 }
