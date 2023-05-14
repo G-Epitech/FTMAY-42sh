@@ -10,6 +10,7 @@
 
     #include <unistd.h>
     #include <stdbool.h>
+    #include "utils/utils.h"
     #include "special_vars.h"
     #include "types/var/defs.h"
     #include "types/list/defs.h"
@@ -21,7 +22,7 @@
     #define SHELL_DEFAULT_PATH "/usr/bin:/bin"
     #define SHELL_VAR_NOT_FOUND 1
     #define SHELL_VAR_FOUND 2
-
+    #define SHELL_VAR_IGNOREEOF(value) (is_number(value) ? atoi(value) : 26)
 
 // Environnement variables
 extern char **environ;
@@ -41,6 +42,7 @@ typedef struct s_shell_io {
 // Represent a shell
 typedef struct s_shell {
     int exit_code;              // Last exit code of shell
+    int exit_in;                // Counter before exit if ignoreeof is set
     shell_status_t status;      // Shell current status
     bool is_tty;                // Specify if shell is in TTY mode
     list_t *vars;               // Shell variables (list of var_t)

@@ -17,6 +17,7 @@
 static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
 {
     shell->exit_code = SHELL_EXIT_SUCCESS;
+    shell->exit_in = 0;
     shell->is_tty = isatty(STDIN_FILENO);
     shell->status = SH_RUNNING;
     shell->vars = list_new();
