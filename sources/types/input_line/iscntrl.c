@@ -61,6 +61,8 @@ int input_line_get_cntrls(int character)
         case KEY_TAB:
             character = TAB;
             break;
+        case KEY_CTRL_C:
+            return CTRL_KEY_C;
         default:
             character = input_line_get_cntrl();
             break;

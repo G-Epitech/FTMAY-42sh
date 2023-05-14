@@ -49,6 +49,13 @@ void input_line_keypressed_enter(shell_t *shell, input_line_t *line);
 void input_line_keypressed_d(shell_t *shell, input_line_t *line);
 
 /**
+ * @brief Open a new line.
+ * @param line Structure input entry
+ * @param shell Structure of shell
+ */
+void input_line_keypressed_c(shell_t *shell, input_line_t *line);
+
+/**
  * @brief Select the prev instruction on the history.
  * @param line Structure input entry
  * @param shell Structure of shell
