@@ -24,7 +24,6 @@ static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
     shell->builtins = builtins;
     shell->history = history_new();
     shell_special_vars_init(shell);
-    shell_init_io(shell);
     shell->history = history_new();
     return true;
 }
