@@ -21,6 +21,7 @@ import suites.inhibitors as inhibitors
 import suites.builtins.echo as echo
 import suites.builtins.where as where
 import suites.builtins.which as which
+import suites.variables as variables
 
 if __name__ == '__main__':
     tester = Tester()
@@ -42,6 +43,7 @@ if __name__ == '__main__':
     tester.addSuite(echo.suite)
     tester.addSuite(where.suite)
     tester.addSuite(which.suite)
+    tester.addSuite(variables.suite)
 
     if tester.execute():
         exit(0)

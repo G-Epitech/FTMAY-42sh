@@ -13,3 +13,15 @@ pwd = pathlib.Path(__file__).parent.resolve()
 
 global suite
 suite = TestSuite("Variable")
+
+test = Test("simple env var", "echo \"echo $PATH\" | {shell}")
+suite.addTest(test)
+
+test = Test("simple special var", "echo \"echo $path\" | {shell}")
+suite.addTest(test)
+
+test = Test("var no exist", "echo \"echo $flavinouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\" | {shell}")
+suite.addTest(test)
+
+test = Test("double var (env, spe)", "echo \"echo $path; echo $PATH\" | {shell}")
+suite.addTest(test)
