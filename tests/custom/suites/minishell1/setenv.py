@@ -28,14 +28,14 @@ suite.addTest(variablenamenumber)
 variablenamedot = Test("Variable name dot", "echo 'setenv .TEST Hello_world ; echo $_TEST' | env -i {shell}")
 suite.addTest(variablenamedot)
 
-variablenameminus = Test("Variable name minus", "echo setenv -TEST Hello_world ; echo $-TEST' | env -i {shell}")
+variablenameminus = Test("Variable name minus", "echo 'setenv -TEST Hello_world ; echo $-TEST' | env -i {shell}")
 suite.addTest(variablenameminus)
 
-variablenameunderscore = Test("Variable name underscore", "echo setenv _TEST Hello_world ; echo $_TEST' | env -i {shell}")
+variablenameunderscore = Test("Variable name underscore", "echo 'setenv _TEST Hello_world ; echo $_TEST' | env -i {shell}")
 suite.addTest(variablenameunderscore)
 
-redifinevariable = Test("Redifine variable", "echo setenv PATH /bin ; echo $PATH' | env -i {shell}")
+redifinevariable = Test("Redifine variable", "echo 'setenv PATH /bin ; echo $PATH' | env -i {shell}")
 suite.addTest(redifinevariable)
 
-emptyavariable = Test("Empty a variable", "echo setenv PATH ; echo $PATH' | env -i {shell}")
+emptyavariable = Test("Empty a variable", "echo 'setenv PATH ; echo $PATH' | env -i {shell}")
 suite.addTest(emptyavariable)
