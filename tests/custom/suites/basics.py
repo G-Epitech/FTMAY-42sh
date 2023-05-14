@@ -53,7 +53,7 @@ suite.addTest(regex)
 interactive = Test("Interactive options", "echo \"rm -i file.txt\" | {shell}")
 suite.addTest(interactive)
 
-command_substitution = Test("Command substitution", "echo \"echo \"Today is $(date)\"\" | {shell}")
+command_substitution = Test("Command substitution", "echo \"echo \"Today is $(ls)\"\" | {shell}")
 suite.addTest(command_substitution)
 
 external_command = Test("External command", "echo \"/usr/bin/ls -l\"  | {shell}")
