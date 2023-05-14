@@ -24,7 +24,7 @@ static bool find_command(char *command, shell_t *shell)
         return false;
     if (!cmd_determine_target(cmd, shell) || cmd->type == CMD_NULL ||
     cmd->type == CMD_EMPTY) {
-        fprintf(stderr, "%s: Command not found.\n", command);
+        fprintf(stdout, "%s: Command not found.\n", command);
         return false;
     }
     if (cmd->type == CMD_BUILTIN) {
