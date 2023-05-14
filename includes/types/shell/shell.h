@@ -114,7 +114,7 @@ char *shell_format_string_get_no_var(char *input, int start, int end);
  * @param shell Shell struct
  * @return true if no error else false
  */
-bool shell_format_check(shell_t *shell, char *input);
+bool shell_format_check(char *input);
 
 /**
  * @brief Set the exit code of the shell.

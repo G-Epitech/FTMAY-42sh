@@ -34,11 +34,10 @@ static bool check_var(char *input, int *index_start_var)
     return true;
 }
 
-bool shell_format_check(shell_t *shell, char *input)
+bool shell_format_check(char *input)
 {
     for (int index = 0; input[index] != '\0'; index++) {
         if (!check_var(input, &index)) {
-            shell->exit_code = SHELL_EXIT_ERROR;
             display_error();
             return false;
         }
