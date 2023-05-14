@@ -26,6 +26,13 @@
 // Environnement variables
 extern char **environ;
 
+// Represent all utils data to replace history occurences in input
+typedef struct s_hist_replace_utils {
+    char *final;           // Final input
+    size_t i;              // Current index
+    bool error;             // Specify if an error already occured
+} hist_replace_utils_t;
+
 // Represent current shell status
 typedef enum e_shell_status {
     SH_RUNNING,                 // Shell is running
@@ -49,6 +56,7 @@ typedef struct s_shell {
     const builtin_t *builtins;  // Builtins command available in shell
     shell_io_t io;              // Shell input / output
     history_t *history;         // Shell history of commands
+    char *last_history_pattern; // Last serached history pattern
 } shell_t;
 
 #endif /* !SHELL_DEFS_H_ */
