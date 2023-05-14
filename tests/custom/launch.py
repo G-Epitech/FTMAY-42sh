@@ -18,6 +18,7 @@ import suites.parenthesis as parenthesis
 import suites.operators as operators
 import suites.complexes as complexes
 import suites.builtins.echo as echo
+import suites.builtins.where as where
 
 if __name__ == '__main__':
     tester = Tester()
@@ -36,6 +37,7 @@ if __name__ == '__main__':
     tester.addSuite(operators.suite)
     tester.addSuite(complexes.suite)
     tester.addSuite(echo.suite)
+    tester.addSuite(where.suite)
 
     if tester.execute():
         exit(0)
