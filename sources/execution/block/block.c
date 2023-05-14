@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include "types/inst/defs.h"
+#include "types/shell/shell.h"
 #include "execution/execution.h"
 
 static node_t *get_high_node(node_t *first)
@@ -40,6 +41,7 @@ bool execution_block(node_t *node_inst, shell_t *shell, exec_utils_t *utils)
         if (!node)
             return false;
         code = execution_inst(node, shell, utils, EXEC_SUPERIOR);
+        shell_restore_io(shell);
         next = execution_block_get_next(node, code);
     } while (next);
     utils->status = code;
