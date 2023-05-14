@@ -47,6 +47,9 @@ suite.addTest(options)
 substitution = Test("Variable substitution", "echo 'set var = \"Hello\"; echo $var' | {shell}")
 suite.addTest(substitution)
 
+# regex = Test("Regular expressions", "echo \"echo \"Hello, World!\" | sed -E s/World/Universe/\" | {shell}")
+# suite.addTest(regex)
+
 interactive = Test("Interactive options", "echo \"rm -i file.txt\" | {shell}")
 suite.addTest(interactive)
 
