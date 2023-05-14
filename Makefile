@@ -94,6 +94,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/format/format.c \
 				types/shell/format/get_no_var.c \
 				types/shell/format/get_var.c \
+				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
 				types/shell/format/check.c \

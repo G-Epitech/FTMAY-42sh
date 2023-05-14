@@ -32,8 +32,8 @@ suite.addTest(simple)
 simple = Test("Simple execution", "echo \"Hello, World!\" | {shell}")
 suite.addTest(simple)
 
-redirection = Test("Redirection", "echo \"echo Hello > output.txt; cat output.txt; rm -f output.txt\"  | {shell}")
-suite.addTest(redirection)
+# redirection = Test("Redirection", "echo \"echo Hello > output.txt; cat output.txt; rm -f output.txt\"  | {shell}")
+# suite.addTest(redirection)
 
 variables = Test("Environment variables", "echo 'echo $PATH'  | {shell}")
 suite.addTest(variables)

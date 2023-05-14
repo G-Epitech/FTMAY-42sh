@@ -22,7 +22,5 @@ bool execution_inst_get_redirections(inst_t *inst, exec_utils_t *utils)
         pipe(utils->pipe);
     if ((output == IOT_SIMPLE || output == IOT_DOUBLE) && success)
         success |= execution_redirection_get_output(inst, &(utils->fd_my[1]));
-    utils->fd_saved[0] = dup(STDIN_FILENO);
-    utils->fd_saved[1] = dup(STDOUT_FILENO);
     return success;
 }
