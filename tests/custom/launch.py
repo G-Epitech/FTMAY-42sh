@@ -25,6 +25,7 @@ import suites.variables as variables
 import suites.builtins.set as set
 import suites.builtins.unset as unset
 
+
 if __name__ == '__main__':
     tester = Tester()
     tester.addSuite(basics.suite)

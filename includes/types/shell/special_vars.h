@@ -12,7 +12,7 @@
     #include <stdbool.h>
     #include "types/var/defs.h"
 
-    #define SHELL_SPECIAL_VARS_LEN 13
+    #define SHELL_SPECIAL_VARS_LEN 15
 
 /**
  * @brief Get special shell variable.
@@ -171,6 +171,25 @@ char *dependency);
 bool shell_special_vars_ignoreeof_set(char *name, char *value, char *dependency,
 shell_t *shell);
 
+/**
+ * @brief Initialize special variable status.
+ * @param name Name of the variable that must be init
+ * @param shell Shell object
+ * @param dependency Name of dependency env variable
+ * @return Status of init success
+ */
+bool shell_special_vars_status_init(char *name, shell_t *shell,
+char *dependency);
+
+/**
+ * @brief Get special shell variable (status).
+ * @param shell Shell object
+ * @param name Name of special variable to get
+ * @param copy Specify if value to get needs to be duplicated
+ * @return Value of term variable or NULL if undefined
+ */
+char *shell_special_vars_status_get(shell_t *shell, char *name, bool copy);
+
 // List of special shell variables
 static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
@@ -275,6 +294,22 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_ignoreeof_set,
         NULL,
         NULL,
+        NULL
+    },
+    {
+        "?",
+        &shell_special_vars_status_get,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    {
+        "status",
+        &shell_special_vars_std_get,
+        &shell_special_vars_std_set,
+        NULL,
+        &shell_special_vars_status_init,
         NULL
     }
 };

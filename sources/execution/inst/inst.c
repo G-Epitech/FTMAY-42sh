@@ -46,5 +46,6 @@ exec_caller_t caller)
     else
         utils.status = W_EXITCODE(SHELL_EXIT_ERROR, 0);
     execution_inst_handle_status(inst, &utils);
+    shell_set_exit_code(shell, inst->exit_code);
     return inst->exit_code;
 }
