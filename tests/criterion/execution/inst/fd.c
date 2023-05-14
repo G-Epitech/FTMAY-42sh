@@ -24,6 +24,8 @@ Test(execution_inst_fd_tests, close_fd)
 
     utils.fd_my[0] = STDIN_FILENO;
     utils.fd_my[1] = STDOUT_FILENO;
+    utils.fd_saved[0] = STDIN_FILENO;
+    utils.fd_saved[1] = STDOUT_FILENO;
     execution_inst_close_fd(&utils);
     cr_assert(fcntl(utils.fd_my[0], F_GETFD) != -1);
     cr_assert(fcntl(utils.fd_my[1], F_GETFD) != -1);
@@ -56,7 +58,7 @@ Test(execution_inst_set_fd_tests, set_simple_file)
     cr_assert(fcntl(utils.fd_my[0], F_GETFD) != -1);
     cr_assert(fcntl(utils.fd_my[1], F_GETFD) != -1);
     execution_inst_launch_fork(node, shell, &utils);
-    shell_restore_io(shell);
+    execution_inst_close_fd(&utils);
     fd = open("file-1.tmp", O_RDONLY);
     cr_assert(fd != -1);
     read(fd, buff, 7);
@@ -83,7 +85,7 @@ Test(execution_inst_set_fd_tests, set_simple_pipe)
     cr_assert(fcntl(utils.fd_herited[0], F_GETFD) != -1);
     cr_assert(fcntl(utils.fd_herited[1], F_GETFD) != -1);
     execution_inst_launch_fork(node, shell, &utils);
-    shell_restore_io(shell);
+    execution_inst_close_fd(&utils);
     close(utils.fd_herited[1]);
     read(utils.fd_herited[0], buff, 7);
     buff[6] = '\0';
@@ -130,7 +132,7 @@ Test(execution_inst_set_fd_tests, set_double_output_file)
     execution_inst_get_redirections(inst, &utils);
     cr_assert(fcntl(utils.fd_my[1], F_GETFD) != -1);
     execution_inst_launch_fork(node, shell, &utils);
-    shell_restore_io(shell);
+    execution_inst_close_fd(&utils);
     fd = open("file-3.tmp", O_RDONLY);
     cr_assert(fd != -1);
     cr_assert(read(fd, buff, 50) == 12);

@@ -12,7 +12,7 @@
     #include <stdbool.h>
     #include "types/var/defs.h"
 
-    #define SHELL_SPECIAL_VARS_LEN 12
+    #define SHELL_SPECIAL_VARS_LEN 13
 
 /**
  * @brief Get special shell variable.
@@ -160,6 +160,17 @@ char *dependency);
 bool shell_special_vars_home_init(char *name, shell_t *shell,
 char *dependency);
 
+/**
+ * @brief Set special shell variable (ignoreeof).
+ * @param value Value to set to variable
+ * @param name Name of special variable to get
+ * @param dependency Name of dependency env variable
+ * @param shell Shell object
+ * @return Status of setting success
+ */
+bool shell_special_vars_ignoreeof_set(char *name, char *value, char *dependency,
+shell_t *shell);
+
 // List of special shell variables
 static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
     {
@@ -256,6 +267,14 @@ static const var_special_t shell_special_vars[SHELL_SPECIAL_VARS_LEN] = {
         &shell_special_vars_std_set,
         &shell_special_vars_std_update,
         &shell_special_vars_tty_init,
+        NULL
+    },
+    {
+        "ignoreeof",
+        &shell_special_vars_std_get,
+        &shell_special_vars_ignoreeof_set,
+        NULL,
+        NULL,
         NULL
     }
 };

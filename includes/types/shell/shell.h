@@ -84,20 +84,6 @@ void shell_special_vars_init(shell_t *shell);
 void shell_special_vars_dispatch_env_update(shell_t *shell, char *name);
 
 /**
- * @brief Init shell input / output.
- * @param shell Shell object
- * @return Success status of initialization
- */
-bool shell_init_io(shell_t *shell);
-
-/**
- * @brief Restore initial input / output of shell.
- * @param shell Shell object
- * @return Status of restoring success
- */
-bool shell_restore_io(shell_t *shell);
-
-/**
  * @brief Replace value of var in given string.
  * @param string String to format
  * @param shell Shell struct

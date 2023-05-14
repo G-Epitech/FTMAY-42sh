@@ -36,6 +36,7 @@ Test(execution_handle_status_tests, simple_command,
     execution_inst_launch(node, shell, &utils);
     cr_assert(execution_inst_handle_status(inst, &utils));
     cr_assert(inst->exit_code == SHELL_EXIT_SUCCESS);
+    fflush(stdout);
     cr_assert_stdout_eq_str("12\n"); 
 }
 

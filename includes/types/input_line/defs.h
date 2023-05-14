@@ -13,7 +13,7 @@
     #include "types/shell/defs.h"
 
     #define PROMPT_LEN 7
-    #define CTRL_KEY_HANDLERS_NBR 9
+    #define CTRL_KEY_HANDLERS_NBR 10
 
 // Represent value of arrow key
 typedef enum e_ctrl_key {
@@ -26,7 +26,8 @@ typedef enum e_ctrl_key {
     CTRL_KEY_DEL,           // Code of key controle delete
     CTRL_KEY_A,             // Code of key controle a
     CTRL_KEY_D,             // Code of key controle d
-    TAB                     // Code of key tabulation
+    CTRL_KEY_C,             // Code of key controle c
+    TAB,                    // Code of key tabulation
 } ctrl_key_e;
 
 // Represent the terminale size.
@@ -79,7 +80,8 @@ static const ctrl_key_handler_t ctrl_key_handlers[CTRL_KEY_HANDLERS_NBR] = {
     {CTRL_KEY_ENTER, &input_line_keypressed_enter},
     {CTRL_KEY_D, &input_line_keypressed_d},
     {CTRL_KEY_A, &input_line_keypressed_a},
-    {TAB, &input_line_keypressed_tab}
+    {TAB, &input_line_keypressed_tab},
+    {CTRL_KEY_C, &input_line_keypressed_c}
 };
 
 #endif /* !INPUT_LINE_DEFS_H_ */

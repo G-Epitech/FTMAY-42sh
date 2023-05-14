@@ -28,6 +28,7 @@ typedef enum e_exec_caller {
 typedef struct s_exec_utils {
     int fd_herited[2];  // File descriptors of parent command
     int fd_my[2];       // File descriptors created by current command
+    int fd_saved[2];    // Original file descriptors
     int level;          // Recursivity proof
     int status;         // Status code of current execution
     int sub_status;     // Status code of sub process

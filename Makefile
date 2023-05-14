@@ -13,6 +13,7 @@ _SRC =			mysh/mysh.c \
 				\
 				builtins/cd.c \
 				builtins/env.c \
+				builtins/echo.c \
 				builtins/exit.c \
 				builtins/unsetenv.c \
 				builtins/setenv.c \
@@ -46,6 +47,7 @@ _SRC =			mysh/mysh.c \
 				types/cmd/target/empty.c \
 				types/cmd/args/get_len.c \
 				types/cmd/args/set_args.c \
+				types/cmd/args/get_new_value.c \
 				types/cmd/new.c \
 				\
 				types/io/free.c \
@@ -92,7 +94,6 @@ _SRC =			mysh/mysh.c \
 				types/shell/format/format.c \
 				types/shell/format/get_no_var.c \
 				types/shell/format/get_var.c \
-				types/shell/io.c \
 				types/shell/exit.c \
 				types/shell/prompt.c \
         		types/shell/vars/vars.c \
@@ -106,6 +107,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/shell.c \
 				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
+				types/shell/vars/special/ignoreeof.c \
 				\
 				types/history/new.c \
 				types/history/free.c \
@@ -161,14 +163,15 @@ _SRC =			mysh/mysh.c \
 				execution/execution.c \
 				execution/utils.c \
 
-_TESTS =		criterion/types/list.c \
+_TESTS =		criterion/main.c \
+				\
+				criterion/types/list.c \
 				criterion/types/node.c \
 				criterion/types/ios.c \
 				criterion/types/var.c \
 				criterion/types/shell/shell.c \
 				criterion/types/shell/input.c \
 				criterion/types/shell/format.c \
-				criterion/types/shell/io.c \
 				criterion/types/shell/vars.c \
 				criterion/types/inst/inst.c \
 				criterion/types/inst/block.c \
@@ -186,6 +189,7 @@ _TESTS =		criterion/types/list.c \
 				criterion/builtins/exit.c \
 				criterion/builtins/env.c \
 				criterion/builtins/cd.c \
+				criterion/builtins/echo.c \
 				criterion/builtins/unsetenv.c \
 				criterion/builtins/setenv.c \
 				criterion/builtins/set.c \

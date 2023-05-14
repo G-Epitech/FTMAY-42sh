@@ -12,7 +12,7 @@
 #include "utils/malloc2.h"
 #include "types/var/var.h"
 #include "types/args/defs.h"
-#include "types/shell/defs.h"
+#include "types/shell/shell.h"
 #include "builtins/builtins.h"
 
 static bool list_set(shell_t *shell, char *name, char *value)
@@ -21,7 +21,7 @@ static bool list_set(shell_t *shell, char *name, char *value)
         fprintf(stderr, "set: Variable name must begin with a letter.\n");
         return false;
     }
-    var_list_set(shell->vars, name, value);
+    shell_set_var(shell, name, value);
     return true;
 }
 

@@ -17,13 +17,13 @@
 static bool shell_init_data(shell_t *shell, const builtin_t *builtins)
 {
     shell->exit_code = SHELL_EXIT_SUCCESS;
+    shell->exit_in = 0;
     shell->is_tty = isatty(STDIN_FILENO);
     shell->status = SH_RUNNING;
     shell->vars = list_new();
     shell->builtins = builtins;
     shell->history = history_new();
     shell_special_vars_init(shell);
-    shell_init_io(shell);
     shell->history = history_new();
     return true;
 }
