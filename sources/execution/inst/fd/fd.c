@@ -55,8 +55,12 @@ void execution_inst_close_fd(exec_utils_t *utils)
         close(utils->fd_my[1]);
     if (utils->fd_my[0] != STDIN_FILENO)
         close(utils->fd_my[0]);
-    dup2(utils->fd_saved[0], STDIN_FILENO);
-    dup2(utils->fd_saved[1], STDOUT_FILENO);
-    close(utils->fd_saved[0]);
-    close(utils->fd_saved[1]);
+    if (utils->fd_saved[0] != STDIN_FILENO) {
+        dup2(utils->fd_saved[0], STDIN_FILENO);
+        close(utils->fd_saved[1]);
+    }
+    if (utils->fd_saved[1] != STDOUT_FILENO) {
+        dup2(utils->fd_saved[1], STDOUT_FILENO);
+        close(utils->fd_saved[0]);
+    }
 }

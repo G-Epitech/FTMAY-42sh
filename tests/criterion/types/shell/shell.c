@@ -125,7 +125,7 @@ Test(exit_shell, shell_exit_tty_on_exited_exit_in_sup_to_zero, .init=cr_redirect
     shell_free(shell);
 }
 
-Test(ignoreeof_shell, shell_exit_tty_on_with_ignoreeof_var)
+Test(ignoreeof_shell, shell_exit_tty_on_with_ignoreeof_var, .init=cr_redirect_stdout)
 {
     shell_t *shell = shell_new(builtins_cmds);
 
