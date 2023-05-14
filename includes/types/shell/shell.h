@@ -108,4 +108,12 @@ int *parsing_index);
  */
 char *shell_format_string_get_no_var(char *input, int start, int end);
 
+/**
+ * @brief Set the exit code of the shell.
+ * @param shell Shell struct
+ * @param code Code exit
+ * @return Status of success
+ */
+bool shell_set_exit_code(shell_t *shell, int code);
+
 #endif /* !SHELL_H_ */

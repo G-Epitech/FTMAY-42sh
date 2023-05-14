@@ -100,6 +100,7 @@ _SRC =			mysh/mysh.c \
 				types/shell/vars/special/tty.c \
 				types/shell/vars/special/dispatch_env_update.c \
 				types/shell/vars/special/ignoreeof.c \
+				types/shell/vars/special/status.c \
 				\
 				types/history/new.c \
 				types/history/free.c \
