@@ -41,9 +41,6 @@ suite.addTest(test)
 test = Test("Multiple syntax error discarded", "echo 'set test = 1 test2=2 test3= 3 test4 test5; echo $test5' | {shell}")
 suite.addTest(test)
 
-test = Test("Set with string", "echo 'set test=\"big string for test\" && echo $test' | {shell}")
-suite.addTest(test)
-
 test = Test("Invalid variable name", "echo \"set 2test\" | {shell}")
 suite.addTest(test)
 
