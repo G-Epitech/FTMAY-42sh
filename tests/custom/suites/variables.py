@@ -30,9 +30,6 @@ suite.addTest(test)
 test = Test("Special owd", "echo 'cd ../ && echo $owd' | {shell}")
 suite.addTest(test)
 
-test = Test("Special owd", "echo 'cd ../ && echo $owd' | {shell}")
-suite.addTest(test)
-
 test = Test("Special error code", "echo 'ls && echo $?' | {shell}")
 suite.addTest(test)
 
