@@ -20,10 +20,10 @@ suite.addTest(test)
 test = Test("Invalid argument", "echo \"unset invalidarg\" | {shell}")
 suite.addTest(test)
 
-test = Test("Simple unset", "echo \"set cool && unset cool && echo $cool\" | {shell}")
+test = Test("Simple unset", "echo 'set cool && unset cool && echo $cool' | {shell}")
 suite.addTest(test)
 
-test = Test("Unset special variable", "echo \"unset path && echo $path\" | {shell}")
+test = Test("Unset special variable", "echo 'unset path && echo $path' | {shell}")
 suite.addTest(test)
 
 test = Test("Unset multiple variables",

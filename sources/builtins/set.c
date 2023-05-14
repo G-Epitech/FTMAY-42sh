@@ -17,9 +17,18 @@
 
 static bool list_set(shell_t *shell, char *name, char *value)
 {
-    if (!CHAR_IS_ALPHA(name[0])) {
+    size_t len = strlen(name);
+
+    if (!CHAR_IS_ALPHA_EXT(name[0])) {
         fprintf(stderr, "set: Variable name must begin with a letter.\n");
         return false;
+    }
+    for (size_t i = 1; i < len; i++) {
+        if (!CHAR_IS_ALPHANUM_EXT(name[i])) {
+            fprintf(stderr, "set: Variable name must contain "
+            "alphanumeric characters.\n");
+            return false;
+        }
     }
     shell_set_var(shell, name, value);
     return true;
@@ -67,7 +76,7 @@ static bool set_var_value(args_t *args, shell_t *shell, int *index)
 
 int builtin_set(args_t *args, shell_t *shell)
 {
-    int index = 0;
+    int index = 1;
 
     if (!args)
         return SHELL_EXIT_ERROR;

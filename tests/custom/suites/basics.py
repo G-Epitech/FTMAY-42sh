@@ -35,7 +35,7 @@ suite.addTest(simple)
 redirection = Test("Redirection", "echo \"echo Hello > output.txt; cat output.txt; rm output.txt\"  | {shell}")
 suite.addTest(redirection)
 
-variables = Test("Environment variables", "echo \"echo $PATH\"  | {shell}")
+variables = Test("Environment variables", "echo 'echo $PATH'  | {shell}")
 suite.addTest(variables)
 
 pipes = Test("Pipes", "echo \"ls | grep \"\.txt\" | wc -l\"  | {shell}")
@@ -44,7 +44,7 @@ suite.addTest(pipes)
 options = Test("Command with options", "echo \"ls -l\"  | {shell}")
 suite.addTest(options)
 
-substitution = Test("Variable substitution", "echo \"set var = \"Hello\"; echo $var\" | {shell}")
+substitution = Test("Variable substitution", "echo 'set var = \"Hello\"; echo $var' | {shell}")
 suite.addTest(substitution)
 
 regex = Test("Regular expressions", "echo \"echo \"Hello, World!\" | sed -E s/World/Universe/\" | {shell}")

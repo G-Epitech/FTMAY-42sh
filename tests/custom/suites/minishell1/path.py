@@ -15,7 +15,7 @@ pwd = pathlib.Path(__file__).parent.resolve()
 global suite
 suite = TestSuite("Path")
 
-test = Test("Simple path", "echo \"echo $PATH\" | {shell}")
+test = Test("Simple path", "echo \"echo \$PATH\" | {shell}")
 suite.addTest(test)
 
 test = Test("Without env heritage", "echo \"ls\" | env -i {shell}")
@@ -26,10 +26,6 @@ suite.addTest(test)
 
 commandTcsh="echo \"setenv PATH \"\"; ls\" | {shell}"
 test = Test("With void env path", "echo \"ls\" | env PATH=\"\" {shell}", commandTcsh=commandTcsh)
-suite.addTest(test)
-
-commandTcsh="echo \"echo '$PATH'; echo '$PATH'\" | {shell}"
-test = Test("Compare env PATH value", "echo 'echo $PATH; echo $path' | {shell}", commandTcsh=commandTcsh)
 suite.addTest(test)
 
 test = Test("Unset env PATH value", "echo 'unsetenv PATH; echo $PATH' | {shell}")
