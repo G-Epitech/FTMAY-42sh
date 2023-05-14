@@ -37,9 +37,9 @@ exec_caller_t caller)
     if (prevent_errors(inst, &utils))
         return utils.status;
     execution_utils_init(&utils, herited, caller);
-    execution_inst_get_redirections(inst, &utils);
+    launch &= execution_inst_get_redirections(inst, &utils);
     execution_inst_previous_piped(node_inst, shell, &utils);
-    if (inst->type == INS_CMD)
+    if (inst->type == INS_CMD && launch)
         launch = execution_cmd_prepare(node_inst, shell);
     if (launch)
         execution_inst_launch(node_inst, shell, &utils);
